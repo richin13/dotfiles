@@ -138,7 +138,7 @@ Plug 'hdima/python-syntax'
 Plug 'hynek/vim-python-pep8-indent'
 
 " Python folding
-Plug 'tmhedberg/simpylfold'
+" Plug 'tmhedberg/simpylfold'
 
 " Javascript development
 Plug 'pangloss/vim-javascript'
@@ -162,10 +162,9 @@ augroup END
 
 augroup fold_settings
   autocmd!
-  autocmd FileType vim setlocal foldmethod=marker
-  autocmd FileType vim setlocal foldlevelstart=0
+  autocmd FileType vim,tmux setlocal foldmethod=marker foldlevelstart=0
   autocmd FileType * setlocal foldnestmax=1
-  autocmd FileType python setlocal foldlevelstart=99
+  autocmd BufNewFile,BufRead .zprofile,.profile,.bashrc,.zshrc setlocal foldmethod=marker foldlevelstart=0
 augroup END
 
 " }}}
