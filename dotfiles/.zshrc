@@ -197,10 +197,9 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 # }}}
-
-# Sensitive information
+# Sensitive information includes --- {{{
 include ~/.bash/sensitive
-
+# }}}
 # Functions --- {{{
 #
 # Creates a directory and cd into it
@@ -245,7 +244,8 @@ function fsetup() {
 
     green "Setting up Git"
     git init > /dev/null 2>&1
-    git commit -ma "Initial commit" > /dev/null 2>&1
+    git add --all > /dev/null 2>&1
+    git commit -m "Initial commit" > /dev/null 2>&1
 
     popd > /dev/null 2>&1
 
@@ -280,5 +280,6 @@ alias pipu="pip uninstall"
 alias so="source ~/.zshrc"
 alias cpwd="pwd | xclip"
 alias ppwd="cd \`xclip -o\`"
-
+# Delete a folder
+alias rf="rm -rf"
 # }}}
