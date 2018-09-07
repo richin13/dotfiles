@@ -30,8 +30,8 @@ $ sudo apt install -y stow
 ```
 
 Another issue you might run into is `stow` not being able to create the symlinks. This
-happens when the files already exists and are not symlinks. Make sure to backup
-your existing dotfiles before proceeding.
+happens when the files already exists in you home directory and are not symlinks.
+Make sure to backup your existing dotfiles before proceeding.
 
 ## License
 
