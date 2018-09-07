@@ -233,13 +233,16 @@ function fsetup() {
 
     green "Creating basic app skeleton"
     mkdir ./instance
-    mkdir ./application
+    mkdir ./application # This should configurable maybe?
+    mkdir -p "./test/unit" # test is a reserved keyword
+    mkdir -p "./test/integration"
     touch ./instance/config.py
     touch ./config.py
     touch ./application/__init__.py
+    touch "./test/__init__.py"
 
     green "Installing dependencies"
-    $(pyenv which pip) install flask flask-sqlalchemy > /dev/null 2>&1
+    $(pyenv which pip) install flask flask-sqlalchemy factory_boy > /dev/null 2>&1
     $(pyenv which pip) freeze > requirements.txt > /dev/null 2>&1
 
     green "Setting up Git"
