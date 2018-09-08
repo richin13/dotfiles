@@ -284,6 +284,15 @@ alias apti="sudo apt install -y"
 alias apts="apt search"
 alias aptu="sudo apt uninstall -y"
 
+# Pacman aliases
+alias pac="pacman"
+alias pacs="sudo pacman -S"
+alias pacss="pacman -Ss"
+alias pacsy="pacman -Sy"
+alias pacsyu="pacman -Syu"
+alias pacr="sudo pacman -R"
+alias pacrs="sudo pacman -Rs"
+
 # Pip aliases
 alias pipi="pip install"
 alias pipf="pip freeze"
