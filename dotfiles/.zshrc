@@ -181,8 +181,8 @@ function yellow() { echo -e "${YELLOW}$@${NC}" }
 # Oh My ZSH setup --- {{{
 export ZSH="/home/vagrant/.oh-my-zsh"
 
-# Use Dracula Theme (https://draculatheme.com)
-ZSH_THEME="dracula"
+# Use honukai theme
+ZSH_THEME="honukai"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
