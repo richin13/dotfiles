@@ -179,7 +179,7 @@ function yellow() { echo -e "${YELLOW}$@${NC}" }
 
 # }}}
 # Oh My ZSH setup --- {{{
-export ZSH="/home/vagrant/.oh-my-zsh"
+export ZSH="/home/$USER/.oh-my-zsh"
 
 # Use honukai theme
 ZSH_THEME="honukai"
