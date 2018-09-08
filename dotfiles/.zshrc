@@ -192,7 +192,7 @@ ZSH_THEME="honukai"
 
 # Oh-my-zsh plugins
 plugins=(
-  git git-flow pylint
+  git git-flow pylint python
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -267,7 +267,7 @@ function vim_who() {
   if [[ $? -eq 0 ]]; then
     nvim $@
   else
-    vim $@
+    /usr/bin/vim $@
   fi
 }
 # }}}
