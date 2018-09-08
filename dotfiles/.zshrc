@@ -297,5 +297,7 @@ alias ppwd="cd \`xclip -o\`"
 
 # Delete a folder
 alias rf="rm -rf"
+
+alias django="python manage.py"
 ###################################
 # }}}
