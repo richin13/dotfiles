@@ -259,9 +259,20 @@ function fsetup() {
 
 # Delete the virtual env version of the current project
 function dvenv() { [[ -f .python-version ]] && pyenv uninstall -f $(cat .python-version) }
+
+# Determine whether NeoVIM should be used every time I type `vim`
+function vim_who() {
+  which nvim > /dev/null
+
+  if [[ $? -eq 0 ]]; then
+    nvim $@
+  else
+    vim $@
+  fi
+}
 # }}}
 # Aliases --- {{{
-alias vim=nvim
+alias vim=vim_who
 alias o=xdg-open
 alias itree="tree -I '__pycache__|venv|node_modules'"
 
@@ -279,10 +290,12 @@ alias pipf="pip freeze"
 alias pipff="pip freeze > requirements.txt"
 alias pipu="pip uninstall"
 
-# Utils
+############# Utils ###############
 alias so="source ~/.zshrc"
 alias cpwd="pwd | xclip"
 alias ppwd="cd \`xclip -o\`"
+
 # Delete a folder
 alias rf="rm -rf"
+###################################
 # }}}
