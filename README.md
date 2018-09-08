@@ -33,6 +33,9 @@ Another issue you might run into is `stow` not being able to create the symlinks
 happens when the files already exists in you home directory and are not symlinks.
 Make sure to backup your existing dotfiles before proceeding.
 
+Also, make sure to install [Vim-Plug](https://github.com/junegunn/vim-plug#installation)
+before openning Vim
+
 ## License
 
 See `LICENSE`
