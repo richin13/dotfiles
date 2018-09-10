@@ -242,7 +242,7 @@ function fsetup() {
     touch "./test/__init__.py"
 
     green "Installing dependencies"
-    $(pyenv which pip) install flask flask-sqlalchemy factory_boy pytest > /dev/null 2>&1
+    $(pyenv which pip) install flask flask-sqlalchemy mixer pytest > /dev/null 2>&1
     $(pyenv which pip) freeze > requirements.txt > /dev/null 2>&1
 
     green "Setting up Git"
