@@ -154,6 +154,11 @@ if [ -d "$STACK_LOC" ]; then
   path_ladd "$STACK_LOC"
 fi
 
+YARN_BINS="$HOME/.yarn/bin"
+if [ -d "$YARN_BINS" ]; then
+  path_ladd "$YARN_BINS"
+fi
+
 # EXPORT THE FINAL, MODIFIED PATH
 export PATH
 
@@ -299,6 +304,11 @@ alias pipf="pip freeze"
 alias pipff="pip freeze > requirements.txt"
 alias pipu="pip uninstall"
 alias pips="pip search"
+
+# Js ecosystem aliases
+alias yadd="yarn add"
+alias yrm="yarn remove"
+alias cra="create-react-app"
 
 ############# Utils ###############
 alias so="source ~/.zshrc"
