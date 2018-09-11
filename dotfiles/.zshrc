@@ -186,7 +186,22 @@ function yellow() { echo -e "${YELLOW}$@${NC}" }
 # Oh My ZSH setup --- {{{
 export ZSH="/home/$USER/.oh-my-zsh"
 
-# Use honukai theme
+SPACESHIP_PROMPT_ORDER=(
+  dir
+  host
+  git
+  package
+  node
+  docker
+  aws
+  pyenv
+  exec_time
+  line_sep
+  vi_mode
+  jobs
+  exit_code
+  char
+)
 ZSH_THEME="spaceship"
 
 # Uncomment the following line to enable command auto-correction.
@@ -204,6 +219,11 @@ source $ZSH/oh-my-zsh.sh
 # }}}
 # Sensitive information includes --- {{{
 include ~/.bash/sensitive
+# }}}
+# Exports ------------ {{{
+if [[ $ZSH_THEME -eq "spaceship" ]]; then
+  export VIRTUAL_ENV_DISABLE_PROMPT=1
+fi
 # }}}
 # Functions --- {{{
 #
