@@ -182,7 +182,7 @@ function yellow() { echo -e "${YELLOW}$@${NC}" }
 export ZSH="/home/$USER/.oh-my-zsh"
 
 # Use honukai theme
-ZSH_THEME="honukai"
+ZSH_THEME="spaceship"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
