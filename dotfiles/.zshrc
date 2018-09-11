@@ -282,7 +282,7 @@ alias jk="fc -e -"
 # APT aliases
 alias apti="sudo apt install -y"
 alias apts="apt search"
-alias aptu="sudo apt uninstall -y"
+alias aptu="sudo apt remove -y"
 
 # Pacman aliases
 alias pac="pacman"
