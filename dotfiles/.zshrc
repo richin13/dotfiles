@@ -298,6 +298,7 @@ alias pipi="pip install"
 alias pipf="pip freeze"
 alias pipff="pip freeze > requirements.txt"
 alias pipu="pip uninstall"
+alias pips="pip search"
 
 ############# Utils ###############
 alias so="source ~/.zshrc"
