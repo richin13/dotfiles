@@ -144,6 +144,8 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
+" Dockerfiles and docker-compose.yml files
+Plug 'ekalinin/Dockerfile.vim'
 call plug#end()
 
 " }}}
