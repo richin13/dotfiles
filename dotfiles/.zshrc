@@ -268,7 +268,7 @@ function fsetup() {
 
     green "Installing dependencies"
     $(pyenv which pip) install flask flask-sqlalchemy mixer pytest > /dev/null 2>&1
-    $(pyenv which pip) freeze > requirements.txt > /dev/null 2>&1
+    $(pyenv which pip) freeze > requirements.txt 2> /dev/null
 
     green "Setting up Git"
     git init > /dev/null 2>&1
