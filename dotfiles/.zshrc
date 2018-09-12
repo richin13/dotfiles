@@ -270,7 +270,7 @@ deploy-local: build-container ## Run the application container
 
 .PHONY: run
 run: ## Run the development server
-	FLASK_APPLICATION=${pkg} FLASK_ENV=development FLASK_DEBUG=1 flask run
+	FLASK_APP=${pkg} FLASK_ENV=development FLASK_DEBUG=1 flask run
 
 .PHONY: test
 test: ## Run the tests
