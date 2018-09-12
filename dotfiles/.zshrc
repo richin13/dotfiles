@@ -317,6 +317,8 @@ function fsetup() {
     touch ./config.py
     touch ./$pkg/__init__.py
     touch "./test/__init__.py"
+    touch "./test/unit/__init__.py"
+    touch "./test/integration/__init__.py"
 
     green "Installing dependencies"
     $(pyenv which pip) install flask flask-sqlalchemy mixer pytest pylint mypy > /dev/null 2>&1
