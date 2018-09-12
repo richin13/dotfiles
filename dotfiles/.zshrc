@@ -245,6 +245,49 @@ function mypy_ini() {
   done
 }
 
+function flask_makefile() {
+  if [ ${#} -lt 1 ]; then
+    echo -e "[${RED}ERROR${NC}]: Missing required paramater <application-package>"
+    echo -e "Usage: flask_makefile <application-package>"
+    return 1
+  fi
+  pkg=$1
+
+  cat > Makefile << EOF
+help: ## Show this help.
+	  @fgrep -h "##" \$(MAKEFILE_LIST) | \\
+		fgrep -v fgrep | \\
+		    sed -e 's/\\$$//' | \\
+		    sed -e 's/##//'
+
+.PHONY: build-container
+build-container: lint test ## Build the application container
+	docker build -t basic-backend .
+
+.PHONY: deploy-local
+deploy-local: build-container ## Run the application container
+	docker run -d -p 4000:80 basic-backend
+
+.PHONY: run
+run: ## Run the development server
+	FLASK_APPLICATION=${pkg} FLASK_ENV=development FLASK_DEBUG=1 flask run
+
+.PHONY: test
+test: ## Run the tests
+	pytest --disable-pytest-warnings
+
+.PHONY: lint
+lint: ## Lint the application's code
+	pylint ${pkg}
+	mypy ${pkg}
+
+.PHONY: clean
+clean: ## Deletes the python generated files and directories
+	find . -type f -name "*.py[co]" -delete
+	find . -type d -name "__pycache__" -delete
+EOF
+}
+
 function fsetup() {
   if [ ${#} -lt 1 ]; then
     echo -e "[${RED}ERROR${NC}]: Missing required paramater <app-name>"
@@ -253,6 +296,7 @@ function fsetup() {
   elif [[ -d $@ ]]; then
     echo -e "[${RED}ERROR${NC}]: App $@ already exists"
   else
+    pkg=application
     app=$@
     mkdir $app
     pushd $app > /dev/null 2>&1
@@ -266,22 +310,26 @@ function fsetup() {
 
     green "Creating basic app skeleton"
     mkdir ./instance
-    mkdir ./application # This should configurable maybe?
+    mkdir ./$pkg # This should configurable maybe?
     mkdir -p "./test/unit" # test is a reserved keyword
     mkdir -p "./test/integration"
     touch ./instance/config.py
     touch ./config.py
-    touch ./application/__init__.py
+    touch ./$pkg/__init__.py
     touch "./test/__init__.py"
 
     green "Installing dependencies"
-    $(pyenv which pip) install flask flask-sqlalchemy mixer pytest > /dev/null 2>&1
+    $(pyenv which pip) install flask flask-sqlalchemy mixer pytest pylint mypy > /dev/null 2>&1
     $(pyenv which pip) freeze > requirements.txt 2> /dev/null
 
     green "Setting up Git"
     git init > /dev/null 2>&1
     git add --all > /dev/null 2>&1
     git commit -m "Initial commit" > /dev/null 2>&1
+
+    green "Genereating default settings for tools"
+    mypy_ini flask flask-sqlalchemy
+    flask_makefile $pkg
 
     popd > /dev/null 2>&1
 
