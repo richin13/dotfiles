@@ -237,6 +237,14 @@ function epenv() { echo "${*}" > .python-version > /dev/null 2>&1 }
 
 function ignore() { curl -L -s "https://gitignore.io/api/$@" ;}
 
+function mypy_ini() {
+  echo -e "[mypy]\n\n" > mypy.ini
+
+  for pkg in $@; do
+    echo -e "[mypy-$pkg.*]\nignore_missing_imports = True\n\n" >> mypy.ini
+  done
+}
+
 function fsetup() {
   if [ ${#} -lt 1 ]; then
     echo -e "[${RED}ERROR${NC}]: Missing required paramater <app-name>"
