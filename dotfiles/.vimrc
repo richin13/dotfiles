@@ -131,8 +131,10 @@ Plug 'tpope/vim-fugitive'
 " Autocompletion of '"[{(
 Plug 'townk/vim-autoclose'
 
-" Language-specific syntax
+" Syntax highlighting
 Plug 'hdima/python-syntax'
+Plug 'chr4/nginx.vim'
+Plug 'ekalinin/Dockerfile.vim'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
@@ -144,8 +146,6 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
-" Dockerfiles and docker-compose.yml files
-Plug 'ekalinin/Dockerfile.vim'
 call plug#end()
 
 " }}}
