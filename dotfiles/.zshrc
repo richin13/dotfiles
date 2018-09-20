@@ -254,6 +254,12 @@ function flask_makefile() {
   pkg=$1
 
   cat > Makefile << EOF
+.EXPORT_ALL_VARIABLES
+APP = \$(notdir \$(PWD))
+FLASK_APP=${pkg}
+FLASK_ENV=development
+FLASK_DEBUG=1
+
 help: ## Show this help.
 	  @fgrep -h "##" \$(MAKEFILE_LIST) | \\
 		fgrep -v fgrep | \\
@@ -264,13 +270,13 @@ help: ## Show this help.
 build-container: lint test ## Build the application container
 	docker build -t basic-backend .
 
-.PHONY: deploy-local
+.PHONY: run-container
 deploy-local: build-container ## Run the application container
 	docker run -d -p 4000:80 basic-backend
 
 .PHONY: run
 run: ## Run the development server
-	FLASK_APP=${pkg} FLASK_ENV=development FLASK_DEBUG=1 flask run
+	flask run
 
 .PHONY: test
 test: ## Run the tests
@@ -348,9 +354,9 @@ function vim_who() {
   which nvim > /dev/null
 
   if [[ $? -eq 0 ]]; then
-    nvim $@
+    nvim -p $@
   else
-    /usr/bin/vim $@
+    /usr/bin/vim -p $@
   fi
 }
 # }}}
