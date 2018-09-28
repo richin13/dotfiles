@@ -107,6 +107,9 @@ set shell=/usr/bin/zsh
 set splitbelow
 set splitright
 
+" Hide mode (LightLine provides what we need to tell the mode we're in
+set noshowmode
+
 " Redraw window whenever I've regained focus
 augroup redraw_on_refocus
   au FocusGained * :redraw!
@@ -120,10 +123,10 @@ call plug#begin('~/.vim/plugged')
 " Commands run in vim's virtual screen and don't pollute main shell
 Plug 'fcpg/vim-altscreen'
 
-" Basic coloring
+" ==== Basic ====
 Plug 'NLKNguyen/papercolor-theme'
 
-" Utils
+                                  " Utils
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 
@@ -132,7 +135,9 @@ Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux integration
 " Autocompletion of '"[{(
 Plug 'townk/vim-autoclose'
 
-" Syntax highlighting
+Plug 'itchyny/lightline.vim'
+
+" ==== Syntax highlighting ====
 Plug 'hdima/python-syntax'
 Plug 'chr4/nginx.vim'
 Plug 'ekalinin/Dockerfile.vim'
@@ -264,8 +269,10 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 " }}}
-" Plugin: Vim Fugitive ------------------------------ {{{
-
+" Plugin: Lightline ------------------------------ {{{
+let g:lightline = {
+  \ 'colorscheme': 'jellybeans',
+  \ }
 " set statusline += %{FugitiveStatusline()}
 
 " }}}
