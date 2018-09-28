@@ -126,7 +126,8 @@ Plug 'NLKNguyen/papercolor-theme'
 " Utils
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
+
+Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux integration
 
 " Autocompletion of '"[{(
 Plug 'townk/vim-autoclose'
