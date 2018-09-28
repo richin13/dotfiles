@@ -36,7 +36,7 @@ let mapleader = ","
 let maplocalleader = "\\"
 
 " }}}
-" General: global config ------------ {{{
+" General: global config ---------------------- {{{
 
 "A comma separated list of options for Insert mode completion
 "   menuone  Use the popup menu also when there is only one match.
@@ -125,6 +125,7 @@ Plug 'fcpg/vim-altscreen'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux integration
+Plug 'scrooloose/nerdtree'
 
 " Utils
 Plug 'tpope/vim-commentary'
@@ -152,7 +153,7 @@ Plug 'tell-k/vim-autopep8'
 call plug#end()
 
 " }}}
-" General: Indentation (tabs, spaces, width, etc)------------- {{{
+" General: Indentation ------------------------ {{{
 
 augroup indentation_sr
   autocmd!
@@ -163,7 +164,7 @@ augroup indentation_sr
 augroup END
 
 " }}}
-" General: Folding Settings --------------- {{{
+" General: Folding Settings ------------------- {{{
 
 augroup fold_settings
   autocmd!
@@ -173,7 +174,7 @@ augroup fold_settings
 augroup END
 
 " }}}
-" General: Trailing whitespace ------------- {{{
+" General: Trailing whitespace ---------------- {{{
 
 " This section should go before syntax highlighting
 " because autocommands must be declared before syntax library is loaded
@@ -239,14 +240,14 @@ catch
 endtry
 
 " }}}
-"  Plugin: Configure ------------ {{{
+"  Plugin: Configure --------------------------- {{{
 
 " Python highlighting
 let g:python_highlight_space_errors = 0
 let g:python_highlight_all = 1
 
 "  }}}
-" General: Key remappings ----------------------- {{{
+" General: Key remappings --------------------- {{{
 
 " Put your key remappings here
 " Prefer nnoremap to nmap, inoremap to imap, and vnoremap to vmap
@@ -288,20 +289,45 @@ nnoremap <silent><leader>r :NumbersToggle<CR>
 augroup enable_formatting
   autocmd Filetype python nnoremap <buffer> <leader>f :Autopep8<cr>
 augroup end
+
+" Toggle NERDTree
+nnoremap <silent> <space>j :NERDTreeToggle<CR>
 " }}}
-" Plugin: Lightline ------------------------------ {{{
+" Plugin: Lightline --------------------------- {{{
 let g:lightline = {
   \ 'colorscheme': 'jellybeans',
   \ }
 " set statusline += %{FugitiveStatusline()}
 
 " }}}
-" Plugin: Auto PEP-8 --- {{{
+"  Plugin: NERDTree ---------------------------- {{{
+
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeMapJumpFirstChild = '<C-k>'
+let g:NERDTreeMapJumpLastChild = '<C-j>'
+let g:NERDTreeMapJumpNextSibling = '<C-n>'
+let g:NERDTreeMapJumpPrevSibling = '<C-p>'
+let g:NERDTreeMapOpenInTab = '<C-t>'
+let g:NERDTreeMapOpenInTabSilent = ''
+let g:NERDTreeMapOpenSplit = '<C-s>'
+let g:NERDTreeMapOpenVSplit = '<C-v>'
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeShowLineNumbers = 1
+let g:NERDTreeWinPos = 'left'
+let g:NERDTreeWinSize = 31
+
+let g:NERDTreeIgnore=[
+      \'__pycache__$[[dir]]',
+      \'.egg-info$[[dir]]',
+      \'node_modules$[[dir]]',
+      \]
+" }}}
+" Plugin: Auto PEP-8 -------------------------- {{{
 
 let g:autopep8_disable_show_diff = 1
 
 " }}}
-" General: Cleanup ------------------ {{{
+" General: Cleanup ---------------------------- {{{
 " commands that need to run at the end of my vimrc
 
 " disable unsafe commands in your project-specific .vimrc files
