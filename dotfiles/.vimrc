@@ -120,37 +120,34 @@ augroup END
 
 call plug#begin('~/.vim/plugged')
 
-" Commands run in vim's virtual screen and don't pollute main shell
+" Basic
 Plug 'fcpg/vim-altscreen'
-
-" ==== Basic ====
-Plug 'NLKNguyen/papercolor-theme'
-
-                                  " Utils
-Plug 'tpope/vim-commentary'
+Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
-
 Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux integration
 
-" Autocompletion of '"[{(
-Plug 'townk/vim-autoclose'
+" Utils
+Plug 'tpope/vim-commentary'
+Plug 'jiangmiao/auto-pairs'
+" Plug 'tmhedberg/simpylfold' " Better folding for python
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'myusuf3/numbers.vim'
 
-Plug 'itchyny/lightline.vim'
+" Coloring
+Plug 'NLKNguyen/papercolor-theme'
 
-" ==== Syntax highlighting ====
+" Syntax highlighting
 Plug 'hdima/python-syntax'
 Plug 'chr4/nginx.vim'
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
 
-" Python folding
-" Plug 'tmhedberg/simpylfold'
-
-" Javascript development
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+" Formatting and beautify
+Plug 'tell-k/vim-autopep8'
 
 call plug#end()
 
@@ -268,12 +265,40 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+
+" Omnicompletion now works with Ctrl-Space
+inoremap <C-@> <C-x><C-o>
+inoremap <C-space> <C-x><C-o>
+
+" Navigate tabs
+nnoremap <silent> L gt
+nnoremap <silent> H gT
+nnoremap <A-1> 1gt
+nnoremap <A-2> 2gt
+nnoremap <A-3> 3gt
+nnoremap <A-4> 4gt
+nnoremap <A-5> 5gt
+nnoremap <A-6> 6gt
+nnoremap <A-7> 7gt
+nnoremap <A-8> 8gt
+nnoremap <A-9> 9gt
+
+nnoremap <silent><leader>r :NumbersToggle<CR>
+
+augroup enable_formatting
+  autocmd Filetype python nnoremap <buffer> <leader>f :Autopep8<cr>
+augroup end
 " }}}
 " Plugin: Lightline ------------------------------ {{{
 let g:lightline = {
   \ 'colorscheme': 'jellybeans',
   \ }
 " set statusline += %{FugitiveStatusline()}
+
+" }}}
+" Plugin: Auto PEP-8 --- {{{
+
+let g:autopep8_disable_show_diff = 1
 
 " }}}
 " General: Cleanup ------------------ {{{
