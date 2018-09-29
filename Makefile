@@ -24,3 +24,7 @@ oh-my-zsh-swag:
 .PHONY: pyenv-virtualenv
 pyenv-virtualenv:
 	-git clone https://github.com/pyenv/pyenv-virtualenv.git $$(pyenv root)/plugins/pyenv-virtualenv
+
+.PHONY: tmux-swag
+tmux-swag:
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
