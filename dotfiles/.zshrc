@@ -346,6 +346,27 @@ function fsetup() {
   fi
 }
 
+function pyscript() {
+  if [ ${#} -ne 1 ]; then
+    echo -e "[${RED}ERROR${NC}]: Missing required paramater <script-name>"
+    echo -e "Usage: pyscript <script-name>"
+    return 1
+  fi
+
+  cat > $@ << EOF
+#!/usr/bin/env python
+
+
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    main()
+EOF
+
+}
+
 # Delete the virtual env version of the current project
 function dvenv() { [[ -f .python-version ]] && pyenv uninstall -f $(cat .python-version) }
 
@@ -372,6 +393,7 @@ alias jk="fc -e -"
 alias apti="sudo apt install -y"
 alias apts="apt search"
 alias aptu="sudo apt remove -y"
+alias aptup="sudo apt update && sudo apt upgrade"
 
 # Pacman aliases
 alias pac="pacman"
@@ -393,6 +415,10 @@ alias pips="pip search"
 alias yadd="yarn add"
 alias yrm="yarn remove"
 alias cra="create-react-app"
+
+# Python specific aliases
+alias p="bpython"
+alias va="pyenv virtualenv $(basename $PWD)-venv && echo $(basename $PWD)-venv > .python-version"
 
 ############# Utils ###############
 alias so="source ~/.zshrc"
