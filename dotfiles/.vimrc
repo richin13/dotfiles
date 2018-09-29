@@ -1,4 +1,4 @@
-" General: Notes
+a General: Notes
 "
 " Author: Samuel Roeca
 " Maintainer: Ricardo Madriz
@@ -271,7 +271,7 @@ nnoremap <c-l> <c-w>l
 inoremap <C-@> <C-x><C-o>
 inoremap <C-space> <C-x><C-o>
 
-" Navigate tabs
+" Tabs
 nnoremap <silent> L gt
 nnoremap <silent> H gT
 nnoremap <A-1> 1gt
@@ -283,6 +283,7 @@ nnoremap <A-6> 6gt
 nnoremap <A-7> 7gt
 nnoremap <A-8> 8gt
 nnoremap <A-9> 9gt
+nnoremap <silent><leader>t :tabe<CR>
 
 nnoremap <silent><leader>r :NumbersToggle<CR>
 
@@ -302,6 +303,7 @@ let g:lightline = {
 " }}}
 "  Plugin: NERDTree ---------------------------- {{{
 
+let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeMapJumpFirstChild = '<C-k>'
 let g:NERDTreeMapJumpLastChild = '<C-j>'
