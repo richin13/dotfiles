@@ -1,9 +1,8 @@
 # Author: Ricardo Madriz <richin13[at]gmail.com>
 # Bash helpers to improve my Python development workflow
 #
-# Alias definitions
+# ====== Aliases ======
 alias p="bpython"
-# alias va="pyenv virtualenv $(basename $PWD)-venv && echo $(basename $PWD)-venv > .python-version"
 
 alias pipi="pip install"
 alias pipu="pip uninstall"
@@ -12,18 +11,21 @@ alias pipf="pip freeze"
 alias pipff="pip freeze > requirements.txt"
 
 alias django="python manage.py"
-# Functions
+# ====== Functions ======
+# va: Activates a virtualenvironment ------------------------------ {{{
 function va() {
   if [ ${#} -ne 1 ]; then
-    pkg=$(basename $PWD)
+    local pkg=$(basename $PWD)
   else
-    pkg=$@
+    local pkg=$@
   fi
 
   pyenv virtualenv $pkg-venv
   echo $pkg-venv > .python-version
 
 }
+# }}}
+# pyscript: Simple python script generator ------------------------ {{{
 function pyscript() {
   if [ ${#} -ne 1 ]; then
     echo -e "[${RED}ERROR${NC}]: Missing required paramater <script-name>"
@@ -44,18 +46,16 @@ if __name__ == '__main__':
 EOF
 
 }
-
-# Generates a mypy.ini file with basic configuration
-# to ignore missing imports for the given packages.
+# }}}
+# mypy_ini: mypy config file to ignore missing imports ------------ {{{
 function mypy_ini() {
   echo -e "[mypy]\n\n" > mypy.ini
 
   for pkg in $@; do
     echo -e "[mypy-$pkg.*]\nignore_missing_imports = True\n\n" >> mypy.ini
   done
-}
-
-
+} # }}}
+# flask_makefile: Basic Makefile for a Flask app ------------------ {{{
 function flask_makefile() {
   if [ ${#} -lt 1 ]; then
     echo -e "[${RED}ERROR${NC}]: Missing required paramater <application-package>"
@@ -65,33 +65,44 @@ function flask_makefile() {
   pkg=$1
 
   cat > Makefile << EOF
-.EXPORT_ALL_VARIABLES
+.EXPORT_ALL_VARIABLES:
 APP = \$(notdir \$(PWD))
-FLASK_APP=${pkg}
-FLASK_ENV=development
-FLASK_DEBUG=1
+FLASK_APP = ${pkg}
+FLASK_ENV = development
+FLASK_CONFIG = config.DevConfig
 
+.PHONY: help
 help: ## Show this help.
-	  @fgrep -h "##" \$(MAKEFILE_LIST) | \\
-		fgrep -v fgrep | \\
-		    sed -e 's/\\\$\$//' | \\
-		    sed -e 's/##//'
+	  @echo -e "\$\$(grep -hE '^\S+:.*##' \$(MAKEFILE_LIST) | sed -e 's/:.*##\s*/:/' -e 's/^\(.\+\):\(.*\)/\\\\x1b[36m\1\\\\x1b[m:\2/' | column -c2 -t -s :)"
 
-.PHONY: build-container
-build-container: lint test ## Build the application container
+.PHONY: docker
+docker: lint test ## Creates a docker container
 	docker build -t basic-backend .
-
-.PHONY: run-container
-deploy-local: build-container ## Run the application container
 	docker run -d -p 4000:80 basic-backend
 
 .PHONY: run
-run: ## Run the development server
+run: database ## Run the development server
 	flask run
+
+.PHONY: create_db
+create_db: database ## Creates the database tables
+	flask create_db
+
+.PHONY: shell
+shell: ## Spawns a Python shell with Flask app preloaded
+	flask shell
+
+.PHONY: routes
+routes: ## Shows the application routes
+	flask routes
+
+.PHONY: database
+database: ## Launch the development database
+	-docker run -e POSTGRES_PASSWORD="\$(DB_PASSWORD)" -e POSTGRES_DB="\$(DB_DATABASE)" -p 5432:5432 -d postgres
 
 .PHONY: test
 test: ## Run the tests
-	pytest --disable-pytest-warnings
+	FLASK_CONFIG="config.TestConfig" pytest --disable-pytest-warnings
 
 .PHONY: lint
 lint: ## Lint the application's code
@@ -103,9 +114,8 @@ clean: ## Deletes the python generated files and directories
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 EOF
-}
-
-# Generates a basic structure for a Flask application
+} # }}}
+# fsetup: Generates a basic structure for a Flask application ----- {{{
 function fsetup() {
   if [ ${#} -lt 1 ]; then
     echo -e "[${RED}ERROR${NC}]: Missing required paramater <app-name>"
@@ -120,7 +130,7 @@ function fsetup() {
     pushd $app > /dev/null 2>&1
     # First step is to create a new virtual environment for the project
     green "Creating virtual environment for $app"
-    va "$app-venv" > /dev/null 2>&1
+    va $app > /dev/null 2>&1
 
     green "Creating .gitignore file"
     ignore "python,vim" > .gitignore > /dev/null 2>&1
@@ -155,14 +165,13 @@ function fsetup() {
     echo "Done!"
     echo " \$ cd $app/"
   fi
-}
-
-# Delete the virtual env version of the current project
+} # }}}
+# dvenv: Delete the virtualenv activated in the current project --- {{{
 function dvenv() {
   [[ -f .python-version ]] && pyenv uninstall -f $(cat .python-version)
 }
-
-# Deletes a directory that contains a Python project
+# }}}
+# Deletes a directory that contains a Python project -------------- {{{
 function pyrm() {
   if [ ${#} -ne 1 ]; then
     echo -e "[${RED}ERROR${NC}]: Missing required paramater <project-folder>"
@@ -179,3 +188,4 @@ function pyrm() {
   popd > /dev/null 2>&1
   rm -rf $folder
 }
+# }}}
