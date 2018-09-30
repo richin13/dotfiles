@@ -126,6 +126,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux integration
 Plug 'scrooloose/nerdtree'
+Plug 'christoomey/vim-system-copy'
 
 " Utils
 Plug 'tpope/vim-commentary'
