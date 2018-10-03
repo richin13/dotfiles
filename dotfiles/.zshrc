@@ -237,6 +237,22 @@ function wttr() {
   curl "wttr.in/?0"
 }
 
+# Edit the file manipulated in the last command
+function manipulate_last_file() {
+  cmd="vim" # Default is vim
+
+  if [[ $# -ge 1 ]]; then
+    cmd=$@
+  fi
+  file=$(fc -ln -1 | cut -d " " -f 2-)
+
+  if [[ $file =~ "[\w\d\./]" ]]; then
+    eval "$cmd $file"
+  else
+    echo "$file is not a file"
+  fi
+}
+
 # }}}
 # Aliases --- {{{
 # Check whether NeoVIM is installed and alias it to vim
@@ -284,6 +300,7 @@ alias ppwd="cd \`xclip -o\`"
 # (export defined in `sensitive` file)
 alias jm="o $ZOOM_MEETING"
 
+alias el="manipulate_last_file"
 ###################################
 # }}}
 # Extra scripts: ----------------- {{{
