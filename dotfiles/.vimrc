@@ -247,6 +247,12 @@ endtry
 let g:python_highlight_space_errors = 0
 let g:python_highlight_all = 1
 
+" Numbers
+let g:numbers_exclude = ['nerdtree']
+
+" Auto PEP-8
+let g:autopep8_disable_show_diff = 1
+
 "  }}}
 " General: Key remappings --------------------- {{{
 
@@ -324,11 +330,6 @@ let g:NERDTreeIgnore=[
       \'.egg-info$[[dir]]',
       \'node_modules$[[dir]]',
       \]
-" }}}
-" Plugin: Auto PEP-8 -------------------------- {{{
-
-let g:autopep8_disable_show_diff = 1
-
 " }}}
 " General: Cleanup ---------------------------- {{{
 " commands that need to run at the end of my vimrc
