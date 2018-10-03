@@ -212,7 +212,7 @@ ZSH_THEME="spaceship"
 
 # Oh-my-zsh plugins
 plugins=(
-  git git-flow pylint python
+  git git-flow pylint python web-search
 )
 
 source $ZSH/oh-my-zsh.sh
