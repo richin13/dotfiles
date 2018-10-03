@@ -280,6 +280,10 @@ alias so="source ~/.zshrc"
 alias cpwd="pwd | xclip"
 alias ppwd="cd \`xclip -o\`"
 
+# Join a Zoom Meeting
+# (export defined in `sensitive` file)
+alias jm="o $ZOOM_MEETING"
+
 ###################################
 # }}}
 # Extra scripts: ----------------- {{{
