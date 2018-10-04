@@ -171,7 +171,7 @@ function dvenv() {
   [[ -f .python-version ]] && pyenv uninstall -f $(cat .python-version)
 }
 # }}}
-# Deletes a directory that contains a Python project -------------- {{{
+# pyrm: Deletes a directory that contains a Python project -------- {{{
 function pyrm() {
   if [ ${#} -ne 1 ]; then
     echo -e "[${RED}ERROR${NC}]: Missing required paramater <project-folder>"
