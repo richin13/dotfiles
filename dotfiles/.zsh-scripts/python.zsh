@@ -189,3 +189,27 @@ function pyrm() {
   rm -rf $folder
 }
 # }}}
+# pipii: Installs a package and saves it to requirements.txt ------ {{{
+function pipii() {
+  # super hacky but it works :D
+  temp="/tmp/$(echo $@ | md5sum).tmp"
+  str="Successfully installed "
+  pip install $@ | tee $temp
+  installed_pkgs=($(cat $temp | grep $str | sed "s/$str//"))
+
+  if [[ $? -eq 0 ]]; then
+    for pkg in $installed_pkgs; do
+      pkg=$(echo $pkg | sed 's/\(.*\)-/\1=/')
+      name=$(echo $pkg | cut -d "=" -f 1)
+
+      if echo $@ | grep -iq $name; then
+        echo $pkg >> requirements.txt
+      fi
+    done
+
+    sort -o requirements.txt requirements.txt
+  fi
+
+  rm $temp
+}
+# }}}
