@@ -20,7 +20,7 @@ function va() {
     local pkg=$@
   fi
 
-  pyenv virtualenv $pkg-venv
+  pyenv virtualenv $(pyenv global) $pkg-venv
   echo $pkg-venv > .python-version
 
 }
