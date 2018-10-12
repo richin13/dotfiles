@@ -134,6 +134,7 @@ Plug 'jiangmiao/auto-pairs'
 " Plug 'tmhedberg/simpylfold' " Better folding for python
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'myusuf3/numbers.vim'
+Plug 'tpope/vim-abolish'
 
 " Coloring
 Plug 'NLKNguyen/papercolor-theme'
