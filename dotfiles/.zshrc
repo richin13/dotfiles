@@ -253,6 +253,10 @@ function manipulate_last_file() {
   fi
 }
 
+function clubhouse() {
+  echo -e "## Goal\n## Reason\n## Acceptance Criteria" | xsel -ib
+}
+
 # }}}
 # Aliases --- {{{
 # Check whether NeoVIM is installed and alias it to vim
@@ -267,6 +271,7 @@ alias rmdir="rm -rf"
 alias sudo="sudo "
 alias o=xdg-open
 alias itree="tree -I '__pycache__|venv|node_modules'"
+alias srm="shred -n 100 -z -u"
 
 # Execute the previous command
 alias jk="fc -e -"
@@ -299,6 +304,7 @@ alias ppwd="cd \`xclip -o\`"
 # Join a Zoom Meeting
 # (export defined in `sensitive` file)
 alias jm="o $ZOOM_MEETING"
+alias kgaws="o $AWS_CONSOLE"
 
 alias el="manipulate_last_file"
 ###################################
