@@ -1,6 +1,8 @@
 # Author: Ricardo Madriz <richin13[at]gmail.com>
 # Bash helpers to improve my Python development workflow
 #
+# ===== Variables =====
+DEV_PKGS=(neovim jedi bpython autopep8)
 # ====== Aliases ======
 alias p="bpython"
 
@@ -9,6 +11,7 @@ alias pipu="pip uninstall"
 alias pips="pip search"
 alias pipf="pip freeze"
 alias pipff="pip freeze > requirements.txt"
+alias pip-dev="pipi $DEV_PKGS"
 
 alias django="python manage.py"
 # ====== Functions ======
@@ -19,9 +22,12 @@ function va() {
   else
     local pkg=$@
   fi
+  venv_name=$pkg-venv
 
-  pyenv virtualenv $(pyenv global) $pkg-venv
-  echo $pkg-venv > .python-version
+  pyenv virtualenv $(pyenv global) $venv_name
+  pyenv shell $venv_name
+  $(pyenv which pip) install --upgrade pip $DEV_PKGS
+  echo $venv_name > .python-version
 
 }
 # }}}
