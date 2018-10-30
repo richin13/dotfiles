@@ -136,6 +136,9 @@ Plug 'tmhedberg/simpylfold' " Better folding for python
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'myusuf3/numbers.vim'
 Plug 'tpope/vim-abolish'
+Plug 'weirongxu/plantuml-previewer.vim'
+Plug 'tyru/open-browser.vim'
+Plug 'Yggdroot/indentLine'
 
 " Coloring
 Plug 'NLKNguyen/papercolor-theme'
@@ -147,12 +150,14 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'mrk21/yaml-vim'
+Plug 'aklt/plantuml-syntax'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
 
-" Formatting and beautify
+" Python development
 Plug 'tell-k/vim-autopep8'
+Plug 'davidhalter/jedi-vim'
 
 call plug#end()
 
@@ -302,6 +307,10 @@ nnoremap <silent><leader>t :tabe<CR>
 
 nnoremap <silent><leader>r :NumbersToggle<CR>
 
+" Exit: Preview and Help && QuickFix and Location List
+inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>a
+nnoremap <silent> <C-c> :pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>
+
 augroup enable_formatting
   autocmd Filetype python nnoremap <buffer> <leader>f :Autopep8<cr>
 augroup end
@@ -338,6 +347,20 @@ let g:NERDTreeIgnore=[
       \'.egg-info$[[dir]]',
       \'node_modules$[[dir]]',
       \]
+" }}}
+" Plugin: Autocompletion
+let g:jedi#popup_on_dot = 0
+let g:jedi#show_call_signatures = 0
+let g:jedi#auto_close_doc = 0
+let g:jedi#smart_auto_mappings = 0
+let g:jedi#force_py_version = 3
+
+" remappings
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#goto_command = "<C-]>"
+let g:jedi#documentation_command = "<leader>gd"
+let g:jedi#usages_command = "<leader>gu"
+let g:jedi#rename_command = "<leader>gr"
 " }}}
 " General: Cleanup ---------------------------- {{{
 " commands that need to run at the end of my vimrc
