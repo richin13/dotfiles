@@ -313,4 +313,5 @@ alias el="manipulate_last_file"
 include "$HOME/.zsh-scripts/python.zsh"
 # }}}
 # Extra swag: ----------------- {{{
+fortune ~/.fortunes/zen | cowsay
 # }}}
