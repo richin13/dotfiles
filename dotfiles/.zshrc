@@ -169,6 +169,15 @@ export PATH
 #                 Session setup                      #
 #                                                    #
 ######################################################
+# ZSH setup -------------------------------------{{{
+function chpwd() {
+  if command -v colorls 2>&1 > /dev/null;then
+    colorls
+  else
+    ls
+  fi
+}
+# }}}
 # Colors --- {{{
 RED='\033[0;31m'
 GREEN='\033[0;32m'
