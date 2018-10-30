@@ -24,7 +24,7 @@ function va() {
   fi
   venv_name=$pkg-venv
 
-  pyenv virtualenv $(pyenv global) $venv_name
+  pyenv virtualenv -p python3.7 $(pyenv global) $venv_name
   pyenv shell $venv_name
   $(pyenv which pip) install --upgrade pip $DEV_PKGS
   echo $venv_name > .python-version
