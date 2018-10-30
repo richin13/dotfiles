@@ -272,6 +272,7 @@ alias sudo="sudo "
 alias o=xdg-open
 alias itree="tree -I '__pycache__|venv|node_modules'"
 alias srm="shred -n 100 -z -u"
+alias ff="grep -rnw . -e"
 
 # Execute the previous command
 alias jk="fc -e -"
@@ -280,7 +281,7 @@ alias jk="fc -e -"
 alias apti="sudo apt install -y"
 alias apts="apt search"
 alias aptu="sudo apt remove -y"
-alias aptup="sudo apt update && sudo apt upgrade"
+alias aptup="sudo apt update && sudo apt upgrade -y"
 
 # Pacman aliases
 alias pac="pacman"
