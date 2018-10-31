@@ -159,6 +159,11 @@ if [ -d "$YARN_BINS" ]; then
   path_ladd "$YARN_BINS"
 fi
 
+POETRY_BINS="$HOME/.poetry/bin"
+if [ -d "$POETRY_BINS" ]; then
+  path_ladd "$POETRY_BINS"
+fi
+
 # EXPORT THE FINAL, MODIFIED PATH
 export PATH
 
