@@ -25,8 +25,9 @@ function va() {
   venv_name=$pkg-venv
 
   pyenv virtualenv -p python3.7 $(pyenv global) $venv_name
-  pyenv shell $venv_name
+  pyenv activate $venv_name
   $(pyenv which pip) install --upgrade pip $DEV_PKGS
+  pyenv deactivate
   echo $venv_name > .python-version
 
 }
