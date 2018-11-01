@@ -322,6 +322,9 @@ alias jm="o $ZOOM_MEETING"
 alias kgaws="o $AWS_CONSOLE"
 
 alias el="manipulate_last_file"
+
+# I surf these alot :D
+alias sam-dotfiles="o https://github.com/pappasam/dotfiles/tree/master/dotfiles"
 ###################################
 # }}}
 # Extra scripts: ----------------- {{{
