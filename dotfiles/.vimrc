@@ -138,6 +138,7 @@ Plug 'myusuf3/numbers.vim'
 Plug 'tpope/vim-abolish'
 Plug 'weirongxu/plantuml-previewer.vim'
 Plug 'tyru/open-browser.vim'
+
 Plug 'Yggdroot/indentLine'
 
 " Coloring
@@ -151,9 +152,11 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'mrk21/yaml-vim'
 Plug 'aklt/plantuml-syntax'
+Plug 'khalliday7/Jenkinsfile-vim-syntax'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
+Plug 'vim-scripts/groovyindent-unix'
 
 " Python development
 Plug 'tell-k/vim-autopep8'
