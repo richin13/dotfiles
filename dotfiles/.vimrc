@@ -4,31 +4,6 @@
 " Maintainer: Ricardo Madriz
 " Date: September 4, 2018
 " TLDR: vimrc minimum viable product for Python programming
-"
-" I've noticed that many vim/neovim beginners have trouble creating a useful
-" vimrc. This file is intended to get a Python programmer who is new to vim
-" set up with a vimrc that will enable the following:
-"   1. Sane editing of Python files
-"   2. Sane defaults for vim itself
-"   3. An organizational skeleton that can be easily extended
-"
-" Notes:
-"   * When in normal mode, scroll over a folded section and type 'za'
-"       this toggles the folded section
-"
-" Initialization:
-"   1. Follow instructions at https://github.com/junegunn/vim-plug to install
-"      vim-plug for either Vim or Neovim
-"   2. Open vim (hint: type vim at command line and press enter :p)
-"   3. :PlugInstall
-"   4. :PlugUpdate
-"   5. You should be ready for MVP editing
-"
-" Updating:
-"   If you want to upgrade your vim plugins to latest version
-"     :PlugUpdate
-"   If you want to upgrade vim-plug itself
-"     :PlugUpgrade
 
 " General: Leader mappings -------------------- {{{
 
@@ -153,6 +128,7 @@ Plug 'mxw/vim-jsx'
 Plug 'mrk21/yaml-vim'
 Plug 'aklt/plantuml-syntax'
 Plug 'khalliday7/Jenkinsfile-vim-syntax'
+Plug 'cespare/vim-toml'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
@@ -257,19 +233,6 @@ catch
 endtry
 
 " }}}
-"  Plugin: Configure --------------------------- {{{
-
-" Python highlighting
-let g:python_highlight_space_errors = 0
-let g:python_highlight_all = 1
-
-" Numbers
-let g:numbers_exclude = ['nerdtree']
-
-" Auto PEP-8
-let g:autopep8_disable_show_diff = 1
-
-"  }}}
 " General: Key remappings --------------------- {{{
 
 " Put your key remappings here
@@ -321,6 +284,19 @@ augroup end
 " Toggle NERDTree
 nnoremap <silent> <space>j :NERDTreeToggle<CR>
 " }}}
+"  Plugin: Configure --------------------------- {{{
+
+" Python highlighting
+let g:python_highlight_space_errors = 0
+let g:python_highlight_all = 1
+
+" Numbers
+let g:numbers_exclude = ['nerdtree']
+
+" Auto PEP-8
+let g:autopep8_disable_show_diff = 1
+
+"  }}}
 " Plugin: Lightline --------------------------- {{{
 let g:lightline = {
   \ 'colorscheme': 'jellybeans',
@@ -351,7 +327,7 @@ let g:NERDTreeIgnore=[
       \'node_modules$[[dir]]',
       \]
 " }}}
-" Plugin: Autocompletion
+" Plugin: Autocompletion ---------------------- {{{
 let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = 0
 let g:jedi#auto_close_doc = 0
