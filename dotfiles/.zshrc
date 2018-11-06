@@ -312,7 +312,7 @@ alias yrm="yarn remove"
 alias cra="create-react-app"
 
 ############# Utils ###############
-alias so="source ~/.zshrc"
+alias so="clear && source ~/.zshrc"
 alias cpwd="pwd | xclip"
 alias ppwd="cd \`xclip -o\`"
 
