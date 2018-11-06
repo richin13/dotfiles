@@ -48,3 +48,12 @@ pyenv: ## Install pyenv and virtualenv plugin
 .PHONY: poetry
 poetry: ## Install Poetry
 	curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+
+################################################################################
+# Apps
+################################################################################
+.PHONY: kitty
+kitty:
+	curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+	-ln -s ~/.local/kitty.app/bin/kitty ~/bin/
+	@echo "`kitty` executable is now in '$$HOME/bin'. Make sure it's in your PATH"
