@@ -25,6 +25,12 @@ function va() {
   venv_name=$pkg-venv
 
   pyenv virtualenv -p python3.7 $(pyenv global) $venv_name
+
+  if [[ $? -ne 0 ]]; then
+    yellow "Virtual Environment $venv_name is already activated!"
+    return
+  fi
+
   pyenv activate $venv_name
   $(pyenv which pip) install --upgrade pip $DEV_PKGS
   pyenv deactivate
