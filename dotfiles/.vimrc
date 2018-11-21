@@ -113,6 +113,7 @@ Plug 'myusuf3/numbers.vim'
 Plug 'tpope/vim-abolish'
 Plug 'weirongxu/plantuml-previewer.vim'
 Plug 'tyru/open-browser.vim'
+Plug 'greyblake/vim-preview'
 
 Plug 'Yggdroot/indentLine'
 
@@ -283,6 +284,9 @@ augroup end
 
 " Toggle NERDTree
 nnoremap <silent> <space>j :NERDTreeToggle<CR>
+
+" Quit VIM
+nnoremap <silent> <localleader>q :conf q<CR>
 " }}}
 "  Plugin: Configure --------------------------- {{{
 
@@ -325,6 +329,8 @@ let g:NERDTreeIgnore=[
       \'__pycache__$[[dir]]',
       \'.egg-info$[[dir]]',
       \'node_modules$[[dir]]',
+      \'node_modules$[[dir]]',
+      \'.pyc$[[file]]',
       \]
 " }}}
 " Plugin: Autocompletion ---------------------- {{{
@@ -340,6 +346,19 @@ let g:jedi#goto_command = "<C-]>"
 let g:jedi#documentation_command = "<leader>gd"
 let g:jedi#usages_command = "<leader>gu"
 let g:jedi#rename_command = "<leader>gr"
+" }}}
+" Config: Preview ---------------------- {{{
+function! _Preview()
+  if &filetype ==? 'plantuml'
+    exec 'PlantumlOpen'
+  else
+    exec 'Preview'
+  endif
+endfunction
+
+command! PreviewCmd call _Preview()
+
+nmap <silent><leader>p :PreviewCmd<CR>
 " }}}
 " General: Cleanup ---------------------------- {{{
 " commands that need to run at the end of my vimrc
