@@ -287,6 +287,11 @@ nnoremap <silent> <space>j :NERDTreeToggle<CR>
 
 " Quit VIM
 nnoremap <silent> <localleader>q :conf q<CR>
+
+" Search and Replace
+nnoremap <silent> <esc> :noh<return><esc>
+
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 " }}}
 "  Plugin: Configure --------------------------- {{{
 
