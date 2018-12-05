@@ -271,6 +271,16 @@ function clubhouse() {
   echo -e "## Goal\n## Reason\n## Acceptance Criteria" | xsel -ib
 }
 
+function exclude() {
+  if [ ${#} -ne 1 ]; then
+    red "Missing expression"
+    bold "Usage: $0 <expression>"
+    return 1
+  fi
+
+  [[ -f .git/info/exclude ]] && echo $1 >> .git/info/exclude
+}
+
 # }}}
 # Aliases --- {{{
 # Check whether NeoVIM is installed and alias it to vim
