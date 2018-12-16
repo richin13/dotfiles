@@ -281,6 +281,18 @@ function exclude() {
   [[ -f .git/info/exclude ]] && echo $1 >> .git/info/exclude
 }
 
+function de4k() {
+  if [[ $# -ne 1 ]]; then
+    red "Need to specifiy a video filename"
+    bold "Usage: $0 <video>"
+    return 1
+  fi
+
+  video=$1
+
+  ffmpeg -i $video -c:v libx264 -vf scale=1920x1080 -c:a copy "1080-$video"
+}
+
 # }}}
 # Aliases --- {{{
 # Check whether NeoVIM is installed and alias it to vim
