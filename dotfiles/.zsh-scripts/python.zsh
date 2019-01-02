@@ -226,3 +226,13 @@ function pipii() {
   rm $temp
 }
 # }}}
+# pyni: Initializes a new python package (__init__.py) ------ {{{
+function pyni() {
+  dir=.
+  if  [[ $# -eq 1 ]]; then
+    dir=$1
+  fi
+
+  touch $dir/__init__.py
+}
+# }}}
