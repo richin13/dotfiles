@@ -293,6 +293,10 @@ function de4k() {
   ffmpeg -i $video -c:v libx264 -vf scale=1920x1080 -c:a copy "1080-$video"
 }
 
+function rndpw() {
+  </dev/urandom tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' | head -c 13  ; echo
+}
+
 # }}}
 # Aliases --- {{{
 # Check whether NeoVIM is installed and alias it to vim
