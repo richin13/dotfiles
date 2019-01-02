@@ -226,7 +226,7 @@ ZSH_THEME="spaceship"
 
 # Oh-my-zsh plugins
 plugins=(
-  git git-flow pylint python web-search
+  magic-enter git git-flow pylint python web-search docker-compose
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -309,6 +309,7 @@ alias o=xdg-open
 alias itree="tree -I '__pycache__|venv|node_modules'"
 alias srm="shred -n 100 -z -u"
 alias ff="grep -rnw . -e"
+alias m="make"
 
 # Execute the previous command
 alias jk="fc -e -"
