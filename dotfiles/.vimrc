@@ -108,6 +108,7 @@ Plug 'christoomey/vim-system-copy'
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tmhedberg/simpylfold' " Better folding for python
+Plug 'pseewald/vim-anyfold'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'myusuf3/numbers.vim'
 Plug 'tpope/vim-abolish'
@@ -123,7 +124,7 @@ Plug 'NLKNguyen/papercolor-theme'
 " Syntax highlighting
 Plug 'hdima/python-syntax'
 Plug 'chr4/nginx.vim'
-Plug 'ekalinin/Dockerfile.vim'
+Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'mrk21/yaml-vim'
