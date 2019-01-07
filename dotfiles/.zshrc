@@ -182,6 +182,8 @@ function chpwd() {
     ls -lAh --group-directories-first
   fi
 }
+
+setopt auto_cd
 # }}}
 # Colors --- {{{
 RED='\033[0;31m'
@@ -197,8 +199,28 @@ function yellow() { echo -e "${YELLOW}$@${NC}" }
 # function green_bold() { bold $(green $@) }
 
 # }}}
-# Oh My ZSH setup --- {{{
-export ZSH="/home/$USER/.oh-my-zsh"
+# export ZSH="/home/$USER/.oh-my-zsh"
+# source $ZSH/oh-my-zsh.sh
+# Plugins --- {{{
+source ~/.zplug/init.zsh
+
+# Old Oh-my-zsh setup
+zplug "plugins/magic-enter", from:oh-my-zsh
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/git-flow", from:oh-my-zsh
+zplug "plugins/pylint", from:oh-my-zsh
+zplug "plugins/python", from:oh-my-zsh
+zplug "plugins/web-search", from:oh-my-zsh
+zplug "plugins/docker-compose", from:oh-my-zsh
+
+zplug "lib/completion", from:oh-my-zsh
+zplug "lib/compfix", from:oh-my-zsh
+zplug "lib/directories", from:oh-my-zsh
+zplug "lib/history", from:oh-my-zsh
+zplug "lib/key-bindings", from:oh-my-zsh
+
+# Spaceship theme
+zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, as:theme
 
 SPACESHIP_PROMPT_ORDER=(
   dir
@@ -216,20 +238,14 @@ SPACESHIP_PROMPT_ORDER=(
   exit_code
   char
 )
-ZSH_THEME="spaceship"
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+# Final thoughts
+if ! zplug check; then
+  zplug install
+fi
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+zplug load
 
-# Oh-my-zsh plugins
-plugins=(
-  magic-enter git git-flow pylint python web-search docker-compose
-)
-
-source $ZSH/oh-my-zsh.sh
 # }}}
 # Sensitive information includes --- {{{
 include ~/.bash/sensitive
