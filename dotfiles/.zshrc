@@ -177,9 +177,9 @@ export PATH
 # ZSH setup -------------------------------------{{{
 function chpwd() {
   if command -v colorls 2>&1 > /dev/null;then
-    colorls
+    colorls -lA --sd
   else
-    ls
+    ls -lAh --group-directories-first
   fi
 }
 # }}}
