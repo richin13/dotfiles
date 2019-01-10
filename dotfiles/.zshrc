@@ -176,11 +176,18 @@ export PATH
 ######################################################
 # ZSH setup -------------------------------------{{{
 function chpwd() {
-  if command -v colorls 2>&1 > /dev/null;then
-    colorls -lA --sd
-  else
-    ls -lAh --group-directories-first
+  local opts="--group-directories-first -h"
+  local cmd="ls -l"
+
+  if command -v k 2>&1 > /dev/null;then
+    cmd="k"
   fi
+
+  if [[ $(ls -l) = 'total 0' ]]; then
+    opts+="A"
+  fi
+
+  eval $cmd $opts
 }
 
 setopt auto_cd
@@ -199,8 +206,6 @@ function yellow() { echo -e "${YELLOW}$@${NC}" }
 # function green_bold() { bold $(green $@) }
 
 # }}}
-# export ZSH="/home/$USER/.oh-my-zsh"
-# source $ZSH/oh-my-zsh.sh
 # Plugins --- {{{
 source ~/.zplug/init.zsh
 
@@ -238,6 +243,10 @@ SPACESHIP_PROMPT_ORDER=(
   exit_code
   char
 )
+
+# Cool stuff
+zplug "paulirish/git-open", as:plugin
+zplug "supercrabtree/k"
 
 # Final thoughts
 if ! zplug check; then
