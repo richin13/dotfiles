@@ -103,6 +103,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux integration
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'christoomey/vim-system-copy'
+Plug 'gcmt/taboo.vim'
 
 " Utils
 Plug 'tpope/vim-commentary'
@@ -365,6 +366,7 @@ let g:gina#command#blame#formatter#timestamp_format2 = "%Y-%m-%d"
 function! _Gblame()
   let current_file = expand('%:t')
   execute 'Gina blame'
+  execute 'TabooRename blame: ' . current_file
 endfunction
 
 command! Gblame call _Gblame()
