@@ -181,7 +181,11 @@ function fsetup() {
 } # }}}
 # dvenv: Delete the virtualenv activated in the current project --- {{{
 function dvenv() {
-  [[ -f .python-version ]] && pyenv uninstall -f $(cat .python-version)
+  local pversion=$(cat .python-version)
+  [[ -f .python-version ]] \
+    && pyenv uninstall -f $pversion \
+    && rm .python-version > /dev/null \
+    && green "Uninstalled \`$pversion\`"
 }
 # }}}
 # pyrm: Deletes a directory that contains a Python project -------- {{{
