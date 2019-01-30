@@ -116,6 +116,8 @@ Plug 'tpope/vim-abolish'
 Plug 'weirongxu/plantuml-previewer.vim'
 Plug 'tyru/open-browser.vim'
 Plug 'greyblake/vim-preview'
+Plug 'alvan/vim-closetag'
+Plug 'tpope/vim-ragtag'
 
 Plug 'Yggdroot/indentLine'
 
@@ -140,6 +142,9 @@ Plug 'vim-scripts/groovyindent-unix'
 " Python development
 Plug 'tell-k/vim-autopep8'
 Plug 'davidhalter/jedi-vim'
+
+" Javascript development
+Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
 
 " Git
 Plug 'lambdalisue/gina.vim'
@@ -358,6 +363,13 @@ let g:jedi#goto_command = "<C-]>"
 let g:jedi#documentation_command = "<leader>gd"
 let g:jedi#usages_command = "<leader>gu"
 let g:jedi#rename_command = "<leader>gr"
+
+augroup js_autocompletion
+  autocmd Filetype javascript.jsx,javascript nnoremap <buffer> <C-]> :TernDef<CR>
+  autocmd Filetype javascript.jsx,javascript nnoremap <buffer> <leader>gd :TernDoc<CR>
+  autocmd Filetype javascript.jsx,javascript nnoremap <buffer> <leader>gu :TernRefs<CR>
+  autocmd Filetype javascript.jsx,javascript nnoremap <buffer> <leader>gr :TernRename<CR>
+augroup end
 " }}}
 " Plugin: Gina -------------------------------- {{{
 
