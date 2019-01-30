@@ -3,6 +3,7 @@
 #
 # ===== Variables =====
 DEV_PKGS=(neovim jedi bpython autopep8)
+PY_DEFAULT_VERSION=python3.7
 # ====== Aliases ======
 alias p="bpython"
 
@@ -18,13 +19,20 @@ alias django="python manage.py"
 # va: Activates a virtualenvironment ------------------------------ {{{
 function va() {
   if [ ${#} -ne 1 ]; then
-    local pkg=$(basename $PWD)
+    local pkg_base=$(basename $PWD)
+    local pkg_hashval=$(\
+      pwd |\
+      sha1sum |\
+      base32 |\
+      cut -c1-5 |\
+      tr '[:upper:]' '[:lower:]')
+    local pkg="$pkg_base-$pkg_hashval"
   else
     local pkg=$@
   fi
-  venv_name=$pkg-venv
+  venv_name=$pkg
 
-  pyenv virtualenv -p python3.7 $(pyenv global) $venv_name
+  pyenv virtualenv -p $PY_DEFAULT_VERSION $(pyenv global) $venv_name
 
   if [[ $? -ne 0 ]]; then
     yellow "Virtual Environment $venv_name is already activated!"
@@ -181,8 +189,8 @@ function fsetup() {
 } # }}}
 # dvenv: Delete the virtualenv activated in the current project --- {{{
 function dvenv() {
-  local pversion=$(cat .python-version)
   [[ -f .python-version ]] \
+    && local pversion=$(cat .python-version) \
     && pyenv uninstall -f $pversion \
     && rm .python-version > /dev/null \
     && green "Uninstalled \`$pversion\`"
