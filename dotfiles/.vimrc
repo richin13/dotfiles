@@ -227,6 +227,8 @@ augroup python_syntax
   autocmd!
   autocmd FileType python syn keyword pythonBuiltinObj self
   autocmd FileType python syn keyword pythonBuiltinObj cls
+  autocmd FileType python syn keyword pythonBuiltinObj args
+  autocmd FileType python syn keyword pythonBuiltinObj kwargs
 augroup end
 
 " Syntax: select global syntax scheme
@@ -315,7 +317,7 @@ let g:autopep8_disable_show_diff = 1
 let g:lightline = {
   \ 'colorscheme': 'jellybeans',
   \ }
-" set statusline += %{FugitiveStatusline()}
+" set statusline += %{}
 
 " }}}
 "  Plugin: NERDTree ---------------------------- {{{
@@ -358,6 +360,10 @@ let g:jedi#usages_command = "<leader>gu"
 let g:jedi#rename_command = "<leader>gr"
 " }}}
 " Plugin: Gina -------------------------------- {{{
+
+call gina#custom#command#option('diff', '--opener', 'vsplit')
+call gina#custom#command#option('blame', '--width', '79')
+
 let g:gina#command#blame#formatter#format = '%in|%ti|%au|%su'
 let g:gina#command#blame#formatter#timestamp_months = 0
 let g:gina#command#blame#formatter#timestamp_format1 = "%Y-%m-%d"
