@@ -7,7 +7,7 @@
 #                 Environment setup                  #
 #                                                    #
 ######################################################
-# Functions --- {{{
+# Functions ------------------------------------------------------- {{{
 
 path_ladd() {
   # Takes 1 argument and adds it to the beginning of the PATH
@@ -28,7 +28,7 @@ include () {
 }
 
 # }}}
-# Exported variable: LS_COLORS --- {{{
+# Exported variable: LS_COLORS ------------------------------------ {{{
 
 # Colors when using the LS command
 # NOTE:
@@ -95,7 +95,7 @@ LS_COLORS+="*.rpm=90"
 export LS_COLORS
 
 # }}}
-# Exported variables: General --- {{{
+# Exported variables: General ------------------------------------- {{{
 
 # React
 export REACT_EDITOR='less'
@@ -127,7 +127,7 @@ export GDK_SCALE=0
 export HISTSIZE=5000
 
 # }}}
-# Path appends + Misc env setup --- {{{
+# Path appends + Misc env setup ----------------------------------- {{{
 
 PYENV_ROOT="$HOME/.pyenv"
 if [ -d "$PYENV_ROOT" ]; then
@@ -182,31 +182,7 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 # }}}
-
-######################################################
-#                                                    #
-#                 Session setup                      #
-#                                                    #
-######################################################
-# ZSH setup -------------------------------------{{{
-function chpwd() {
-  local opts="--group-directories-first -h"
-  local cmd="ls -l"
-
-  if command -v k 2>&1 > /dev/null;then
-    cmd="k"
-  fi
-
-  if [[ $(ls -l) = 'total 0' ]]; then
-    opts+="A"
-  fi
-
-  eval $cmd $opts
-}
-
-setopt auto_cd
-# }}}
-# Colors --- {{{
+# Colors ---------------------------------------------------------- {{{
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -220,7 +196,13 @@ function yellow() { echo -e "${YELLOW}$@${NC}" }
 # function green_bold() { bold $(green $@) }
 
 # }}}
-# Plugins --- {{{
+
+######################################################
+#                                                    #
+#                 Session setup                      #
+#                                                    #
+######################################################
+# Plugins --------------------------------------------------------- {{{
 source ~/.zplug/init.zsh
 
 # Old Oh-my-zsh setup
@@ -252,15 +234,30 @@ fi
 zplug load
 
 # }}}
-# Sensitive information includes --- {{{
-include ~/.bash/sensitive
+# ZSH setup ------------------------------------------------------- {{{
+function chpwd() {
+  local opts="--group-directories-first -h"
+  local cmd="ls -l"
+
+  if command -v k 2>&1 > /dev/null;then
+    cmd="k"
+  fi
+
+  if [[ $(ls -l) = 'total 0' ]]; then
+    opts+="A"
+  fi
+
+  eval $cmd $opts
+}
+
+setopt auto_cd
 # }}}
-# Exports ------------ {{{
+# Exports --------------------------------------------------------- {{{
 if [[ $ZSH_THEME -eq "spaceship" ]]; then
   export VIRTUAL_ENV_DISABLE_PROMPT=1
 fi
 # }}}
-# Functions --- {{{
+# Functions ------------------------------------------------------- {{{
 # Creates a directory and cd into it
 function mkcd() { mkdir -p "$@" && cd "$_" }
 
@@ -319,7 +316,7 @@ function rndpw() {
 }
 
 # }}}
-# Aliases --- {{{
+# Aliases --------------------------------------------------------- {{{
 # Check whether NeoVIM is installed and alias it to vim
 [[ -x "$(command -v nvim)" ]] && alias vim="nvim -p"
 
@@ -376,9 +373,12 @@ alias el="manipulate_last_file"
 alias sam-dotfiles="o https://github.com/pappasam/dotfiles/tree/master/dotfiles"
 ###################################
 # }}}
-# Extra scripts: ----------------- {{{
+# Extra scripts: -------------------------------------------------- {{{
 include "$HOME/.zsh-scripts/python.zsh"
+
+# Sensitive information includes
+include ~/.bash/sensitive
 # }}}
-# Extra swag: ----------------- {{{
+# Extra swag: ----------------------------------------------------- {{{
 fortune ~/.fortunes/zen | cowsay
 # }}}
