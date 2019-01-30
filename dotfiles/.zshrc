@@ -164,9 +164,23 @@ if [ -d "$POETRY_BINS" ]; then
   path_ladd "$POETRY_BINS"
 fi
 
+CARGON_BINS="$HOME/.cargo/bin"
+if [ -d "$CARGON_BINS" ]; then
+  path_ladd "$CARGON_BINS"
+fi
+
 # EXPORT THE FINAL, MODIFIED PATH
 export PATH
 
+# Remove duplicates in $PATH
+# https://til.hashrocket.com/posts/7evpdebn7g-remove-duplicates-in-zsh-path
+typeset -aU path
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 # }}}
 
 ######################################################
@@ -224,25 +238,7 @@ zplug "lib/directories", from:oh-my-zsh
 zplug "lib/history", from:oh-my-zsh
 zplug "lib/key-bindings", from:oh-my-zsh
 
-# Spaceship theme
-zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, as:theme
-
-SPACESHIP_PROMPT_ORDER=(
-  dir
-  host
-  git
-  package
-  node
-  docker
-  aws
-  pyenv
-  exec_time
-  line_sep
-  vi_mode
-  jobs
-  exit_code
-  char
-)
+zplug "~/src/projects-to-contribute/0i0.zsh-theme", from:local, use:0i0.zsh-theme, as:theme
 
 # Cool stuff
 zplug "paulirish/git-open", as:plugin
@@ -268,7 +264,7 @@ fi
 # Creates a directory and cd into it
 function mkcd() { mkdir -p "$@" && cd "$_" }
 
-function searchalias() { alias | grep "${*}" }
+function sa() { alias | grep "${*}" }
 
 function ignore() { curl -L -s "https://gitignore.io/api/$@" ;}
 
@@ -327,6 +323,7 @@ function rndpw() {
 # Check whether NeoVIM is installed and alias it to vim
 [[ -x "$(command -v nvim)" ]] && alias vim="nvim -p"
 
+alias ls="ls --color=auto"
 alias cp="cp -iv"
 alias mv="mv -iv"
 alias rm="rm -Iv"
@@ -384,11 +381,4 @@ include "$HOME/.zsh-scripts/python.zsh"
 # }}}
 # Extra swag: ----------------- {{{
 fortune ~/.fortunes/zen | cowsay
-# }}}
-# Google Cloud SDK: ----------------- {{{
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 # }}}
