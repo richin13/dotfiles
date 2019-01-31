@@ -217,6 +217,7 @@ zplug "plugins/docker-compose", from:oh-my-zsh
 zplug "lib/completion", from:oh-my-zsh
 zplug "lib/compfix", from:oh-my-zsh
 zplug "lib/directories", from:oh-my-zsh
+zplug "lib/git", from:oh-my-zsh
 zplug "lib/history", from:oh-my-zsh
 zplug "lib/key-bindings", from:oh-my-zsh
 
@@ -375,6 +376,7 @@ alias sam-dotfiles="o https://github.com/pappasam/dotfiles/tree/master/dotfiles"
 # }}}
 # Extra scripts: -------------------------------------------------- {{{
 include "$HOME/.zsh-scripts/python.zsh"
+include "$HOME/.zsh-scripts/git.zsh"
 
 # Sensitive information includes
 include ~/.bash/sensitive
