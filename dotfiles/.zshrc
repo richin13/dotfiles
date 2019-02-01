@@ -316,6 +316,23 @@ function rndpw() {
   </dev/urandom tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' | head -c 13  ; echo
 }
 
+function kplr() {
+  cd "$KEPLER_FOLDER/$1"
+}
+
+_kplr() {
+  local state
+
+  _arguments \
+    '1: :->dir'
+
+  case $state in
+    (dir) _arguments '1:projects:($(ls $KEPLER_FOLDER))' ;;
+  esac
+}
+
+compdef _kplr kplr
+
 # }}}
 # Aliases --------------------------------------------------------- {{{
 # Check whether NeoVIM is installed and alias it to vim
