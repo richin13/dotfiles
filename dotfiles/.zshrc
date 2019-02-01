@@ -334,6 +334,10 @@ alias itree="tree -I '__pycache__|venv|node_modules'"
 alias srm="shred -n 100 -z -u"
 alias ff="grep -rnw . -e"
 alias m="make"
+alias dc="docker-compose"
+alias dcbuild="dc build"
+alias dcup="dc up"
+alias dcdown="dc down"
 
 # Execute the previous command
 alias jk="fc -e -"
