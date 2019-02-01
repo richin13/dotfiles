@@ -136,12 +136,13 @@ Plug 'khalliday7/Jenkinsfile-vim-syntax'
 Plug 'cespare/vim-toml'
 
 " Indentation
-Plug 'hynek/vim-python-pep8-indent'
+" Plug 'hynek/vim-python-pep8-indent'
 Plug 'vim-scripts/groovyindent-unix'
 
 " Python development
-Plug 'tell-k/vim-autopep8'
+" Plug 'tell-k/vim-autopep8'
 Plug 'davidhalter/jedi-vim'
+Plug 'pappasam/vim-filetype-formatter'
 
 " Javascript development
 Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
@@ -290,9 +291,7 @@ nnoremap <silent><leader>r :NumbersToggle<CR>
 inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>a
 nnoremap <silent> <C-c> :pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>
 
-augroup enable_formatting
-  autocmd Filetype python nnoremap <buffer> <leader>f :Autopep8<cr>
-augroup end
+nnoremap <buffer> <leader>f :FiletypeFormat<cr>
 
 " Toggle NERDTree
 nnoremap <silent> <space>j :NERDTreeToggle<CR>
@@ -314,9 +313,11 @@ let g:python_highlight_all = 1
 " Numbers
 let g:numbers_exclude = ['nerdtree']
 
-" Auto PEP-8
-let g:autopep8_disable_show_diff = 1
-
+" Vim Filetype Formatter
+let g:vim_filetype_formatter_commands = {
+      \ 'python': 'yapf ',
+      \ 'json': 'python -mjson.tool ',
+      \}
 "  }}}
 " Plugin: Lightline --------------------------- {{{
 let g:lightline = {
