@@ -125,10 +125,10 @@ Plug 'Yggdroot/indentLine'
 Plug 'NLKNguyen/papercolor-theme'
 
 " Syntax highlighting
-Plug 'hdima/python-syntax'
+Plug 'hdima/python-syntax', {'for': 'python'}
 Plug 'chr4/nginx.vim'
 Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
-Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript', {'for': ['javascript', 'javascript.jsx']}
 Plug 'mxw/vim-jsx'
 Plug 'mrk21/yaml-vim'
 Plug 'aklt/plantuml-syntax'
@@ -141,11 +141,11 @@ Plug 'vim-scripts/groovyindent-unix'
 
 " Python development
 " Plug 'tell-k/vim-autopep8'
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'pappasam/vim-filetype-formatter'
 
 " Javascript development
-Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
+Plug 'ternjs/tern_for_vim', {'do': 'npm install', 'for': ['javascript', 'javascript.jsx']}
 
 " Git
 Plug 'lambdalisue/gina.vim'
@@ -304,6 +304,12 @@ nnoremap <silent> <esc> :noh<return><esc>
 
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 " }}}
+" General: Filetype detection --------------------- {{{
+augroup file_extensions
+  autocmd!
+  autocmd BufNewFile,BufRead,BufEnter *.zsh-theme set filetype=zsh
+augroup end
+" }}}
 "  Plugin: Configure --------------------------- {{{
 
 " Python highlighting
@@ -365,8 +371,12 @@ let g:jedi#documentation_command = "<leader>gd"
 let g:jedi#usages_command = "<leader>gu"
 let g:jedi#rename_command = "<leader>gr"
 
+let g:tern#command = ["npx", "tern"]
+
 augroup js_autocompletion
+  autocmd!
   autocmd Filetype javascript.jsx,javascript nnoremap <buffer> <C-]> :TernDef<CR>
+
   autocmd Filetype javascript.jsx,javascript nnoremap <buffer> <leader>gd :TernDoc<CR>
   autocmd Filetype javascript.jsx,javascript nnoremap <buffer> <leader>gu :TernRefs<CR>
   autocmd Filetype javascript.jsx,javascript nnoremap <buffer> <leader>gr :TernRename<CR>
