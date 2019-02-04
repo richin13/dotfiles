@@ -26,6 +26,10 @@ config_directories: $(CONFIG_DIRS_HOME) ## Create the directories in the HOME fo
 ################################################################################
 # Theming and plugins
 ################################################################################
+.PHONY: zplug
+zplug: ## Install zplug
+	curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+
 .PHONY: oh-my-zsh-swag
 oh-my-zsh-swag: ## Install the spaceship-prompt theme
 	-sh -c "$$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
