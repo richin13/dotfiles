@@ -2,7 +2,7 @@
 # Bash helpers to improve my Python development workflow
 #
 # ===== Variables =====
-DEV_PKGS=(neovim jedi bpython autopep8)
+DEV_PKGS=(neovim jedi bpython yapf)
 PY_DEFAULT_VERSION=python3.7
 # ====== Aliases ======
 alias p="bpython"
