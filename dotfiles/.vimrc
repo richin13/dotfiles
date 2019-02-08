@@ -104,6 +104,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'christoomey/vim-system-copy'
 Plug 'gcmt/taboo.vim'
+Plug 'tmhedberg/matchit'
 
 " Utils
 Plug 'tpope/vim-commentary'
@@ -225,6 +226,9 @@ let g:PaperColor_Theme_Options['language'] = {
       \     },
       \     'c': {
       \       'highlight_builtins' : 1
+      \     },
+      \     'javascript': {
+      \       'highlight_builtins' : 1
       \     }
       \ }
 
@@ -235,6 +239,11 @@ augroup python_syntax
   autocmd FileType python syn keyword pythonBuiltinObj cls
   autocmd FileType python syn keyword pythonBuiltinObj args
   autocmd FileType python syn keyword pythonBuiltinObj kwargs
+augroup end
+
+augroup js_syntax
+  autocmd!
+  autocmd FileType javascript,javascript.jsx syn keyword jsBooleanTrue this
 augroup end
 
 " Syntax: select global syntax scheme
@@ -309,6 +318,10 @@ augroup file_extensions
   autocmd!
   autocmd BufNewFile,BufRead,BufEnter *.zsh-theme set filetype=zsh
 augroup end
+
+" Vim-JSX
+let g:jsx_ext_required = 0
+
 " }}}
 "  Plugin: Configure --------------------------- {{{
 
@@ -322,8 +335,13 @@ let g:numbers_exclude = ['nerdtree']
 " Vim Filetype Formatter
 let g:vim_filetype_formatter_commands = {
       \ 'python': 'yapf ',
-      \ 'json': 'python -mjson.tool ',
+      \ 'json': 'jq .',
       \}
+
+"
+let g:ctrlp_custom_ignore = {
+	\   'dir' : '\.git$\|build$\|node_modules\|dist'
+	\ }
 "  }}}
 " Plugin: Lightline --------------------------- {{{
 let g:lightline = {
