@@ -338,6 +338,15 @@ _kplr() {
 
 compdef _kplr kplr
 
+function cloneme() {
+  if [[ $# -ne 1 ]]; then
+    red "Need to specify a repo to clone."
+    return 1
+  fi
+
+  gcl "git@github.com:richin13/$1.git"
+}
+
 # }}}
 # Aliases --------------------------------------------------------- {{{
 # Check whether NeoVIM is installed and alias it to vim
