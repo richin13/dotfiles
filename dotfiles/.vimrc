@@ -135,6 +135,7 @@ Plug 'mrk21/yaml-vim'
 Plug 'aklt/plantuml-syntax'
 Plug 'khalliday7/Jenkinsfile-vim-syntax'
 Plug 'cespare/vim-toml'
+Plug 'hashivim/vim-terraform'
 
 " Indentation
 " Plug 'hynek/vim-python-pep8-indent'
