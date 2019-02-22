@@ -130,6 +130,7 @@ Plug 'hdima/python-syntax', {'for': 'python'}
 Plug 'chr4/nginx.vim'
 Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 Plug 'pangloss/vim-javascript', {'for': ['javascript', 'javascript.jsx']}
+" Plug 'maxmellon/vim-jsx-pretty'
 Plug 'mxw/vim-jsx'
 Plug 'mrk21/yaml-vim'
 Plug 'aklt/plantuml-syntax'
@@ -173,11 +174,12 @@ augroup fold_settings
   autocmd FileType vim,tmux setlocal foldmethod=marker foldlevelstart=0
   autocmd FileType * setlocal foldnestmax=1
   autocmd BufNewFile,BufRead .zprofile,.profile,.bashrc,.zshrc,*.zsh setlocal foldmethod=marker foldlevelstart=0
+  autocmd FileType javascript,javascript.jsx setlocal foldmethod=syntax foldnestmax=2 foldlevelstart=0
 augroup END
 
 augroup fold_python_settings
   autocmd!
-  autocmd BufRead *.py normal zR<CR>
+  autocmd BufRead *.py,*.js,*.jsx normal zR<CR>
 augroup END
 
 " }}}
@@ -245,6 +247,11 @@ augroup end
 augroup js_syntax
   autocmd!
   autocmd FileType javascript,javascript.jsx syn keyword jsBooleanTrue this
+augroup end
+
+augroup javascript_syntax
+ autocmd!
+ autocmd FileType javascript syn keyword jsBooleanTrue this
 augroup end
 
 " Syntax: select global syntax scheme
@@ -336,13 +343,15 @@ let g:numbers_exclude = ['nerdtree']
 " Vim Filetype Formatter
 let g:vim_filetype_formatter_commands = {
       \ 'python': 'yapf ',
-      \ 'json': 'jq .',
+      \ 'json': 'python3 -c "import json, sys; print(json.dumps(json.load(sys.stdin), indent=2), end=\"\")"',
       \}
 
 "
 let g:ctrlp_custom_ignore = {
 	\   'dir' : '\.git$\|build$\|node_modules\|dist'
 	\ }
+
+let g:vim_jsx_pretty_colorful_config = 1
 "  }}}
 " Plugin: Lightline --------------------------- {{{
 let g:lightline = {
