@@ -211,7 +211,7 @@ function yellow() { echo -e "${YELLOW}$@${NC}" }
 source ~/.zplug/init.zsh
 
 # Old Oh-my-zsh setup
-zplug "plugins/magic-enter", from:oh-my-zsh
+# zplug "plugins/magic-enter", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/git-flow", from:oh-my-zsh
 zplug "plugins/pylint", from:oh-my-zsh
@@ -259,9 +259,7 @@ function chpwd() {
 setopt auto_cd
 # }}}
 # Exports --------------------------------------------------------- {{{
-if [[ $ZSH_THEME -eq "spaceship" ]]; then
-  export VIRTUAL_ENV_DISABLE_PROMPT=1
-fi
+export MANPAGER="nvim -c 'set ft=man' -"
 # }}}
 # Functions ------------------------------------------------------- {{{
 # Creates a directory and cd into it
