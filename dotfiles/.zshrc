@@ -260,6 +260,7 @@ setopt auto_cd
 # }}}
 # Exports --------------------------------------------------------- {{{
 export MANPAGER="nvim -c 'set ft=man' -"
+export DOCS_DIRECTORY=$HOME/.config/docs
 # }}}
 # Functions ------------------------------------------------------- {{{
 # Creates a directory and cd into it
@@ -344,6 +345,31 @@ function cloneme() {
 
   gcl "git@github.com:richin13/$1.git"
 }
+
+function docs() {
+  if [[ $# -lt 1 ]]; then
+    bold "Available documentations:"
+    ls $DOCS_DIRECTORY
+  else
+    pushd $DOCS_DIRECTORY/$1 > /dev/null
+    shift
+    python -m http.server $@
+    popd > /dev/null
+  fi
+}
+
+_docs() {
+  local state
+
+  _arguments \
+    '1: :->dir'
+
+  case $state in
+    (dir) _arguments '1:documentations:($(ls $DOCS_DIRECTORY))' ;;
+  esac
+}
+
+compdef _docs docs
 
 # }}}
 # Aliases --------------------------------------------------------- {{{
