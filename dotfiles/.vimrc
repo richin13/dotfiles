@@ -105,6 +105,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'christoomey/vim-system-copy'
 Plug 'gcmt/taboo.vim'
 Plug 'tmhedberg/matchit'
+Plug 'ap/vim-buftabline'
 
 " Utils
 Plug 'tpope/vim-commentary'
@@ -217,7 +218,10 @@ augroup END
 let g:PaperColor_Theme_Options = {}
 let g:PaperColor_Theme_Options['theme'] = {
       \     'default': {
-      \       'transparent_background': 1
+      \       'transparent_background': 1,
+      \       'override': {
+      \         'buftabline_current_bg': ['#00d75f', '041']
+      \       }
       \     }
       \ }
 let g:PaperColor_Theme_Options['language'] = {
@@ -274,19 +278,23 @@ nnoremap <c-l> <c-w>l
 inoremap <C-@> <C-x><C-o>
 inoremap <C-space> <C-x><C-o>
 
-" Tabs
-nnoremap <silent> L gt
-nnoremap <silent> H gT
-nnoremap <A-1> 1gt
-nnoremap <A-2> 2gt
-nnoremap <A-3> 3gt
-nnoremap <A-4> 4gt
-nnoremap <A-5> 5gt
-nnoremap <A-6> 6gt
-nnoremap <A-7> 7gt
-nnoremap <A-8> 8gt
-nnoremap <A-9> 9gt
-nnoremap <silent><leader>t :tabe<CR>
+" Buffers
+augroup buffer_navigation
+  au!
+  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> L :bnext<CR> | endif
+  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> H :bprev<CR> | endif
+  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-1> :1buffer<CR> | endif
+  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-2> :2buffer<CR> | endif
+  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-3> :3buffer<CR> | endif
+  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-4> :4buffer<CR> | endif
+  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-5> :5buffer<CR> | endif
+  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-6> :6buffer<CR> | endif
+  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-7> :7buffer<CR> | endif
+  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-8> :8buffer<CR> | endif
+  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-9> :9buffer<CR> | endif
+
+  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <leader>t :enew<CR> | endif
+augroup END
 
 nnoremap <silent><leader>r :NumbersToggle<CR>
 
@@ -300,7 +308,7 @@ nnoremap <buffer> <leader>f :FiletypeFormat<cr>
 nnoremap <silent> <space>j :NERDTreeToggle<CR>
 
 " Quit VIM
-nnoremap <silent> <localleader>q :conf q<CR>
+nnoremap <silent> <localleader>q :bd<CR>
 
 " Search and Replace
 nnoremap <silent> <esc> :noh<return><esc>
@@ -370,6 +378,21 @@ let g:NERDTreeIgnore=[
       \'node_modules$[[dir]]',
       \'.pyc$[[file]]',
       \]
+" }}}
+"  Plugin: BUFTabline ---------------------------- {{{
+
+" Show tabline only when there's more than 1 opened buffer
+let g:buftabline_show = 1
+
+" Prepend buffer name
+let g:buftabline_numbers = 1
+
+" Indicate whether the buffer it's been modified
+let g:buftabline_indicators = 1
+
+" Do not set default mappings for jumping to specific buffers
+let g:buftabline_plug_max = 0
+
 " }}}
 " Plugin: Autocompletion ---------------------- {{{
 let g:jedi#popup_on_dot = 0

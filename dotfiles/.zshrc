@@ -374,7 +374,7 @@ compdef _docs docs
 # }}}
 # Aliases --------------------------------------------------------- {{{
 # Check whether NeoVIM is installed and alias it to vim
-[[ -x "$(command -v nvim)" ]] && alias vim="nvim -p"
+[[ -x "$(command -v nvim)" ]] && alias vim="nvim"
 
 alias ls="ls --color=auto"
 alias cp="cp -iv"
