@@ -371,6 +371,22 @@ _docs() {
 
 compdef _docs docs
 
+function review-pr() {
+  if [[ $# -lt 1 ]]; then
+    red "Invalid use: Specify the PR #"
+    return 1
+  fi
+  local pr=$1
+  local branch=${2:-"pr-$pr"}
+
+  git fetch origin pull/$1/head:$branch
+
+  if [[ $? -eq 0 ]]; then
+    bold "You can review the changes by typing:"
+    green "git checkout $branch"
+  fi
+}
+
 # }}}
 # Aliases --------------------------------------------------------- {{{
 # Check whether NeoVIM is installed and alias it to vim
