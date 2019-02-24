@@ -126,7 +126,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'NLKNguyen/papercolor-theme'
 
 " Syntax highlighting
-Plug 'hdima/python-syntax', {'for': 'python'}
+Plug 'richin13/python-syntax', {'for': 'python', 'branch': 'class-patch1'}
 Plug 'chr4/nginx.vim'
 Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 Plug 'pangloss/vim-javascript', {'for': ['javascript', 'javascript.jsx']}
@@ -235,23 +235,9 @@ let g:PaperColor_Theme_Options['language'] = {
       \     }
       \ }
 
-" Python: Highlight self and cls keyword in class definitions
-augroup python_syntax
-  autocmd!
-  autocmd FileType python syn keyword pythonBuiltinObj self
-  autocmd FileType python syn keyword pythonBuiltinObj cls
-  autocmd FileType python syn keyword pythonBuiltinObj args
-  autocmd FileType python syn keyword pythonBuiltinObj kwargs
-augroup end
-
 augroup js_syntax
   autocmd!
   autocmd FileType javascript,javascript.jsx syn keyword jsBooleanTrue this
-augroup end
-
-augroup javascript_syntax
- autocmd!
- autocmd FileType javascript syn keyword jsBooleanTrue this
 augroup end
 
 " Syntax: select global syntax scheme
