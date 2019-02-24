@@ -294,6 +294,12 @@ augroup buffer_navigation
   au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-9> :9buffer<CR> | endif
 
   au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <leader>t :enew<CR> | endif
+
+" Smartly close buffers/quit vim
+  au BufEnter * if len(getbufinfo({'buflisted':1})) > 1 | nnoremap <buffer><silent> <localleader>q :bd<CR>
+        \ | else |
+        \ nnoremap <buffer><silent> <localleader>q :q<CR>
+        \ | endif
 augroup END
 
 nnoremap <silent><leader>r :NumbersToggle<CR>
@@ -307,12 +313,9 @@ nnoremap <buffer> <leader>f :FiletypeFormat<cr>
 " Toggle NERDTree
 nnoremap <silent> <space>j :NERDTreeToggle<CR>
 
-" Quit VIM
-nnoremap <silent> <localleader>q :bd<CR>
-
-" Search and Replace
 nnoremap <silent> <esc> :noh<return><esc>
 
+" Search and Replace
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 " }}}
 " General: Filetype detection --------------------- {{{
