@@ -130,9 +130,8 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'richin13/python-syntax', {'for': 'python', 'branch': 'class-patch1'}
 Plug 'chr4/nginx.vim'
 Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
-Plug 'pangloss/vim-javascript', {'for': ['javascript', 'javascript.jsx']}
-" Plug 'maxmellon/vim-jsx-pretty'
-Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript', {'for': ['javascript']}
+Plug 'MaxMEllon/vim-jsx-pretty', {'for': ['javascript']}
 Plug 'mrk21/yaml-vim'
 Plug 'aklt/plantuml-syntax'
 Plug 'khalliday7/Jenkinsfile-vim-syntax'
@@ -347,8 +346,6 @@ let g:vim_filetype_formatter_commands = {
 let g:ctrlp_custom_ignore = {
 	\   'dir' : '\.git$\|build$\|node_modules\|dist'
 	\ }
-
-let g:vim_jsx_pretty_colorful_config = 1
 "  }}}
 " Plugin: Lightline --------------------------- {{{
 let g:lightline = {
