@@ -175,6 +175,7 @@ augroup fold_settings
   autocmd FileType * setlocal foldnestmax=1
   autocmd BufNewFile,BufRead .zprofile,.profile,.bashrc,.zshrc,*.zsh setlocal foldmethod=marker foldlevelstart=0
   autocmd FileType javascript,javascript.jsx setlocal foldmethod=syntax foldnestmax=2 foldlevelstart=0
+  autocmd FileType yaml setlocal foldmethod=indent foldnestmax=5 foldlevelstart=0
 augroup END
 
 augroup fold_python_settings
