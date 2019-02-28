@@ -438,6 +438,17 @@ endfunction
 
 command! Gblame call _Gblame()
 " }}}
+" Plugin: Ragtag ----------------------------- {{{
+
+" Load mappings on every filetype
+let g:ragtag_global_maps = 1
+
+" Additional files for whice ragtag will initialize
+augroup ragtag_config
+ autocmd FileType javascript call RagtagInit()
+augroup end
+
+" }}}
 " Config: Preview ---------------------- {{{
 function! _Preview()
   if &filetype ==? 'plantuml'
