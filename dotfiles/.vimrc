@@ -146,6 +146,7 @@ Plug 'vim-scripts/groovyindent-unix'
 " Plug 'tell-k/vim-autopep8'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'pappasam/vim-filetype-formatter'
+Plug 'fisadev/vim-isort'
 
 " Javascript development
 Plug 'ternjs/tern_for_vim', {'do': 'npm install', 'for': ['javascript', 'javascript.jsx']}
@@ -308,7 +309,11 @@ nnoremap <silent><leader>r :NumbersToggle<CR>
 inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>a
 nnoremap <silent> <C-c> :pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>
 
-nnoremap <buffer> <leader>f :FiletypeFormat<cr>
+augroup formatting
+  au!
+  au Filetype python nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>:Isort<cr>
+  au Filetype * nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
+augroup END
 
 " Toggle NERDTree
 nnoremap <silent> <space>j :NERDTreeToggle<CR>
