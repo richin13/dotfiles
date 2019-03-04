@@ -352,6 +352,9 @@ let g:vim_filetype_formatter_commands = {
 let g:ctrlp_custom_ignore = {
 	\   'dir' : '\.git$\|build$\|node_modules\|dist'
 	\ }
+
+" Disable vim-isort default mapping
+let g:vim_isort_map = ''
 "  }}}
 " Plugin: Lightline --------------------------- {{{
 let g:lightline = {
