@@ -126,6 +126,7 @@ Plug 'tyru/open-browser.vim'
 Plug 'greyblake/vim-preview'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-ragtag'
+Plug 'wincent/ferret'
 
 Plug 'Yggdroot/indentLine'
 
