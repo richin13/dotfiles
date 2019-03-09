@@ -260,6 +260,9 @@ setopt auto_cd
 
 # Completion settings
 zstyle ':completion:*' ignored-patterns '__pycache__' '*?.pyc' 'poetry.lock' 'yarn.lock' 'node_modules'
+
+bindkey '^P' up-line-or-beginning-search
+bindkey '^N' down-line-or-beginning-search
 # }}}
 # Exports --------------------------------------------------------- {{{
 export MANPAGER="nvim -c 'set ft=man' -"
