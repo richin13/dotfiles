@@ -139,7 +139,7 @@ Plug 'cespare/vim-toml'
 Plug 'hashivim/vim-terraform'
 
 " Indentation
-" Plug 'hynek/vim-python-pep8-indent'
+Plug 'hynek/vim-python-pep8-indent'
 Plug 'vim-scripts/groovyindent-unix'
 
 " Python development
