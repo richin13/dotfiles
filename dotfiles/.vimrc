@@ -284,15 +284,6 @@ augroup buffer_navigation
   au!
   au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> L :bnext<CR> | endif
   au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> H :bprev<CR> | endif
-  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-1> :1buffer<CR> | endif
-  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-2> :2buffer<CR> | endif
-  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-3> :3buffer<CR> | endif
-  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-4> :4buffer<CR> | endif
-  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-5> :5buffer<CR> | endif
-  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-6> :6buffer<CR> | endif
-  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-7> :7buffer<CR> | endif
-  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-8> :8buffer<CR> | endif
-  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <A-9> :9buffer<CR> | endif
 
   au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <leader>t :enew<CR> | endif
 
@@ -390,11 +381,8 @@ let g:NERDTreeIgnore=[
 " }}}
 "  Plugin: BUFTabline ---------------------------- {{{
 
-" Show tabline only when there's more than 1 opened buffer
-let g:buftabline_show = 1
-
-" Prepend buffer name
-let g:buftabline_numbers = 1
+" Numbering the buffer labels: ordinal number
+let g:buftabline_numbers = 2
 
 " Indicate whether the buffer it's been modified
 let g:buftabline_indicators = 1
