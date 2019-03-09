@@ -313,6 +313,8 @@ nnoremap <silent> <esc> :noh<return><esc>
 
 " Search and Replace
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+
+nnoremap <F2> "zyiw:exe "Ack ".@z.""<CR>
 " }}}
 " General: Filetype detection --------------------- {{{
 augroup file_extensions
