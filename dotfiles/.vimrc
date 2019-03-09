@@ -350,9 +350,18 @@ let g:vim_isort_map = ''
 " Plugin: Lightline --------------------------- {{{
 let g:lightline = {
   \ 'colorscheme': 'jellybeans',
+  \ 'active': {
+  \   'right': [ [ 'position' ],
+  \              [ 'fileencoding', 'filetype' ],
+  \              [ 'branch' ] ]
+  \ },
+  \ 'component': {
+  \   'position': '%l/%L:%c'
+  \ },
+  \ 'component_function': {
+  \   'branch': 'gina#component#repo#branch'
+  \ },
   \ }
-" set statusline += %{}
-
 " }}}
 "  Plugin: NERDTree ---------------------------- {{{
 
