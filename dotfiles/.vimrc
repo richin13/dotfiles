@@ -90,6 +90,12 @@ augroup redraw_on_refocus
   au FocusGained * :redraw!
 augroup END
 
+" Ignore annoying patterns
+set wildignore=*.pyc,**/__pycache__/*,**/node_modules/*
+
+" Ignore casing when performing completion
+set wildignorecase
+"
 " }}}
 " General: Plugin Install --------------------- {{{
 
