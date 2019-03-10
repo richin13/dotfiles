@@ -322,7 +322,7 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 nnoremap <F2> "zyiw:exe "Ack ".@z.""<CR>
 " }}}
-" General: Filetype detection --------------------- {{{
+" General: Filetype detection ----------------- {{{
 augroup file_extensions
   autocmd!
   autocmd BufNewFile,BufRead,BufEnter *.zsh-theme set filetype=zsh
@@ -396,7 +396,7 @@ let g:NERDTreeIgnore=[
       \'.pyc$[[file]]',
       \]
 " }}}
-"  Plugin: BUFTabline ---------------------------- {{{
+"  Plugin: BUFTabline -------------------------- {{{
 
 " Numbering the buffer labels: ordinal number
 let g:buftabline_numbers = 2
@@ -451,7 +451,7 @@ endfunction
 
 command! Gblame call _Gblame()
 " }}}
-" Plugin: Ragtag ----------------------------- {{{
+" Plugin: Ragtag ------------------------------ {{{
 
 " Load mappings on every filetype
 let g:ragtag_global_maps = 1
@@ -462,7 +462,7 @@ augroup ragtag_config
 augroup end
 
 " }}}
-" Config: Preview ---------------------- {{{
+" Config: Preview ----------------------------- {{{
 function! _Preview()
   if &filetype ==? 'plantuml'
     exec 'PlantumlOpen'
@@ -474,6 +474,18 @@ endfunction
 command! PreviewCmd call _Preview()
 
 nmap <silent><leader>p :PreviewCmd<CR>
+" }}}
+" Config: Abbreviations ----------------------- {{{
+augroup python_ab
+  au!
+  au Filetype python iab ifmain if __name__ == '__main__':<CR>main()<ESC>
+augroup END
+
+augroup js_ab
+  au!
+  au Filetype javascript iab constcomp const = (props) => {<CR>}<ESC>Oreturn ()<ESC>k0ea
+  au Filetype javascript iab cdbg console.debug('[DEBUG]')<ESC>F]a
+augroup END
 " }}}
 " General: Cleanup ---------------------------- {{{
 " commands that need to run at the end of my vimrc
