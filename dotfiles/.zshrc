@@ -259,7 +259,7 @@ function chpwd() {
 setopt auto_cd
 
 # Completion settings
-zstyle ':completion:*' ignored-patterns '__pycache__' '*?.pyc' 'poetry.lock' 'yarn.lock' 'node_modules'
+zstyle ':completion:*' ignored-patterns '__pycache__' '*?.pyc' 'poetry.lock' 'yarn.lock' 'node_modules' 'pip-wheel-metadata' '*.egg-info'
 
 bindkey '^P' up-line-or-beginning-search
 bindkey '^N' down-line-or-beginning-search
@@ -397,6 +397,8 @@ function review-pr() {
 # Aliases --------------------------------------------------------- {{{
 # Check whether NeoVIM is installed and alias it to vim
 [[ -x "$(command -v nvim)" ]] && alias vim="nvim"
+
+[[ -x "$(command -v bat)" ]] && alias cat="bat -p"
 
 alias ls="ls --color=auto"
 alias cp="cp -iv"
