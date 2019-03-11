@@ -354,6 +354,12 @@ let g:ctrlp_custom_ignore = {
 
 " Disable vim-isort default mapping
 let g:vim_isort_map = ''
+
+augroup auto_pairs_config
+  au!
+  " Auto-pair string and byte literals
+  au Filetype python let b:AutoPairs = AutoPairsDefine({"\\(f\\|r\\|b\\)'": "'"})
+augroup END
 "  }}}
 " Plugin: Lightline --------------------------- {{{
 let g:lightline = {
