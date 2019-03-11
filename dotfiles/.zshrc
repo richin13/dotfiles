@@ -414,7 +414,7 @@ alias m="make"
 alias dc="docker-compose"
 alias dcbuild="dc build"
 alias dcup="dc up"
-alias dcdown="dc down"
+alias dcdown="dc down -v"
 
 # Execute the previous command
 alias jk="fc -e -"
