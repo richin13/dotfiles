@@ -95,6 +95,7 @@ set wildignore=*.pyc,**/__pycache__/*,**/node_modules/*
 
 " Ignore casing when performing completion
 set wildignorecase
+
 "
 " }}}
 " General: Plugin Install --------------------- {{{
@@ -228,18 +229,15 @@ let g:PaperColor_Theme_Options['theme'] = {
       \     'default': {
       \       'transparent_background': 1,
       \       'override': {
-      \         'buftabline_current_bg': ['#00d75f', '041']
+      \         'folded_bg': ['#5f5f5f', '59'],
+      \         'folded_fg': ['#c6c6c6', '251'],
+      \         'cursorlinenr_fg': ['#00d75f', '041'],
+      \         'buftabline_current_bg': ['#00d75f', '041'],
       \       }
       \     }
       \ }
 let g:PaperColor_Theme_Options['language'] = {
       \     'python': {
-      \       'highlight_builtins' : 1
-      \     },
-      \     'cpp': {
-      \       'highlight_standard_library': 1
-      \     },
-      \     'c': {
       \       'highlight_builtins' : 1
       \     },
       \     'javascript': {
@@ -399,8 +397,11 @@ let g:NERDTreeIgnore=[
       \'__pycache__$[[dir]]',
       \'.egg-info$[[dir]]',
       \'node_modules$[[dir]]',
-      \'node_modules$[[dir]]',
       \'.pyc$[[file]]',
+      \'pip-wheel-metadata$[[dir]]',
+      \'.tox$[[dir]]',
+      \'.mypy_cache$[[dir]]',
+      \'.git$[[dir]]',
       \]
 " }}}
 "  Plugin: BUFTabline -------------------------- {{{
