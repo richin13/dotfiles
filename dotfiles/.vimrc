@@ -325,6 +325,7 @@ nnoremap <F2> "zyiw:exe "Ack ".@z.""<CR>
 augroup file_extensions
   autocmd!
   autocmd BufNewFile,BufRead,BufEnter *.zsh-theme set filetype=zsh
+  autocmd BufRead poetry.lock set filetype=toml
 augroup end
 
 " Vim-JSX
