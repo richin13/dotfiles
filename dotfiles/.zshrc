@@ -413,10 +413,6 @@ alias itree="tree -I '__pycache__|venv|node_modules'"
 alias srm="shred -n 100 -z -u"
 alias ff="grep -rnw . -e"
 alias m="make"
-alias dc="docker-compose"
-alias dcbuild="dc build"
-alias dcup="dc up"
-alias dcdown="dc down -v"
 
 # Execute the previous command
 alias jk="fc -e -"
@@ -460,6 +456,7 @@ alias sam-dotfiles="o https://github.com/pappasam/dotfiles/tree/master/dotfiles"
 # Extra scripts: -------------------------------------------------- {{{
 include "$HOME/.zsh-scripts/python.zsh"
 include "$HOME/.zsh-scripts/git.zsh"
+include "$HOME/.zsh-scripts/docker.zsh"
 
 # Sensitive information includes
 include ~/.bash/sensitive
