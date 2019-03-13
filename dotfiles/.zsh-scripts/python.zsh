@@ -194,6 +194,8 @@ function dvenv() {
     && pyenv uninstall -f $pversion \
     && rm .python-version > /dev/null \
     && green "Uninstalled \`$pversion\`"
+
+  [[ $? -ne 0 ]] && red "Make sure there's a .python-version file in CWD"
 }
 # }}}
 # pyrm: Deletes a directory that contains a Python project -------- {{{
