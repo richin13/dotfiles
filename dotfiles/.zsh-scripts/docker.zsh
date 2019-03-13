@@ -5,6 +5,13 @@
 DOCKER_IMAGES_FORMAT="{{.ID}}|{{.Repository}}|{{.CreatedSince}} ago"
 
 # Aliases: -------------------------------------------------------- {{{
+alias dckr="docker"
+alias dckri="docker image"
+alias dckre="docker exec"
+alias dckrr="docker run"
+alias dckrrit="docker run -it"
+alias dckrp="docker ps"
+
 alias dc="docker-compose"
 alias dcbuild="dc build"
 alias dcup="dc up"
