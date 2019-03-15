@@ -326,6 +326,7 @@ augroup file_extensions
   autocmd!
   autocmd BufNewFile,BufRead,BufEnter *.zsh-theme set filetype=zsh
   autocmd BufRead poetry.lock set filetype=toml
+  autocmd BufRead .pylintrc set filetype=dosini
 augroup end
 
 " Vim-JSX
