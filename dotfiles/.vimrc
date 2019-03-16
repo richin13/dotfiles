@@ -92,6 +92,14 @@ set wildignore=*.pyc,**/__pycache__/*,**/node_modules/*
 " Ignore casing when performing completion
 set wildignorecase
 
+" Better color support
+if (has("nvim"))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+if (has("termguicolors"))
+  set termguicolors
+endif
+
 "
 " }}}
 " General: Plugin Install --------------------- {{{
@@ -223,13 +231,14 @@ augroup END
 " Papercolor: options
 let g:PaperColor_Theme_Options = {}
 let g:PaperColor_Theme_Options['theme'] = {
-      \     'default': {
+      \     'default.dark': {
       \       'transparent_background': 1,
       \       'override': {
       \         'folded_bg': ['#5f5f5f', '59'],
       \         'folded_fg': ['#c6c6c6', '251'],
       \         'cursorlinenr_fg': ['#00d75f', '041'],
-      \         'buftabline_current_bg': ['#00d75f', '041'],
+      \         'buftabline_current_bg': ['#00d75f', ''],
+      \         'buftabline_inactive_fg': ['#00000', ''],
       \       }
       \     }
       \ }
