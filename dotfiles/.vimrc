@@ -394,6 +394,7 @@ let g:NERDTreeShowHidden = 1
 let g:NERDTreeShowLineNumbers = 1
 let g:NERDTreeWinPos = 'left'
 let g:NERDTreeWinSize = 31
+let g:NERDTreeShowBookmarks = 1
 
 let g:NERDTreeIgnore=[
       \'__pycache__$[[dir]]',
