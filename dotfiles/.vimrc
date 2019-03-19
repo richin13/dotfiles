@@ -478,6 +478,18 @@ augroup ragtag_config
 augroup end
 
 " }}}
+" Plugin: Vim-Isort --------------------------- {{{
+
+" Disable key mappings
+let g:vim_isort_map = ''
+
+let g:vim_isort_config_overrides = {
+  \ 'line_length': 79,
+  \ 'include_trailing_comma': 1,
+  \ 'multi_line_output': 3,
+  \ }
+
+" }}}
 " Config: Preview ----------------------------- {{{
 function! _Preview()
   if &filetype ==? 'plantuml'
