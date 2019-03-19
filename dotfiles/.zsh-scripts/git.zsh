@@ -11,7 +11,7 @@ alias gci="gco integration"
 alias 'gp!'="gp --force"
 
 # Edit modified files
-alias vemod="vim \$(git status --porcelain | grep --regexp='^\sM' | cut -d ' ' -f 3)"
+alias vemod="vim \$(git status --porcelain=v2 | grep -P '\.M' | cut -d ' ' -f 9)"
 
 # }}}
 # Section: Functions ---------------------------------------------- {{{
