@@ -10,6 +10,9 @@
 alias gci="gco integration"
 alias 'gp!'="gp --force"
 
+# Edit modified files
+alias vemod="vim \$(git status --porcelain | grep --regexp='^\sM' | cut -d ' ' -f 3)"
+
 # }}}
 # Section: Functions ---------------------------------------------- {{{
 function gdiff() {
