@@ -153,8 +153,9 @@ Plug 'vim-scripts/groovyindent-unix'
 " Python development
 " Plug 'tell-k/vim-autopep8'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'pappasam/vim-filetype-formatter'
+" Plug 'pappasam/vim-filetype-formatter'
 Plug 'fisadev/vim-isort'
+Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
 " Javascript development
 Plug 'ternjs/tern_for_vim', {'do': 'npm install', 'for': ['javascript', 'javascript.jsx']}
@@ -307,8 +308,8 @@ nnoremap <silent> <C-c> :pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>
 
 augroup formatting
   au!
-  au Filetype python nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>:Isort<cr>
-  au Filetype * nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
+  au Filetype python nnoremap <silent> <buffer> <leader>f :YAPF<cr>:Isort<cr>
+  " au Filetype * nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
 augroup END
 
 " Toggle NERDTree
