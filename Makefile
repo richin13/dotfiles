@@ -2,7 +2,7 @@
 .EXPORT_ALL_VARIABLES:
 ZSH_CUSTOM=./dotfiles/.oh-my-zsh/custom
 
-CONFIG_DIRS_DOTFILES := $(wildcard dotfiles/.config/*)
+CONFIG_DIRS_DOTFILES := $(sort $(dir $(wildcard dotfiles/.config/*/) ) )
 CONFIG_DIRS_HOME := $(subst dotfiles, ~, $(CONFIG_DIRS_DOTFILES))
 
 .PHONY: help
