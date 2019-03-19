@@ -1,17 +1,13 @@
-" General: Notes
+" My VIM setup
 "
-" Author: Samuel Roeca
-" Maintainer: Ricardo Madriz
-" Date: September 4, 2018
-" TLDR: vimrc minimum viable product for Python programming
+" Author: Ricardo Madriz
+" Based on: Sam Roeca's dotfiles (https://github.com/pappasam/dotfiles)
 
-" General: Leader mappings -------------------- {{{
+" General: global config ---------------------- {{{
 
+" Leader mappings
 let mapleader = ","
 let maplocalleader = "\\"
-
-" }}}
-" General: global config ---------------------- {{{
 
 "A comma separated list of options for Insert mode completion
 "   menuone  Use the popup menu also when there is only one match.
