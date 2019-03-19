@@ -362,6 +362,10 @@ augroup auto_pairs_config
   " Auto-pair string and byte literals
   au Filetype python let b:AutoPairs = AutoPairsDefine({"\\(f\\|r\\|b\\)'": "'"})
 augroup END
+
+" Vim-JS
+let g:javascript_plugin_flow = 1
+
 "  }}}
 " Plugin: Lightline --------------------------- {{{
 let g:lightline = {
