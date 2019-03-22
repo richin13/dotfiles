@@ -236,7 +236,7 @@ let g:PaperColor_Theme_Options['theme'] = {
       \       'override': {
       \         'folded_bg': ['#5f5f5f', '59'],
       \         'folded_fg': ['#c6c6c6', '251'],
-      \         'cursorlinenr_fg': ['#00d75f', '041'],
+      \         'cursorlinenr_fg': ['#00d75f', ''],
       \         'buftabline_current_bg': ['#00d75f', ''],
       \         'buftabline_inactive_fg': ['#00000', ''],
       \       }
@@ -371,10 +371,12 @@ augroup END
 " Vim-JS
 let g:javascript_plugin_flow = 1
 
+" Indent Lines Plugin settings
+let g:indentLine_setConceal = 0
 "  }}}
 " Plugin: Lightline --------------------------- {{{
 let g:lightline = {
-  \ 'colorscheme': 'jellybeans',
+  \ 'colorscheme': 'wombat',
   \ 'active': {
   \   'right': [ [ 'position' ],
   \              [ 'fileencoding', 'filetype' ],
@@ -384,9 +386,16 @@ let g:lightline = {
   \   'position': '%l/%L:%c'
   \ },
   \ 'component_function': {
-  \   'branch': 'gina#component#repo#branch'
+  \   'branch': 'LightlineBranch'
   \ },
   \ }
+
+function! LightlineBranch()
+  let branch = gina#component#repo#branch()
+  let prefix = branch != '' ? ' ' : ''
+
+  return &filetype !~# '\v(help|nerdtree)' ? prefix . branch : ''
+endfunction
 " }}}
 "  Plugin: NERDTree ---------------------------- {{{
 
