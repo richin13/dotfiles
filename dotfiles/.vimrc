@@ -185,10 +185,9 @@ augroup END
 
 augroup fold_settings
   autocmd!
-  autocmd FileType vim,tmux setlocal foldmethod=marker foldlevelstart=0
+  autocmd FileType vim,tmux,zsh setlocal foldmethod=marker foldlevelstart=0
   autocmd FileType * setlocal foldnestmax=1
-  autocmd BufNewFile,BufRead .zprofile,.profile,.bashrc,.zshrc,*.zsh setlocal foldmethod=marker foldlevelstart=0
-  autocmd FileType javascript,javascript.jsx setlocal foldmethod=syntax foldnestmax=2 foldlevelstart=0
+  autocmd Filetype javascript setlocal foldlevel=0 foldmethod=syntax foldnestmax=2 foldlevelstart=3
   autocmd FileType yaml setlocal foldmethod=indent foldnestmax=5 foldlevelstart=0
 augroup END
 
@@ -326,11 +325,27 @@ nnoremap <silent> <esc> :noh<return><esc>
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 nnoremap <F2> "zyiw:exe "Ack ".@z.""<CR>
+
+" Make CTRL-P and CTRL-N behave like <Up> & <Down>
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
+
+" Toggle Spell Check
+nnoremap <leader>ss :setlocal spell!<cr>
+" Move to next bad word
+nnoremap <leader>sn ]s
+" Move to previous bad word
+nnoremap <leader>sp [s
+" Open Suggestion for bad word
+nnoremap <leader>s? z=
+" Add current word in dictionary
+nnoremap <leader>sa zg
+
 " }}}
-" General: Filetype detection ----------------- {{{
+" General: File type detection ---------------- {{{
 augroup file_extensions
   autocmd!
-  autocmd BufNewFile,BufRead,BufEnter *.zsh-theme set filetype=zsh
+  autocmd BufNewFile,BufRead,BufEnter *.zsh-theme,.zprofile set filetype=zsh
   autocmd BufRead poetry.lock set filetype=toml
   autocmd BufRead .pylintrc set filetype=dosini
 augroup end
