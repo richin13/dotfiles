@@ -354,10 +354,18 @@ let g:vim_filetype_formatter_commands = {
       \ 'json': 'python3 -c "import json, sys; print(json.dumps(json.load(sys.stdin), indent=2), end=\"\")"',
       \}
 
-"
-let g:ctrlp_custom_ignore = {
-	\   'dir' : '\.git$\|build$\|node_modules\|dist'
-	\ }
+" CtrlP
+let g:ctrlp_working_path_mode = 'ca'
+
+if executable('fd')
+  let g:ctrlp_user_command = 'fd --type=f --type=l --search-path=%s'
+  let g:ctrlp_use_caching = 0
+else
+  let g:ctrlp_custom_ignore = {
+        \   'dir' : '\.git$\|build$\|node_modules\|dist'
+        \ }
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
+endif
 
 " Disable vim-isort default mapping
 let g:vim_isort_map = ''
