@@ -186,9 +186,9 @@ augroup END
 augroup fold_settings
   autocmd!
   autocmd FileType vim,tmux,zsh setlocal foldmethod=marker foldlevelstart=0
-  autocmd FileType * setlocal foldnestmax=1
   autocmd Filetype javascript setlocal foldlevel=0 foldmethod=syntax foldnestmax=2 foldlevelstart=3
-  autocmd FileType yaml setlocal foldmethod=indent foldnestmax=5 foldlevelstart=0
+  autocmd FileType yaml setlocal foldmethod=indent foldnestmax=5 foldlevelstart=5
+  autocmd FileType * setlocal foldnestmax=1
 augroup END
 
 augroup fold_python_settings
@@ -267,8 +267,9 @@ endtry
 " }}}
 " General: Key remappings --------------------- {{{
 
-" Put your key remappings here
-" Prefer nnoremap to nmap, inoremap to imap, and vnoremap to vmap
+" Utils
+nnoremap <silent> <leader>rc :source ~/.vimrc<CR>:echo "Re-loaded config"<CR>
+nnoremap ; :
 
 " Disable the functionality of arrow keys
 noremap <Left> <nop>
@@ -350,8 +351,10 @@ augroup file_extensions
   autocmd BufRead .pylintrc set filetype=dosini
 augroup end
 
-" Vim-JSX
-let g:jsx_ext_required = 0
+augroup filetype_specific_configs
+  autocmd!
+  autocmd Filetype gitcommit setlocal spell textwidth=72
+augroup end
 
 " }}}
 "  Plugin: Configure --------------------------- {{{
@@ -503,6 +506,7 @@ function! _Gblame()
 endfunction
 
 command! Gblame call _Gblame()
+
 " }}}
 " Plugin: Ragtag ------------------------------ {{{
 
