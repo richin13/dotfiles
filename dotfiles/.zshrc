@@ -425,10 +425,10 @@ alias aptup="sudo apt update && sudo apt upgrade -y"
 
 # Pacman aliases
 alias pac="pacman"
-alias pacs="sudo pacman -S"
 alias pacss="pacman -Ss"
-alias pacsy="pacman -Sy"
-alias pacsyu="pacman -Syu"
+alias pacs="sudo pacman -S"
+alias pacsy="sudo pacman -Syyy"
+alias pacsu="sudo pacman -Su"
 alias pacr="sudo pacman -R"
 alias pacrs="sudo pacman -Rs"
 
