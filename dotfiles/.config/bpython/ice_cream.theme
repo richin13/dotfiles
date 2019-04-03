@@ -1,0 +1,44 @@
+# vim: ft=config
+# Each letter represents a colour marker:
+#   k = blacK
+#   r = Red
+#   g = Green
+#   y = Yellow
+#   b = Blue
+#   m = Magenta
+#   c = Cyan
+#   w = White
+#   d = Default
+# Capital letters represent bold
+# Copy to ~/.bpython/foo.theme and set "color_scheme = foo" in
+# ~/.bython/config
+
+[syntax]
+# keyword = b
+# name = y
+# comment = m
+# string = g
+# error = R
+# number = g
+# operator = w
+# paren = b
+# punctuation = w
+# token = b
+
+keyword = B
+name = g
+comment = b
+string = y
+error = r
+number = B
+operator = b
+paren = b
+punctuation = b
+token = g
+
+[interface]
+background = d
+output = w
+main = B
+prompt = W
+prompt_more = W
