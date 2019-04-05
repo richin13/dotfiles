@@ -87,7 +87,7 @@ augroup redraw_on_refocus
 augroup END
 
 " Ignore annoying patterns
-set wildignore=*.pyc,**/__pycache__/*,**/node_modules/*
+set wildignore=*.pyc,**/__pycache__/*,**/node_modules/*,.coverage.*,.eggs,*.egg-info/
 
 " Ignore casing when performing completion
 set wildignorecase
@@ -451,6 +451,8 @@ let g:NERDTreeIgnore=[
       \'.mypy_cache$[[dir]]',
       \'.git$[[dir]]',
       \]
+let g:NERDTreeRespectWildIgnore = 1
+
 " }}}
 "  Plugin: BUFTabline -------------------------- {{{
 
