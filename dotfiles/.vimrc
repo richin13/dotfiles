@@ -158,7 +158,7 @@ Plug 'vim-scripts/groovyindent-unix'
 " Plug 'tell-k/vim-autopep8'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 " Plug 'pappasam/vim-filetype-formatter'
-Plug 'fisadev/vim-isort'
+Plug 'fisadev/vim-isort', { 'for': 'python' }
 Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
 " Javascript development
