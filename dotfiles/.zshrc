@@ -160,7 +160,7 @@ zplug "richin13/0i0.zsh-theme", use:0i0.zsh-theme, as:theme
 
 # Cool stuff
 zplug "paulirish/git-open", as:plugin
-zplug "supercrabtree/k"
+# zplug "supercrabtree/k"
 
 # Final thoughts
 if ! zplug check; then
@@ -172,18 +172,11 @@ zplug load
 # }}}
 # ZSH setup ------------------------------------------------------- {{{
 function chpwd() {
-  local opts="--group-directories-first -h"
-  local cmd="ls -l"
+  local owner=$(stat -L -c "%U" $PWD)
 
-  if command -v k 2>&1 > /dev/null;then
-    cmd="k"
+  if [[ $USER = $owner ]]; then
+    ls --color=auto --group-directories-first --classify
   fi
-
-  if [[ $(ls -l) = 'total 0' ]]; then
-    opts+="A"
-  fi
-
-  eval $cmd $opts
 }
 
 setopt auto_cd
