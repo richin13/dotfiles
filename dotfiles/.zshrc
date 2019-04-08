@@ -48,12 +48,9 @@ export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
-# tmuxinator
 export EDITOR=vim
-export SHELL=bash
+export SHELL=zsh
 
-# environment variable controlling difference between HI-DPI / Non HI_DPI
-# turn off because it messes up my pdf tooling
 export GDK_SCALE=0
 
 # History: How many lines of history to keep in memory
@@ -371,7 +368,7 @@ alias yrm="yarn remove"
 alias cra="create-react-app"
 
 ############# Utils ###############
-alias so="clear && source ~/.zshrc"
+alias so="clear && exec $SHELL"
 alias cpwd="pwd | xclip"
 alias ppwd="cd \`xclip -o\`"
 
