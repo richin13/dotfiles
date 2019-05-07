@@ -182,7 +182,8 @@ function chpwd() {
 setopt auto_cd
 
 # Completion settings
-zstyle ':completion:*' ignored-patterns '__pycache__' '*?.pyc' 'poetry.lock' 'yarn.lock' 'node_modules' 'pip-wheel-metadata' '*.egg-info'
+# zstyle ':completion:*' ignored-patterns '__pycache__' '*?.pyc' 'poetry.lock' 'yarn.lock' 'node_modules' 'pip-wheel-metadata' '*.egg-info'
+zstyle ":completion:*" ignored-patterns "(*/)#(__pycache__|*.pyc|node_modules|.git|*.egg-info)"
 
 bindkey '^P' up-line-or-beginning-search
 bindkey '^N' down-line-or-beginning-search
@@ -332,7 +333,7 @@ alias rf="rm -rf"
 alias rmdir="rm -rf"
 alias sudo="sudo "
 alias o=xdg-open
-alias itree="tree -I '__pycache__|venv|node_modules'"
+alias itree="tree --dirsfirst -I '__pycache__|venv|node_modules'"
 alias srm="shred -n 100 -z -u"
 alias ff="grep -rnw . -e"
 alias m="make"
