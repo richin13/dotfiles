@@ -100,6 +100,9 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+" let g:python3_host_prog = $HOME . '/.pyenv/shims/python3'
+" let g:python_host_prog = $HOME . '/.pyenv/shims/python2'
+
 "
 " }}}
 " General: Plugin Install --------------------- {{{
@@ -373,7 +376,7 @@ let g:vim_filetype_formatter_commands = {
       \}
 
 " CtrlP
-let g:ctrlp_working_path_mode = 'ca'
+" let g:ctrlp_working_path_mode = 'ca'
 
 if executable('fd')
   let g:ctrlp_user_command = 'fd --type=f --type=l --search-path=%s'
@@ -398,7 +401,7 @@ augroup END
 let g:javascript_plugin_flow = 1
 
 " Indent Lines Plugin settings
-let g:indentLine_setConceal = 0
+" let g:indentLine_setConceal = 0
 "  }}}
 " Plugin: Lightline --------------------------- {{{
 let g:lightline = {
