@@ -9,6 +9,8 @@
 
 alias gci="gco integration"
 alias 'gp!'="gp --force"
+alias gwip="gaa && gcmsg '[WIP]'"
+alias guwip="grh HEAD~1"
 
 # Edit modified files
 alias vemod="vim \$(git status --porcelain=v2 | grep -P '\.M' | cut -d ' ' -f 9)"
