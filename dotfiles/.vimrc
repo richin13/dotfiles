@@ -322,6 +322,7 @@ augroup END
 
 " Toggle NERDTree
 nnoremap <silent> <space>j :NERDTreeToggle<CR>
+inoremap <silent> <localleader>N <esc>:NERDTreeToggle<cr><c-w>la
 
 nnoremap <silent> <esc> :noh<return><esc>
 
@@ -559,6 +560,20 @@ augroup js_ab
   au!
   au Filetype javascript iab constcomp const = (props) => {<CR>}<ESC>Oreturn ()<ESC>k0ea
   au Filetype javascript iab cdbg console.debug('[DEBUG]')<ESC>F]a
+augroup END
+" }}}
+" Config: Comment strings ----------------------- {{{
+augroup comment_str_config
+  au!
+  au BufNew,BufRead kitty.conf setlocal commentstring=#:\ %s
+  au Filetype dosini setlocal commentstring=#\ %s
+  au Filetype dosini setlocal comments=:#,:;
+augroup END
+" }}}
+" Config: Ridiculous settings ----------------------- {{{
+augroup hide_column_on_test_files
+  au!
+  au BufNew,BufRead test_*.py setlocal colorcolumn=
 augroup END
 " }}}
 " General: Cleanup ---------------------------- {{{
