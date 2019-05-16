@@ -241,6 +241,22 @@ let g:PaperColor_Theme_Options['theme'] = {
       \         'cursorlinenr_fg': ['#00d75f', ''],
       \         'buftabline_current_bg': ['#00d75f', ''],
       \         'buftabline_inactive_fg': ['#00000', ''],
+      \         'color00': ['#000000'],
+      \         'color01': ['#ff5555'],
+      \         'color02': ['#50fa7b'],
+      \         'color03': ['#f1fa8c'],
+      \         'color04': ['#bd93f9'],
+      \         'color05': ['#ff79c6'],
+      \         'color06': ['#8be9fd'],
+      \         'color07': ['#bfbfbf'],
+      \         'color08': ['#4d4d4d'],
+      \         'color09': ['#ff6e67'],
+      \         'color10': ['#5af78e'],
+      \         'color11': ['#f4f99d'],
+      \         'color12': ['#caa9fa'],
+      \         'color13': ['#ff92d0'],
+      \         'color14': ['#9aedfe'],
+      \         'color15': ['#e6e6e6'],
       \       }
       \     }
       \ }
