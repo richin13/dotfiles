@@ -166,7 +166,7 @@ Plug 'fisadev/vim-isort', { 'for': 'python' }
 Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
 " Javascript development
-Plug 'ternjs/tern_for_vim', {'do': 'npm install', 'for': ['javascript', 'javascript.jsx']}
+" Plug 'ternjs/tern_for_vim', {'do': 'npm install', 'for': ['javascript', 'javascript.jsx']}
 
 " Git
 Plug 'lambdalisue/gina.vim'
