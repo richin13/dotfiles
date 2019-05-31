@@ -297,7 +297,7 @@ noremap <Up> <nop>
 noremap <Down> <nop>
 
 " Exit INSERT mode when pressing jk
-inoremap jk <esc>
+" inoremap jk <esc>
 
 " Move between panes using <c-jkhl>
 nnoremap <c-j> <c-w>j
