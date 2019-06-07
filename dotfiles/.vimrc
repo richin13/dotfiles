@@ -152,6 +152,7 @@ Plug 'aklt/plantuml-syntax'
 Plug 'khalliday7/Jenkinsfile-vim-syntax'
 Plug 'cespare/vim-toml'
 Plug 'hashivim/vim-terraform'
+Plug 'jparise/vim-graphql'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
