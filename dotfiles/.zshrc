@@ -366,9 +366,6 @@ alias so="clear && exec $SHELL"
 alias cpwd="pwd | xclip"
 alias ppwd="cd \`xclip -o\`"
 
-# Join a Zoom Meeting
-# (export defined in `sensitive` file)
-alias jm="o $ZOOM_MEETING"
 alias kgaws="o $AWS_CONSOLE"
 
 alias el="manipulate_last_file"
