@@ -345,7 +345,7 @@ alias jk="fc -e -"
 alias apti="sudo apt install -y"
 alias apts="apt search"
 alias aptu="sudo apt remove -y"
-alias aptup="sudo apt update && sudo apt upgrade -y"
+alias aptup="sudo apt update && sudo apt upgrade -y && sudo apt autoremove"
 
 # Pacman aliases
 alias pac="pacman"
