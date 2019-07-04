@@ -502,6 +502,7 @@ let g:jedi#goto_command = "<C-]>"
 let g:jedi#documentation_command = "<leader>gd"
 let g:jedi#usages_command = "<leader>gu"
 let g:jedi#rename_command = "<leader>gr"
+let g:jedi#goto_stubs_command = "<leader>gs"
 
 let g:tern#command = ["npx", "tern"]
 
