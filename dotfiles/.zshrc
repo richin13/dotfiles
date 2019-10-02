@@ -79,6 +79,12 @@ if [ -d "$NODENV_ROOT" ]; then
   eval "$(nodenv init -)"
 fi
 
+ASDF_ROOT="$HOME/.asdf"
+if [ -d "$ASDF_ROOT" ]; then
+  export ASDF_ROOT
+  . "$ASDF_ROOT/asdf.sh"
+fi
+
 HOME_BIN="$HOME/bin"
 if [ -d "$HOME_BIN" ]; then
   path_ladd "$HOME_BIN"
