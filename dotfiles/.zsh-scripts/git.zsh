@@ -13,7 +13,7 @@ alias gwip="gaa && gcmsg '[WIP]'"
 alias guwip="grh HEAD~1"
 
 # Edit modified files
-alias vemod="vim \$(git status --porcelain=v2 | grep -P '\.M' | cut -d ' ' -f 9)"
+alias vemd="vim \$(git status --porcelain=v2 | grep -P '\.M' | cut -d ' ' -f 9)"
 
 # }}}
 # Section: Functions ---------------------------------------------- {{{

@@ -14,6 +14,11 @@ alias pipf="pip freeze"
 alias pipff="pip freeze > requirements.txt"
 alias pip-dev="pipi $DEV_PKGS"
 
+alias pt="poetry"
+alias pti="poetry install"
+alias ptu="poetry update"
+alias ptr="poetry remove"
+
 alias django="python manage.py"
 # ====== Functions ======
 # va: Activates a virtualenvironment ------------------------------ {{{

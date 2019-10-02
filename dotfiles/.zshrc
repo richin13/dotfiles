@@ -192,6 +192,12 @@ bindkey '^N' down-line-or-beginning-search
 export MANPAGER="nvim -c 'set ft=man' -"
 export DOCS_DIRECTORY=$HOME/.config/docs
 # }}}
+# Key Bindings ---------------------------------------------------- {{{
+
+# Use C-K to clear the screen
+bindkey '^K' clear-screen
+
+# }}}
 # Functions ------------------------------------------------------- {{{
 # Creates a directory and cd into it
 function mkcd() { mkdir -p "$@" && cd "$_" }
@@ -325,6 +331,7 @@ function review-pr() {
 [[ -x "$(command -v bat)" ]] && alias cat="bat -p"
 
 alias ls="ls --color=auto --group-directories-first --classify"
+alias ks="ls --color=auto --group-directories-first --classify"
 alias cp="cp -iv"
 alias mv="mv -iv"
 alias rm="rm -Iv"
@@ -357,6 +364,7 @@ alias pacr="sudo pacman -R"
 alias pacrs="sudo pacman -Rs"
 
 # Js ecosystem aliases
+alias yins="yarn install"
 alias yadd="yarn add"
 alias yrm="yarn remove"
 alias cra="create-react-app"
