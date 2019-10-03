@@ -167,8 +167,19 @@ Plug 'fisadev/vim-isort', { 'for': 'python' }
 Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
 " Javascript development
-" Plug 'ternjs/tern_for_vim', {'do': 'npm install', 'for': ['javascript', 'javascript.jsx']}
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
+" Advanced
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 " Git
 Plug 'lambdalisue/gina.vim'
 
@@ -490,31 +501,54 @@ let g:buftabline_indicators = 1
 let g:buftabline_plug_max = 0
 
 " }}}
-" Plugin: Autocompletion ---------------------- {{{
-let g:jedi#popup_on_dot = 0
-let g:jedi#show_call_signatures = 0
-let g:jedi#auto_close_doc = 0
-let g:jedi#smart_auto_mappings = 0
-let g:jedi#force_py_version = 3
+" Plugin: Autocompletion and LSP -------------- {{{
+let g:deoplete#enable_at_startup = 1
+function! CustomDeopleteConfig()
+  " Deoplete Defaults:
+  call deoplete#custom#option({
+        \ 'auto_complete': v:true,
+        \ 'auto_complete_delay': 300,
+        \ 'max_list': 500,
+        \ 'num_processes': 2,
+        \ })
 
-" remappings
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#goto_command = "<C-]>"
-let g:jedi#documentation_command = "<leader>gd"
-let g:jedi#usages_command = "<leader>gu"
-let g:jedi#rename_command = "<leader>gr"
-let g:jedi#goto_stubs_command = "<leader>gs"
+  " Source Defaults:
+  call deoplete#custom#option('ignore_sources', {
+        \ '_': ['buffer', 'around'],
+        \ })
+  call deoplete#custom#source('_', 'min_pattern_length', 1)
+  call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
+endfunction
 
-let g:tern#command = ["npx", "tern"]
-
-augroup js_autocompletion
+augroup deoplete_on_vim_startup
   autocmd!
-  autocmd Filetype javascript.jsx,javascript nnoremap <buffer> <C-]> :TernDef<CR>
+  autocmd VimEnter * call CustomDeopleteConfig()
+augroup END
 
-  autocmd Filetype javascript.jsx,javascript nnoremap <buffer> <leader>gd :TernDoc<CR>
-  autocmd Filetype javascript.jsx,javascript nnoremap <buffer> <leader>gu :TernRefs<CR>
-  autocmd Filetype javascript.jsx,javascript nnoremap <buffer> <leader>gr :TernRename<CR>
-augroup end
+let g:LanguageClient_serverCommands = {
+    \ 'python': ['jinja-language-server'],
+    \ }
+let g:LanguageClient_selectionUI = 'quickfix'
+
+function! CustomLanguageClientConfig()
+  nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
+  nnoremap <buffer> <leader>gd :call LanguageClient#textDocument_hover()<CR>
+  nnoremap <buffer> <leader>gr :call LanguageClient#textDocument_rename()<CR>
+  nnoremap <buffer> <leader>gf :call LanguageClient#textDocument_formatting()<CR>
+  nnoremap <buffer> <leader>gu :call LanguageClient#textDocument_references()<CR>
+  nnoremap <buffer> <leader>ga :call LanguageClient#textDocument_codeAction()<CR>
+  nnoremap <buffer> <leader>gs :call LanguageClient#textDocument_documentSymbol()<CR>
+  nnoremap <buffer> <leader>gc :call LanguageClient_contextMenu()<CR>
+  setlocal omnifunc=LanguageClient#complete
+endfunction
+
+augroup languageclient_on_vim_startup
+  autocmd!
+  execute 'autocmd FileType '
+        \ . join(keys(g:LanguageClient_serverCommands), ',')
+        \ . ' call CustomLanguageClientConfig()'
+augroup END
+
 " }}}
 " Plugin: Gina -------------------------------- {{{
 
