@@ -160,19 +160,18 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'vim-scripts/groovyindent-unix'
 
 " Python development
-" Plug 'tell-k/vim-autopep8'
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
 " Plug 'pappasam/vim-filetype-formatter'
 Plug 'fisadev/vim-isort', { 'for': 'python' }
 Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
 " Javascript development
+Plug 'leafgarland/typescript-vim'
+
+" Advanced
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-
-" Advanced
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -527,6 +526,7 @@ augroup END
 
 let g:LanguageClient_serverCommands = {
     \ 'python': ['jinja-language-server'],
+    \ 'typescript': ['npx', '-q', '--no-install', 'typescript-language-server', '--stdio'],
     \ }
 let g:LanguageClient_selectionUI = 'quickfix'
 
@@ -534,9 +534,7 @@ function! CustomLanguageClientConfig()
   nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
   nnoremap <buffer> <leader>gd :call LanguageClient#textDocument_hover()<CR>
   nnoremap <buffer> <leader>gr :call LanguageClient#textDocument_rename()<CR>
-  nnoremap <buffer> <leader>gf :call LanguageClient#textDocument_formatting()<CR>
   nnoremap <buffer> <leader>gu :call LanguageClient#textDocument_references()<CR>
-  nnoremap <buffer> <leader>ga :call LanguageClient#textDocument_codeAction()<CR>
   nnoremap <buffer> <leader>gs :call LanguageClient#textDocument_documentSymbol()<CR>
   nnoremap <buffer> <leader>gc :call LanguageClient_contextMenu()<CR>
   setlocal omnifunc=LanguageClient#complete
