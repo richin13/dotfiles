@@ -119,6 +119,7 @@ Plug 'gcmt/taboo.vim'
 Plug 'tmhedberg/matchit'
 Plug 'ap/vim-buftabline'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'kristijanhusak/defx-git'
 
 " Utils
 Plug 'tpope/vim-commentary'
@@ -373,6 +374,7 @@ nnoremap <leader>sa zg
 augroup file_extensions
   autocmd!
   autocmd BufNewFile,BufRead,BufEnter *.zsh-theme,.zprofile set filetype=zsh
+  autocmd BufNewFile,BufRead,BufEnter *.jsx set filetype=javascript
   autocmd BufRead poetry.lock set filetype=toml
   autocmd BufRead .pylintrc set filetype=dosini
 augroup end
@@ -390,7 +392,7 @@ let g:python_highlight_space_errors = 0
 let g:python_highlight_all = 1
 
 " Numbers
-let g:numbers_exclude = ['nerdtree']
+let g:numbers_exclude = ['defx']
 
 " Vim Filetype Formatter
 let g:vim_filetype_formatter_commands = {
@@ -448,16 +450,16 @@ function! LightlineBranch()
   let branch = gina#component#repo#branch()
   let prefix = branch != '' ? ' ' : ''
 
-  return &filetype !~# '\v(help|nerdtree)' ? prefix . branch : ''
+  return &filetype !~# '\v(help|defx)' ? prefix . branch : ''
 endfunction
 " }}}
 " Plugin: Defx -------------------------------- {{{
 
 call defx#custom#option('_', {
       \ 'buffer_name': 'defx',
-      \ 'columns': 'mark:indent:icon:filename:type',
+      \ 'columns': 'mark:git:indent:icon:filename',
       \ 'direction': 'topleft',
-      \ 'ignored_files': '__pycache__/*,*.egg-info/,node_modules/*,*.pyc,pip-wheel-metadata,.tox,.mypy_cache,.git,.python-version',
+      \ 'ignored_files': '__pycache__/,*.egg-info/,node_modules/,*.pyc,pip-wheel-metadata,.tox,.mypy_cache,.git,.python-version',
       \ 'search': '`expand("%:p")`',
       \ 'split': 'vertical',
       \ 'winwidth': 31,
@@ -476,6 +478,8 @@ function! CustomDefxConfig()
 
   nnoremap <silent><buffer><expr> ma defx#do_action('new_file')
   nnoremap <silent><buffer><expr> md defx#do_action('remove')
+
+  nnoremap <silent><buffer><expr> u defx#do_action('cd', '..')
 endfunction
 
 augroup configure_defx
