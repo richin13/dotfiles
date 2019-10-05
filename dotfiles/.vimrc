@@ -522,9 +522,11 @@ augroup END
 
 let g:LanguageClient_serverCommands = {
     \ 'python': ['jinja-language-server'],
+    \ 'javascript': ['npx', '-q', '--no-install', 'javascript-typescript-stdio', '-t'],
     \ 'typescript': ['npx', '-q', '--no-install', 'typescript-language-server', '--stdio'],
     \ }
 let g:LanguageClient_selectionUI = 'quickfix'
+let g:LanguageClient_diagnosticsEnable = 0
 
 function! CustomLanguageClientConfig()
   nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
