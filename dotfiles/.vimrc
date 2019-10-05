@@ -114,12 +114,11 @@ Plug 'fcpg/vim-altscreen'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux integration
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'christoomey/vim-system-copy'
 Plug 'gcmt/taboo.vim'
 Plug 'tmhedberg/matchit'
 Plug 'ap/vim-buftabline'
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Utils
 Plug 'tpope/vim-commentary'
@@ -343,9 +342,9 @@ augroup formatting
   " au Filetype * nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
 augroup END
 
-" Toggle NERDTree
-nnoremap <silent> <space>j :NERDTreeToggle<CR>
-inoremap <silent> <localleader>N <esc>:NERDTreeToggle<cr><c-w>la
+" Toggle Defx
+nnoremap <silent> <space>j :Defx -toggle<CR>
+nnoremap <silent><space>J :Defx `expand('%:p:h')` -toggle<CR>
 
 nnoremap <silent> <esc> :noh<return><esc>
 
@@ -452,35 +451,37 @@ function! LightlineBranch()
   return &filetype !~# '\v(help|nerdtree)' ? prefix . branch : ''
 endfunction
 " }}}
-"  Plugin: NERDTree ---------------------------- {{{
+" Plugin: Defx -------------------------------- {{{
 
-let g:NERDTreeQuitOnOpen = 1
-let g:NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeMapJumpFirstChild = '<C-k>'
-let g:NERDTreeMapJumpLastChild = '<C-j>'
-let g:NERDTreeMapJumpNextSibling = '<C-n>'
-let g:NERDTreeMapJumpPrevSibling = '<C-p>'
-let g:NERDTreeMapOpenInTab = '<C-t>'
-let g:NERDTreeMapOpenInTabSilent = ''
-let g:NERDTreeMapOpenSplit = '<C-s>'
-let g:NERDTreeMapOpenVSplit = '<C-v>'
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeShowLineNumbers = 1
-let g:NERDTreeWinPos = 'left'
-let g:NERDTreeWinSize = 31
-let g:NERDTreeShowBookmarks = 1
+call defx#custom#option('_', {
+      \ 'buffer_name': 'defx',
+      \ 'columns': 'mark:indent:icon:filename:type',
+      \ 'direction': 'topleft',
+      \ 'ignored_files': '__pycache__/*,*.egg-info/,node_modules/*,*.pyc,pip-wheel-metadata,.tox,.mypy_cache,.git,.python-version',
+      \ 'search': '`expand("%:p")`',
+      \ 'split': 'vertical',
+      \ 'winwidth': 31,
+      \ })
 
-let g:NERDTreeIgnore=[
-      \'__pycache__$[[dir]]',
-      \'.egg-info$[[dir]]',
-      \'node_modules$[[dir]]',
-      \'.pyc$[[file]]',
-      \'pip-wheel-metadata$[[dir]]',
-      \'.tox$[[dir]]',
-      \'.mypy_cache$[[dir]]',
-      \'.git$[[dir]]',
-      \]
-let g:NERDTreeRespectWildIgnore = 1
+function! CustomDefxConfig()
+  nnoremap <silent><buffer><expr> <CR>
+        \ defx#is_directory() ?
+        \ defx#do_action('open_or_close_tree') :
+        \ defx#async_action('multi', ['drop', 'quit'])
+  nnoremap <silent><buffer><expr> <C-c> defx#do_action('quit')
+
+  nnoremap <silent><buffer><expr> <C-t> defx#do_action('open', 'tabe')
+  nnoremap <silent><buffer><expr> <C-s> defx#do_action('open', 'split')
+  nnoremap <silent><buffer><expr> <C-v> defx#do_action('open', 'vsplit')
+
+  nnoremap <silent><buffer><expr> ma defx#do_action('new_file')
+  nnoremap <silent><buffer><expr> md defx#do_action('remove')
+endfunction
+
+augroup configure_defx
+  autocmd!
+  autocmd Filetype defx call CustomDefxConfig()
+augroup end
 
 " }}}
 "  Plugin: BUFTabline -------------------------- {{{
