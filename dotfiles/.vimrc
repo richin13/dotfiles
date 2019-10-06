@@ -512,12 +512,24 @@ augroup deoplete_on_vim_startup
 augroup END
 
 let g:LanguageClient_serverCommands = {
-    \ 'python': ['jinja-language-server'],
+    \ 'python': ['pyls'],
     \ 'javascript': ['npx', '-q', '--no-install', 'javascript-typescript-stdio', '-t'],
     \ 'typescript': ['npx', '-q', '--no-install', 'typescript-language-server', '--stdio'],
     \ }
 let g:LanguageClient_selectionUI = 'quickfix'
-let g:LanguageClient_diagnosticsEnable = 0
+
+" In-editor diagnostics
+let g:LanguageClient_diagnosticsEnable = 1
+let g:LanguageClient_useVirtualText = 1
+let g:LanguageClient_diagnosticsMaxSeverity = 'Warning'
+let g:LanguageClient_diagnosticsDisplay={}
+let g:LanguageClient_diagnosticsDisplay[1] = { 'signText': '!!' }
+let g:LanguageClient_diagnosticsDisplay[2] = { 'signText': '!' }
+
+" Logging
+let g:LanguageClient_loggingFile = expand('~/.vim/LanguageClient.log')
+let g:LanguageClient_loggingLevel = 'DEBUG'
+let g:LanguageClient_windowLogMessageLevel = 'Log'
 
 function! CustomLanguageClientConfig()
   nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
