@@ -631,6 +631,31 @@ augroup hide_column_on_test_files
   au BufNew,BufRead test_*.py setlocal colorcolumn=
 augroup END
 " }}}
+" Config: Custom functions -------------------- {{{
+function! MakePhony(confirm)
+  let line = getline('.')
+  let target = matchstr(line, '^\zs\f*\ze:')
+
+  if a:confirm
+    let answer = confirm('Insert ".PHONY: ' . target . '"?', "&Yes\n&No", 1)
+    if answer != 1
+      return
+    endif
+  endif
+
+  " Workaround to remove the auto-indentation
+  execute "normal! O"
+  execute "normal! a.PHONY: " . target
+endfunction
+
+command! -nargs=? MakePh call MakePhony(<args>)
+
+augroup activate_make_phony_on_makefiles
+  autocmd!
+  autocmd Filetype make nnoremap <localleader>m :MakePh v:false<CR>
+augroup end
+
+" }}}
 " General: Cleanup ---------------------------- {{{
 " commands that need to run at the end of my vimrc
 
