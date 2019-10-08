@@ -656,6 +656,11 @@ augroup activate_make_phony_on_makefiles
   autocmd Filetype make nnoremap <localleader>M :MakePh v:true<CR>
 augroup end
 
+function! MakeList(  ) range
+  echo "Selected: " . line("'<")
+endfunction
+
+command! -range MakeList call MakeList()
 " }}}
 " General: Cleanup ---------------------------- {{{
 " commands that need to run at the end of my vimrc
