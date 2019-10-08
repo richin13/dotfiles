@@ -653,6 +653,7 @@ command! -nargs=? MakePh call MakePhony(<args>)
 augroup activate_make_phony_on_makefiles
   autocmd!
   autocmd Filetype make nnoremap <localleader>m :MakePh v:false<CR>
+  autocmd Filetype make nnoremap <localleader>M :MakePh v:true<CR>
 augroup end
 
 " }}}
