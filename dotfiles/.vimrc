@@ -160,9 +160,8 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'vim-scripts/groovyindent-unix'
 
 " Python development
-" Plug 'pappasam/vim-filetype-formatter'
+Plug 'pappasam/vim-filetype-formatter'
 Plug 'fisadev/vim-isort', { 'for': 'python' }
-Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
 " Javascript development
 Plug 'leafgarland/typescript-vim'
@@ -337,12 +336,6 @@ nnoremap <silent><leader>r :NumbersToggle<CR>
 inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>a
 nnoremap <silent> <C-c> :pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>
 
-augroup formatting
-  au!
-  au Filetype python nnoremap <silent> <buffer> <leader>f :YAPF<cr>:Isort<cr>
-  " au Filetype * nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
-augroup END
-
 " Toggle Defx
 nnoremap <silent> <space>j :Defx -toggle<CR>
 nnoremap <silent><space>J :Defx `expand('%:p:h')` -toggle<CR>
@@ -394,12 +387,6 @@ let g:python_highlight_all = 1
 " Numbers
 let g:numbers_exclude = ['defx']
 
-" Vim Filetype Formatter
-let g:vim_filetype_formatter_commands = {
-      \ 'python': 'yapf ',
-      \ 'json': 'python3 -c "import json, sys; print(json.dumps(json.load(sys.stdin), indent=2), end=\"\")"',
-      \}
-
 " CtrlP
 " let g:ctrlp_working_path_mode = 'ca'
 
@@ -424,11 +411,10 @@ augroup auto_pairs_config
   au Filetype python let b:AutoPairs = AutoPairsDefine({"\\(f\\|r\\|b\\)'": "'"})
 augroup END
 
-" Vim-JS
-let g:javascript_plugin_flow = 1
 
 " Indent Lines Plugin settings
 " let g:indentLine_setConceal = 0
+let g:indentLine_fileTypeExclude = ['defx']
 "  }}}
 " Plugin: Lightline --------------------------- {{{
 let g:lightline = {
@@ -457,7 +443,7 @@ endfunction
 
 call defx#custom#option('_', {
       \ 'buffer_name': 'defx',
-      \ 'columns': 'mark:git:indent:icon:filename',
+      \ 'columns': 'git:indent:icon:filename',
       \ 'direction': 'topleft',
       \ 'ignored_files': '__pycache__/,*.egg-info/,node_modules/,*.pyc,pip-wheel-metadata,.tox,.mypy_cache,.git,.python-version',
       \ 'search': '`expand("%:p")`',
@@ -478,6 +464,7 @@ function! CustomDefxConfig()
 
   nnoremap <silent><buffer><expr> ma defx#do_action('new_file')
   nnoremap <silent><buffer><expr> md defx#do_action('remove')
+  nnoremap <silent><buffer><expr> mm defx#do_action('rename')
 
   nnoremap <silent><buffer><expr> u defx#do_action('cd', '..')
 endfunction
@@ -590,6 +577,25 @@ let g:vim_isort_config_overrides = {
   \ 'include_trailing_comma': 1,
   \ 'multi_line_output': 3,
   \ }
+
+" }}}
+" Config: Code Formatting --------------------- {{{
+
+let g:vim_filetype_formatter_commands = {
+  \ 'python': g:filetype_formatter#ft#formatters['python']['yapf'],
+  \ }
+
+augroup formatting
+  au!
+  au Filetype * nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
+  au Filetype * vnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
+
+  " Override defaults defined above
+  au Filetype python nnoremap <silent><buffer> <leader>f
+        \ :FiletypeFormat<cr>
+        \ :Isort<cr>
+augroup END
+
 
 " }}}
 " Config: Preview ----------------------------- {{{
