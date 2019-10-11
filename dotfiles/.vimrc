@@ -623,7 +623,7 @@ augroup js_ab
   au Filetype javascript iab cdbg console.debug('[DEBUG]')<ESC>F]a
 augroup END
 " }}}
-" Config: Comment strings ----------------------- {{{
+" Config: Comment strings --------------------- {{{
 augroup comment_str_config
   au!
   au BufNew,BufRead kitty.conf setlocal commentstring=#:\ %s
@@ -631,7 +631,7 @@ augroup comment_str_config
   au Filetype dosini setlocal comments=:#,:;
 augroup END
 " }}}
-" Config: Ridiculous settings ----------------------- {{{
+" Config: Ridiculous settings ----------------- {{{
 augroup hide_column_on_test_files
   au!
   au BufNew,BufRead test_*.py setlocal colorcolumn=
