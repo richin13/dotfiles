@@ -26,7 +26,10 @@ alias dvenv="yellow 'Use vd next time' && vd"
 # ====== Functions ======
 # va: Activates a virtualenvironment ------------------------------ {{{
 function va() {
-  venv_name=$PYTHON_VENV_DIR
+  local venv_name=$PYTHON_VENV_DIR
+  if [ ${#} -gt 0 ]; then
+    venv_name=$@
+  fi
 
   if [[ -d $venv_name ]]; then
     [[ -z "$VIRTUAL_ENV" ]] \
@@ -42,11 +45,16 @@ function va() {
 # }}}
 # vd: Delete the virtualenv activated in the current project ------ {{{
 function vd() {
+  local venv_name=$PYTHON_VENV_DIR
+  if [ ${#} -gt 0 ]; then
+    venv_name=$@
+  fi
+
   [[ -n "$VIRTUAL_ENV" ]] && deactivate
 
-  [[ -d $PYTHON_VENV_DIR ]] \
-    && rm -rf $PYTHON_VENV_DIR > /dev/null \
-    && green "Deleted ./$PYTHON_VENV_DIR/"
+  [[ -d $venv_name ]] \
+    && rm -rf $venv_name > /dev/null \
+    && green "Deleted ./$venv_name/"
 
   [[ $? -ne 0 ]] \
     && red "No virtualenv at ./$PYTHON_VENV_DIR/" \
