@@ -21,6 +21,8 @@ alias ptu="poetry update"
 alias ptr="poetry remove"
 
 alias django="python manage.py"
+
+alias dvenv="yellow 'Use vd next time' && vd"
 # ====== Functions ======
 # va: Activates a virtualenvironment ------------------------------ {{{
 function va() {
@@ -36,6 +38,19 @@ function va() {
   python -m venv $venv_name
 
   source $venv_name/bin/activate && pip install -U pip $DEV_PKGS
+}
+# }}}
+# vd: Delete the virtualenv activated in the current project ------ {{{
+function vd() {
+  [[ -n "$VIRTUAL_ENV" ]] && deactivate
+
+  [[ -d $PYTHON_VENV_DIR ]] \
+    && rm -rf $PYTHON_VENV_DIR > /dev/null \
+    && green "Deleted ./$PYTHON_VENV_DIR/"
+
+  [[ $? -ne 0 ]] \
+    && red "No virtualenv at ./$PYTHON_VENV_DIR/" \
+    || true
 }
 # }}}
 # pyscript: Simple python script generator ------------------------ {{{
@@ -179,18 +194,6 @@ function fsetup() {
     echo " \$ cd $app/"
   fi
 } # }}}
-# dvenv: Delete the virtualenv activated in the current project --- {{{
-function dvenv() {
-  [[ -n "$VIRTUAL_ENV" ]] && deactivate
-  [[ -d $PYTHON_VENV_DIR ]] \
-    && rm -rf $PYTHON_VENV_DIR > /dev/null \
-    && green "Deleted ./$PYTHON_VENV_DIR/"
-
-  [[ $ret -ne 0 ]] \
-    && red "No virtualenv at ./$PYTHON_VENV_DIR/" \
-    || true
-}
-# }}}
 # pyrm: Deletes a directory that contains a Python project -------- {{{
 function pyrm() {
   if [ ${#} -ne 1 ]; then
