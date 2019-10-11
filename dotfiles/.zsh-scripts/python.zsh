@@ -4,6 +4,7 @@
 # ===== Variables =====
 DEV_PKGS=(neovim jedi bpython jedi-language-server isort toml-sort)
 PY_DEFAULT_VERSION=python3.7
+PYTHON_VENV_DIR=.venv
 # ====== Aliases ======
 alias p="bpython"
 
@@ -23,32 +24,18 @@ alias django="python manage.py"
 # ====== Functions ======
 # va: Activates a virtualenvironment ------------------------------ {{{
 function va() {
-  if [ ${#} -ne 1 ]; then
-    local pkg_base=$(basename $PWD)
-    local pkg_hashval=$(\
-      pwd |\
-      sha1sum |\
-      base32 |\
-      cut -c1-5 |\
-      tr '[:upper:]' '[:lower:]')
-    local pkg="$pkg_base-$pkg_hashval"
-  else
-    local pkg=$@
-  fi
-  venv_name=$pkg
+  venv_name=$PYTHON_VENV_DIR
 
-  pyenv virtualenv -p $PY_DEFAULT_VERSION $(pyenv global) $venv_name
-
-  if [[ $? -ne 0 ]]; then
-    yellow "Virtual Environment $venv_name is already activated!"
-    return
+  if [[ -d $venv_name ]]; then
+    [[ -z "$VIRTUAL_ENV" ]] \
+      && yellow "Virtualenv exists but it's not activated" \
+      || yellow "Virtualenv already activated"
+    return 1
   fi
 
-  pyenv activate $venv_name
-  $(pyenv which pip) install --upgrade pip $DEV_PKGS
-  pyenv deactivate
-  echo $venv_name > .python-version
+  python -m venv $venv_name
 
+  source $venv_name/bin/activate && pip install -U pip $DEV_PKGS
 }
 # }}}
 # pyscript: Simple python script generator ------------------------ {{{
@@ -194,13 +181,14 @@ function fsetup() {
 } # }}}
 # dvenv: Delete the virtualenv activated in the current project --- {{{
 function dvenv() {
-  [[ -f .python-version ]] \
-    && local pversion=$(cat .python-version) \
-    && pyenv uninstall -f $pversion \
-    && rm .python-version > /dev/null \
-    && green "Uninstalled \`$pversion\`"
+  [[ -n "$VIRTUAL_ENV" ]] && deactivate
+  [[ -d $PYTHON_VENV_DIR ]] \
+    && rm -rf $PYTHON_VENV_DIR > /dev/null \
+    && green "Deleted ./$PYTHON_VENV_DIR/"
 
-  [[ $? -ne 0 ]] && red "Make sure there's a .python-version file in CWD"
+  [[ $ret -ne 0 ]] \
+    && red "No virtualenv at ./$PYTHON_VENV_DIR/" \
+    || true
 }
 # }}}
 # pyrm: Deletes a directory that contains a Python project -------- {{{
@@ -255,3 +243,22 @@ function pyni() {
   touch $dir/__init__.py
 }
 # }}}
+# _py_venv_activation_hook: Hook to activate venvs ---------------- {{{
+function _py_venv_activation_hook() {
+  local ret=$?
+
+  if [ -n "$VIRTUAL_ENV" ]; then
+    source $PYTHON_VENV_DIR/bin/activate 2>/dev/null || deactivate || true
+  else
+    source $PYTHON_VENV_DIR/bin/activate 2>/dev/null || true
+  fi
+
+  return $ret
+}
+
+typeset -g -a precmd_functions
+if [[ -z $precmd_functions[(r)_py_venv_activation_hook] ]]; then
+  precmd_functions=(_py_venv_activation_hook $precmd_functions);
+fi
+# }}}
+
