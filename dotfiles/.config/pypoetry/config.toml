@@ -1,0 +1,4 @@
+[settings]
+[settings.virtualenvs]
+create = true
+in-project = true
