@@ -64,12 +64,11 @@ export XDG_DATA_HOME=$HOME/.local/share
 # }}}
 # Path appends + Misc env setup ----------------------------------- {{{
 
-PYENV_ROOT="$HOME/.pyenv"
-if [ -d "$PYENV_ROOT" ]; then
-  export PYENV_ROOT
-  path_radd "$PYENV_ROOT/bin"
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
+ASDF_ROOT="$HOME/.asdf"
+if [ -d "$ASDF_ROOT" ]; then
+  export ASDF_ROOT
+  . "$ASDF_ROOT/asdf.sh"
+  . "$ASDF_ROOT/completions/asdf.bash"
 fi
 
 NODENV_ROOT="$HOME/.nodenv"
@@ -77,12 +76,6 @@ if [ -d "$NODENV_ROOT" ]; then
   export NODENV_ROOT
   path_radd "$NODENV_ROOT/bin"
   eval "$(nodenv init -)"
-fi
-
-ASDF_ROOT="$HOME/.asdf"
-if [ -d "$ASDF_ROOT" ]; then
-  export ASDF_ROOT
-  . "$ASDF_ROOT/asdf.sh"
 fi
 
 HOME_BIN="$HOME/bin"

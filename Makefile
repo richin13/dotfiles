@@ -44,11 +44,6 @@ tmux-swag: ## Install tpm tmux plugin manager
 ################################################################################
 # Tools
 ################################################################################
-.PHONY: pyenv
-pyenv: ## Install pyenv and virtualenv plugin
-	-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-	-git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
-
 .PHONY: poetry
 poetry: ## Install Poetry
 	curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
@@ -56,6 +51,11 @@ poetry: ## Install Poetry
 .PHONY: asdf-vm
 asdf-vm: ## Install asdf-vm
 	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.4 --depth=1
+	asdf plugin-add nodejs
+	asdf plugin-add python
+	@echo "Installed [nodejs] & [python] plugins"
+	@echo "Make sure to install an appropiate version"
+
 ################################################################################
 # Apps
 ################################################################################
