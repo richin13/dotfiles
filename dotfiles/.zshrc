@@ -68,7 +68,6 @@ ASDF_ROOT="$HOME/.asdf"
 if [ -d "$ASDF_ROOT" ]; then
   export ASDF_ROOT
   . "$ASDF_ROOT/asdf.sh"
-  . "$ASDF_ROOT/completions/asdf.bash"
 fi
 
 HOME_BIN="$HOME/bin"
@@ -373,6 +372,12 @@ alias el="manipulate_last_file"
 # I surf these alot :D
 alias sam-dotfiles="o https://github.com/pappasam/dotfiles/tree/master/dotfiles"
 ###################################
+# }}}
+# Autocompletion -------------------------------------------------- {{{
+
+if [ -d "$ASDF_ROOT" ]; then
+  . "$ASDF_ROOT/completions/asdf.bash"
+fi
 # }}}
 # Extra scripts: -------------------------------------------------- {{{
 include "$HOME/.zsh-scripts/python.zsh"
