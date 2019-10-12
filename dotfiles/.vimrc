@@ -37,6 +37,12 @@ if (exists('+colorcolumn'))
   highlight ColorColumn ctermbg=9
 endif
 
+" Always show signcolumn
+set signcolumn=yes
+
+" Highlight current line
+set cursorline
+
 " Remove query for terminal version
 " This prevents un-editable garbage characters from being printed
 " after the 80 character highlight line
@@ -240,14 +246,9 @@ augroup END
 let g:PaperColor_Theme_Options = {}
 let g:PaperColor_Theme_Options['theme'] = {
       \     'default.dark': {
-      \       'transparent_background': 1,
+      \       'transparent_background': 0,
       \       'override': {
-      \         'folded_bg': ['#5f5f5f', '59'],
-      \         'folded_fg': ['#c6c6c6', '251'],
-      \         'cursorlinenr_fg': ['#00d75f', ''],
-      \         'buftabline_current_bg': ['#00d75f', ''],
-      \         'buftabline_inactive_fg': ['#00000', ''],
-      \         'color00': ['#000000'],
+      \         'color00': ['#282a36'],
       \         'color01': ['#ff5555'],
       \         'color02': ['#50fa7b'],
       \         'color03': ['#f1fa8c'],
@@ -263,6 +264,23 @@ let g:PaperColor_Theme_Options['theme'] = {
       \         'color13': ['#ff92d0'],
       \         'color14': ['#9aedfe'],
       \         'color15': ['#e6e6e6'],
+      \         'cursorline': ['#44475a'],
+      \         'cursorlinenr_bg': ['#282a36'],
+      \         'cursorlinenr_fg': ['#00d75f'],
+      \         'folded_bg': ['#5f5f5f', '59'],
+      \         'folded_fg': ['#c6c6c6', '251'],
+      \         'linenumber_bg': ['#282a36'],
+      \         'linenumber_fg': ['#44475a'],
+      \         'matchparen_bg': ['#282a36'],
+      \         'matchparen_fg': ['#f8f8f2'],
+      \         'search_bg': ['#00d75f'],
+      \         'search_fg': ['#282a36'],
+      \         'vertsplit_bg': ['#282a36'],
+      \         'vertsplit_fg': ['#8be9fd'],
+      \         'visual_bg': ['#44475a'],
+      \         'visual_fg': ['#f8f8f2'],
+      \         'buftabline_current_bg': ['#00d75f', ''],
+      \         'buftabline_inactive_fg': ['#00000', ''],
       \       }
       \     }
       \ }
