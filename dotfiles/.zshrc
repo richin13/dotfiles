@@ -71,13 +71,6 @@ if [ -d "$ASDF_ROOT" ]; then
   . "$ASDF_ROOT/completions/asdf.bash"
 fi
 
-NODENV_ROOT="$HOME/.nodenv"
-if [ -d "$NODENV_ROOT" ]; then
-  export NODENV_ROOT
-  path_radd "$NODENV_ROOT/bin"
-  eval "$(nodenv init -)"
-fi
-
 HOME_BIN="$HOME/bin"
 if [ -d "$HOME_BIN" ]; then
   path_ladd "$HOME_BIN"
