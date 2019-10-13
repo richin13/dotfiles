@@ -181,6 +181,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Git
 Plug 'lambdalisue/gina.vim'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -350,11 +351,6 @@ augroup custom_syntax
   autocmd VimEnter * exec 'hi! link jsClassKeyword jsStatement'
   autocmd VimEnter * exec 'hi! link jsExtendsKeyword jsStatement'
 augroup end
-
-" augroup custom_syntax
-"   autocmd!
-"   autocmd ColorScheme * highlight Special cterm=italic ctermfg=3
-" augroup end
 
 " }}}
 " General: Key remappings --------------------- {{{
