@@ -316,7 +316,7 @@ function! FixTsSyntax()
   endfor
 
   " Some other keywords
-  syn keyword typescriptGlobal      Promise
+  syn keyword typescriptGlobal      Promise super
   syn keyword typescriptStatement   await async continue break default
   syn keyword tsThis                this
   syn keyword tsConstructor         constructor
