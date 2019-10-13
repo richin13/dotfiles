@@ -331,28 +331,44 @@ function! FixTsSyntax()
 
 endfunction
 
+function! OverrideHiLinks()
+  let l:new_links = [
+        \ ['jsAsyncKeyword',   'jsStatement'],
+        \ ['jsImport',         'jsStatement'],
+        \ ['jsExport',         'jsStatement'],
+        \ ['jsModuleAs',       'jsStatement'],
+        \ ['jsFrom',           'jsStatement'],
+        \ ['jsExportDefault',  'jsStatement'],
+        \ ['jsClassKeyword',   'jsStatement'],
+        \ ['jsExtendsKeyword', 'jsStatement'],
+        \ ['jsNoise',          'jsConditional'],
+        \ ['pythonBuiltinFunc',  'pythonBuiltinType'],
+        \ ]
+
+  for [oldGroup, newGroup] in l:new_links
+    exec 'hi! link ' . oldGroup . ' ' . newGroup
+  endfor
+endfunction
+
+function! RedefineKeywords()
+  let l:new_keywords = [
+        \ ['jsBooleanFalse',    ['undefined', 'null']],
+        \ ['jsStatement',       ['throw']],
+        \ ]
+
+  for [newGroup, keywords] in l:new_keywords
+    exec 'syn keyword ' . newGroup . ' ' . join(keywords)
+  endfor
+endfunction
+
 augroup custom_syntax
   autocmd!
   " `Special` hi-group is italic by default
   autocmd VimEnter,SourcePost * exec 'hi! Special gui=italic guifg=#ff5555'
 
-  autocmd VimEnter * syn keyword jsBooleanFalse undefined null
-  autocmd VimEnter * syn keyword jsStatement throw
-  autocmd VimEnter * exec 'hi! link jsAsyncKeyword jsStatement'
-
-  autocmd Filetype typescript,typescript.tsx call FixTsSyntax()
-
-  " Temp fix before NLKNguyen/papercolor-theme#137 gets merged
-  autocmd VimEnter * exec 'hi! link jsImport jsStatement'
-  autocmd VimEnter * exec 'hi! link jsExport jsStatement'
-  autocmd VimEnter * exec 'hi! link jsModuleAs jsStatement'
-  autocmd VimEnter * exec 'hi! link jsFrom jsStatement'
-  autocmd VimEnter * exec 'hi! link jsExportDefault jsStatement'
-
-  autocmd VimEnter * exec 'hi! link jsClassKeyword jsStatement'
-  autocmd VimEnter * exec 'hi! link jsExtendsKeyword jsStatement'
-
-  autocmd VimEnter * exec 'hi! link pythonBuiltinFunc pythonBuiltinType'
+  autocmd VimEnter,Filetype,SourcePost typescript,typescript.tsx call FixTsSyntax()
+  autocmd VimEnter,Filetype,SourcePost * call OverrideHiLinks()
+  autocmd VimEnter,Filetype,SourcePost * call RedefineKeywords()
 augroup end
 
 " }}}
