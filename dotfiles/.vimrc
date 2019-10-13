@@ -335,6 +335,7 @@ augroup custom_syntax
   autocmd VimEnter * exec 'hi! Special gui=italic guifg=#ff5555'
 
   autocmd VimEnter * syn keyword jsBooleanFalse undefined null
+  autocmd VimEnter * syn keyword jsStatement throw
   autocmd VimEnter * exec 'hi! link jsAsyncKeyword jsStatement'
 
   autocmd Filetype typescript,typescript.tsx call FixTsSyntax()
