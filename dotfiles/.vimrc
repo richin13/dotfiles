@@ -289,7 +289,7 @@ let g:PaperColor_Theme_Options['theme'] = {
       \ }
 let g:PaperColor_Theme_Options['language'] = {
       \     'python': {
-      \       'highlight_builtins' : 1
+      \       'highlight_builtins' : 0
       \     },
       \     'javascript': {
       \       'highlight_builtins' : 1
