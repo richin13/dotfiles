@@ -335,7 +335,7 @@ endfunction
 augroup custom_syntax
   autocmd!
   " `Special` hi-group is italic by default
-  autocmd VimEnter * exec 'hi! Special gui=italic guifg=#ff5555'
+  autocmd VimEnter,SourcePost * exec 'hi! Special gui=italic guifg=#ff5555'
 
   autocmd VimEnter * syn keyword jsBooleanFalse undefined null
   autocmd VimEnter * syn keyword jsStatement throw
