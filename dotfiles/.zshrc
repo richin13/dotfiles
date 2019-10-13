@@ -30,6 +30,8 @@ include () {
 # }}}
 # Exported variables: General ------------------------------------- {{{
 
+export TERM='tmux-256color'
+
 # React
 export REACT_EDITOR='less'
 
