@@ -278,6 +278,8 @@ let g:PaperColor_Theme_Options['theme'] = {
       \         'matchparen_fg': ['#f8f8f2'],
       \         'search_bg': ['#00d75f'],
       \         'search_fg': ['#282a36'],
+      \         'todo_bg': ['#44475a'],
+      \         'todo_fg': ['#ffb86c'],
       \         'vertsplit_bg': ['#282a36'],
       \         'vertsplit_fg': ['#8be9fd'],
       \         'visual_bg': ['#44475a'],
