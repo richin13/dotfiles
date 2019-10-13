@@ -304,6 +304,30 @@ try
 catch
 endtry
 
+function! FixTsSyntax()
+  " Fix typescript-vim syntax
+  let s:builtin_errors = [
+        \ 'Error', 'EvalError', 'RangeError', 'ReferenceError', 'SyntaxError',
+        \ 'TypeError', 'URIError',
+        \ ]
+
+  for err in s:builtin_errors
+    exec 'syn keyword typescriptGlobal '.err
+  endfor
+
+  " Some other keywords
+  syn keyword typescriptGlobal      Promise
+  syn keyword typescriptStatement   await async continue break default
+  syn keyword tsThis                this
+  syn keyword tsConstructor         constructor
+
+  hi! link typescriptReserved       Statement
+  hi! link typescriptExceptions     Exception
+  hi! link typescriptGlobalObjects  typescriptGlobal
+  hi! link tsThis                   Special
+  hi! tsConstructor                 gui=underline guifg=#50fa7b
+
+endfunction
 
 augroup custom_syntax
   autocmd!
@@ -312,6 +336,8 @@ augroup custom_syntax
 
   autocmd VimEnter * syn keyword jsBooleanFalse undefined null
   autocmd VimEnter * exec 'hi! link jsAsyncKeyword jsStatement'
+
+  autocmd Filetype typescript,typescript.tsx call FixTsSyntax()
 
   " Temp fix before NLKNguyen/papercolor-theme#137 gets merged
   autocmd VimEnter * exec 'hi! link jsImport jsStatement'
