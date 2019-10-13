@@ -253,19 +253,19 @@ let g:PaperColor_Theme_Options['theme'] = {
       \         'color02': ['#50fa7b'],
       \         'color03': ['#f1fa8c'],
       \         'color04': ['#bd93f9'],
-      \         'color05': ['#ff79c6'],
-      \         'color06': ['#8be9fd'],
+      \         'color05': ['#6272a4'],
+      \         'color06': ['#8be9fd', '#8be9fd-cyan/py>cls,self/js>default,const,var,let/vim>var_names'],
       \         'color07': ['#f8f8f2'],
       \         'color08': ['#4d4d4d'],
-      \         'color09': ['#50fa7b'],
-      \         'color10': ['#50fa7b'],
-      \         'color11': ['#f1fa8c'],
-      \         'color12': ['#bd93f9'],
-      \         'color13': ['#ff79c6'],
+      \         'color09': ['#ff79c6', '#50fa7b-green/py>try,except,finally'],
+      \         'color10': ['#50fa7b', '#50fa7b-green/py>keywords/js>function,return,undefined,null/html>attrs'],
+      \         'color11': ['#ff79c6', '#ff79c6-pink/py>while,if,try/js>if,else,while,for/html>tags'],
+      \         'color12': ['#fcf405', 'unused'],
+      \         'color13': ['#bd93f9', '#bd93f9-purple/py>numbers,None,deco@/js>number,super,window'],
       \         'color14': ['#8be9fd'],
       \         'color15': ['#44475a'],
       \         'color16': ['#8be9fd'],
-      \         'color17': ['#ff79c6'],
+      \         'color17': ['#bd93f9', '#bd93f9-purple/py>True,False,None/js>true,false,this'],
       \         'cursorline': ['#44475a'],
       \         'cursorlinenr_bg': ['#282a36'],
       \         'cursorlinenr_fg': ['#00d75f'],
@@ -295,11 +295,6 @@ let g:PaperColor_Theme_Options['language'] = {
       \     }
       \ }
 
-augroup js_syntax
-  autocmd!
-  autocmd FileType javascript,javascript.jsx syn keyword jsBooleanTrue this
-augroup end
-
 " Syntax: select global syntax scheme
 " Make sure this is at end of section
 try
@@ -308,6 +303,31 @@ try
   colorscheme PaperColor
 catch
 endtry
+
+
+augroup custom_syntax
+  autocmd!
+  " `Special` hi-group is italic by default
+  autocmd VimEnter * exec 'hi! Special gui=italic guifg=#ff5555'
+
+  autocmd VimEnter * syn keyword jsBooleanFalse undefined null
+  autocmd VimEnter * exec 'hi! link jsAsyncKeyword jsStatement'
+
+  " Temp fix before NLKNguyen/papercolor-theme#137 gets merged
+  autocmd VimEnter * exec 'hi! link jsImport jsStatement'
+  autocmd VimEnter * exec 'hi! link jsExport jsStatement'
+  autocmd VimEnter * exec 'hi! link jsModuleAs jsStatement'
+  autocmd VimEnter * exec 'hi! link jsFrom jsStatement'
+  autocmd VimEnter * exec 'hi! link jsExportDefault jsStatement'
+
+  autocmd VimEnter * exec 'hi! link jsClassKeyword jsStatement'
+  autocmd VimEnter * exec 'hi! link jsExtendsKeyword jsStatement'
+augroup end
+
+" augroup custom_syntax
+"   autocmd!
+"   autocmd ColorScheme * highlight Special cterm=italic ctermfg=3
+" augroup end
 
 " }}}
 " General: Key remappings --------------------- {{{
