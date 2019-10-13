@@ -352,6 +352,8 @@ augroup custom_syntax
 
   autocmd VimEnter * exec 'hi! link jsClassKeyword jsStatement'
   autocmd VimEnter * exec 'hi! link jsExtendsKeyword jsStatement'
+
+  autocmd VimEnter * exec 'hi! link pythonBuiltinFunc pythonBuiltinType'
 augroup end
 
 " }}}
