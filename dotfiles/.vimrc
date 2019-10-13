@@ -202,7 +202,6 @@ augroup END
 augroup fold_settings
   autocmd!
   autocmd FileType vim,tmux,zsh setlocal foldmethod=marker foldlevelstart=0
-  autocmd Filetype javascript setlocal foldlevel=0 foldmethod=syntax foldnestmax=2 foldlevelstart=3
   autocmd FileType yaml setlocal foldmethod=indent foldnestmax=5 foldlevelstart=5
   autocmd FileType * setlocal foldnestmax=1
 augroup END
@@ -642,7 +641,7 @@ let g:ragtag_global_maps = 1
 
 " Additional files for whice ragtag will initialize
 augroup ragtag_config
- autocmd FileType javascript call RagtagInit()
+ autocmd FileType javascript,typescript call RagtagInit()
 augroup end
 
 " }}}
