@@ -369,11 +369,14 @@ endfunction
 augroup custom_syntax
   autocmd!
   " `Special` hi-group is italic by default
-  autocmd VimEnter,SourcePost * exec 'hi! Special gui=italic guifg=#ff5555'
+  try
+    autocmd VimEnter,SourcePost * exec 'hi! Special gui=italic guifg=#ff5555'
 
-  autocmd VimEnter,Filetype,SourcePost javascript,javascript.tsx call s:js_syntax()
-  autocmd VimEnter,Filetype,SourcePost typescript,typescript.tsx call s:ts_syntax()
-  autocmd VimEnter,Filetype,SourcePost python call s:python_syntax()
+    autocmd VimEnter,Filetype,SourcePost javascript,javascript.tsx call s:js_syntax()
+    autocmd VimEnter,Filetype,SourcePost typescript,typescript.tsx call s:ts_syntax()
+    autocmd VimEnter,Filetype,SourcePost python call s:python_syntax()
+  catch
+  endtry
 augroup end
 
 " Syntax highlight Debug utils
