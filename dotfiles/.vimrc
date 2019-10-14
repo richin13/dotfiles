@@ -306,33 +306,24 @@ try
 catch
 endtry
 
-function! FixTsSyntax()
-  " Fix typescript-vim syntax
-  let s:builtin_errors = [
-        \ 'Error', 'EvalError', 'RangeError', 'ReferenceError', 'SyntaxError',
-        \ 'TypeError', 'URIError',
-        \ ]
-
-  for err in s:builtin_errors
-    exec 'syn keyword typescriptGlobal '.err
+function! s:redefine_keywords(new_keywords)
+  for [newGroup, keywords] in a:new_keywords
+    exec 'syn keyword ' . newGroup . ' ' . join(keywords)
   endfor
-
-  " Some other keywords
-  syn keyword typescriptGlobal      Promise super
-  syn keyword typescriptStatement   await async continue break default
-  syn keyword tsThis                this
-  syn keyword tsConstructor         constructor
-
-  hi! link typescriptReserved       Statement
-  hi! link typescriptExceptions     Exception
-  hi! link typescriptGlobalObjects  typescriptGlobal
-  hi! link tsThis                   Special
-  hi! tsConstructor                 gui=underline guifg=#50fa7b
-
 endfunction
 
-function! OverrideHiLinks()
-  let l:new_links = [
+function! s:override_links(new_links)
+  for [oldGroup, newGroup] in a:new_links
+    exec 'hi! link ' . oldGroup . ' ' . newGroup
+  endfor
+endfunction
+
+function! s:js_syntax()
+  let l:js_new_keywords = [
+        \ ['jsBooleanFalse',    ['undefined', 'null']],
+        \ ['jsStatement',       ['throw']],
+        \ ]
+  let s:js_links_overrides = [
         \ ['jsAsyncKeyword',   'jsStatement'],
         \ ['jsImport',         'jsStatement'],
         \ ['jsExport',         'jsStatement'],
@@ -342,23 +333,37 @@ function! OverrideHiLinks()
         \ ['jsClassKeyword',   'jsStatement'],
         \ ['jsExtendsKeyword', 'jsStatement'],
         \ ['jsNoise',          'jsConditional'],
+        \ ]
+
+  call s:redefine_keywords(l:js_new_keywords)
+  call s:override_links(l:js_links_overrides)
+endfunction
+
+function! s:ts_syntax()
+  let l:ts_new_keywords = [
+        \ ['typescriptGlobal',   ['Error', 'EvalError', 'RangeError',
+                                \ 'ReferenceError', 'SyntaxError', 'TypeError',
+                                \ 'URIError', 'Promise', 'super'] ],
+        \ ['typescriptStatement', ['await', 'async', 'continue', 'break', 'default',]],
+        \ ['typescriptThis',      ['this']],
+        \ ]
+  let l:ts_links_overrides = [
+        \ ['typescriptReserved',      'typescriptStatement'],
+        \ ['typescriptExceptions',    'Exception'],
+        \ ['typescriptGlobalObjects', 'typescriptGlobal'],
+        \ ['typescriptThis',          'typescriptSpecial'],
+        \ ]
+
+  call s:redefine_keywords(l:ts_new_keywords)
+  call s:override_links(l:ts_links_overrides)
+endfunction
+
+function! s:python_syntax()
+  let l:python_links_overrides = [
         \ ['pythonBuiltinFunc',  'pythonBuiltinType'],
         \ ]
 
-  for [oldGroup, newGroup] in l:new_links
-    exec 'hi! link ' . oldGroup . ' ' . newGroup
-  endfor
-endfunction
-
-function! RedefineKeywords()
-  let l:new_keywords = [
-        \ ['jsBooleanFalse',    ['undefined', 'null']],
-        \ ['jsStatement',       ['throw']],
-        \ ]
-
-  for [newGroup, keywords] in l:new_keywords
-    exec 'syn keyword ' . newGroup . ' ' . join(keywords)
-  endfor
+  call s:override_links(l:python_links_overrides)
 endfunction
 
 augroup custom_syntax
@@ -366,9 +371,9 @@ augroup custom_syntax
   " `Special` hi-group is italic by default
   autocmd VimEnter,SourcePost * exec 'hi! Special gui=italic guifg=#ff5555'
 
-  autocmd VimEnter,Filetype,SourcePost typescript,typescript.tsx call FixTsSyntax()
-  autocmd VimEnter,Filetype,SourcePost * call OverrideHiLinks()
-  autocmd VimEnter,Filetype,SourcePost * call RedefineKeywords()
+  autocmd VimEnter,Filetype,SourcePost javascript,javascript.tsx call s:js_syntax()
+  autocmd VimEnter,Filetype,SourcePost typescript,typescript.tsx call s:ts_syntax()
+  autocmd VimEnter,Filetype,SourcePost python call s:python_syntax()
 augroup end
 
 " }}}
