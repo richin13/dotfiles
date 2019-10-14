@@ -376,6 +376,9 @@ augroup custom_syntax
   autocmd VimEnter,Filetype,SourcePost python call s:python_syntax()
 augroup end
 
+" Syntax highlight Debug utils
+command! HiGroupInfo exe ':verbose hi '.synIDattr(synstack(line('.'), col('.'))[-1], 'name')
+
 " }}}
 " General: Key remappings --------------------- {{{
 
