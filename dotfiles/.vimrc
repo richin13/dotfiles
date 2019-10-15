@@ -455,6 +455,12 @@ nnoremap <leader>s? z=
 " Add current word in dictionary
 nnoremap <leader>sa zg
 
+" Util remappings
+
+" Like i_o & i_O but returns to normal mode
+nnoremap <leader>o moo<ESC>k`o
+nnoremap <leader>O moO<ESC>k`o
+
 " }}}
 " General: File type detection ---------------- {{{
 augroup file_extensions
