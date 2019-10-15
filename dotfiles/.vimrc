@@ -385,10 +385,6 @@ command! HiGroupInfo exe ':verbose hi '.synIDattr(synstack(line('.'), col('.'))[
 " }}}
 " General: Key remappings --------------------- {{{
 
-" Utils
-nnoremap <silent> <leader>` :source ~/.vimrc<CR>:echo "Re-loaded config"<CR>
-nnoremap ; :
-
 " Disable the functionality of arrow keys
 noremap <Left> <nop>
 noremap <Right> <nop>
@@ -456,6 +452,12 @@ nnoremap <leader>s? z=
 nnoremap <leader>sa zg
 
 " Util remappings
+
+" Reload config
+nnoremap <silent> <leader>` :source ~/.vimrc<CR>:echo "Re-loaded config"<CR>
+
+" Why not?
+nnoremap ; :
 
 " Like i_o & i_O but returns to normal mode
 nnoremap <leader>o moo<ESC>k`o
