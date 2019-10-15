@@ -383,7 +383,7 @@ command! HiGroupInfo exe ':verbose hi '.synIDattr(synstack(line('.'), col('.'))[
 " General: Key remappings --------------------- {{{
 
 " Utils
-nnoremap <silent> <leader>rc :source ~/.vimrc<CR>:echo "Re-loaded config"<CR>
+nnoremap <silent> <leader>` :source ~/.vimrc<CR>:echo "Re-loaded config"<CR>
 nnoremap ; :
 
 " Disable the functionality of arrow keys
