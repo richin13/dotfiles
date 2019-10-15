@@ -621,9 +621,9 @@ let g:LanguageClient_diagnosticsDisplay[1] = { 'signText': '!!' }
 let g:LanguageClient_diagnosticsDisplay[2] = { 'signText': '!' }
 
 " Logging
-let g:LanguageClient_loggingFile = expand('~/.vim/LanguageClient.log')
-let g:LanguageClient_loggingLevel = 'DEBUG'
-let g:LanguageClient_windowLogMessageLevel = 'Log'
+" let g:LanguageClient_loggingFile = expand('~/.vim/LanguageClient.log')
+" let g:LanguageClient_loggingLevel = 'DEBUG'
+" let g:LanguageClient_windowLogMessageLevel = 'Log'
 
 function! CustomLanguageClientConfig()
   nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
