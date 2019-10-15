@@ -503,8 +503,11 @@ augroup END
 
 
 " Indent Lines Plugin settings
-" let g:indentLine_setConceal = 0
+let g:indentLine_enabled = v:false
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+let g:indentLine_color_gui = '#44475a'
 let g:indentLine_fileTypeExclude = ['defx']
+
 "  }}}
 " Plugin: Lightline --------------------------- {{{
 let g:lightline = {
@@ -536,6 +539,7 @@ call defx#custom#option('_', {
       \ 'columns': 'git:indent:icon:filename',
       \ 'direction': 'topleft',
       \ 'ignored_files': '__pycache__/,*.egg-info/,node_modules/,*.pyc,pip-wheel-metadata,.tox,.mypy_cache,.git,.python-version',
+      \ 'root_marker': '[>]',
       \ 'search': '`expand("%:p")`',
       \ 'split': 'vertical',
       \ 'winwidth': 31,
