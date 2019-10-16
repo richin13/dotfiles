@@ -141,6 +141,7 @@ Plug 'greyblake/vim-preview'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-ragtag'
 Plug 'wincent/ferret'
+Plug 'tommcdo/vim-lion'
 
 Plug 'Yggdroot/indentLine'
 
@@ -483,28 +484,28 @@ augroup end
 
 " Python highlighting
 let g:python_highlight_space_errors = 0
-let g:python_highlight_all = 1
+let g:python_highlight_all          = 1
 
 " Numbers
-let g:numbers_exclude = ['defx']
+let g:numbers_exclude               = ['defx']
 
 " CtrlP
-" let g:ctrlp_working_path_mode = 'ca'
+" let g:ctrlp_working_path_mode     = 'ca'
 
 if executable('fd')
-  let g:ctrlp_user_command = 'fd --type=f --type=l --search-path=%s'
-  let g:ctrlp_use_caching = 0
+  let g:ctrlp_user_command          = 'fd --type=f --type=l --search-path=%s'
+  let g:ctrlp_use_caching           = 0
 else
-  let g:ctrlp_custom_ignore = {
+  let g:ctrlp_custom_ignore         = {
         \   'dir' : '\.git$\|build$\|node_modules\|dist'
         \ }
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
+  let g:ctrlp_user_command          = ['.git', 'cd %s && git ls-files']
 endif
 
 " Disable vim-isort default mapping
-let g:vim_isort_map = ''
+let g:vim_isort_map                 = ''
 
-let g:vim_isort_python_version = 'python3'
+let g:vim_isort_python_version      = 'python3'
 
 augroup auto_pairs_config
   au!
@@ -514,9 +515,9 @@ augroup END
 
 
 " Indent Lines Plugin settings
-let g:indentLine_enabled = v:false
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-let g:indentLine_color_gui = '#44475a'
+let g:indentLine_enabled         = v:false
+let g:indentLine_char_list       = ['|', '¦', '┆', '┊']
+let g:indentLine_color_gui       = '#44475a'
 let g:indentLine_fileTypeExclude = ['defx']
 
 "  }}}
@@ -546,32 +547,32 @@ endfunction
 " Plugin: Defx -------------------------------- {{{
 
 call defx#custom#option('_', {
-      \ 'buffer_name': 'defx',
-      \ 'columns': 'git:indent:icon:filename',
-      \ 'direction': 'topleft',
+      \ 'buffer_name'  : 'defx',
+      \ 'columns'      : 'git       :indent:icon:filename',
+      \ 'direction'    : 'topleft',
       \ 'ignored_files': '__pycache__/,*.egg-info/,node_modules/,*.pyc,pip-wheel-metadata,.tox,.mypy_cache,.git,.python-version',
-      \ 'root_marker': '[>]',
-      \ 'search': '`expand("%:p")`',
-      \ 'split': 'vertical',
-      \ 'winwidth': 31,
+      \ 'root_marker'  : '[>]',
+      \ 'search'       : '`expand("%:p")`',
+      \ 'split'        : 'vertical',
+      \ 'winwidth'     : 31,
       \ })
 
 function! CustomDefxConfig()
   nnoremap <silent><buffer><expr> <CR>
-        \ defx#is_directory() ?
-        \ defx#do_action('open_or_close_tree') :
-        \ defx#async_action('multi', ['drop', 'quit'])
+        \                               defx#is_directory() ?
+        \                               defx#do_action('open_or_close_tree') :
+        \                               defx#async_action('multi', ['drop', 'quit'])
   nnoremap <silent><buffer><expr> <C-c> defx#do_action('quit')
 
   nnoremap <silent><buffer><expr> <C-t> defx#do_action('open', 'tabe')
   nnoremap <silent><buffer><expr> <C-s> defx#do_action('open', 'split')
   nnoremap <silent><buffer><expr> <C-v> defx#do_action('open', 'vsplit')
 
-  nnoremap <silent><buffer><expr> ma defx#do_action('new_file')
-  nnoremap <silent><buffer><expr> md defx#do_action('remove')
-  nnoremap <silent><buffer><expr> mm defx#do_action('rename')
+  nnoremap <silent><buffer><expr> ma    defx#do_action('new_file')
+  nnoremap <silent><buffer><expr> md    defx#do_action('remove')
+  nnoremap <silent><buffer><expr> mm    defx#do_action('rename')
 
-  nnoremap <silent><buffer><expr> u defx#do_action('cd', '..')
+  nnoremap <silent><buffer><expr> u     defx#do_action('cd', '..')
 endfunction
 
 augroup configure_defx
@@ -583,13 +584,13 @@ augroup end
 "  Plugin: BUFTabline -------------------------- {{{
 
 " Numbering the buffer labels: ordinal number
-let g:buftabline_numbers = 2
+let g:buftabline_numbers    = 2
 
 " Indicate whether the buffer it's been modified
 let g:buftabline_indicators = 1
 
 " Do not set default mappings for jumping to specific buffers
-let g:buftabline_plug_max = 0
+let g:buftabline_plug_max   = 0
 
 " }}}
 " Plugin: Autocompletion and LSP -------------- {{{
@@ -617,27 +618,27 @@ augroup deoplete_on_vim_startup
 augroup END
 
 let g:LanguageClient_serverCommands = {
-    \ 'python': ['pyls'],
+    \ 'python'    : ['pyls'],
     \ 'javascript': ['npx', '-q', '--no-install', 'javascript-typescript-stdio', '-t'],
     \ 'typescript': ['npx', '-q', '--no-install', 'typescript-language-server', '--stdio'],
     \ }
 let g:LanguageClient_selectionUI = 'quickfix'
 
 " In-editor diagnostics
-let g:LanguageClient_diagnosticsEnable = 1
-let g:LanguageClient_useVirtualText = 1
-let g:LanguageClient_diagnosticsMaxSeverity = 'Warning'
-let g:LanguageClient_diagnosticsDisplay={}
-let g:LanguageClient_diagnosticsDisplay[1] = { 'signText': '!!' }
-let g:LanguageClient_diagnosticsDisplay[2] = { 'signText': '!' }
+let g:LanguageClient_diagnosticsEnable       = 1
+let g:LanguageClient_useVirtualText          = 1
+let g:LanguageClient_diagnosticsMaxSeverity  = 'Warning'
+let g:LanguageClient_diagnosticsDisplay      = {}
+let g:LanguageClient_diagnosticsDisplay[1]   = { 'signText': '!!' }
+let g:LanguageClient_diagnosticsDisplay[2]   = { 'signText': '!' }
 
 " Logging
-" let g:LanguageClient_loggingFile = expand('~/.vim/LanguageClient.log')
-" let g:LanguageClient_loggingLevel = 'DEBUG'
+" let g:LanguageClient_loggingFile           = expand('~/.vim/LanguageClient.log')
+" let g:LanguageClient_loggingLevel          = 'DEBUG'
 " let g:LanguageClient_windowLogMessageLevel = 'Log'
 
 function! CustomLanguageClientConfig()
-  nnoremap <buffer> <C-]> :call LanguageClient#textDocument_definition()<CR>
+  nnoremap <buffer> <C-]>      :call LanguageClient#textDocument_definition()<CR>
   nnoremap <buffer> <leader>gd :call LanguageClient#textDocument_hover()<CR>
   nnoremap <buffer> <leader>gr :call LanguageClient#textDocument_rename()<CR>
   nnoremap <buffer> <leader>gu :call LanguageClient#textDocument_references()<CR>
@@ -659,8 +660,8 @@ augroup END
 call gina#custom#command#option('diff', '--opener', 'vsplit')
 call gina#custom#command#option('blame', '--width', '79')
 
-let g:gina#command#blame#formatter#format = '%in|%ti|%au|%su'
-let g:gina#command#blame#formatter#timestamp_months = 0
+let g:gina#command#blame#formatter#format            = '%in|%ti|%au|%su'
+let g:gina#command#blame#formatter#timestamp_months  = 0
 let g:gina#command#blame#formatter#timestamp_format1 = "%Y-%m-%d"
 let g:gina#command#blame#formatter#timestamp_format2 = "%Y-%m-%d"
 
@@ -690,9 +691,9 @@ augroup end
 let g:vim_isort_map = ''
 
 let g:vim_isort_config_overrides = {
-  \ 'line_length': 79,
+  \ 'line_length'           : 79,
   \ 'include_trailing_comma': 1,
-  \ 'multi_line_output': 3,
+  \ 'multi_line_output'     : 3,
   \ }
 
 " }}}
@@ -712,8 +713,6 @@ augroup formatting
         \ :FiletypeFormat<cr>
         \ :Isort<cr>
 augroup END
-
-
 " }}}
 " Config: Preview ----------------------------- {{{
 function! _Preview()
