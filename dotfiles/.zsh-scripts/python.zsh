@@ -16,6 +16,7 @@ alias pipff="pip freeze > requirements.txt"
 alias pip-dev="pipi $DEV_PKGS"
 
 alias pt="poetry"
+alias pta="poetry add"
 alias pti="poetry install"
 alias ptu="poetry update"
 alias ptr="poetry remove"
