@@ -142,6 +142,7 @@ Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-ragtag'
 Plug 'wincent/ferret'
 Plug 'tommcdo/vim-lion'
+Plug 'tpope/vim-endwise'
 
 Plug 'Yggdroot/indentLine'
 
