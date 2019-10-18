@@ -732,6 +732,8 @@ nmap <silent><leader>p :PreviewCmd<CR>
 augroup python_ab
   au!
   au Filetype python iab ifmain if __name__ == '__main__':<CR>main()<ESC>
+  au Filetype python iab ffaker factory.Faker()<ESC>
+  au Filetype python iab pdis # pylint: disable= <ESC>
 augroup END
 
 augroup js_ab
