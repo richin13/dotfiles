@@ -30,8 +30,10 @@ include () {
 # }}}
 # Exported variables: General ------------------------------------- {{{
 
-if [[ "$(hostname)" != "armadillo" ]]; then
+if [[ "$(hostname)" == "tumbleweed" ]]; then
   export TERM='tmux-256color'
+else
+  export TERM='xterm'
 fi
 
 # React
