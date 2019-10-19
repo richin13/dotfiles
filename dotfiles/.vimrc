@@ -325,7 +325,7 @@ function! s:js_syntax()
         \ ['jsBooleanFalse',    ['undefined', 'null']],
         \ ['jsStatement',       ['throw']],
         \ ]
-  let s:js_links_overrides = [
+  let l:js_links_overrides = [
         \ ['jsAsyncKeyword',   'jsStatement'],
         \ ['jsImport',         'jsStatement'],
         \ ['jsExport',         'jsStatement'],
