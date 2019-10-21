@@ -700,10 +700,6 @@ let g:vim_isort_config_overrides = {
 " }}}
 " Config: Code Formatting --------------------- {{{
 
-let g:vim_filetype_formatter_commands = {
-  \ 'python': g:filetype_formatter#ft#formatters['python']['yapf'],
-  \ }
-
 augroup formatting
   au!
   au Filetype * nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
