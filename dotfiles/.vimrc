@@ -23,7 +23,7 @@ let maplocalleader = "\\"
 "   preview  Show extra information about the currently selected
 "            completion in the preview window.  Only works in
 "            combination with 'menu' or 'menuone'.
-set completeopt=menuone,longest,preview
+set completeopt=menu,longest
 
 " Enable buffer deletion instead of having to write each buffer
 set hidden
