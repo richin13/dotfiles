@@ -488,6 +488,7 @@ let g:python_highlight_space_errors = 0
 let g:python_highlight_all          = 1
 
 " Numbers
+let g:enable_numbers = 0
 let g:numbers_exclude               = ['defx']
 
 " CtrlP
@@ -623,7 +624,8 @@ let g:LanguageClient_serverCommands = {
     \ 'javascript': ['npx', '-q', '--no-install', 'javascript-typescript-stdio', '-t'],
     \ 'typescript': ['npx', '-q', '--no-install', 'typescript-language-server', '--stdio'],
     \ }
-let g:LanguageClient_selectionUI = 'quickfix'
+let g:LanguageClient_hoverPreview = 'Always'
+let g:LanguageClient_selectionUI  = 'quickfix'
 
 " In-editor diagnostics
 let g:LanguageClient_diagnosticsEnable       = 1
