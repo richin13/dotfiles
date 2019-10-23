@@ -273,4 +273,22 @@ if [[ -z $precmd_functions[(r)_py_venv_activation_hook] ]]; then
   precmd_functions=(_py_venv_activation_hook $precmd_functions);
 fi
 # }}}
+# pymod: Adds an __init__.py to a folder -------------------------- {{{
+function pymod() {
+  dir=.
+  if  [[ $# -eq 1 ]]; then
+    dir=$1
+  fi
 
+  touch $dir/__init__.py
+}
+# }}}
+function pymod() {
+  if  [[ $# -lt 1 ]]; then
+    red "Specify a target folder"
+    return 1
+  fi
+  target=$1
+
+  touch "$target/__init__.py"
+}
