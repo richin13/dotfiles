@@ -551,7 +551,7 @@ call defx#custom#option('_', {
       \ 'buffer_name'  : 'defx',
       \ 'columns'      : 'git       :indent:icon:filename',
       \ 'direction'    : 'topleft',
-      \ 'ignored_files': '__pycache__/,*.egg-info/,node_modules/,*.pyc,pip-wheel-metadata,.tox,.mypy_cache,.git,.python-version',
+      \ 'ignored_files': '__pycache__/,.venv/,*.egg-info/,node_modules/,*.pyc,pip-wheel-metadata,.tox,.mypy_cache,.pytest_cache,.git,.python-version',
       \ 'root_marker'  : '[>]',
       \ 'search'       : '`expand("%:p")`',
       \ 'split'        : 'vertical',
