@@ -162,6 +162,7 @@ Plug 'cespare/vim-toml'
 Plug 'hashivim/vim-terraform'
 Plug 'jparise/vim-graphql'
 Plug 'leafgarland/typescript-vim'
+Plug 'plasticboy/vim-markdown'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
@@ -620,20 +621,12 @@ augroup deoplete_on_vim_startup
 augroup END
 
 let g:LanguageClient_serverCommands = {
-    \ 'python'    : ['pyls'],
+    \ 'python'    : ['jedi-language-server'],
     \ 'javascript': ['npx', '-q', '--no-install', 'javascript-typescript-stdio', '-t'],
     \ 'typescript': ['npx', '-q', '--no-install', 'typescript-language-server', '--stdio'],
     \ }
 let g:LanguageClient_hoverPreview = 'Always'
 let g:LanguageClient_selectionUI  = 'quickfix'
-
-" In-editor diagnostics
-let g:LanguageClient_diagnosticsEnable       = 1
-let g:LanguageClient_useVirtualText          = 1
-let g:LanguageClient_diagnosticsMaxSeverity  = 'Warning'
-let g:LanguageClient_diagnosticsDisplay      = {}
-let g:LanguageClient_diagnosticsDisplay[1]   = { 'signText': '!!' }
-let g:LanguageClient_diagnosticsDisplay[2]   = { 'signText': '!' }
 
 " Logging
 " let g:LanguageClient_loggingFile           = expand('~/.vim/LanguageClient.log')
