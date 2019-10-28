@@ -702,15 +702,14 @@ let g:vim_isort_config_overrides = {
 " }}}
 " Config: Code Formatting --------------------- {{{
 
+let g:vim_filetype_formatter_commands = {
+      \ 'python': 'black -q - | isort -',
+      \ }
+
 augroup formatting
   au!
   au Filetype * nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
   au Filetype * vnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
-
-  " Override defaults defined above
-  au Filetype python nnoremap <silent><buffer> <leader>f
-        \ :FiletypeFormat<cr>
-        \ :Isort<cr>
 augroup END
 " }}}
 " Config: Preview ----------------------------- {{{
