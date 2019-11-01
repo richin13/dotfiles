@@ -631,7 +631,7 @@ augroup deoplete_on_vim_startup
 augroup END
 
 let g:LanguageClient_serverCommands = {
-    \ 'python'    : ['jedi-language-server'],
+    \ 'python'    : ['pyls'],
     \ 'javascript': ['npx', '-q', '--no-install', 'javascript-typescript-stdio', '-t'],
     \ 'typescript': ['npx', '-q', '--no-install', 'typescript-language-server', '--stdio'],
     \ }
