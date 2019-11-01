@@ -183,6 +183,7 @@ Plug 'autozimu/LanguageClient-neovim', {
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'neomake/neomake'
 Plug 'liuchengxu/vista.vim'
+Plug 'Shougo/echodoc.vim'
 
 " Git
 Plug 'lambdalisue/gina.vim'
@@ -671,6 +672,13 @@ let g:vista#renderer#icons = {
 \   "class"   : "ͼ",
 \  }
 let g:vista_echo_cursor_strategy = 'floating_win'
+
+" Echodoc
+let g:echodoc#enable_at_startup    = v:true
+let g:echodoc#highlight_arguments  = "QuickScopePrimary"
+let g:echodoc#highlight_identifier = "Identifier"
+let g:echodoc#highlight_trailing   = "Type"
+let g:echodoc#type                 = "floating"
 
 " }}}
 " Plugin: Gina -------------------------------- {{{
