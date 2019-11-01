@@ -182,6 +182,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'neomake/neomake'
+Plug 'liuchengxu/vista.vim'
 
 " Git
 Plug 'lambdalisue/gina.vim'
@@ -433,6 +434,9 @@ nnoremap <silent> <C-c> :pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>
 nnoremap <silent> <space>j :Defx -toggle<CR>
 nnoremap <silent><space>J :Defx `expand('%:p:h')` -toggle<CR>
 
+" Toggle Vista.vim
+nnoremap <silent> <space>f :Vista!!<CR>
+
 nnoremap <silent> <esc> :noh<return><esc>
 
 " Search and Replace
@@ -634,6 +638,7 @@ let g:LanguageClient_serverCommands = {
 let g:LanguageClient_hoverPreview = 'Always'
 let g:LanguageClient_selectionUI  = 'quickfix'
 
+let g:LanguageClient_diagnosticsEnable = v:false
 " Logging
 " let g:LanguageClient_loggingFile           = expand('~/.vim/LanguageClient.log')
 " let g:LanguageClient_loggingLevel          = 'DEBUG'
@@ -655,6 +660,17 @@ augroup languageclient_on_vim_startup
         \ . join(keys(g:LanguageClient_serverCommands), ',')
         \ . ' call CustomLanguageClientConfig()'
 augroup END
+
+" Vista.vim
+let g:vista_default_executive = 'lcn'
+let g:vista#renderer#enable_icon = 1
+let g:vista#renderer#icons = {
+\   "function": "λ",
+\   "variable": "ν",
+\   "module"  : "ϟ",
+\   "class"   : "ͼ",
+\  }
+let g:vista_echo_cursor_strategy = 'floating_win'
 
 " }}}
 " Plugin: Gina -------------------------------- {{{
