@@ -564,9 +564,24 @@ call defx#custom#option('_', {
       \ 'buffer_name'  : 'defx',
       \ 'columns'      : 'git       :indent:icon:filename',
       \ 'direction'    : 'topleft',
-      \ 'ignored_files': '__pycache__/,.venv/,*.egg-info/,node_modules/,*.pyc,pip-wheel-metadata,.tox,.mypy_cache,.pytest_cache,.git,.python-version',
+      \ 'ignored_files': join([
+      \   '*.egg-info/',
+      \   '*.pyc',
+      \   '.git',
+      \   '.mypy_cache',
+      \   '.pytest_cache',
+      \   '.python-version',
+      \   '.tox',
+      \   '.venv/',
+      \   '.vim/',
+      \   '__pycache__/',
+      \   'node_modules/',
+      \   'pip-wheel-metadata',
+      \   'Session.vim',
+      \], ','),
       \ 'root_marker'  : '[>]',
       \ 'search'       : '`expand("%:p")`',
+      \ 'session_file' : tempname(),
       \ 'split'        : 'vertical',
       \ 'winwidth'     : 31,
       \ })
@@ -579,8 +594,12 @@ function! CustomDefxConfig()
   nnoremap <silent><buffer><expr> <C-c> defx#do_action('quit')
 
   nnoremap <silent><buffer><expr> <C-t> defx#do_action('open', 'tabe')
-  nnoremap <silent><buffer><expr> <C-s> defx#do_action('open', 'split')
-  nnoremap <silent><buffer><expr> <C-v> defx#do_action('open', 'vsplit')
+  nnoremap <silent><buffer><expr> <C-s> defx#do_action('multi', ['quit', ['open', 'split']])
+  nnoremap <silent><buffer><expr> <C-v> defx#do_action('multi', ['quit', ['open', 'vsplit']])
+
+  nnoremap <silent><buffer><expr> R     defx#do_action('redraw')
+  nnoremap <silent><buffer><expr> q     defx#do_action('quit')
+  nnoremap <silent><buffer><expr> H     defx#do_action('toggle_ignored_files')
 
   nnoremap <silent><buffer><expr> ma    defx#do_action('new_file')
   nnoremap <silent><buffer><expr> md    defx#do_action('remove')
@@ -592,6 +611,7 @@ endfunction
 augroup configure_defx
   autocmd!
   autocmd Filetype defx call CustomDefxConfig()
+  autocmd BufLeave,BufWinLeave  \[defx\]* call defx#call_action('add_session')
 augroup end
 
 " }}}
