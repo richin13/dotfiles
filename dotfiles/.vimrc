@@ -456,6 +456,12 @@ nnoremap ; :
 nnoremap <leader>o moo<ESC>k`o
 nnoremap <leader>O moO<ESC>k`o
 
+" Navigate with C-hjkl in insert mode
+inoremap <C-h> <C-o>h
+inoremap <C-j> <C-o>j
+inoremap <C-k> <C-o>k
+inoremap <C-l> <C-o>l
+
 " }}}
 " General: File type detection ---------------- {{{
 augroup file_extensions
