@@ -163,14 +163,11 @@ Plug 'hashivim/vim-terraform'
 Plug 'jparise/vim-graphql'
 Plug 'leafgarland/typescript-vim'
 Plug 'plasticboy/vim-markdown'
+Plug 'pappasam/vim-filetype-formatter'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'vim-scripts/groovyindent-unix'
-
-" Python development
-Plug 'pappasam/vim-filetype-formatter'
-Plug 'fisadev/vim-isort', { 'for': 'python' }
 
 " Javascript development
 Plug 'leafgarland/typescript-vim'
@@ -701,18 +698,6 @@ let g:ragtag_global_maps = 1
 augroup ragtag_config
  autocmd FileType javascript,typescript call RagtagInit()
 augroup end
-
-" }}}
-" Plugin: Vim-Isort --------------------------- {{{
-
-" Disable key mappings
-let g:vim_isort_map = ''
-
-let g:vim_isort_config_overrides = {
-  \ 'line_length'           : 79,
-  \ 'include_trailing_comma': 1,
-  \ 'multi_line_output'     : 3,
-  \ }
 
 " }}}
 " Config: Code Formatting --------------------- {{{
