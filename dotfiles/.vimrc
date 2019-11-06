@@ -121,7 +121,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux integration
 Plug 'christoomey/vim-system-copy'
-Plug 'gcmt/taboo.vim'
 Plug 'tmhedberg/matchit'
 Plug 'ap/vim-buftabline'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -143,7 +142,7 @@ Plug 'tpope/vim-ragtag'
 Plug 'wincent/ferret'
 Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-endwise'
-
+Plug 'pappasam/vim-filetype-formatter'
 Plug 'Yggdroot/indentLine'
 
 " Coloring
@@ -163,14 +162,11 @@ Plug 'hashivim/vim-terraform'
 Plug 'jparise/vim-graphql'
 Plug 'leafgarland/typescript-vim'
 Plug 'plasticboy/vim-markdown'
-Plug 'pappasam/vim-filetype-formatter'
+Plug 'leafgarland/typescript-vim'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'vim-scripts/groovyindent-unix'
-
-" Javascript development
-Plug 'leafgarland/typescript-vim'
 
 " Advanced
 Plug 'autozimu/LanguageClient-neovim', {
