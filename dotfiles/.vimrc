@@ -397,15 +397,6 @@ noremap <Right> <nop>
 noremap <Up> <nop>
 noremap <Down> <nop>
 
-" Exit INSERT mode when pressing jk
-" inoremap jk <esc>
-
-" Move between panes using <c-jkhl>
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
-
 " Omnicompletion now works with Ctrl-Space
 inoremap <C-@> <C-x><C-o>
 inoremap <C-space> <C-x><C-o>
