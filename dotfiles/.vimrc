@@ -495,11 +495,6 @@ else
   let g:ctrlp_user_command          = ['.git', 'cd %s && git ls-files']
 endif
 
-" Disable vim-isort default mapping
-let g:vim_isort_map                 = ''
-
-let g:vim_isort_python_version      = 'python3'
-
 " Pear-Tree
 let g:pear_tree_smart_openers   = 1
 let g:pear_tree_smart_closers   = 1
