@@ -128,7 +128,7 @@ Plug 'kristijanhusak/defx-git'
 
 " Utils
 Plug 'tpope/vim-commentary'
-Plug 'jiangmiao/auto-pairs'
+Plug 'tmsvg/pear-tree'
 Plug 'tmhedberg/simpylfold' " Better folding for python
 Plug 'pseewald/vim-anyfold'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -500,12 +500,10 @@ let g:vim_isort_map                 = ''
 
 let g:vim_isort_python_version      = 'python3'
 
-augroup auto_pairs_config
-  au!
-  " Auto-pair string and byte literals
-  au Filetype python let b:AutoPairs = AutoPairsDefine({"\\(f\\|r\\|b\\)'": "'"})
-augroup END
-
+" Pear-Tree
+let g:pear_tree_smart_openers   = 1
+let g:pear_tree_smart_closers   = 1
+let g:pear_tree_smart_backspace = 1
 
 " Indent Lines Plugin settings
 let g:indentLine_enabled         = v:false
