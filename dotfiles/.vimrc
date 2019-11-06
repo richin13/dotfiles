@@ -186,7 +186,7 @@ Plug 'liuchengxu/vista.vim'
 Plug 'Shougo/echodoc.vim'
 
 " Git
-Plug 'lambdalisue/gina.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 call plug#end()
@@ -552,7 +552,7 @@ let g:lightline = {
   \ }
 
 function! LightlineBranch()
-  let branch = gina#component#repo#branch()
+  let branch = FugitiveStatusline()
   let prefix = branch != '' ? ' ' : ''
 
   return &filetype !~# '\v(help|defx)' ? prefix . branch : ''
@@ -699,25 +699,6 @@ let g:echodoc#highlight_arguments  = "QuickScopePrimary"
 let g:echodoc#highlight_identifier = "Identifier"
 let g:echodoc#highlight_trailing   = "Type"
 let g:echodoc#type                 = "floating"
-
-" }}}
-" Plugin: Gina -------------------------------- {{{
-
-call gina#custom#command#option('diff', '--opener', 'vsplit')
-call gina#custom#command#option('blame', '--width', '79')
-
-let g:gina#command#blame#formatter#format            = '%in|%ti|%au|%su'
-let g:gina#command#blame#formatter#timestamp_months  = 0
-let g:gina#command#blame#formatter#timestamp_format1 = "%Y-%m-%d"
-let g:gina#command#blame#formatter#timestamp_format2 = "%Y-%m-%d"
-
-function! _Gblame()
-  let current_file = expand('%:t')
-  execute 'Gina blame'
-  execute 'TabooRename blame: ' . current_file
-endfunction
-
-command! Gblame call _Gblame()
 
 " }}}
 " Plugin: Ragtag ------------------------------ {{{
