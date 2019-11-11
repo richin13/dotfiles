@@ -177,6 +177,8 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'neomake/neomake'
 Plug 'liuchengxu/vista.vim'
 Plug 'Shougo/echodoc.vim'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 
 " Git
 Plug 'tpope/vim-fugitive'
