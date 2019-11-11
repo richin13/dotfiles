@@ -537,7 +537,7 @@ let g:lightline = {
   \ }
 
 function! LightlineBranch()
-  let branch = FugitiveStatusline()
+  let branch = FugitiveHead()
   let prefix = branch != '' ? ' ' : ''
 
   return &filetype !~# '\v(help|defx)' ? prefix . branch : ''
