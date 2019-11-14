@@ -20,6 +20,7 @@ alias pta="poetry add"
 alias pti="poetry install"
 alias ptu="poetry update"
 alias ptr="poetry remove"
+alias ptrun="poetry run"
 
 alias django="python manage.py"
 
