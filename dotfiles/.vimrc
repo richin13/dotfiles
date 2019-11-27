@@ -747,7 +747,7 @@ augroup END
 " Config: Ridiculous settings ----------------- {{{
 augroup hide_column_on_test_files
   au!
-  au BufNew,BufRead test_*.py setlocal colorcolumn=
+  " au BufNew,BufRead test_*.py setlocal colorcolumn=
 augroup END
 " }}}
 " Config: Custom functions -------------------- {{{
