@@ -700,7 +700,7 @@ augroup end
 " Config: Code Formatting --------------------- {{{
 
 let g:vim_filetype_formatter_commands = {
-      \ 'python': 'black -q - | isort -',
+      \ 'python': 'black -l 79 -q - | isort -',
       \ }
 
 augroup formatting
