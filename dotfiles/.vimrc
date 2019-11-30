@@ -149,7 +149,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'NLKNguyen/papercolor-theme'
 
 " Syntax highlighting
-Plug 'richin13/python-syntax', {'for': 'python', 'branch': 'class-patch1'}
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+" Plug 'richin13/python-syntax', {'for': 'python', 'branch': 'class-patch1'}
 Plug 'chr4/nginx.vim'
 Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 Plug 'pangloss/vim-javascript', {'for': ['javascript']}
@@ -258,9 +259,9 @@ let g:PaperColor_Theme_Options['theme'] = {
       \         'color06': ['#8be9fd', '#8be9fd-cyan/py>cls,self/js>default,const,var,let/vim>var_names'],
       \         'color07': ['#f8f8f2'],
       \         'color08': ['#4d4d4d'],
-      \         'color09': ['#ff79c6', '#50fa7b-green/py>try,except,finally'],
+      \         'color09': ['#50fa7b', '#50fa7b-green/py>try,except,finally'],
       \         'color10': ['#50fa7b', '#50fa7b-green/py>keywords/js>function,return,undefined,null/html>attrs'],
-      \         'color11': ['#ff79c6', '#ff79c6-pink/py>while,if,try/js>if,else,while,for/html>tags'],
+      \         'color11': ['#50fa7b', '#ff79c6-pink/py>while,if,try/js>if,else,while,for/html>tags'],
       \         'color12': ['#fcf405', 'unused'],
       \         'color13': ['#bd93f9', '#bd93f9-purple/py>numbers,None,deco@/js>number,super,window'],
       \         'color14': ['#8be9fd'],
@@ -360,11 +361,19 @@ function! s:ts_syntax()
 endfunction
 
 function! s:python_syntax()
-  let l:python_links_overrides = [
-        \ ['pythonBuiltinFunc',  'pythonBuiltinType'],
-        \ ]
-
-  call s:override_links(l:python_links_overrides)
+  let g:semshi#simplify_markup = v:true
+  " Make semshi play well with dracula colors
+  hi semshiLocal           guifg=#ff0000
+  hi semshiGlobal          guifg=#ff79c6
+  hi semshiImported        guifg=#ff79c6 gui=bold
+  hi semshiParameter       guifg=#ffb86c
+  hi semshiParameterUnused guifg=#ffb86c gui=underline
+  hi semshiFree            guifg=#ffb86c
+  hi semshiBuiltin         guifg=#8be9fd
+  hi semshiAttribute       guifg=#f8f8f2
+  hi semshiSelf            guifg=#bd93f9 gui=italic
+  hi semshiUnresolved      guifg=#ff5555 gui=underline
+  hi semshiSelected        guifg=#282a36 guibg=#ffb86c
 endfunction
 
 augroup custom_syntax
