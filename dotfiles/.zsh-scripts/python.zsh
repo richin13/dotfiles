@@ -3,7 +3,7 @@
 #
 # ===== Variables =====
 DEV_PKGS=(neovim bpython python-language-server isort toml-sort)
-PY_DEFAULT_VERSION=python3.7
+PY_DEFAULT_VERSION=python3.8
 PYTHON_VENV_DIR=.venv
 # ====== Aliases ======
 alias p="bpython"
