@@ -161,9 +161,9 @@ Plug 'khalliday7/Jenkinsfile-vim-syntax'
 Plug 'cespare/vim-toml'
 Plug 'hashivim/vim-terraform'
 Plug 'jparise/vim-graphql'
-Plug 'leafgarland/typescript-vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
 " Indentation
 Plug 'hynek/vim-python-pep8-indent'
