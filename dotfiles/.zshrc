@@ -341,6 +341,8 @@ alias itree="tree --dirsfirst -I '__pycache__|venv|node_modules'"
 alias srm="shred -n 100 -z -u"
 alias ff="grep -rnw . -e"
 alias m="make"
+alias zshrc="vim ~/.zshrc"
+alias vimrc="vim ~/.vimrc"
 
 # Execute the previous command
 alias jk="fc -e -"
