@@ -170,10 +170,6 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'vim-scripts/groovyindent-unix'
 
 " Advanced
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'neomake/neomake'
 Plug 'liuchengxu/vista.vim'
@@ -643,37 +639,6 @@ endfunction
 augroup deoplete_on_vim_startup
   autocmd!
   autocmd VimEnter * call CustomDeopleteConfig()
-augroup END
-
-let g:LanguageClient_serverCommands = {
-    \ 'python'    : ['pyls'],
-    \ 'javascript': ['npx', '-q', '--no-install', 'javascript-typescript-stdio', '-t'],
-    \ 'typescript': ['npx', '-q', '--no-install', 'typescript-language-server', '--stdio'],
-    \ }
-let g:LanguageClient_hoverPreview = 'Always'
-let g:LanguageClient_selectionUI  = 'quickfix'
-
-let g:LanguageClient_diagnosticsEnable = v:false
-" Logging
-" let g:LanguageClient_loggingFile           = expand('~/.vim/LanguageClient.log')
-" let g:LanguageClient_loggingLevel          = 'DEBUG'
-" let g:LanguageClient_windowLogMessageLevel = 'Log'
-
-function! CustomLanguageClientConfig()
-  nnoremap <buffer> <C-]>      :call LanguageClient#textDocument_definition()<CR>
-  nnoremap <buffer> <leader>gd :call LanguageClient#textDocument_hover()<CR>
-  nnoremap <buffer> <leader>gr :call LanguageClient#textDocument_rename()<CR>
-  nnoremap <buffer> <leader>gu :call LanguageClient#textDocument_references()<CR>
-  nnoremap <buffer> <leader>gs :call LanguageClient#textDocument_documentSymbol()<CR>
-  nnoremap <buffer> <leader>gc :call LanguageClient_contextMenu()<CR>
-  setlocal omnifunc=LanguageClient#complete
-endfunction
-
-augroup languageclient_on_vim_startup
-  autocmd!
-  execute 'autocmd FileType '
-        \ . join(keys(g:LanguageClient_serverCommands), ',')
-        \ . ' call CustomLanguageClientConfig()'
 augroup END
 
 " Vista.vim
