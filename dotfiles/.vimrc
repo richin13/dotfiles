@@ -109,6 +109,12 @@ endif
 let g:python3_host_prog = $HOME . '/.asdf/shims/python3'
 let g:python_host_prog  = $HOME . '/.asdf/shims/python2'
 
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Have proper space to show diagnostic messages
+set cmdheight=2
 "
 " }}}
 " General: Plugin Install --------------------- {{{
@@ -128,7 +134,6 @@ Plug 'kristijanhusak/defx-git'
 
 " Utils
 Plug 'tpope/vim-commentary'
-Plug 'tmsvg/pear-tree'
 Plug 'tmhedberg/simpylfold' " Better folding for python
 Plug 'pseewald/vim-anyfold'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -170,16 +175,31 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'vim-scripts/groovyindent-unix'
 
 " Advanced
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'neomake/neomake'
 Plug 'liuchengxu/vista.vim'
-Plug 'Shougo/echodoc.vim'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
 
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+
+" Language server: Coc
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+for coc_plugin in [
+      \ 'josa42/coc-docker',
+      \ 'neoclide/coc-css',
+      \ 'neoclide/coc-html',
+      \ 'neoclide/coc-json',
+      \ 'neoclide/coc-neco',
+      \ 'neoclide/coc-pairs',
+      \ 'neoclide/coc-python',
+      \ 'neoclide/coc-snippets',
+      \ 'fannheyward/coc-sql',
+      \ 'neoclide/coc-tsserver',
+      \ 'neoclide/coc-yaml',
+      \ ]
+  Plug coc_plugin, {'do': 'yarn install --frozen-lockfile && yarn build'}
+endfor
+
 
 call plug#end()
 
@@ -398,8 +418,28 @@ noremap <Up> <nop>
 noremap <Down> <nop>
 
 " Omnicompletion now works with Ctrl-Space
-inoremap <C-@> <C-x><C-o>
-inoremap <C-space> <C-x><C-o>
+" inoremap <C-@> <C-x><C-o>
+" inoremap <C-space> <C-x><C-o>
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+nmap <silent> <C-]> <Plug>(coc-definition)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 " Buffers
 augroup buffer_navigation
@@ -468,6 +508,20 @@ inoremap <C-h> <C-o>h
 inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
 inoremap <C-l> <C-o>l
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 " }}}
 " General: File type detection ---------------- {{{
@@ -618,28 +672,8 @@ let g:buftabline_plug_max   = 0
 
 " }}}
 " Plugin: Autocompletion and LSP -------------- {{{
-let g:deoplete#enable_at_startup = 1
-function! CustomDeopleteConfig()
-  " Deoplete Defaults:
-  call deoplete#custom#option({
-        \ 'auto_complete': v:true,
-        \ 'auto_complete_delay': 300,
-        \ 'max_list': 500,
-        \ 'num_processes': 2,
-        \ })
+" Coc.vim
 
-  " Source Defaults:
-  call deoplete#custom#option('ignore_sources', {
-        \ '_': ['buffer', 'around'],
-        \ })
-  call deoplete#custom#source('_', 'min_pattern_length', 1)
-  call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
-endfunction
-
-augroup deoplete_on_vim_startup
-  autocmd!
-  autocmd VimEnter * call CustomDeopleteConfig()
-augroup END
 
 " Vista.vim
 let g:vista_default_executive = 'lcn'
