@@ -175,7 +175,6 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'vim-scripts/groovyindent-unix'
 
 " Advanced
-Plug 'neomake/neomake'
 Plug 'liuchengxu/vista.vim'
 
 " Git
