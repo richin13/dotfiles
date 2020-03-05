@@ -24,4 +24,14 @@ function gdiff() {
     exit 1
   fi
 }
+
+# cd to the current git root
+function gr() {
+  if [ $(git rev-parse --is-inside-work-tree 2>/dev/null ) ]; then
+    cd $(git rev-parse --show-toplevel)
+  else
+    echo "'$PWD' is not inside a git repository"
+    return 1
+  fi
+}
 # }}}
