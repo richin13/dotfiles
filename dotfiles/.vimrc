@@ -572,11 +572,6 @@ let g:indentLine_char_list       = ['|', '¦', '┆', '┊']
 let g:indentLine_color_gui       = '#44475a'
 let g:indentLine_fileTypeExclude = ['defx']
 
-" Neomake config
-call neomake#configure#automake('w')
-
-let g:neomake_python_enabled_makers = ['pylint', 'mypy']
-
 "  }}}
 " Plugin: Lightline --------------------------- {{{
 let g:lightline = {
