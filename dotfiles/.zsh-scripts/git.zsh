@@ -26,7 +26,7 @@ function gdiff() {
 }
 
 # cd to the current git root
-function gr() {
+function groot() {
   if [ $(git rev-parse --is-inside-work-tree 2>/dev/null ) ]; then
     cd $(git rev-parse --show-toplevel)
   else
