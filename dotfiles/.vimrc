@@ -180,6 +180,7 @@ Plug 'liuchengxu/vista.vim'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'rhysd/git-messenger.vim'
 
 " Language server: Coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -571,6 +572,9 @@ let g:indentLine_enabled         = v:false
 let g:indentLine_char_list       = ['|', '¦', '┆', '┊']
 let g:indentLine_color_gui       = '#44475a'
 let g:indentLine_fileTypeExclude = ['defx']
+
+" GitMessenger
+" let g:git_messenger_include_diff = "current"
 
 "  }}}
 " Plugin: Lightline --------------------------- {{{
