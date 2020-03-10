@@ -562,11 +562,6 @@ else
   let g:ctrlp_user_command          = ['.git', 'cd %s && git ls-files']
 endif
 
-" Pear-Tree
-let g:pear_tree_smart_openers   = 1
-let g:pear_tree_smart_closers   = 1
-let g:pear_tree_smart_backspace = 1
-
 " Indent Lines Plugin settings
 let g:indentLine_enabled         = v:false
 let g:indentLine_char_list       = ['|', '¦', '┆', '┊']
