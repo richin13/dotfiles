@@ -424,10 +424,10 @@ inoremap <silent><expr> <c-space> coc#refresh()
 nmap <silent> <C-]> <Plug>(coc-definition)
 
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <leader>gy <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
+nmap <silent> <leader>rn <Plug>(coc-rename)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -707,8 +707,9 @@ let g:vim_filetype_formatter_commands = {
 
 augroup formatting
   au!
-  au Filetype * nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
-  au Filetype * vnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
+  command! -nargs=0 Format :call CocAction('format')
+  au Filetype * nnoremap <silent> <buffer> <leader>f :Format<cr>
+  au Filetype * vnoremap <silent> <buffer> <leader>f :Format<cr>
 augroup END
 " }}}
 " Config: Preview ----------------------------- {{{
