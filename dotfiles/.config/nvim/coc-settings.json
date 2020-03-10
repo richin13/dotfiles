@@ -1,4 +1,5 @@
 {
+  "suggest.autoTrigger": "always",
   "tsserver.npm": "/home/rmadriz/.asdf/shims/npm",
   "python.formatting.provider": "black",
   "python.linting.mypyEnabled": true
