@@ -128,7 +128,8 @@ Plug 'tpope/vim-surround'
 Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux integration
 Plug 'christoomey/vim-system-copy'
 Plug 'tmhedberg/matchit'
-Plug 'ap/vim-buftabline'
+" Plug 'ap/vim-buftabline'
+Plug 'bagrat/vim-buffet'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kristijanhusak/defx-git'
 
@@ -301,8 +302,6 @@ let g:PaperColor_Theme_Options['theme'] = {
       \         'vertsplit_fg': ['#8be9fd'],
       \         'visual_bg': ['#44475a'],
       \         'visual_fg': ['#f8f8f2'],
-      \         'buftabline_current_bg': ['#00d75f', ''],
-      \         'buftabline_inactive_fg': ['#00000', ''],
       \       }
       \     }
       \ }
@@ -625,6 +624,9 @@ let g:lightline = {
   \ 'component_function': {
   \   'branch': 'LightlineBranch'
   \ },
+  \ 'enable': {
+  \   'tabline': v:false
+  \ }
   \ }
 
 function! LightlineBranch()
@@ -691,16 +693,21 @@ augroup configure_defx
 augroup end
 
 " }}}
-"  Plugin: BUFTabline -------------------------- {{{
+"  Plugin: Buffet -------------------------- {{{
 
-" Numbering the buffer labels: ordinal number
-let g:buftabline_numbers    = 2
+" Show cardinal indexes
+let g:buffet_show_index = v:true
 
-" Indicate whether the buffer it's been modified
-let g:buftabline_indicators = 1
+" Do not configure any key binding
+let g:buffet_max_plug = 0
 
-" Do not set default mappings for jumping to specific buffers
-let g:buftabline_plug_max   = 0
+function! g:BuffetSetCustomColors()
+" Default tabline colors
+    hi! TabLineFill ctermbg=Magenta guibg=#909181
+    hi! BuffetCurrentBuffer guibg=#00d75f guifg=#000000
+    hi! BuffetBuffer guifg=#000000
+    hi! BuffetTab guibg=#282a36 guifg=#6272a4
+endfunction
 
 " }}}
 " Plugin: Autocompletion and LSP -------------- {{{
