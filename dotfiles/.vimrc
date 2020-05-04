@@ -192,7 +192,7 @@ for coc_plugin in [
       \ 'neoclide/coc-json',
       \ 'neoclide/coc-neco',
       \ 'neoclide/coc-pairs',
-      \ 'neoclide/coc-python',
+      \ 'pappasam/coc-jedi',
       \ 'neoclide/coc-snippets',
       \ 'fannheyward/coc-sql',
       \ 'neoclide/coc-tsserver',

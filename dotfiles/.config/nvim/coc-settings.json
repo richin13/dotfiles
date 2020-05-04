@@ -1,6 +1,13 @@
 {
   "suggest.autoTrigger": "always",
   "tsserver.npm": "/home/rmadriz/.asdf/shims/npm",
-  "python.formatting.provider": "black",
-  "python.linting.mypyEnabled": true
+  "languageserver": {
+    "jls": {
+      "command": "jedi-language-server",
+      "args": [],
+      "filetypes": [
+        "python"
+      ]
+    }
+  }
 }
