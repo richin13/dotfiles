@@ -188,6 +188,14 @@ bindkey '^N' down-line-or-beginning-search
 # Exports --------------------------------------------------------- {{{
 export MANPAGER="nvim -c 'set ft=man' -"
 export DOCS_DIRECTORY=$HOME/.config/docs
+
+# MANPATH: add asdf man pages to my man path
+if [ -x "$(command -v fd)" ]; then
+  for value in $(fd man1 ~/.asdf/installs --type directory | sort -hr); do
+    MANPATH="$MANPATH:$(dirname $value)"
+  done
+  export MANPATH
+fi
 # }}}
 # Key Bindings ---------------------------------------------------- {{{
 
