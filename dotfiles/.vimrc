@@ -193,6 +193,7 @@ for coc_plugin in [
       \ 'neoclide/coc-neco',
       \ 'neoclide/coc-pairs',
       \ 'pappasam/coc-jedi',
+      \ 'iamcco/coc-diagnostic',
       \ 'neoclide/coc-snippets',
       \ 'fannheyward/coc-sql',
       \ 'neoclide/coc-tsserver',
