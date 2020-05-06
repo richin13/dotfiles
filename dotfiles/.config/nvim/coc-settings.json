@@ -1,15 +1,6 @@
 {
   "suggest.autoTrigger": "always",
   "tsserver.npm": "/home/rmadriz/.asdf/shims/npm",
-  "languageserver": {
-    "jls": {
-      "command": "jedi-language-server",
-      "args": [],
-      "filetypes": [
-        "python"
-      ]
-    }
-  },
   "diagnostic-languageserver.filetypes": {
     "python": [
       "pylint",
