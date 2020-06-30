@@ -1,6 +1,7 @@
 {
   "suggest.autoTrigger": "always",
   "tsserver.npm": "/home/rmadriz/.asdf/shims/npm",
+  "jedi.diagnostics.enable": false,
   "diagnostic-languageserver.filetypes": {
     "python": [
       "pylint",
@@ -18,7 +19,7 @@
         "no",
         "--msg-template",
         "'{line}:{column}:{category}:{msg} ({msg_id}:{symbol})'",
-        "%file"
+        "%filepath"
       ],
       "formatPattern": [
         "^(\\d+?):(\\d+?):([a-z]+?):(.*)$",
@@ -47,7 +48,9 @@
         "--no-color-output",
         "--no-error-summary",
         "--show-column-numbers",
-        "%file"
+        "--ignore-missing-imports",
+        "--follow-imports=silent",
+        "%filepath"
       ],
       "formatPattern": [
         "^.*:(\\d+?):(\\d+?): ([a-z]+?): (.*)$",

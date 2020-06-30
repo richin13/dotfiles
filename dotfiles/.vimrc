@@ -150,6 +150,7 @@ Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-endwise'
 Plug 'pappasam/vim-filetype-formatter'
 Plug 'Yggdroot/indentLine'
+Plug 'psliwka/vim-smoothie'
 
 " Coloring
 Plug 'NLKNguyen/papercolor-theme'
@@ -447,6 +448,9 @@ endfunction
 nnoremap <expr><C-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-e>"
 nnoremap <expr><C-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
 
+" inoremap <CR> <ESC><Plug>(coc-snippets-expand)i<CR>
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
 " Buffers
 augroup buffer_navigation
   au!
@@ -456,7 +460,7 @@ augroup buffer_navigation
   au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <leader>t :enew<CR> | endif
 
 " Smartly close buffers/quit vim
-  au BufEnter * if len(getbufinfo({'buflisted':1})) > 1 | nnoremap <buffer><silent> <localleader>q :bd<CR>
+  au BufEnter * if len(getbufinfo({'buflisted':1})) > 1 | nnoremap <buffer><silent> <localleader>q :bw<CR>
         \ | else |
         \ nnoremap <buffer><silent> <localleader>q :q<CR>
         \ | endif
@@ -510,10 +514,10 @@ nnoremap <leader>o moo<ESC>k`o
 nnoremap <leader>O moO<ESC>k`o
 
 " Navigate with C-hjkl in insert mode
-inoremap <C-h> <C-o>h
-inoremap <C-j> <C-o>j
-inoremap <C-k> <C-o>k
-inoremap <C-l> <C-o>l
+" inoremap <C-h> <C-o>h
+" inoremap <C-j> <C-o>j
+" inoremap <C-k> <C-o>k
+" inoremap <C-l> <C-o>l
 
 " Shifting: in visual mode, make shifts keep selection
 vnoremap <C-d> <gv
@@ -522,8 +526,13 @@ vnoremap <C-t> >gv
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
