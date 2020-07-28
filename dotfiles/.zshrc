@@ -328,6 +328,31 @@ function review-pr() {
   fi
 }
 
+
+function active_input_port() {
+  pactl list sources | grep 'Active Port:' | cut -d ':' -f 2 | xargs
+}
+
+function check_input_port() {
+  local SOURCE="alsa_input.pci-0000_00_1f.3.analog-stereo"
+  local DESIRED_INPUT="analog-input-headset-mic"
+  local current=$(active_input_port)
+  if [ "$current" != "$DESIRED_INPUT" ]; then
+    echo "Changing active port from '$current' to '$DESIRED_INPUT'"
+    pactl set-source-port $SOURCE $DESIRED_INPUT > /dev/null 2>&1
+
+    if [ $? -ne 0 ]; then
+      echo "Failed to configure the source port: $DESIRED_INPUT. Maybe not connected?"
+      return 1
+    fi
+  fi
+}
+
+function zoomy() {
+  check_input_port
+  xdg-open "zoommtg://zoom.us/join?action=join&confno=$1" > /dev/null 2>&1
+}
+
 # }}}
 # Aliases --------------------------------------------------------- {{{
 # Check whether NeoVIM is installed and alias it to vim
