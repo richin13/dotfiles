@@ -151,6 +151,7 @@ Plug 'tpope/vim-endwise'
 Plug 'pappasam/vim-filetype-formatter'
 Plug 'Yggdroot/indentLine'
 Plug 'psliwka/vim-smoothie'
+Plug 'mogelbrod/vim-jsonpath'
 
 " Coloring
 Plug 'NLKNguyen/papercolor-theme'
