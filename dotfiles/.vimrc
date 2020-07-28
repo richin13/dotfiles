@@ -431,7 +431,7 @@ nmap <silent> <leader>gi <Plug>(coc-implementation)
 nmap <silent> <leader>gr <Plug>(coc-references)
 nmap <silent> <leader>rn <Plug>(coc-rename)
 
-nnoremap <silent> <leader>d :CocDiagnosticToggle<CR>
+nnoremap <silent> <leader>d <cmd>call CocActionAsync('diagnosticToggle')<CR>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -589,39 +589,6 @@ let g:indentLine_fileTypeExclude = ['defx']
 
 " GitMessenger
 " let g:git_messenger_include_diff = "current"
-
-" Coc
-function! s:coc_diagnostic_disable()
-  call coc#config('diagnostic.enable', v:false)
-  let g:coc_custom_diagnostic_enabled = v:false
-  silent CocRestart
-  echom 'Disabled [coc-diagnostics]'
-endfunction
-
-function! s:coc_diagnostic_enable()
-  call coc#config('diagnostic.enable', v:true)
-  let g:coc_custom_diagnostic_enabled = v:true
-  echom 'Enabled [coc-diagnostics]'
-endfunction
-
-function! s:coc_diagnostic_toggle()
-  if g:coc_custom_diagnostic_enabled == v:true
-    call s:coc_diagnostic_disable()
-  else
-    call s:coc_diagnostic_enable()
-  endif
-endfunction
-
-function! s:coc_init()
-  let g:coc_custom_diagnostic_enabled = v:true
-endfunction
-
-augroup coc_initialization
-  autocmd!
-  autocmd VimEnter * call s:coc_init()
-augroup end
-
-command! CocDiagnosticToggle call s:coc_diagnostic_toggle()
 
 "  }}}
 " Plugin: Lightline --------------------------- {{{
