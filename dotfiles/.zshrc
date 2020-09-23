@@ -339,7 +339,7 @@ function check_input_port() {
   local current=$(active_input_port)
   if [ "$current" != "$DESIRED_INPUT" ]; then
     echo "Changing active port from '$current' to '$DESIRED_INPUT'"
-    pactl set-source-port $SOURCE $DESIRED_INPUT > /dev/null 2>&1
+    pactl set-source-port $SOURCE $DESIRED_INPUT
 
     if [ $? -ne 0 ]; then
       echo "Failed to configure the source port: $DESIRED_INPUT. Maybe not connected?"
