@@ -666,6 +666,9 @@ function! CustomDefxConfig()
   nnoremap <silent><buffer><expr> mm    defx#do_action('rename')
 
   nnoremap <silent><buffer><expr> u     defx#do_action('cd', '..')
+
+  nnoremap <silent><buffer><expr> h     defx#do_action('resize', 31)
+  nnoremap <silent><buffer><expr> l     defx#do_action('resize', 62)
 endfunction
 
 augroup configure_defx
