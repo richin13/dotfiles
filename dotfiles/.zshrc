@@ -101,6 +101,11 @@ if [ -d "$CARGON_BINS" ]; then
   path_ladd "$CARGON_BINS"
 fi
 
+COMPOSER_BINS="$HOME/.config/composer/vendor/bin"
+if [ -d "$COMPOSER_BINS" ]; then
+  path_ladd "$COMPOSER_BINS"
+fi
+
 # EXPORT THE FINAL, MODIFIED PATH
 export PATH
 
