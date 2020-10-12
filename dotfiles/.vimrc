@@ -190,6 +190,7 @@ function! PackagerInit() abort
         \ 'fannheyward/coc-sql',
         \ 'iamcco/coc-diagnostic',
         \ 'josa42/coc-docker',
+        \ 'marlonfan/coc-phpls',
         \ 'neoclide/coc-css',
         \ 'neoclide/coc-html',
         \ 'neoclide/coc-json',
