@@ -132,7 +132,7 @@ function! PackagerInit() abort
   call packager#add('tmhedberg/matchit')
 
   call packager#add('bagrat/vim-buffet')
-  call packager#add('Shougo/defx.nvim'      , { 'do': ':UpdateRemotePlugins' })
+  call packager#add('Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' })
 
   " Utils
   call packager#add('tpope/vim-commentary')
@@ -154,10 +154,10 @@ function! PackagerInit() abort
 
 " Coloring & Syntax highlighting
   call packager#add('NLKNguyen/papercolor-theme')
-  call packager#add('numirias/semshi'       , {'do': ':UpdateRemotePlugins'})
+  call packager#add('numirias/semshi', {'do': ':UpdateRemotePlugins'})
 
   call packager#add('chr4/nginx.vim')
-  call packager#add('docker/docker'              , {'rtp': '/contrib/syntax/vim/'})
+  call packager#add('docker/docker', {'rtp': '/contrib/syntax/vim/'})
   call packager#add('pangloss/vim-javascript')
   call packager#add('MaxMEllon/vim-jsx-pretty')
   call packager#add('mrk21/yaml-vim')
