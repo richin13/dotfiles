@@ -118,94 +118,111 @@ set cmdheight=2
 "
 " }}}
 " General: Plugin Install --------------------- {{{
+function! PackagerInit() abort
+  packadd vim-packager
+  call packager#init({'depth': 1})
+  call packager#add('kristijanhusak/vim-packager', { 'type': 'opt' })
 
-call plug#begin('~/.vim/plugged')
+  " Basic
+  call packager#add('fcpg/vim-altscreen')
+  call packager#add('itchyny/lightline.vim')
+  call packager#add('tpope/vim-surround')
+  call packager#add('tmux-plugins/vim-tmux-focus-events') " Tmux integration
+  call packager#add('christoomey/vim-system-copy')
+  call packager#add('tmhedberg/matchit')
 
-" Basic
-Plug 'fcpg/vim-altscreen'
-Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-surround'
-Plug 'tmux-plugins/vim-tmux-focus-events' " Tmux integration
-Plug 'christoomey/vim-system-copy'
-Plug 'tmhedberg/matchit'
-" Plug 'ap/vim-buftabline'
-Plug 'bagrat/vim-buffet'
-Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'kristijanhusak/defx-git'
+  call packager#add('bagrat/vim-buffet')
+  call packager#add('Shougo/defx.nvim'      , { 'do': ':UpdateRemotePlugins' })
 
-" Utils
-Plug 'tpope/vim-commentary'
-Plug 'tmhedberg/simpylfold' " Better folding for python
-Plug 'pseewald/vim-anyfold'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'myusuf3/numbers.vim'
-Plug 'tpope/vim-abolish'
-Plug 'weirongxu/plantuml-previewer.vim'
-Plug 'tyru/open-browser.vim'
-Plug 'greyblake/vim-preview'
-Plug 'alvan/vim-closetag'
-Plug 'tpope/vim-ragtag'
-Plug 'wincent/ferret'
-Plug 'tommcdo/vim-lion'
-Plug 'tpope/vim-endwise'
-Plug 'pappasam/vim-filetype-formatter'
-Plug 'Yggdroot/indentLine'
-Plug 'psliwka/vim-smoothie'
-Plug 'mogelbrod/vim-jsonpath'
+  " Utils
+  call packager#add('tpope/vim-commentary')
+  call packager#add('ctrlpvim/ctrlp.vim')
+  call packager#add('myusuf3/numbers.vim')
+  call packager#add('tpope/vim-abolish')
+  call packager#add('weirongxu/plantuml-previewer.vim')
+  call packager#add('tyru/open-browser.vim')
+  call packager#add('greyblake/vim-preview')
+  call packager#add('alvan/vim-closetag')
+  call packager#add('tpope/vim-ragtag')
+  call packager#add('wincent/ferret')
+  call packager#add('tommcdo/vim-lion')
+  call packager#add('tpope/vim-endwise')
+  call packager#add('pappasam/vim-filetype-formatter')
+  call packager#add('Yggdroot/indentLine')
+  call packager#add('psliwka/vim-smoothie')
+  call packager#add('mogelbrod/vim-jsonpath', {'type': 'opt'})
 
-" Coloring
-Plug 'NLKNguyen/papercolor-theme'
+" Coloring & Syntax highlighting
+  call packager#add('NLKNguyen/papercolor-theme')
+  call packager#add('numirias/semshi'       , {'do': ':UpdateRemotePlugins'})
 
-" Syntax highlighting
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-" Plug 'richin13/python-syntax', {'for': 'python', 'branch': 'class-patch1'}
-Plug 'chr4/nginx.vim'
-Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
-Plug 'pangloss/vim-javascript', {'for': ['javascript']}
-Plug 'MaxMEllon/vim-jsx-pretty', {'for': ['javascript']}
-Plug 'mrk21/yaml-vim'
-Plug 'aklt/plantuml-syntax'
-Plug 'khalliday7/Jenkinsfile-vim-syntax'
-Plug 'cespare/vim-toml'
-Plug 'hashivim/vim-terraform'
-Plug 'jparise/vim-graphql'
-Plug 'plasticboy/vim-markdown'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+  call packager#add('chr4/nginx.vim')
+  call packager#add('docker/docker'              , {'rtp': '/contrib/syntax/vim/'})
+  call packager#add('pangloss/vim-javascript')
+  call packager#add('MaxMEllon/vim-jsx-pretty')
+  call packager#add('mrk21/yaml-vim')
+  call packager#add('aklt/plantuml-syntax')
+  call packager#add('khalliday7/Jenkinsfile-vim-syntax')
+  call packager#add('cespare/vim-toml')
+  call packager#add('hashivim/vim-terraform')
+  call packager#add('jparise/vim-graphql')
+  call packager#add('plasticboy/vim-markdown')
+  call packager#add('leafgarland/typescript-vim')
+  call packager#add('peitalin/vim-jsx-typescript')
 
-" Indentation
-Plug 'hynek/vim-python-pep8-indent'
-Plug 'vim-scripts/groovyindent-unix'
-
-" Advanced
-Plug 'liuchengxu/vista.vim'
+" Indentation & folding
+  call packager#add('hynek/vim-python-pep8-indent' , {'type': 'opt'})
+  call packager#add('vim-scripts/groovyindent-unix', {'type': 'opt'})
+  call packager#add('tmhedberg/simpylfold') " Better folding for python
+  call packager#add('pseewald/vim-anyfold')
 
 " Git
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'rhysd/git-messenger.vim'
+  call packager#add('tpope/vim-fugitive')
+  call packager#add('airblade/vim-gitgutter')
+  call packager#add('rhysd/git-messenger.vim')
+  call packager#add('kristijanhusak/defx-git')
 
 " Language server: Coc
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-for coc_plugin in [
-      \ 'josa42/coc-docker',
-      \ 'neoclide/coc-css',
-      \ 'neoclide/coc-html',
-      \ 'neoclide/coc-json',
-      \ 'neoclide/coc-neco',
-      \ 'neoclide/coc-pairs',
-      \ 'pappasam/coc-jedi',
-      \ 'iamcco/coc-diagnostic',
-      \ 'neoclide/coc-snippets',
-      \ 'fannheyward/coc-sql',
-      \ 'neoclide/coc-tsserver',
-      \ 'neoclide/coc-yaml',
-      \ ]
-  Plug coc_plugin, {'do': 'yarn install --frozen-lockfile && yarn build'}
-endfor
+  call packager#add('Shougo/neco-vim')
+  call packager#add('neoclide/coc-neco')
+  call packager#add('neoclide/coc.nvim', {'branch': 'release'})
+  for coc_plugin in [
+        \ 'fannheyward/coc-sql',
+        \ 'iamcco/coc-diagnostic',
+        \ 'josa42/coc-docker',
+        \ 'neoclide/coc-css',
+        \ 'neoclide/coc-html',
+        \ 'neoclide/coc-json',
+        \ 'neoclide/coc-pairs',
+        \ 'neoclide/coc-snippets',
+        \ 'neoclide/coc-tsserver',
+        \ 'neoclide/coc-yaml',
+        \ 'pappasam/coc-jedi',
+        \ ]
+    call packager#add(coc_plugin, {
+          \ 'do': 'yarn install --frozen-lockfile && yarn build',
+          \ })
+  endfor
+endfunction
 
+command! PlugInstall call PackagerInit() |
+      \ call packager#install()
+command! -bang PlugUpdate call PackagerInit() |
+      \ call packager#update({'force_hooks': '<bang>'})
+command! -bang PlugClean call PackagerInit() |
+      \ call packager#clean()
+command! -bang PlugStatus call PackagerInit() |
+      \ call packager#status()
+command! -bang PlugStartOver call PackagerInit() |
+      \ call packager#clean()
+      \ call packager#update({'force_hooks': '<bang>'})
 
-call plug#end()
+augroup enable_opt_plugins
+  autocmd!
+  autocmd Filetype python packadd vim-python-pep8-indent
+  autocmd Filetype groovy packadd groovyindent-unix
+  autocmd Filetype json packadd vim-jsonpath
+augroup END
 
 " }}}
 " General: Indentation ------------------------ {{{
@@ -620,33 +637,38 @@ endfunction
 " }}}
 " Plugin: Defx -------------------------------- {{{
 
-call defx#custom#option('_', {
-      \ 'buffer_name'  : 'defx',
-      \ 'columns'      : 'git       :indent:icon:filename',
-      \ 'direction'    : 'topleft',
-      \ 'ignored_files': join([
-      \   '*.egg-info/',
-      \   '*.pyc',
-      \   '.git',
-      \   '.mypy_cache',
-      \   '.pytest_cache',
-      \   '.python-version',
-      \   '.tox',
-      \   '.venv/',
-      \   '.vim/',
-      \   '__pycache__/',
-      \   'node_modules/',
-      \   'pip-wheel-metadata',
-      \   'Session.vim',
-      \], ','),
-      \ 'root_marker'  : '[>]',
-      \ 'search'       : '`expand("%:p")`',
-      \ 'session_file' : tempname(),
-      \ 'split'        : 'vertical',
-      \ 'winwidth'     : 31,
-      \ })
+function! s:defx_custom_init() abort
+  if !exists('g:loaded_defx')
+    return
+  endif
+  call defx#custom#option('_', {
+        \ 'buffer_name'  : 'defx',
+        \ 'columns'      : 'git       :indent:icon:filename',
+        \ 'direction'    : 'topleft',
+        \ 'ignored_files': join([
+        \   '*.egg-info/',
+        \   '*.pyc',
+        \   '.git',
+        \   '.mypy_cache',
+        \   '.pytest_cache',
+        \   '.python-version',
+        \   '.tox',
+        \   '.venv/',
+        \   '.vim/',
+        \   '__pycache__/',
+        \   'node_modules/',
+        \   'pip-wheel-metadata',
+        \   'Session.vim',
+        \], ','),
+        \ 'root_marker'  : '[>]',
+        \ 'search'       : '`expand("%:p")`',
+        \ 'session_file' : tempname(),
+        \ 'split'        : 'vertical',
+        \ 'winwidth'     : 31,
+        \ })
+endfunction
 
-function! CustomDefxConfig()
+function! s:defx_keybindings()
   nnoremap <silent><buffer><expr> <CR>
         \                               defx#is_directory() ?
         \                               defx#do_action('open_or_close_tree') :
@@ -673,8 +695,10 @@ endfunction
 
 augroup configure_defx
   autocmd!
-  autocmd Filetype defx call CustomDefxConfig()
+  autocmd VimEnter * call s:defx_custom_init()
+  autocmd Filetype defx call s:defx_keybindings()
   autocmd BufLeave,BufWinLeave  \[defx\]* call defx#call_action('add_session')
+  autocmd Filetype defx setlocal nonumber norelativenumber
 augroup end
 
 " }}}
