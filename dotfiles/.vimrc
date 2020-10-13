@@ -151,6 +151,7 @@ function! PackagerInit() abort
   call packager#add('Yggdroot/indentLine')
   call packager#add('psliwka/vim-smoothie')
   call packager#add('mogelbrod/vim-jsonpath', {'type': 'opt'})
+  call packager#add('mhinz/vim-sayonara', {'type': 'opt'})
 
 " Coloring & Syntax highlighting
   call packager#add('NLKNguyen/papercolor-theme')
@@ -478,12 +479,6 @@ augroup buffer_navigation
   au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> H :bprev<CR> | endif
 
   au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <leader>t :enew<CR> | endif
-
-" Smartly close buffers/quit vim
-  au BufEnter * if len(getbufinfo({'buflisted':1})) > 1 | nnoremap <buffer><silent> <localleader>q :bw<CR>
-        \ | else |
-        \ nnoremap <buffer><silent> <localleader>q :q<CR>
-        \ | endif
 augroup END
 
 nnoremap <silent><leader>r :NumbersToggle<CR>
@@ -743,6 +738,15 @@ let g:echodoc#highlight_identifier = "Identifier"
 let g:echodoc#highlight_trailing   = "Type"
 let g:echodoc#type                 = "floating"
 
+" }}}
+" Plugin: Sayonara ---------------------------- {{{
+function! s:close_buffer(bang) abort
+  packadd vim-sayonara
+  execute 'Sayonara' . (a:bang == v:true ? '!' : '')
+endfunction
+
+nnoremap <silent> <localleader>q <cmd>call <SID>close_buffer(v:false)<CR>
+nnoremap <silent> <localleader>w <cmd>call <SID>close_buffer(v:true)<CR>
 " }}}
 " Plugin: Ragtag ------------------------------ {{{
 
