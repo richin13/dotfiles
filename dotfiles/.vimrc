@@ -753,6 +753,42 @@ augroup ragtag_config
 augroup end
 
 " }}}
+" Plugin: Fzf --------------------------------- {{{
+function! s:should_show_preview() abort
+  return &columns >= 80 || &columns >= 120
+endfunction
+
+let $FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+let $FZF_DEFAULT_OPTS = '--bind=\\:toggle-preview'
+
+let g:fzf_colors = {
+      \ 'header': ['fg', 'Todo'],
+      \ 'pointer': ['fg', 'Number'],
+      \ 'info': ['fg', 'String'],
+      \ 'spinner': ['fg', 'Special'],
+      \ 'prompt': ['fg', 'Identifier'],
+      \ 'border': ['fg', 'Conditional'],
+      \ }
+
+let g:fzf_layout = {
+      \ 'window': {
+      \   'width': 1,
+      \   'height': 0.5,
+      \   'yoffset': 0.9,
+      \   'highlight': 'Exception',
+      \ },
+      \}
+
+command! -bang -nargs=* Rg
+      \ call fzf#vim#grep('rg --column --no-heading --line-number --hidden --color=always '.shellescape(<q-args>),
+      \ 1,
+      \ fzf#vim#with_preview({'options': ['--preview-window='.(s:should_show_preview() ? 'nohidden' : 'hidden')]}),
+      \ <bang>0
+      \)
+
+nnoremap <silent> <C-p> <cmd>Files<cr>
+nnoremap <silent> <C-_> <cmd>Rg<cr>
+" }}}
 " Config: Code Formatting --------------------- {{{
 
 let g:vim_filetype_formatter_commands = {
