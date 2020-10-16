@@ -71,7 +71,6 @@ set exrc
 
 " Make sure numbering is set
 set number
-set relativenumber
 
 " Disable Swap file
 set nobackup
