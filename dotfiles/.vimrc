@@ -135,7 +135,6 @@ function! PackagerInit() abort
 
   " Utils
   call packager#add('tpope/vim-commentary')
-  call packager#add('ctrlpvim/ctrlp.vim')
   call packager#add('myusuf3/numbers.vim')
   call packager#add('tpope/vim-abolish')
   call packager#add('weirongxu/plantuml-previewer.vim')
@@ -150,6 +149,10 @@ function! PackagerInit() abort
   call packager#add('Yggdroot/indentLine')
   call packager#add('psliwka/vim-smoothie')
   call packager#add('mogelbrod/vim-jsonpath', {'type': 'opt'})
+
+  " Fzf
+  call packager#add('junegunn/fzf')
+  call packager#add('junegunn/fzf.vim')
 
 " Coloring & Syntax highlighting
   call packager#add('NLKNguyen/papercolor-theme')
