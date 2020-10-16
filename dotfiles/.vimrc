@@ -151,7 +151,6 @@ function! PackagerInit() abort
   call packager#add('Yggdroot/indentLine')
   call packager#add('psliwka/vim-smoothie')
   call packager#add('mogelbrod/vim-jsonpath', {'type': 'opt'})
-  call packager#add('mhinz/vim-sayonara', {'type': 'opt'})
 
 " Coloring & Syntax highlighting
   call packager#add('NLKNguyen/papercolor-theme')
@@ -472,15 +471,6 @@ nnoremap <expr><C-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
 " inoremap <CR> <ESC><Plug>(coc-snippets-expand)i<CR>
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 
-" Buffers
-augroup buffer_navigation
-  au!
-  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> L :bnext<CR> | endif
-  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> H :bprev<CR> | endif
-
-  au BufEnter,WinEnter * if &bt == '' | nnoremap <buffer><silent> <leader>t :enew<CR> | endif
-augroup END
-
 nnoremap <silent><leader>r :NumbersToggle<CR>
 
 " Exit: Preview and Help && QuickFix and Location List
@@ -715,6 +705,17 @@ function! g:BuffetSetCustomColors()
     hi! BuffetTab guibg=#282a36 guifg=#6272a4
 endfunction
 
+nnoremap <silent> H :bp<CR>
+nnoremap <silent> L :bn<CR>
+nnoremap <silent> <localleader>q :Bw<CR>
+nnoremap <silent> <localleader>Q :Bw!<CR>
+nnoremap <silent> <localleader>w :Bonly<CR>
+
+augroup disable_buffer_nav_in_defx
+  autocmd!
+  autocmd FileType defx nnoremap <silent><buffer> H <nop>
+  autocmd FileType defx nnoremap <silent><buffer> L <nop>
+augroup END
 " }}}
 " Plugin: Autocompletion and LSP -------------- {{{
 " Coc.vim
@@ -738,15 +739,6 @@ let g:echodoc#highlight_identifier = "Identifier"
 let g:echodoc#highlight_trailing   = "Type"
 let g:echodoc#type                 = "floating"
 
-" }}}
-" Plugin: Sayonara ---------------------------- {{{
-function! s:close_buffer(bang) abort
-  packadd vim-sayonara
-  execute 'Sayonara' . (a:bang == v:true ? '!' : '')
-endfunction
-
-nnoremap <silent> <localleader>q <cmd>call <SID>close_buffer(v:false)<CR>
-nnoremap <silent> <localleader>w <cmd>call <SID>close_buffer(v:true)<CR>
 " }}}
 " Plugin: Ragtag ------------------------------ {{{
 
