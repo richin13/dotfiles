@@ -363,7 +363,7 @@ function zoomy() {
 # Check whether NeoVIM is installed and alias it to vim
 [[ -x "$(command -v nvim)" ]] && alias vim="nvim"
 
-[[ -x "$(command -v bat)" ]] && alias cat="bat -p"
+[[ -x "$(command -v bat)" ]] && alias cat="bat --style='numbers,changes'"
 
 alias ls="ls --color=auto --group-directories-first --classify"
 alias ks="ls --color=auto --group-directories-first --classify"
