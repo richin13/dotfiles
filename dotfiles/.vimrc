@@ -206,6 +206,8 @@ function! PackagerInit() abort
           \ 'do': 'yarn install --frozen-lockfile && yarn build',
           \ })
   endfor
+
+  call packager#add('liuchengxu/vista.vim')
 endfunction
 
 command! PlugInstall call PackagerInit() |
@@ -724,7 +726,9 @@ augroup END
 
 
 " Vista.vim
-let g:vista_default_executive = 'lcn'
+let g:vista_sidebar_width = 37
+let g:vista_fold_toggle_icons = ['▼', '▶']
+let g:vista_default_executive = 'coc'
 let g:vista#renderer#enable_icon = 1
 let g:vista#renderer#icons = {
 \   "function": "λ",
@@ -733,6 +737,14 @@ let g:vista#renderer#icons = {
 \   "class"   : "ͼ",
 \  }
 let g:vista_echo_cursor_strategy = 'floating_win'
+let g:vista_fzf_preview = ['right:50%']
+let g:vista_keep_fzf_colors = 1
+let g:vista_finder_alternative_executives = []
+
+augroup custom_vista
+  autocmd!
+  autocmd FileType vista,vista_kind nnoremap <buffer> <silent> <2-LeftMouse> <cmd>call vista#cursor#FoldOrJump()<CR>
+augroup end
 
 " Echodoc
 let g:echodoc#enable_at_startup    = v:true
