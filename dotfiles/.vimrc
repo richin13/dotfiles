@@ -170,6 +170,7 @@ function! PackagerInit() abort
   call packager#add('plasticboy/vim-markdown')
   call packager#add('leafgarland/typescript-vim')
   call packager#add('peitalin/vim-jsx-typescript')
+  call packager#add('jwalton512/vim-blade')
   call packager#add('nvim-treesitter/nvim-treesitter')
 
 " Indentation & folding
@@ -490,6 +491,7 @@ augroup end
 augroup filetype_specific_configs
   autocmd!
   autocmd Filetype gitcommit setlocal spell textwidth=72
+  autocmd Filetype php setlocal iskeyword-=$
 augroup end
 
 " }}}
