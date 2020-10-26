@@ -529,8 +529,8 @@ nnoremap <leader>O moO<ESC>k`o
 " inoremap <C-l> <C-o>l
 
 " Shifting: in visual mode, make shifts keep selection
-vnoremap <C-d> <gv
-vnoremap <C-t> >gv
+vnoremap D <gv
+vnoremap T >gv
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
