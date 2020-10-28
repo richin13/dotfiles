@@ -155,8 +155,7 @@ function! PackagerInit() abort
   call packager#add('junegunn/fzf.vim')
 
 " Coloring & Syntax highlighting
-  call packager#add('NLKNguyen/papercolor-theme')
-  call packager#add('numirias/semshi', {'do': ':UpdateRemotePlugins'})
+  call packager#local('richin13/vim')
 
   call packager#add('chr4/nginx.vim')
   call packager#add('docker/docker', {'rtp': '/contrib/syntax/vim/'})
@@ -171,6 +170,7 @@ function! PackagerInit() abort
   call packager#add('plasticboy/vim-markdown')
   call packager#add('leafgarland/typescript-vim')
   call packager#add('peitalin/vim-jsx-typescript')
+  call packager#add('nvim-treesitter/nvim-treesitter')
 
 " Indentation & folding
   call packager#add('hynek/vim-python-pep8-indent' , {'type': 'opt'})
@@ -286,153 +286,54 @@ augroup END
 
 " }}}
 " General: Syntax highlighting ---------------- {{{
+" nvim-treesitter config
+function! ConfigTreeSitter()
+lua <<EOF
+require('nvim-treesitter.configs').setup({
+  highlight = { enable = true },
+  textobjects = { enable = true },
+  ensure_installed = {
+    'html',
+    'javascript',
+    'python',
+    'query',
+    'tsx',
+    'typescript',
+  },
+})
+EOF
+endfunction
 
-" Papercolor: options
-let g:PaperColor_Theme_Options = {}
-let g:PaperColor_Theme_Options['theme'] = {
-      \     'default.dark': {
-      \       'transparent_background': 0,
-      \       'override': {
-      \         'color00': ['#282a36'],
-      \         'color01': ['#ff5555'],
-      \         'color02': ['#50fa7b'],
-      \         'color03': ['#f1fa8c'],
-      \         'color04': ['#bd93f9'],
-      \         'color05': ['#6272a4'],
-      \         'color06': ['#8be9fd', '#8be9fd-cyan/py>cls,self/js>default,const,var,let/vim>var_names'],
-      \         'color07': ['#f8f8f2'],
-      \         'color08': ['#4d4d4d'],
-      \         'color09': ['#50fa7b', '#50fa7b-green/py>try,except,finally'],
-      \         'color10': ['#50fa7b', '#50fa7b-green/py>keywords/js>function,return,undefined,null/html>attrs'],
-      \         'color11': ['#50fa7b', '#ff79c6-pink/py>while,if,try/js>if,else,while,for/html>tags'],
-      \         'color12': ['#fcf405', 'unused'],
-      \         'color13': ['#bd93f9', '#bd93f9-purple/py>numbers,None,deco@/js>number,super,window'],
-      \         'color14': ['#8be9fd'],
-      \         'color15': ['#44475a'],
-      \         'color16': ['#8be9fd'],
-      \         'color17': ['#bd93f9', '#bd93f9-purple/py>True,False,None/js>true,false,this'],
-      \         'cursorline': ['#44475a'],
-      \         'cursorlinenr_bg': ['#282a36'],
-      \         'cursorlinenr_fg': ['#00d75f'],
-      \         'folded_bg': ['#5f5f5f', '59'],
-      \         'folded_fg': ['#c6c6c6', '251'],
-      \         'linenumber_bg': ['#282a36'],
-      \         'linenumber_fg': ['#44475a'],
-      \         'matchparen_bg': ['#282a36'],
-      \         'matchparen_fg': ['#f8f8f2'],
-      \         'search_bg': ['#00d75f'],
-      \         'search_fg': ['#282a36'],
-      \         'todo_bg': ['#44475a'],
-      \         'todo_fg': ['#ffb86c'],
-      \         'vertsplit_bg': ['#282a36'],
-      \         'vertsplit_fg': ['#8be9fd'],
-      \         'visual_bg': ['#44475a'],
-      \         'visual_fg': ['#f8f8f2'],
-      \       }
-      \     }
-      \ }
-let g:PaperColor_Theme_Options['language'] = {
-      \     'python': {
-      \       'highlight_builtins' : 0
-      \     },
-      \     'javascript': {
-      \       'highlight_builtins' : 1
-      \     }
-      \ }
+if !has('gui_running')
+  set t_Co=256
+endif
 
 " Syntax: select global syntax scheme
 " Make sure this is at end of section
-try
-  set t_Co=256 " says terminal has 256 colors
-  set background=dark
-  colorscheme PaperColor
-catch
-endtry
+function! SetupSyntaxHighlighting()
+  colorscheme dracula
 
-function! s:redefine_keywords(new_keywords)
-  for [newGroup, keywords] in a:new_keywords
-    exec 'syn keyword ' . newGroup . ' ' . join(keywords)
-  endfor
+  " General misc colors
+  hi LineNr       guibg=#282a36 guifg=#44475a
+  hi CursorLineNr guifg=#50fa7b
+  hi Folded       guibg=#44475a guifg=#6272a4
+  hi MatchParen   guibg=#44475a guifg=#f8f8f2
+  hi Search       guibg=#ffb86c guifg=#282a36
+  hi Todo         guibg=#ff5555 guifg=#282a36
+  hi VertSplit    guibg=#44475a guifg=#282a36
+
+  " vim-buffet colors
+  hi BuffetCurrentBuffer guibg=#bd93f9 guifg=#282a36
+  hi BuffetTab           guibg=#424450
+
+  call lightline#colorscheme()
 endfunction
 
-function! s:override_links(new_links)
-  for [oldGroup, newGroup] in a:new_links
-    exec 'hi! link ' . oldGroup . ' ' . newGroup
-  endfor
-endfunction
-
-function! s:js_syntax()
-  let l:js_new_keywords = [
-        \ ['jsBooleanFalse',    ['undefined', 'null']],
-        \ ['jsStatement',       ['throw']],
-        \ ]
-  let l:js_links_overrides = [
-        \ ['jsAsyncKeyword',   'jsStatement'],
-        \ ['jsImport',         'jsStatement'],
-        \ ['jsExport',         'jsStatement'],
-        \ ['jsModuleAs',       'jsStatement'],
-        \ ['jsFrom',           'jsStatement'],
-        \ ['jsExportDefault',  'jsStatement'],
-        \ ['jsClassKeyword',   'jsStatement'],
-        \ ['jsExtendsKeyword', 'jsStatement'],
-        \ ['jsNoise',          'jsConditional'],
-        \ ]
-
-  call s:redefine_keywords(l:js_new_keywords)
-  call s:override_links(l:js_links_overrides)
-endfunction
-
-function! s:ts_syntax()
-  let l:ts_new_keywords = [
-        \ ['typescriptGlobal',   ['Error', 'EvalError', 'RangeError',
-                                \ 'ReferenceError', 'SyntaxError', 'TypeError',
-                                \ 'URIError', 'Promise', 'super'] ],
-        \ ['typescriptStatement', ['await', 'async', 'continue', 'break', 'default',]],
-        \ ['typescriptThis',      ['this']],
-        \ ]
-  let l:ts_links_overrides = [
-        \ ['typescriptReserved',      'typescriptStatement'],
-        \ ['typescriptExceptions',    'Exception'],
-        \ ['typescriptGlobalObjects', 'typescriptGlobal'],
-        \ ['typescriptThis',          'typescriptSpecial'],
-        \ ]
-
-  call s:redefine_keywords(l:ts_new_keywords)
-  call s:override_links(l:ts_links_overrides)
-endfunction
-
-function! s:python_syntax()
-  let g:semshi#simplify_markup = v:true
-  " Make semshi play well with dracula colors
-  hi semshiLocal           guifg=#ff0000
-  hi semshiGlobal          guifg=#ff79c6
-  hi semshiImported        guifg=#ff79c6 gui=bold
-  hi semshiParameter       guifg=#ffb86c
-  hi semshiParameterUnused guifg=#ffb86c gui=underline
-  hi semshiFree            guifg=#ffb86c
-  hi semshiBuiltin         guifg=#8be9fd
-  hi semshiAttribute       guifg=#f8f8f2
-  hi semshiSelf            guifg=#bd93f9 gui=italic
-  hi semshiUnresolved      guifg=#ff5555 gui=underline
-  hi semshiSelected        guifg=#282a36 guibg=#ffb86c
-endfunction
-
-augroup custom_syntax
+augroup syntax_highlighting_init
   autocmd!
-  " `Special` hi-group is italic by default
-  try
-    autocmd VimEnter,SourcePost * exec 'hi! Special gui=italic guifg=#ff5555'
-
-    autocmd VimEnter,Filetype,SourcePost javascript,javascript.tsx call s:js_syntax()
-    autocmd VimEnter,Filetype,SourcePost typescript,typescript.tsx call s:ts_syntax()
-    autocmd VimEnter,Filetype,SourcePost python call s:python_syntax()
-  catch
-  endtry
-augroup end
-
-" Syntax highlight Debug utils
-command! HiGroupInfo exe ':verbose hi '.synIDattr(synstack(line('.'), col('.'))[-1], 'name')
-
+  autocmd VimEnter * call ConfigTreeSitter()
+  autocmd VimEnter * call SetupSyntaxHighlighting()
+augroup END
 " }}}
 " General: Key remappings --------------------- {{{
 
@@ -551,6 +452,10 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" Use C-k and C-j to navigate folds
+nnoremap <C-j> zj
+nnoremap <C-k> zk
+
 " }}}
 " General: File type detection ---------------- {{{
 augroup file_extensions
@@ -602,7 +507,7 @@ let g:indentLine_fileTypeExclude = ['defx']
 "  }}}
 " Plugin: Lightline --------------------------- {{{
 let g:lightline = {
-  \ 'colorscheme': 'wombat',
+  \ 'colorscheme': 'dracula',
   \ 'active': {
   \   'right': [ [ 'position' ],
   \              [ 'fileencoding', 'filetype' ],
@@ -701,12 +606,11 @@ let g:buffet_show_index = v:true
 " Do not configure any key binding
 let g:buffet_max_plug = 0
 
+" let g:buffet_hidden_buffers = ['defx']
+let g:buffet_separator = ""
+
 function! g:BuffetSetCustomColors()
 " Default tabline colors
-    hi! TabLineFill ctermbg=Magenta guibg=#909181
-    hi! BuffetCurrentBuffer guibg=#00d75f guifg=#000000
-    hi! BuffetBuffer guifg=#000000
-    hi! BuffetTab guibg=#282a36 guifg=#6272a4
 endfunction
 
 nnoremap <silent> H :bp<CR>
