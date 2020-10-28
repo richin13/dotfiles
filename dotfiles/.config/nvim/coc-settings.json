@@ -2,6 +2,8 @@
   "suggest.autoTrigger": "always",
   "tsserver.npm": "/home/rmadriz/.asdf/shims/npm",
   "jedi.diagnostics.enable": false,
+  "diagnostic.errorSign": "λ",
+  "diagnostic.warningSign": "π",
   "diagnostic-languageserver.filetypes": {
     "python": [
       "pylint",

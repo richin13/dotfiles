@@ -328,6 +328,19 @@ function! SetupSyntaxHighlighting()
   hi BuffetBuffer        guibg=#44475a guifg=#f8f8f2
   hi BuffetTab           guibg=#424450
 
+  " vim-gitgutter
+  hi GitGutterAdd    guifg=#50fa7b
+  hi GitGutterChange guifg=#8be9fd
+  hi GitGutterDelete guifg=#ff5555
+
+  " coc.nvim
+  hi CocErrorSign        guifg=#ff5555
+  hi CocWarningSign      guifg=#ffb86c
+  hi CocInfoSign         guifg=#8be9fd
+  hi CocErrorHighlight   gui=underline
+  hi CocWarningHighlight gui=underline
+  hi CocInfoHighlight    gui=underline
+
   call lightline#colorscheme()
 endfunction
 
