@@ -554,7 +554,7 @@ function! s:defx_custom_init() abort
   endif
   call defx#custom#option('_', {
         \ 'buffer_name'  : 'defx',
-        \ 'columns'      : 'git       :indent:icon:filename',
+        \ 'columns'      : 'git:indent:icon:filename',
         \ 'direction'    : 'topleft',
         \ 'ignored_files': join([
         \   '*.egg-info/',
