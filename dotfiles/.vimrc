@@ -341,6 +341,12 @@ function! SetupSyntaxHighlighting()
   hi CocWarningHighlight gui=underline
   hi CocInfoHighlight    gui=underline
 
+  " defx-git
+  hi Defx_git_Modified  guifg=#8be9fd
+  hi Defx_git_Staged    guifg=#bd93f9
+  hi Defx_git_Untracked guifg=#50fa7b
+  hi Defx_git_Renamed   guifg=#f1fa8c
+
   call lightline#colorscheme()
 endfunction
 
@@ -577,6 +583,12 @@ function! s:defx_custom_init() abort
         \ 'split'        : 'vertical',
         \ 'winwidth'     : 31,
         \ })
+  call defx#custom#column('git', 'indicators', {
+        \ 'Modified'  : '~',
+        \ 'Staged'    : 'ϟ',
+        \ 'Untracked' : '+',
+        \ 'Renamed'   : '➜',
+        \ })
 endfunction
 
 function! s:defx_keybindings()
@@ -745,20 +757,6 @@ endfunction
 command! PreviewCmd call _Preview()
 
 nmap <silent><leader>p :PreviewCmd<CR>
-" }}}
-" Config: Abbreviations ----------------------- {{{
-augroup python_ab
-  au!
-  au Filetype python iab ifmain if __name__ == '__main__':<CR>main()<ESC>
-  au Filetype python iab ffaker factory.Faker()<ESC>
-  au Filetype python iab pdis # pylint: disable= <ESC>
-augroup END
-
-augroup js_ab
-  au!
-  au Filetype javascript iab constcomp const = (props) => {<CR>}<ESC>Oreturn ()<ESC>k0ea
-  au Filetype javascript iab cdbg console.debug('[DEBUG]')<ESC>F]a
-augroup END
 " }}}
 " Config: Comment strings --------------------- {{{
 augroup comment_str_config
