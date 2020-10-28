@@ -293,6 +293,7 @@ require('nvim-treesitter.configs').setup({
   highlight = { enable = true },
   textobjects = { enable = true },
   ensure_installed = {
+    'bash',
     'html',
     'javascript',
     'python',
@@ -324,6 +325,7 @@ function! SetupSyntaxHighlighting()
 
   " vim-buffet colors
   hi BuffetCurrentBuffer guibg=#bd93f9 guifg=#282a36
+  hi BuffetBuffer        guibg=#44475a guifg=#f8f8f2
   hi BuffetTab           guibg=#424450
 
   call lightline#colorscheme()
