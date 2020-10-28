@@ -563,6 +563,7 @@ function! s:defx_custom_init() abort
   call defx#custom#option('_', {
         \ 'buffer_name'  : 'defx',
         \ 'columns'      : 'git:indent:icon:filename',
+        \ 'floating_preview': v:true,
         \ 'direction'    : 'topleft',
         \ 'ignored_files': join([
         \   '*.egg-info/',
@@ -611,6 +612,9 @@ function! s:defx_keybindings()
   nnoremap <silent><buffer><expr> ma    defx#do_action('new_file')
   nnoremap <silent><buffer><expr> md    defx#do_action('remove')
   nnoremap <silent><buffer><expr> mm    defx#do_action('rename')
+  nnoremap <silent><buffer><expr> mc    defx#do_action('copy')
+  nnoremap <silent><buffer><expr> mp    defx#do_action('paste')
+  nnoremap <silent><buffer><expr> mv    defx#do_action('preview')
 
   nnoremap <silent><buffer><expr> u     defx#do_action('cd', '..')
 
