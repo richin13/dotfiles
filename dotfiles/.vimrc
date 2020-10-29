@@ -155,7 +155,7 @@ function! PackagerInit() abort
   call packager#add('junegunn/fzf.vim')
 
 " Coloring & Syntax highlighting
-  call packager#local('richin13/vim')
+  call packager#add('richin13/vim')
 
   call packager#add('chr4/nginx.vim')
   call packager#add('docker/docker', {'rtp': '/contrib/syntax/vim/'})
