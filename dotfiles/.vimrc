@@ -297,6 +297,7 @@ require('nvim-treesitter.configs').setup({
     'bash',
     'html',
     'javascript',
+    'php',
     'python',
     'query',
     'tsx',
