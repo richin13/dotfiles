@@ -293,13 +293,16 @@ lua <<EOF
 require('nvim-treesitter.configs').setup({
   highlight = { enable = true },
   textobjects = { enable = true },
+  indent = { enable = true },
   ensure_installed = {
     'bash',
+    'css',
     'html',
     'javascript',
     'php',
     'python',
     'query',
+    'toml',
     'tsx',
     'typescript',
   },
