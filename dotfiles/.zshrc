@@ -358,6 +358,20 @@ function zoomy() {
   xdg-open "zoommtg://zoom.us/join?action=join&confno=$1" > /dev/null 2>&1
 }
 
+# upgrade relevant local systems
+function upgrade() {
+  sudo apt update
+  sudo apt upgrade -y
+  sudo apt autoremove -y
+  pushd .
+  cd ~/dotfiles
+  git pull
+  popd
+  asdf uninstall neovim nightly
+  asdf install neovim nightly
+  nvim -c 'PlugUpdate'
+}
+
 # }}}
 # Aliases --------------------------------------------------------- {{{
 # Check whether NeoVIM is installed and alias it to vim
