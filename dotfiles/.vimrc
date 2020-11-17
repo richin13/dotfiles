@@ -139,7 +139,7 @@ function! PackagerInit() abort
   call packager#add('tpope/vim-abolish')
   call packager#add('weirongxu/plantuml-previewer.vim')
   call packager#add('tyru/open-browser.vim')
-  call packager#add('greyblake/vim-preview')
+  call packager#add('iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
   call packager#add('alvan/vim-closetag')
   call packager#add('tpope/vim-ragtag')
   call packager#add('wincent/ferret')
@@ -757,10 +757,12 @@ augroup END
 " }}}
 " Config: Preview ----------------------------- {{{
 function! _Preview()
-  if &filetype ==? 'plantuml'
+  if &filetype ==? 'markdown'
+    exec 'MarkdownPreview'
+  elseif &filetype ==? 'plantuml'
     exec 'PlantumlOpen'
   else
-    exec 'Preview'
+    !gio open %:p
   endif
 endfunction
 
