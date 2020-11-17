@@ -2,6 +2,7 @@
   "suggest.autoTrigger": "always",
   "tsserver.npm": "/home/rmadriz/.asdf/shims/npm",
   "jedi.diagnostics.enable": false,
+  "jedi.jediSettings.autoImportModules": ["alembic"],
   "diagnostic.errorSign": "λ",
   "diagnostic.warningSign": "π",
   "diagnostic-languageserver.filetypes": {
@@ -68,5 +69,8 @@
         "error": "error"
       }
     }
+  },
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json": ["/*open-api*.yml", "/*open-api*.yaml"]
   }
 }
