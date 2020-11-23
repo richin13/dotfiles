@@ -197,6 +197,7 @@ function! PackagerInit() abort
         \ 'josa42/coc-sh',
         \ 'marlonfan/coc-phpls',
         \ 'neoclide/coc-css',
+        \ 'neoclide/coc-highlight',
         \ 'neoclide/coc-html',
         \ 'neoclide/coc-json',
         \ 'neoclide/coc-pairs',
@@ -347,6 +348,7 @@ function! SetupSyntaxHighlighting()
   hi CocErrorHighlight   gui=underline
   hi CocWarningHighlight gui=underline
   hi CocInfoHighlight    gui=underline
+  hi CocHighlightText    guibg=#44475a gui=underline
 
   " defx-git
   hi Defx_git_Modified  guifg=#8be9fd
@@ -532,6 +534,12 @@ let g:indentLine_fileTypeExclude = ['defx']
 
 " GitMessenger
 " let g:git_messenger_include_diff = "current"
+
+" coc-highlight
+augroup coc_highligh
+  autocmd!
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+augroup end
 
 "  }}}
 " Plugin: Lightline --------------------------- {{{
