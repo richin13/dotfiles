@@ -125,6 +125,7 @@ function! PackagerInit() abort
   " Basic
   call packager#add('fcpg/vim-altscreen')
   call packager#add('itchyny/lightline.vim')
+  call packager#add('kyazdani42/nvim-web-devicons')
   call packager#add('tpope/vim-surround')
   call packager#add('tmux-plugins/vim-tmux-focus-events') " Tmux integration
   call packager#add('christoomey/vim-system-copy')
@@ -537,15 +538,18 @@ let g:indentLine_fileTypeExclude = ['defx']
 let g:lightline = {
   \ 'colorscheme': 'dracula',
   \ 'active': {
+  \   'left': [ ['mode', 'paste'],
+  \             ['filename-icon'] ],
   \   'right': [ [ 'position' ],
-  \              [ 'fileencoding', 'filetype' ],
-  \              [ 'branch' ] ]
+  \              [ 'filetype' ],
+  \              [ 'branch' ] ],
   \ },
   \ 'component': {
   \   'position': '%l/%L:%c'
   \ },
   \ 'component_function': {
-  \   'branch': 'LightlineBranch'
+  \   'branch': 'LightlineBranch',
+  \   'filename-icon': 'LightlineFT',
   \ },
   \ 'enable': {
   \   'tabline': v:false
@@ -554,10 +558,20 @@ let g:lightline = {
 
 function! LightlineBranch()
   let branch = FugitiveHead()
-  let prefix = branch != '' ? ' ' : ''
+  let prefix = branch != '' ? ' ' : ''
 
   return &filetype !~# '\v(help|defx)' ? prefix . branch : ''
 endfunction
+
+function! LightlineFT()
+  let filename = expand('%:t')
+  let extension = expand('%:e')
+  let icon = luaeval('require("nvim-web-devicons").get_icon(_A[1], _A[2], {default = true})', [filename, extension])
+  return icon . ' ' . filename
+endfunction
+
+
+" Configure dev-icons
 " }}}
 " Plugin: Defx -------------------------------- {{{
 
