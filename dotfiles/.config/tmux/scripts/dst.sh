@@ -2,7 +2,7 @@
 
 function dst {
   local tz_abbr=$(TZ=US/Eastern date +%Z);
-  [ $tz_abbr == "EDT" ] && echo "on" || echo "off"
+  [ $tz_abbr == "EDT" ] && echo "dst:on" || echo "dst:off"
 }
 
 dst
