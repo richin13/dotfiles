@@ -4,19 +4,19 @@ function rnd_music_icon {
   local status=$(playerctl status)
 
   if [ "$status" == "" ]; then
-    echo "x"
+    echo "ﭦ"
     return 0
   fi
 
   if [ "$status" == "Paused" ]; then
-    echo "🔈"
+    echo ""
     return 0
   elif [ "$status" == "Playing" ]; then
     local rnd=$((1 + RANDOM % 12))
     if [ $rnd -lt 6 ]; then
-      echo "🔉"
+      echo ""
     else
-      echo "🔊"
+      echo ""
     fi
   fi
 
