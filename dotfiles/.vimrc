@@ -168,8 +168,7 @@ function! PackagerInit() abort
   call packager#add('hashivim/vim-terraform')
   call packager#add('jparise/vim-graphql')
   call packager#add('plasticboy/vim-markdown')
-  call packager#add('leafgarland/typescript-vim')
-  call packager#add('peitalin/vim-jsx-typescript')
+  call packager#add('pappasam/vim-jsx-typescript.git', {'branch': 'change-to-typescriptreact'})
   call packager#add('jwalton512/vim-blade')
   call packager#add('nvim-treesitter/nvim-treesitter')
 
