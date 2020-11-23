@@ -192,6 +192,7 @@ function! PackagerInit() abort
         \ 'fannheyward/coc-sql',
         \ 'iamcco/coc-diagnostic',
         \ 'josa42/coc-docker',
+        \ 'josa42/coc-sh',
         \ 'marlonfan/coc-phpls',
         \ 'neoclide/coc-css',
         \ 'neoclide/coc-html',
@@ -745,6 +746,8 @@ nnoremap <silent> <C-_> <cmd>Rg<cr>
 
 let g:vim_filetype_formatter_commands = {
       \ 'python': 'black -l 79 -q - | isort -',
+      \ 'bash': 'shfmt -ci -i 2',
+      \ 'sh': 'shfmt -ci -i 2',
       \ }
 
 augroup formatting
