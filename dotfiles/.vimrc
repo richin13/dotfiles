@@ -191,6 +191,7 @@ function! PackagerInit() abort
   for coc_plugin in [
         \ 'fannheyward/coc-sql',
         \ 'iamcco/coc-diagnostic',
+        \ 'iamcco/coc-vimlsp',
         \ 'josa42/coc-docker',
         \ 'josa42/coc-sh',
         \ 'marlonfan/coc-phpls',
