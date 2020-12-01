@@ -172,6 +172,7 @@ function! PackagerInit() abort
   call packager#add('pappasam/vim-jsx-typescript.git', {'branch': 'change-to-typescriptreact'})
   call packager#add('jwalton512/vim-blade')
   call packager#add('nvim-treesitter/nvim-treesitter')
+  call packager#add('nvim-treesitter/playground.git')
 
 " Indentation & folding
   call packager#add('hynek/vim-python-pep8-indent' , {'type': 'opt'})
