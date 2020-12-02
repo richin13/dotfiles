@@ -173,6 +173,7 @@ function! PackagerInit() abort
   call packager#add('jwalton512/vim-blade')
   call packager#add('nvim-treesitter/nvim-treesitter')
   call packager#add('nvim-treesitter/playground')
+  call packager#add('romgrk/nvim-treesitter-context')
 
 " Indentation & folding
   call packager#add('hynek/vim-python-pep8-indent' , {'type': 'opt'})
@@ -408,8 +409,8 @@ function! s:show_documentation()
 endfunction
 
 " Use C-e & C-y to scroll down/up when there's an opened floating window
-nnoremap <expr><C-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-e>"
-nnoremap <expr><C-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
+nnoremap <expr><C-e> coc#float#has_float() ? coc#util#float_scroll(1) : "\<C-e>"
+nnoremap <expr><C-y> coc#float#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
 
 " inoremap <CR> <ESC><Plug>(coc-snippets-expand)i<CR>
 imap <C-j> <Plug>(coc-snippets-expand-jump)
