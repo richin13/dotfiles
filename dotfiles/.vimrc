@@ -156,7 +156,7 @@ function! PackagerInit() abort
   call packager#add('junegunn/fzf.vim')
 
 " Coloring & Syntax highlighting
-  call packager#add('richin13/vim')
+  call packager#add('richin13/dracula.nvim')
 
   call packager#add('chr4/nginx.vim')
   call packager#add('docker/docker', {'rtp': '/contrib/syntax/vim/'})
@@ -172,7 +172,7 @@ function! PackagerInit() abort
   call packager#add('pappasam/vim-jsx-typescript.git', {'branch': 'change-to-typescriptreact'})
   call packager#add('jwalton512/vim-blade')
   call packager#add('nvim-treesitter/nvim-treesitter')
-  call packager#add('nvim-treesitter/playground.git')
+  call packager#add('nvim-treesitter/playground')
 
 " Indentation & folding
   call packager#add('hynek/vim-python-pep8-indent' , {'type': 'opt'})
@@ -295,6 +295,12 @@ augroup END
 function! ConfigTreeSitter()
 lua <<EOF
 require('nvim-treesitter.configs').setup({
+  playground = {
+    enable = true,
+    disable = {},
+    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    persist_queries = false -- Whether the query persists across vim sessions
+  },
   highlight = { enable = true },
   textobjects = { enable = true },
   indent = { enable = true },
@@ -309,6 +315,7 @@ require('nvim-treesitter.configs').setup({
     'toml',
     'tsx',
     'typescript',
+    'yaml',
   },
 })
 EOF
