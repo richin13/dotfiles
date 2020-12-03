@@ -203,6 +203,7 @@ function! PackagerInit() abort
         \ 'neoclide/coc-html',
         \ 'neoclide/coc-json',
         \ 'neoclide/coc-pairs',
+        \ 'neoclide/coc-rls',
         \ 'neoclide/coc-snippets',
         \ 'neoclide/coc-tsserver',
         \ 'neoclide/coc-yaml',
@@ -241,8 +242,7 @@ augroup END
 augroup indentation_sr
   autocmd!
   autocmd Filetype * setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=8
-  autocmd Filetype python setlocal shiftwidth=4 softtabstop=4 tabstop=8
-  autocmd Filetype python,php setlocal shiftwidth=4 softtabstop=4 tabstop=8
+  autocmd Filetype python,php,rust setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype yaml setlocal indentkeys-=<:>
   autocmd Filetype make setlocal noexpandtab softtabstop=0
 augroup END
@@ -313,6 +313,7 @@ require('nvim-treesitter.configs').setup({
     'php',
     'python',
     'query',
+    'rust',
     'toml',
     'tsx',
     'typescript',
