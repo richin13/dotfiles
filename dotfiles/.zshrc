@@ -201,6 +201,8 @@ if [ -x "$(command -v fd)" ]; then
   done
   export MANPATH
 fi
+
+export DOTFILES="$HOME/dotfiles"
 # }}}
 # Key Bindings ---------------------------------------------------- {{{
 
@@ -393,8 +395,17 @@ alias itree="tree --dirsfirst -I '__pycache__|venv|node_modules'"
 alias srm="shred -n 100 -z -u"
 alias ff="grep -rnw . -e"
 alias m="make"
-alias zshrc="vim ~/.zshrc"
-alias vimrc="vim ~/.vimrc"
+
+if [ -d "$DOTFILES" ]; then
+  alias dotfiles="cd $DOTFILES"
+  alias vimrc="nvim $DOTFILES/dotfiles/.config/nvim/init.vim"
+  alias zshrc="nvim $DOTFILES/dotfiles/.zshrc"
+else
+  echo "[WARNING] ~/dotfiles does not exist"
+  alias dotfiles="echo \"[ERROR] No dotfiles in this system :(\""
+  alias vimrc="echo \"[ERROR] No dotfiles in this system :(\""
+  alias zshrc="echo \"[ERROR] No dotfiles in this system :(\""
+fi
 
 # Execute the previous command
 alias jk="fc -e -"
