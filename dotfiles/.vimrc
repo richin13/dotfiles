@@ -131,7 +131,8 @@ function! PackagerInit() abort
   call packager#add('christoomey/vim-system-copy')
   call packager#add('tmhedberg/matchit')
 
-  call packager#add('bagrat/vim-buffet')
+  " call packager#add('bagrat/vim-buffet')
+  call packager#add('romgrk/barbar.nvim')
   call packager#add('Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' })
 
   " Utils
@@ -341,10 +342,11 @@ function! SetupSyntaxHighlighting()
   hi Todo         guibg=#ff5555 guifg=#282a36
   hi VertSplit    guibg=#44475a guifg=#282a36
 
-  " vim-buffet colors
-  hi BuffetCurrentBuffer guibg=#bd93f9 guifg=#282a36
-  hi BuffetBuffer        guibg=#44475a guifg=#f8f8f2
-  hi BuffetTab           guibg=#424450
+  " barbar colors
+  hi BufferCurrent              guibg=#44475a guifg=#f8f8f2
+  hi BufferCurrentMod           guibg=#44475a guifg=#f8f8f2
+  hi BufferCurrentSign          guibg=#44475a guifg=#bd93f9
+  hi BufferCurrentTarget        guibg=#44475a guifg=#ff5555
 
   " vim-gitgutter
   hi GitGutterAdd    guifg=#50fa7b
@@ -668,26 +670,40 @@ augroup configure_defx
 augroup end
 
 " }}}
-"  Plugin: Buffet -------------------------- {{{
+"  Plugin: BarBar ------------------------------ {{{
 
-" Show cardinal indexes
-let g:buffet_show_index = v:true
+let bufferline = {}
 
-" Do not configure any key binding
-let g:buffet_max_plug = 0
+" Enable animations
+let bufferline.animation = v:true
 
-" let g:buffet_hidden_buffers = ['defx']
-let g:buffet_separator = ""
+" Enable icons
+let bufferline.icons = v:true
 
-function! g:BuffetSetCustomColors()
-" Default tabline colors
-endfunction
+" If set, the letters for each buffer in buffer-pick mode will be
+" assigned based on their name. Otherwise or in case all letters are
+" already assigned, the behavior is to assign letters in order of
+" usability (see order below)
+let bufferline.semantic_letters = v:false
 
-nnoremap <silent> H :bp<CR>
-nnoremap <silent> L :bn<CR>
-nnoremap <silent> <localleader>q :Bw<CR>
-nnoremap <silent> <localleader>Q :Bw!<CR>
-nnoremap <silent> <localleader>w :Bonly<CR>
+" New buffer letters are assigned in this order. This order is
+" optimal for the qwerty keyboard layout but might need adjustement
+" for other layouts.
+let bufferline.letters =
+  \ 'asdfjkl;ghnmxcbziowerutyqpASDFJKLGHNMXCBZIOWERUTYQP'
+
+" Sets the maximum padding width with which to surround each tab
+let bufferline.maximum_padding = 1
+
+" BarBar Key mappings
+nnoremap <silent> <C-s>          :BufferPick<CR>
+nnoremap <silent> H              :BufferPrevious<CR>
+nnoremap <silent> L              :BufferNext<CR>
+nnoremap <silent> <A-,>          :BufferMovePrevious<CR>
+nnoremap <silent> <A-.>          :BufferMoveNext<CR>
+nnoremap <silent> <localleader>q :BufferClose<CR>
+nnoremap <silent> <localleader>Q :BufferWipeout<CR>
+nnoremap <silent> <localleader>w :BufferCloseAllButCurrent<CR>
 
 augroup disable_buffer_nav_in_defx
   autocmd!
