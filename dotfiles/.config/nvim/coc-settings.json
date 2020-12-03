@@ -6,10 +6,8 @@
   "diagnostic.errorSign": "λ",
   "diagnostic.warningSign": "π",
   "diagnostic-languageserver.filetypes": {
-    "python": [
-      "pylint",
-      "mypy"
-    ]
+    "python": ["pylint", "mypy"],
+    "sh": ["shellcheck"]
   },
   "diagnostic-languageserver.linters": {
     "pylint": {
@@ -68,9 +66,32 @@
       "securities": {
         "error": "error"
       }
+    },
+    "shellcheck": {
+      "command": "shellcheck",
+      "debounce": 100,
+      "args": ["--format", "json", "-"],
+      "sourceName": "shellcheck",
+      "parseJson": {
+        "line": "line",
+        "column": "column",
+        "endLine": "endLine",
+        "endColumn": "endColumn",
+        "message": "${message} [${code}]",
+        "security": "level"
+      },
+      "securities": {
+        "error": "error",
+        "warning": "warning",
+        "info": "info",
+        "style": "hint"
+      }
     }
   },
   "yaml.schemas": {
-    "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json": ["/*open-api*.yml", "/*open-api*.yaml"]
+    "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json": [
+      "/*open-api*.yml",
+      "/*open-api*.yaml"
+    ]
   }
 }
