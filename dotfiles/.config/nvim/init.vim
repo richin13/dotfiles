@@ -1,29 +1,20 @@
-" My VIM setup
+" My Neovim config
 "
 " Author: Ricardo Madriz
-" Based on: Sam Roeca's dotfiles (https://github.com/pappasam/dotfiles)
 
 " General: global config ---------------------- {{{
+
+" This config assumes you have nvim installed
+if !has('nvim')
+  echo "⚠ Configuration is invalid outside Neovim"
+endif
 
 " Leader mappings
 let mapleader = ","
 let maplocalleader = "\\"
 
 "A comma separated list of options for Insert mode completion
-"   menuone  Use the popup menu also when there is only one match.
-"            Useful when there is additional information about the
-"            match, e.g., what file it comes from.
-
-"   longest  Only insert the longest common text of the matches.  If
-"            the menu is displayed you can use CTRL-L to add more
-"            characters.  Whether case is ignored depends on the kind
-"            of completion.  For buffer text the 'ignorecase' option is
-"            used.
-
-"   preview  Show extra information about the currently selected
-"            completion in the preview window.  Only works in
-"            combination with 'menu' or 'menuone'.
-set completeopt=menu,longest
+set completeopt=menu,longest,preview
 
 " Enable buffer deletion instead of having to write each buffer
 set hidden
@@ -62,9 +53,6 @@ set autoread
 " without further keys
 set wildmode=longest,list,full
 set wildmenu
-
-" Turn off complete vi compatibility
-set nocompatible
 
 " Enable using local vimrc
 set exrc
@@ -827,12 +815,6 @@ augroup comment_str_config
   au BufNew,BufRead kitty.conf setlocal commentstring=#:\ %s
   au Filetype dosini setlocal commentstring=#\ %s
   au Filetype dosini setlocal comments=:#,:;
-augroup END
-" }}}
-" Config: Ridiculous settings ----------------- {{{
-augroup hide_column_on_test_files
-  au!
-  " au BufNew,BufRead test_*.py setlocal colorcolumn=
 augroup END
 " }}}
 " Config: Custom functions -------------------- {{{
