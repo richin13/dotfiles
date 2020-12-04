@@ -481,26 +481,9 @@ augroup end
 " }}}
 "  Plugin: Configure --------------------------- {{{
 
-" Python highlighting
-let g:python_highlight_space_errors = 0
-let g:python_highlight_all          = 1
-
 " Numbers
 let g:enable_numbers = 0
 let g:numbers_exclude               = ['defx']
-
-" CtrlP
-" let g:ctrlp_working_path_mode     = 'ca'
-
-if executable('fd')
-  let g:ctrlp_user_command          = 'fd --type=f --type=l --search-path=%s'
-  let g:ctrlp_use_caching           = 0
-else
-  let g:ctrlp_custom_ignore         = {
-        \   'dir' : '\.git$\|build$\|node_modules\|dist'
-        \ }
-  let g:ctrlp_user_command          = ['.git', 'cd %s && git ls-files']
-endif
 
 " Indent Lines Plugin settings
 let g:indentLine_enabled         = v:false
