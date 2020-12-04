@@ -109,7 +109,6 @@ function! PackagerInit() abort
 
   " Basic
   call packager#add('fcpg/vim-altscreen')
-  call packager#add('itchyny/lightline.vim')
   call packager#add('kyazdani42/nvim-web-devicons')
   call packager#add('tpope/vim-surround')
   call packager#add('tmux-plugins/vim-tmux-focus-events') " Tmux integration
@@ -331,8 +330,6 @@ function! SetupSyntaxHighlighting()
 
   " Column
   hi ColorColumn        guibg=#38393f
-
-  call lightline#colorscheme()
 endfunction
 
 augroup syntax_highlighting_init
@@ -501,45 +498,6 @@ augroup coc_highligh
 augroup end
 
 "  }}}
-" Plugin: Lightline --------------------------- {{{
-let g:lightline = {
-  \ 'colorscheme': 'dracula',
-  \ 'active': {
-  \   'left': [ ['mode', 'paste'],
-  \             ['filename-icon'] ],
-  \   'right': [ [ 'position' ],
-  \              [ 'filetype' ],
-  \              [ 'branch' ] ],
-  \ },
-  \ 'component': {
-  \   'position': '%l/%L:%c'
-  \ },
-  \ 'component_function': {
-  \   'branch': 'LightlineBranch',
-  \   'filename-icon': 'LightlineFT',
-  \ },
-  \ 'enable': {
-  \   'tabline': v:false
-  \ }
-  \ }
-
-function! LightlineBranch()
-  let branch = FugitiveHead()
-  let prefix = branch != '' ? ' ' : ''
-
-  return &filetype !~# '\v(help|defx)' ? prefix . branch : ''
-endfunction
-
-function! LightlineFT()
-  let filename = expand('%:t')
-  let extension = expand('%:e')
-  let icon = luaeval('require("nvim-web-devicons").get_icon(_A[1], _A[2], {default = true})', [filename, extension])
-  return icon . ' ' . filename
-endfunction
-
-
-" Configure dev-icons
-" }}}
 " Plugin: Defx -------------------------------- {{{
 
 function! s:defx_custom_init() abort
