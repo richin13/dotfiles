@@ -182,6 +182,7 @@ function! PackagerInit() abort
         \ 'iamcco/coc-diagnostic',
         \ 'iamcco/coc-vimlsp',
         \ 'josa42/coc-docker',
+        \ 'josa42/coc-lua',
         \ 'josa42/coc-sh',
         \ 'marlonfan/coc-phpls',
         \ 'neoclide/coc-css',
