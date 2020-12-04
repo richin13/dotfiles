@@ -22,11 +22,8 @@ set hidden
 " Mouse: enable GUI mouse support in all modes
 set mouse=a
 
-" Set column to light grey at 80 characters
-if (exists('+colorcolumn'))
-  set colorcolumn=80
-  highlight ColorColumn ctermbg=9
-endif
+" Set column at 80 characters
+set colorcolumn=80
 
 " Always show signcolumn
 set signcolumn=yes
@@ -356,13 +353,16 @@ function! SetupSyntaxHighlighting()
   hi Defx_git_Untracked guifg=#50fa7b
   hi Defx_git_Renamed   guifg=#f1fa8c
 
+  " Column
+  hi ColorColumn        guibg=#38393f
+
   call lightline#colorscheme()
 endfunction
 
 augroup syntax_highlighting_init
   autocmd!
   autocmd VimEnter * call ConfigTreeSitter()
-  autocmd VimEnter * call SetupSyntaxHighlighting()
+  autocmd VimEnter,ColorScheme * call SetupSyntaxHighlighting()
 augroup END
 " }}}
 " General: Key remappings --------------------- {{{
@@ -444,7 +444,7 @@ nnoremap <leader>sa zg
 " Util remappings
 
 " Reload config
-nnoremap <silent> <leader>` :source ~/.vimrc<CR>:echo "Re-loaded config"<CR>
+nnoremap <silent> <leader>` :source ~/.config/nvim/init.vim<CR>:echo "Re-loaded config"<CR>
 
 " Why not?
 nnoremap ; :
