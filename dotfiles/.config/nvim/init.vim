@@ -110,6 +110,7 @@ function! PackagerInit() abort
   " Basic
   call packager#add('fcpg/vim-altscreen')
   call packager#add('kyazdani42/nvim-web-devicons')
+  call packager#add('glepnir/galaxyline.nvim')
   call packager#add('tpope/vim-surround')
   call packager#add('tmux-plugins/vim-tmux-focus-events') " Tmux integration
   call packager#add('christoomey/vim-system-copy')
@@ -279,9 +280,7 @@ augroup END
 " General: Syntax highlighting ---------------- {{{
 " nvim-treesitter config
 function! ConfigTreeSitter()
-lua <<EOF
-require('treesitter')
-EOF
+  lua require('plugins.treesitter')
 endfunction
 
 if !has('gui_running')
@@ -498,6 +497,18 @@ augroup coc_highligh
 augroup end
 
 "  }}}
+" Plugin: Galaxyline -------------------------- {{{
+
+function! ConfigStatusLine()
+  lua require('plugins.status-line')
+endfunction
+
+augroup status_line_init
+  autocmd!
+  autocmd VimEnter * call ConfigStatusLine()
+augroup END
+
+" }}}
 " Plugin: Defx -------------------------------- {{{
 
 function! s:defx_custom_init() abort
