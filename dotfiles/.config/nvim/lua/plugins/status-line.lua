@@ -146,6 +146,19 @@ gls.left[13] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
     icon = '  ',
+    highlight = {colors.yellow,colors.section_bg},
+  }
+}
+gls.left[14] = {
+  Space = {
+    provider = function () return ' ' end,
+    highlight = {colors.section_bg,colors.section_bg},
+  }
+}
+gls.left[15] = {
+  DiagnosticInfo = {
+    provider = 'DiagnosticInfo',
+    icon = '  ',
     highlight = {colors.blue,colors.section_bg},
     separator = ' ',
     separator_highlight = { colors.section_bg, colors.bg },
