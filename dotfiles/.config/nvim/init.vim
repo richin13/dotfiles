@@ -117,6 +117,11 @@ function! PackagerInit() abort
   call packager#add('romgrk/barbar.nvim')
   call packager#add('Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' })
 
+  " fuzzy finders
+  call packager#add('nvim-lua/popup.nvim')
+  call packager#add('nvim-lua/plenary.nvim')
+  call packager#add('nvim-telescope/telescope.nvim')
+
   " Utils
   call packager#add('tpope/vim-commentary')
   call packager#add('myusuf3/numbers.vim')
@@ -323,6 +328,11 @@ function! SetupSyntaxHighlighting()
 
   " Column
   hi ColorColumn        guibg=#38393f
+
+  " Telescope
+  hi TelescopeBorder         guifg=#8be9fd
+  hi TelescopePromptBorder   guifg=#50fa7b
+  hi TelescopePromptPrefix   guifg=#bd93f9
 endfunction
 
 augroup syntax_highlighting_init
@@ -661,6 +671,22 @@ let g:ragtag_global_maps = 1
 augroup ragtag_config
  autocmd FileType javascript,typescript call RagtagInit()
 augroup end
+
+" }}}
+" Plugin: Telescope --------------------------- {{{
+
+function! ConfigTelescope()
+  lua require('plugins.telescope')
+endfunction
+
+augroup telescope_init
+  autocmd!
+  autocmd VimEnter * call ConfigTelescope()
+augroup END
+
+" Keymaps
+nnoremap <silent> <C-p> <cmd>Telescope find_files<cr>
+nnoremap <silent> <C-_> <cmd>Telescope live_grep<cr>
 
 " }}}
 " Config: Code Formatting --------------------- {{{
