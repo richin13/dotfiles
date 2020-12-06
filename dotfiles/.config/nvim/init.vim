@@ -134,10 +134,6 @@ function! PackagerInit() abort
   call packager#add('psliwka/vim-smoothie')
   call packager#add('mogelbrod/vim-jsonpath', {'type': 'opt'})
 
-  " Fzf
-  call packager#add('junegunn/fzf')
-  call packager#add('junegunn/fzf.vim')
-
 " Coloring & Syntax highlighting
   call packager#add('richin13/dracula.nvim')
 
@@ -641,8 +637,6 @@ let g:vista#renderer#icons = {
 \   "class"   : "ͼ",
 \  }
 let g:vista_echo_cursor_strategy = 'floating_win'
-let g:vista_fzf_preview = ['right:50%']
-let g:vista_keep_fzf_colors = 1
 let g:vista_finder_alternative_executives = []
 
 augroup custom_vista
@@ -668,42 +662,6 @@ augroup ragtag_config
  autocmd FileType javascript,typescript call RagtagInit()
 augroup end
 
-" }}}
-" Plugin: Fzf --------------------------------- {{{
-function! s:should_show_preview() abort
-  return &columns >= 80 || &columns >= 120
-endfunction
-
-let $FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-let $FZF_DEFAULT_OPTS = '--bind=\\:toggle-preview'
-
-let g:fzf_colors = {
-      \ 'header': ['fg', 'Todo'],
-      \ 'pointer': ['fg', 'Number'],
-      \ 'info': ['fg', 'String'],
-      \ 'spinner': ['fg', 'Special'],
-      \ 'prompt': ['fg', 'Identifier'],
-      \ 'border': ['fg', 'Conditional'],
-      \ }
-
-let g:fzf_layout = {
-      \ 'window': {
-      \   'width': 1,
-      \   'height': 0.5,
-      \   'yoffset': 0.9,
-      \   'highlight': 'Exception',
-      \ },
-      \}
-
-command! -bang -nargs=* Rg
-      \ call fzf#vim#grep('rg --column --no-heading --line-number --hidden --color=always '.shellescape(<q-args>),
-      \ 1,
-      \ fzf#vim#with_preview({'options': ['--preview-window='.(s:should_show_preview() ? 'nohidden' : 'hidden')]}),
-      \ <bang>0
-      \)
-
-nnoremap <silent> <C-p> <cmd>Files<cr>
-nnoremap <silent> <C-_> <cmd>Rg<cr>
 " }}}
 " Config: Code Formatting --------------------- {{{
 
