@@ -97,9 +97,6 @@ let g:python_host_prog  = $HOME . '/.asdf/shims/python2'
 " delays and poor user experience.
 set updatetime=300
 
-" Have proper space to show diagnostic messages
-set cmdheight=2
-"
 " }}}
 " General: Plugin Install --------------------- {{{
 function! PackagerInit() abort
