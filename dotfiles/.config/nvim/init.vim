@@ -295,7 +295,7 @@ function! SetupSyntaxHighlighting()
   hi LineNr       guibg=#282a36 guifg=#44475a
   hi CursorLineNr guifg=#50fa7b
   hi Folded       guibg=#44475a guifg=#6272a4
-  hi MatchParen   guibg=#44475a guifg=#f8f8f2
+  hi MatchParen   guibg=#44475a guifg=#f8f8f2 gui=underline
   hi Search       guibg=#ffb86c guifg=#282a36
   hi Todo         guibg=#ff5555 guifg=#282a36
   hi VertSplit    guibg=#44475a guifg=#282a36
