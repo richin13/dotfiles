@@ -137,25 +137,13 @@ gls.left[11] = {
   }
 }
 gls.left[12] = {
-  Space = {
-    provider = function () return ' ' end,
-    highlight = {colors.section_bg,colors.section_bg},
-  }
-}
-gls.left[13] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
     icon = '  ',
     highlight = {colors.orange,colors.section_bg},
   }
 }
-gls.left[14] = {
-  Space = {
-    provider = function () return ' ' end,
-    highlight = {colors.section_bg,colors.section_bg},
-  }
-}
-gls.left[15] = {
+gls.left[13] = {
   DiagnosticInfo = {
     provider = 'DiagnosticInfo',
     icon = '  ',
