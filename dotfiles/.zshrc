@@ -30,12 +30,6 @@ include () {
 # }}}
 # Exported variables: General ------------------------------------- {{{
 
-if [[ "$(hostname)" == "tumbleweed" ]]; then
-  export TERM='tmux-256color'
-else
-  export TERM='xterm-256color'
-fi
-
 # React
 export REACT_EDITOR='less'
 
