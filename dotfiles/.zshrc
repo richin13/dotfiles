@@ -368,6 +368,20 @@ function upgrade() {
   nvim -c 'PlugUpdate'
 }
 
+function dbrestore() {
+  local backupfile=${1}
+  local db_user=${2:-$DB_USER}
+  local db_name=${3:-$DB_NAME}
+
+  if [ -z "$backupfile" ]; then
+    echo "Need to pass a backup file"
+    echo "Usage: dbrestore <backupfile> [db-user] [db-name]"
+    return 1
+  fi
+
+  pg_restore -U "$db_user" -d "$db_name" -a "$backupfile"
+}
+
 # }}}
 # Aliases --------------------------------------------------------- {{{
 # Check whether NeoVIM is installed and alias it to vim
