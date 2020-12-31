@@ -200,6 +200,8 @@ if [ -x "$(command -v fd)" ]; then
 fi
 
 export DOTFILES="$HOME/dotfiles"
+
+export DISPLAY=:0
 # }}}
 # Key Bindings ---------------------------------------------------- {{{
 
