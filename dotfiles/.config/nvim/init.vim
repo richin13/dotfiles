@@ -501,6 +501,9 @@ augroup coc_highligh
   autocmd CursorHold * silent call CocActionAsync('highlight')
 augroup end
 
+"
+let g:system_copy#copy_command='clip.exe'
+
 "  }}}
 " Plugin: Galaxyline -------------------------- {{{
 
