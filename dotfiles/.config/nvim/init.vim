@@ -158,6 +158,7 @@ function! PackagerInit() abort
   call packager#add('nvim-treesitter/nvim-treesitter')
   call packager#add('nvim-treesitter/playground')
   call packager#add('romgrk/nvim-treesitter-context')
+  call packager#add('mustache/vim-mustache-handlebars')
 
 " Indentation & folding
   call packager#add('hynek/vim-python-pep8-indent' , {'type': 'opt'})
