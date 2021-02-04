@@ -24,34 +24,34 @@ config_directories: $(CONFIG_DIRS_HOME) ## Create the directories in the HOME fo
 	-mkdir -p $@
 
 ################################################################################
-# Theming and plugins
+# Tools
 ################################################################################
 .PHONY: zplug
 zplug: ## Install zplug
 	curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
-.PHONY: oh-my-zsh-swag
-oh-my-zsh-swag: ## Install the spaceship-prompt theme
-	-sh -c "$$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-	-git clone https://github.com/denysdovhan/spaceship-prompt.git "$$ZSH_CUSTOM/themes/spaceship-prompt"
-	-ln -fs "./spaceship-prompt/spaceship.zsh-theme" "$$ZSH_CUSTOM/themes/spaceship.zsh-theme"
-
-.PHONY: tmux-swag
-tmux-swag: ## Install tpm tmux plugin manager
-	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-	@echo "Remember to execute <prefix>I inside tmux to install your plugins"
-
-################################################################################
-# Tools
-################################################################################
-.PHONY: poetry
-poetry: ## Install Poetry
-	curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
-
 .PHONY: asdf-vm
 asdf-vm: ## Install asdf-vm
 	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.4 --depth=1
-	asdf plugin-add nodejs
-	asdf plugin-add python
-	@echo "Installed [nodejs] & [python] plugins"
-	@echo "Make sure to install an appropiate version"
+
+.PHONY: vim-packager
+vim-packager: ## Install vim-packager
+	git clone https://github.com/kristijanhusak/vim-packager ~/.config/nvim/pack/packager/opt/vim-packager
+
+.PHONY: tools
+tools: zplug asdf-vim vim-packager ## Install required tools
+
+################################################################################
+# Optionals
+################################################################################
+.PHONY: tpm
+tpm: ## Install tpm tmux plugin manager
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+	@echo "Remember to execute <prefix>I inside tmux to install your plugins"
+
+.PHONY: poetry
+poetry: ## Install Poetry
+	curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python - --no-modify-path
+
+.PHONY: optionals
+optionals: tpm poetry ## Install optional tools
