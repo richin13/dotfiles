@@ -55,12 +55,3 @@ asdf-vm: ## Install asdf-vm
 	asdf plugin-add python
 	@echo "Installed [nodejs] & [python] plugins"
 	@echo "Make sure to install an appropiate version"
-
-################################################################################
-# Apps
-################################################################################
-.PHONY: kitty
-kitty:
-	curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-	-ln -s ~/.local/kitty.app/bin/kitty ~/bin/
-	@echo "`kitty` executable is now in '$$HOME/bin'. Make sure it's in your PATH"
