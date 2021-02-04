@@ -1,20 +1,21 @@
-# DOTFILES
+# Dotfiles
 
-These are mainly based on [Sam Roeca's dotfiles](https://github.com/pappasam/dotfiles) with
-a few modifications to adapt them to my current workflow.
+> A collection of configuration files for the tools/programs I use in my day to day programming journey.
 
-This a work in progress :wink:
+This dotfiles provide configurations for [Zsh](https://www.zsh.org/), [Neovim](https://github.com/neovim/neovim), [Tmux](https://github.com/tmux/tmux), [Alacritty](https://github.com/alacritty/alacritty) (and some more). This configurations are "optimized" for developing in Python and Typescript (mainly React).
 
+The color scheme used everywhere is [Dracula](https://github.com/dracula/dracula-theme).
 
 ## Pre-flight checks
 
-Just make sure to install:
+Make sure to install:
 
- - [Pyenv](https://github.com/pyenv/pyenv#installation)
- - [Vim-Plug](https://github.com/junegunn/vim-plug#installation)
+- [asdf-vm](https://asdf-vm.com/#/core-manage-asdf?id=install)
+- [vim-packager](https://github.com/kristijanhusak/vim-packager)
+- [zplug](https://github.com/zplug/zplug#installation)
+- [tpm](https://github.com/zplug/zplug#installation) (Optional, only if you plan to use Tmux [highly recommended])
 
 And these `stow xsel` using your package manager
-
 
 ## Installation
 
@@ -43,7 +44,6 @@ $ sudo apt install -y stow
 Another issue you might run into is `stow` not being able to create the symlinks. This
 happens when the files already exists in you home directory and are not symlinks.
 Make sure to backup your existing dotfiles before proceeding.
-
 
 ## License
 
