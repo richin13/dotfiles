@@ -85,14 +85,9 @@ if [ -d "$YARN_BINS" ]; then
   path_ladd "$YARN_BINS"
 fi
 
-POETRY_BINS="$HOME/.poetry/bin"
-if [ -d "$POETRY_BINS" ]; then
-  path_ladd "$POETRY_BINS"
-fi
-
-CARGON_BINS="$HOME/.cargo/bin"
-if [ -d "$CARGON_BINS" ]; then
-  path_ladd "$CARGON_BINS"
+CARGO_BINS="$HOME/.cargo/bin"
+if [ -d "$CARGO_BINS" ]; then
+  path_ladd "$CARGO_BINS"
 fi
 
 COMPOSER_BINS="$HOME/.config/composer/vendor/bin"
