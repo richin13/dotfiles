@@ -465,6 +465,9 @@ alias el="manipulate_last_file"
 
 # I surf these alot :D
 alias sam-dotfiles="o https://github.com/pappasam/dotfiles/tree/master/dotfiles"
+
+alias sail="bash vendor/bin/sail"
+alias artisan="sail artisan"
 ###################################
 # }}}
 # Autocompletion -------------------------------------------------- {{{
