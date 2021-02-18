@@ -700,6 +700,7 @@ let g:vim_filetype_formatter_commands = {
       \ 'python': 'black -l 79 -q - | isort -',
       \ 'bash': 'shfmt -ci -i 2',
       \ 'sh': 'shfmt -ci -i 2',
+      \ 'php': 'npx --no-install prettier --parser=php',
       \ }
 
 augroup formatting
