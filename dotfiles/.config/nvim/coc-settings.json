@@ -5,6 +5,7 @@
   "jedi.jediSettings.autoImportModules": ["alembic"],
   "diagnostic.errorSign": "λ",
   "diagnostic.warningSign": "π",
+  "diagnostic-languageserver.trace.server": "messages",
   "diagnostic-languageserver.filetypes": {
     "python": ["pylint", "mypy"],
     "sh": ["shellcheck"]
