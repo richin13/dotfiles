@@ -77,7 +77,7 @@ gls.left[3] ={
 }
 gls.left[4] = {
   FileName = {
-    provider = { 'FileName', 'FileSize' },
+    provider = 'FileName',
     condition = buffer_not_empty,
     highlight = { colors.fg, colors.section_bg },
     separator = " ",
@@ -93,7 +93,14 @@ gls.left[5] = {
 }
 gls.left[6] = {
   GitBranch = {
-    provider = 'GitBranch',
+    provider = function()
+      local vcs = require('galaxyline.provider_vcs')
+      local branch_name = vcs.get_git_branch()
+      if (string.len(branch_name) > 28) then
+        return string.sub(branch_name, 1, 25).."..."
+      end
+      return branch_name
+    end,
     condition = buffer_not_empty,
     highlight = {colors.fg,colors.bg},
   }
@@ -182,14 +189,14 @@ gls.right[2] = {
     separator_highlight = { colors.bg, colors.section_bg },
   },
 }
-gls.right[3] = {
-  Heart = {
-    provider = function() return ' ' end,
-    highlight = { colors.red, colors.section_bg },
-    separator = ' | ',
-    separator_highlight = { colors.bg, colors.section_bg },
-  }
-}
+-- gls.right[3] = {
+--   Heart = {
+--     provider = function() return ' ' end,
+--     highlight = { colors.red, colors.section_bg },
+--     separator = ' | ',
+--     separator_highlight = { colors.bg, colors.section_bg },
+--   }
+-- }
 
 -- Short status line
 gls.short_line_left[1] = {
