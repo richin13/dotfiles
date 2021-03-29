@@ -693,7 +693,7 @@ nnoremap <silent> <C-_> <cmd>Telescope live_grep<cr>
 " Config: Code Formatting --------------------- {{{
 
 let g:vim_filetype_formatter_commands = {
-      \ 'python': 'black -l 79 -q - | isort -',
+      \ 'python': 'black -l 79 -q - | isort - | docformatter -',
       \ 'bash': 'shfmt -ci -i 2',
       \ 'sh': 'shfmt -ci -i 2',
       \ }
