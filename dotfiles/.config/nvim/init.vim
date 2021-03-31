@@ -524,7 +524,7 @@ function! s:defx_custom_init() abort
         \ 'buffer_name'  : 'defx',
         \ 'columns'      : 'git:indent:icon:filename',
         \ 'floating_preview': v:true,
-        \ 'direction'    : 'topleft',
+        \ 'direction'    : 'botright',
         \ 'ignored_files': join([
         \   '*.egg-info/',
         \   '*.pyc',
