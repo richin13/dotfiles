@@ -364,6 +364,8 @@ nmap <silent> <leader>gr <Plug>(coc-references)
 nmap <silent> <leader>rn <Plug>(coc-rename)
 
 nnoremap <silent> <leader>d <cmd>call CocActionAsync('diagnosticToggle')<CR>
+nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
+nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -543,7 +545,10 @@ function! s:defx_custom_init() abort
         \ 'root_marker'  : '[>]',
         \ 'search'       : '`expand("%:p")`',
         \ 'session_file' : tempname(),
-        \ 'split'        : 'vertical',
+        \ 'split'        : 'floating',
+        \ 'wincol'       : &columns,
+        \ 'winrow'       : 0,
+        \ 'winheight'    : &lines,
         \ 'winwidth'     : 31,
         \ })
   call defx#custom#column('git', 'indicators', {
@@ -578,8 +583,8 @@ function! s:defx_keybindings()
 
   nnoremap <silent><buffer><expr> u     defx#do_action('cd', '..')
 
-  nnoremap <silent><buffer><expr> h     defx#do_action('resize', 31)
-  nnoremap <silent><buffer><expr> l     defx#do_action('resize', 62)
+  nnoremap <silent><buffer><expr> h     defx#do_action('resize', 62)
+  nnoremap <silent><buffer><expr> l     defx#do_action('resize', 31)
 endfunction
 
 augroup configure_defx
