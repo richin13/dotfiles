@@ -1,3 +1,4 @@
+local vim = vim
 local gl = require('galaxyline')
 local utils = require('utils')
 
@@ -23,8 +24,15 @@ local buffer_not_empty = function()
   return not utils.is_buffer_empty()
 end
 
+local in_git_repo = function ()
+  local vcs = require('galaxyline.provider_vcs')
+  local branch_name = vcs.get_git_branch()
+
+  return branch_name ~= nil
+end
+
 local checkwidth = function()
-  return utils.has_width_gt(40) and buffer_not_empty()
+  return utils.has_width_gt(40) and in_git_repo()
 end
 
 local mode_color = function()
@@ -38,7 +46,13 @@ local mode_color = function()
     R = colors.red,
   }
 
-  return mode_colors[vim.fn.mode()]
+  local color = mode_colors[vim.fn.mode()]
+
+  if color == nil then
+    color = colors.red
+  end
+
+  return color
 end
 
 -- Left side
@@ -61,7 +75,11 @@ gls.left[2] = {
         R = 'REPLACE',
       }
       vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color())
-      return alias[vim.fn.mode()]..' '
+      local alias_mode = alias[vim.fn.mode()]
+      if alias_mode == nil then
+        alias_mode = vim.fn.mode()
+      end
+      return alias_mode..' '
     end,
     highlight = { colors.bg, colors.bg },
     separator = "  ",
@@ -87,7 +105,7 @@ gls.left[4] = {
 gls.left[5] = {
   GitIcon = {
     provider = function() return '  ' end,
-    condition = buffer_not_empty,
+    condition = in_git_repo,
     highlight = {colors.red,colors.bg},
   }
 }
@@ -99,9 +117,9 @@ gls.left[6] = {
       if (string.len(branch_name) > 28) then
         return string.sub(branch_name, 1, 25).."..."
       end
-      return branch_name
+      return branch_name .. " "
     end,
-    condition = buffer_not_empty,
+    condition = in_git_repo,
     highlight = {colors.fg,colors.bg},
   }
 }
