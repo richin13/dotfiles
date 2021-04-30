@@ -129,7 +129,6 @@ function! PackagerInit() abort
   call packager#add('weirongxu/plantuml-previewer.vim')
   call packager#add('tyru/open-browser.vim')
   call packager#add('iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
-  call packager#add('alvan/vim-closetag')
   call packager#add('tpope/vim-ragtag')
   call packager#add('wincent/ferret')
   call packager#add('tommcdo/vim-lion')
@@ -146,7 +145,6 @@ function! PackagerInit() abort
   call packager#add('docker/docker', {'rtp': '/contrib/syntax/vim/'})
   call packager#add('pangloss/vim-javascript')
   call packager#add('MaxMEllon/vim-jsx-pretty')
-  call packager#add('mrk21/yaml-vim')
   call packager#add('aklt/plantuml-syntax')
   call packager#add('khalliday7/Jenkinsfile-vim-syntax')
   call packager#add('cespare/vim-toml')
@@ -158,6 +156,7 @@ function! PackagerInit() abort
   call packager#add('nvim-treesitter/nvim-treesitter')
   call packager#add('nvim-treesitter/playground')
   call packager#add('romgrk/nvim-treesitter-context')
+  call packager#add('windwp/nvim-ts-autotag')
   call packager#add('mustache/vim-mustache-handlebars')
 
 " Indentation & folding

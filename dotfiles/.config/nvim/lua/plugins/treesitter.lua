@@ -10,6 +10,7 @@ treesitter.setup({
   highlight = { enable = true },
   textobjects = { enable = true },
   indent = { enable = false },
+  autotag = { enable = true },
   ensure_installed = {
     'bash',
     'css',
