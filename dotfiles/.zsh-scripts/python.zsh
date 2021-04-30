@@ -13,7 +13,7 @@ alias pipu="pip uninstall"
 alias pips="pip search"
 alias pipf="pip freeze"
 alias pipff="pip freeze > requirements.txt"
-alias pip-dev="pipi $DEV_PKGS"
+alias pip-dev="pipi -U $DEV_PKGS"
 
 alias pt="poetry"
 alias pta="poetry add"
