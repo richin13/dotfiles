@@ -277,6 +277,23 @@ _kplr() {
 
 compdef _kplr kplr
 
+function rocket() {
+  cd "$ROCKET_FOLDER/$1"
+}
+
+_rocket() {
+  local state
+
+  _arguments \
+    '1: :->dir'
+
+  case $state in
+    (dir) _arguments '1:projects:($(ls $ROCKET_FOLDER))' ;;
+  esac
+}
+
+compdef _rocket rocket
+
 function cloneme() {
   if [[ $# -ne 1 ]]; then
     red "Need to specify a repo to clone."
