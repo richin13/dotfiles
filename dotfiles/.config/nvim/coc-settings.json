@@ -5,6 +5,7 @@
   "jedi.jediSettings.autoImportModules": ["alembic"],
   "diagnostic.errorSign": "λ",
   "diagnostic.warningSign": "π",
+  "diagnostic-languageserver.trace.server": "messages",
   "diagnostic-languageserver.filetypes": {
     "python": ["pylint", "mypy"],
     "sh": ["shellcheck"]
@@ -46,6 +47,7 @@
     "mypy": {
       "sourceName": "mypy",
       "command": "mypy",
+      "rootPatterns": [".git", "pyproject.toml", "setup.py"],
       "args": [
         "--no-color-output",
         "--no-error-summary",

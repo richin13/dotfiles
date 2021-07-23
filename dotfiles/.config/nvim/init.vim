@@ -157,6 +157,7 @@ function! PackagerInit() abort
   call packager#add('nvim-treesitter/playground')
   call packager#add('romgrk/nvim-treesitter-context')
   call packager#add('windwp/nvim-ts-autotag')
+  call packager#add('pprovost/vim-ps1') " Powershell & batch syntax highlighting
   call packager#add('mustache/vim-mustache-handlebars')
 
 " Indentation & folding
@@ -700,6 +701,7 @@ let g:vim_filetype_formatter_commands = {
       \ 'python': 'black -l 79 -q - | isort - | docformatter -',
       \ 'bash': 'shfmt -ci -i 2',
       \ 'sh': 'shfmt -ci -i 2',
+      \ 'php': 'npx --no-install prettier --parser=php',
       \ }
 
 augroup formatting
