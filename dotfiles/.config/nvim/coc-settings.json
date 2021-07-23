@@ -47,6 +47,7 @@
     "mypy": {
       "sourceName": "mypy",
       "command": "mypy",
+      "rootPatterns": [".git", "pyproject.toml", "setup.py"],
       "args": [
         "--no-color-output",
         "--no-error-summary",
