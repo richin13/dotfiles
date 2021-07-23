@@ -157,7 +157,7 @@ function! PackagerInit() abort
   call packager#add('nvim-treesitter/playground')
   call packager#add('romgrk/nvim-treesitter-context')
   call packager#add('windwp/nvim-ts-autotag')
-  call packager#add('pprovost/vim-ps1')
+  call packager#add('pprovost/vim-ps1') " Powershell & batch syntax highlighting
   call packager#add('mustache/vim-mustache-handlebars')
 
 " Indentation & folding
