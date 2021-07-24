@@ -199,14 +199,14 @@ gls.right[1]= {
     separator_highlight = { colors.section_bg,colors.bg },
   }
 }
-gls.right[2] = {
-  LineInfo = {
-    provider = 'LineColumn',
-    highlight = { colors.fg, colors.section_bg },
-    separator = ' | ',
-    separator_highlight = { colors.bg, colors.section_bg },
-  },
-}
+-- gls.right[2] = {
+--   LineInfo = {
+--     provider = 'LineColumn',
+--     highlight = { colors.fg, colors.section_bg },
+--     separator = ' | ',
+--     separator_highlight = { colors.bg, colors.section_bg },
+--   },
+-- }
 -- gls.right[3] = {
 --   Heart = {
 --     provider = function() return ' ' end,
