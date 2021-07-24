@@ -12,6 +12,7 @@ alias 'gp!'="gp --force"
 alias gwip="gaa && gcmsg '[WIP]'"
 alias guwip="grh HEAD~1"
 alias gcsmg="git commit -m"
+alias gcmsgnv="git commit --no-verify -m"
 
 # Edit modified files
 alias vemd="vim \$(git status --porcelain=v2 | grep -P '\.M' | cut -d ' ' -f 9)"
