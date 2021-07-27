@@ -196,7 +196,7 @@ function! PackagerInit() abort
         \ 'pappasam/coc-jedi',
         \ ]
     call packager#add(coc_plugin, {
-          \ 'do': 'yarn install --frozen-lockfile && yarn build',
+          \ 'do': 'yarn install --frozen-lockfile',
           \ })
   endfor
 
