@@ -316,7 +316,8 @@ function! SetupSyntaxHighlighting()
   hi CocErrorSign        guifg=#ff5555
   hi CocWarningSign      guifg=#ffb86c
   hi CocInfoSign         guifg=#8be9fd
-  hi CocErrorHighlight   gui=underline
+  hi CocDiagnosticsError gui=underline
+  hi CocErrorHighlight   guifg=#ff5555 gui=underline
   hi CocWarningHighlight gui=underline
   hi CocInfoHighlight    gui=underline
   hi CocHighlightText    guibg=#44475a gui=underline
