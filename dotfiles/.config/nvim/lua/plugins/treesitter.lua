@@ -13,6 +13,7 @@ treesitter.setup({
   autotag = { enable = true },
   ensure_installed = {
     'bash',
+    'comment',
     'css',
     'html',
     'javascript',
