@@ -419,6 +419,7 @@ alias itree="tree --dirsfirst -I '__pycache__|venv|node_modules'"
 alias srm="shred -n 100 -z -u"
 alias ff="grep -rnw . -e"
 alias m="make"
+alias tks="tmux kill-server"
 
 if [ -d "$DOTFILES" ]; then
   alias dotfiles="cd $DOTFILES"
