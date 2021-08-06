@@ -428,6 +428,10 @@ nnoremap <silent> <leader>` :source ~/.config/nvim/init.vim<CR>:echo "Re-loaded 
 
 " Why not?
 nnoremap ; :
+nnoremap : ;
+
+" Turn off ex mode
+nnoremap Q <nop>
 
 " Like i_o & i_O but returns to normal mode
 nnoremap <leader>o moo<ESC>k`o
