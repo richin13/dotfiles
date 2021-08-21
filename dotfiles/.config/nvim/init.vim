@@ -68,6 +68,9 @@ set shell=/usr/bin/zsh
 set splitbelow
 set splitright
 
+" Keep 2 lines visible above/below the cursor when scrolling
+set scrolloff=2
+
 " Hide mode (LightLine provides what we need to tell the mode we're in
 set noshowmode
 
