@@ -184,7 +184,7 @@ bindkey '^P' up-line-or-beginning-search
 bindkey '^N' down-line-or-beginning-search
 # }}}
 # Exports --------------------------------------------------------- {{{
-export MANPAGER="nvim -c 'set ft=man' -"
+export MANPAGER="less"
 export DOCS_DIRECTORY=$HOME/.config/docs
 
 # MANPATH: add asdf man pages to my man path
