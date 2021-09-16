@@ -138,7 +138,6 @@ function! PackagerInit() abort
   call packager#add('tpope/vim-endwise')
   call packager#add('pappasam/vim-filetype-formatter')
   call packager#add('Yggdroot/indentLine')
-  call packager#add('psliwka/vim-smoothie')
   call packager#add('mogelbrod/vim-jsonpath', {'type': 'opt'})
 
 " Coloring & Syntax highlighting
