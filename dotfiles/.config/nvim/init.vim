@@ -110,7 +110,7 @@ function! PackagerInit() abort
   " Basic
   call packager#add('fcpg/vim-altscreen')
   call packager#add('kyazdani42/nvim-web-devicons')
-  call packager#add('glepnir/galaxyline.nvim')
+  call packager#add('NTBBloodbath/galaxyline.nvim')
   call packager#add('tpope/vim-surround')
   call packager#add('tmux-plugins/vim-tmux-focus-events') " Tmux integration
   call packager#add('christoomey/vim-system-copy')
@@ -709,6 +709,7 @@ let g:vim_filetype_formatter_commands = {
       \ 'bash': 'shfmt -ci -i 2',
       \ 'sh': 'shfmt -ci -i 2',
       \ 'php': 'npx --no-install prettier --parser=php',
+      \ 'lua': 'lua-format',
       \ }
 
 augroup formatting
