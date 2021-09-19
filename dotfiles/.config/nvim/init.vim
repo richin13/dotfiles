@@ -175,8 +175,6 @@ function! PackagerInit() abort
   call packager#add('kristijanhusak/defx-git')
 
 " Language server: Coc
-  call packager#add('Shougo/neco-vim')
-  call packager#add('neoclide/coc-neco')
   call packager#add('neoclide/coc.nvim', {'branch': 'release'})
   for coc_plugin in [
         \ 'fannheyward/coc-sql',
