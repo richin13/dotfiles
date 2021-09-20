@@ -108,7 +108,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: FiraCode NerdFont
+    family: monospace
 
     # The `style` can be specified to pick a specific face.
     style: Bold
