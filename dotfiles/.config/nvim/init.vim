@@ -314,12 +314,15 @@ function! SetupSyntaxHighlighting()
 
   " coc.nvim
   hi CocErrorSign        guifg=#ff5555
-  hi CocWarningSign      guifg=#ffb86c
+  hi CocHintSign         guifg=#f8f8f2
   hi CocInfoSign         guifg=#8be9fd
-  hi CocDiagnosticsError gui=underline
-  hi CocErrorHighlight   guifg=#ff5555 gui=underline
-  hi CocWarningHighlight gui=underline
+  hi CocWarningSign      guifg=#ffb86c
+
+  hi CocErrorHighlight   guifg=#ff5555 gui=undercurl
+  hi CocHintHighlight    gui=underline
   hi CocInfoHighlight    gui=underline
+  hi CocWarningHighlight gui=underline
+
   hi CocHighlightText    guibg=#44475a gui=underline
 
   " defx-git
