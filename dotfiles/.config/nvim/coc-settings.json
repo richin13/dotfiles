@@ -29,7 +29,7 @@
           "line": 1,
           "column": 2,
           "security": 3,
-          "message": 4
+          "message": [4]
         }
       ],
       "rootPatterns": [".git", "pyproject.toml", "setup.py"],
@@ -62,10 +62,11 @@
           "line": 1,
           "column": 2,
           "security": 3,
-          "message": 4
+          "message": [4]
         }
       ],
       "securities": {
+        "note": "info",
         "error": "error"
       }
     },
