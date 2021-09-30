@@ -15,7 +15,7 @@ Make sure to install:
 - [zplug](https://github.com/zplug/zplug#installation)
 - [tpm](https://github.com/zplug/zplug#installation) (Optional, only if you plan to use Tmux [highly recommended])
 
-And these `stow xsel` using your package manager
+And these `xstow xsel` using your package manager
 
 ## Installation
 
@@ -30,18 +30,15 @@ $ make dotfiles
 ## Troubleshoot
 
 You might run into some issues when running `make dotfiles`. Under the hood, make will
-execute `stow` to create the symlinks to the dotfiles. First make sure you have
-installed `stow`
+execute `xstow` to create the symlinks to the dotfiles. First make sure you have
+installed `xstow`
 
 ```
-# When in ArchLinux
-$ sudo pacman -S --noconfirm stow
-
 # When in LinuxMint (or any Debian based distro)
-$ sudo apt install -y stow
+$ sudo apt install -y xstow
 ```
 
-Another issue you might run into is `stow` not being able to create the symlinks. This
+Another issue you might run into is `xstow` not being able to create the symlinks. This
 happens when the files already exists in you home directory and are not symlinks.
 Make sure to backup your existing dotfiles before proceeding.
 

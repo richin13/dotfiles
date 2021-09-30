@@ -15,7 +15,7 @@ help: ## This help message
 ################################################################################
 .PHONY: dotfiles
 dotfiles: config_directories ## Create the symlinks to the dotfiles
-	stow -t ~ -R dotfiles/
+	xstow -t ~ -R dotfiles/
 
 .PHONY: config_directories
 config_directories: $(CONFIG_DIRS_HOME) ## Create the directories in the HOME folder
