@@ -200,6 +200,7 @@ function! PackagerInit() abort
         \ 'neoclide/coc-tsserver',
         \ 'neoclide/coc-yaml',
         \ 'pappasam/coc-jedi',
+        \ 'yaegassy/coc-nginx',
         \ ]
     call packager#add(coc_plugin, {
           \ 'do': 'yarn install --frozen-lockfile',
