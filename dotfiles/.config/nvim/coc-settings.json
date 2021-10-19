@@ -8,7 +8,8 @@
   "diagnostic-languageserver.trace.server": "messages",
   "diagnostic-languageserver.filetypes": {
     "python": ["pylint", "mypy"],
-    "sh": ["shellcheck"]
+    "sh": ["shellcheck"],
+    "nginx": ["nginx-linter"]
   },
   "diagnostic-languageserver.linters": {
     "pylint": {
@@ -88,6 +89,28 @@
         "warning": "warning",
         "info": "info",
         "style": "hint"
+      }
+    },
+    "nginx-linter": {
+      "sourceName": "nginx-linter",
+      "command": "nginx-linter",
+      "debounce": 100,
+      "args": [
+        "--include",
+        "%file"
+      ],
+      "formatPattern": [
+        "^\\s+(\\d+?):(\\d+?)\\s+([a-z]+?)\\s+(.*)$",
+        {
+          "line": 1,
+          "column": 2,
+          "security": 3,
+          "message": 4
+        }
+      ],
+      "rootPatterns": ["nginx.conf", ".git"],
+      "securities": {
+        "error": "info"
       }
     }
   },
