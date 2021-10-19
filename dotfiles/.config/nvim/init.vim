@@ -76,7 +76,8 @@ set noshowmode
 
 " Redraw window whenever I've regained focus
 augroup redraw_on_refocus
-  au FocusGained * :redraw!
+  autocmd!
+  au FocusGained * redraw!
 augroup END
 
 " Ignore annoying patterns
@@ -99,6 +100,12 @@ let g:python_host_prog  = $HOME . '/.asdf/shims/python2'
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=300
+
+try
+  colorscheme dracula
+catch
+  echo 'Error loading theme'
+endtry
 
 " }}}
 " General: Plugin Install --------------------- {{{
@@ -152,7 +159,6 @@ function! PackagerInit() abort
   call packager#add('cespare/vim-toml')
   call packager#add('hashivim/vim-terraform')
   call packager#add('jparise/vim-graphql')
-  call packager#add('plasticboy/vim-markdown')
   call packager#add('pappasam/vim-jsx-typescript.git', {'branch': 'change-to-typescriptreact'})
   call packager#add('jwalton512/vim-blade')
   call packager#add('nvim-treesitter/nvim-treesitter')
@@ -290,8 +296,6 @@ endif
 " Syntax: select global syntax scheme
 " Make sure this is at end of section
 function! SetupSyntaxHighlighting()
-  colorscheme dracula
-
   " General misc colors
   hi LineNr       guibg=#282a36 guifg=#44475a
   hi CursorLineNr guifg=#50fa7b
