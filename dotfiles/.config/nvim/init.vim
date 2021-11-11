@@ -482,6 +482,7 @@ nnoremap <C-k> zk
 " General: File type detection ---------------- {{{
 augroup file_extensions
   autocmd!
+  autocmd VimEnter *.prisma set filetype=prisma
   autocmd BufNewFile,BufRead,BufEnter *.zsh-theme,.zprofile set filetype=zsh
   autocmd BufNewFile,BufRead,BufEnter *.jsx set filetype=javascript
   autocmd BufRead poetry.lock set filetype=toml
