@@ -373,8 +373,8 @@ nmap <silent> <leader>gr <Plug>(coc-references)
 nmap <silent> <leader>rn <Plug>(coc-rename)
 
 nnoremap <silent> <leader>d <cmd>call CocActionAsync('diagnosticToggle')<CR>
-nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
-nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
