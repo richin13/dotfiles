@@ -153,7 +153,7 @@ zplug "richin13/0i0.zsh-theme", use:0i0.zsh-theme, as:theme
 
 # Cool stuff
 zplug "paulirish/git-open", as:plugin
-zplug "zdharma/fast-syntax-highlighting", as:plugin
+zplug "zdharma-zmirror/fast-syntax-highlighting", as:plugin
 
 # zplug "supercrabtree/k"
 
