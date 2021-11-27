@@ -19,6 +19,7 @@ treesitter.setup({
     'html',
     'javascript',
     'php',
+    'prisma',
     'python',
     'query',
     'rust',
@@ -26,7 +27,6 @@ treesitter.setup({
     'tsx',
     'typescript',
     'yaml',
-    'prisma',
   },
 })
 parser_config.prisma = {
