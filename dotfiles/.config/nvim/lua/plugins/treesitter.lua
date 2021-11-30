@@ -1,5 +1,4 @@
 local treesitter = require('nvim-treesitter.configs')
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 
 treesitter.setup({
   playground = {
@@ -29,10 +28,3 @@ treesitter.setup({
     'yaml',
   },
 })
-parser_config.prisma = {
-  install_info = {
-    url = 'https://github.com/richin13/tree-sitter-prisma.git',
-    files = {"src/parser.c"},
-  },
-  filetype = "prisma"
-}
