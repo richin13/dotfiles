@@ -180,33 +180,8 @@ function! PackagerInit() abort
   call packager#add('rhysd/git-messenger.vim')
   call packager#add('kristijanhusak/defx-git')
 
-" Language server: Coc
+" Language server
   call packager#add('neoclide/coc.nvim', {'branch': 'release'})
-  for coc_plugin in [
-        \ 'fannheyward/coc-sql',
-        \ 'iamcco/coc-diagnostic',
-        \ 'iamcco/coc-vimlsp',
-        \ 'josa42/coc-docker',
-        \ 'josa42/coc-lua',
-        \ 'josa42/coc-sh',
-        \ 'marlonfan/coc-phpls',
-        \ 'neoclide/coc-css',
-        \ 'neoclide/coc-highlight',
-        \ 'neoclide/coc-html',
-        \ 'neoclide/coc-json',
-        \ 'neoclide/coc-pairs',
-        \ 'neoclide/coc-rls',
-        \ 'neoclide/coc-snippets',
-        \ 'neoclide/coc-tsserver',
-        \ 'neoclide/coc-yaml',
-        \ 'pappasam/coc-jedi',
-        \ 'yaegassy/coc-nginx',
-        \ ]
-    call packager#add(coc_plugin, {
-          \ 'do': 'yarn install --frozen-lockfile',
-          \ })
-  endfor
-
   call packager#add('liuchengxu/vista.vim')
 endfunction
 
@@ -496,6 +471,30 @@ augroup filetype_specific_configs
 augroup end
 
 " }}}
+"  Plugin: Coc --------------------------- {{{
+
+let g:coc_global_extensions = [
+      \ '@yaegassy/coc-nginx',
+      \ 'coc-css',
+      \ 'coc-diagnostic',
+      \ 'coc-docker',
+      \ 'coc-highlight',
+      \ 'coc-html',
+      \ 'coc-jedi',
+      \ 'coc-json',
+      \ 'coc-lua',
+      \ 'coc-pairs',
+      \ 'coc-phpls',
+      \ 'coc-rls',
+      \ 'coc-sh',
+      \ 'coc-snippets',
+      \ 'coc-sql',
+      \ 'coc-tsserver',
+      \ 'coc-vimlsp',
+      \ 'coc-yaml',
+      \ ]
+
+"  }}}
 "  Plugin: Configure --------------------------- {{{
 
 " Numbers
