@@ -1,4 +1,5 @@
 {
+  "coc.preferences.extensionUpdateCheck": "never",
   "suggest.autoTrigger": "always",
   "tsserver.npm": "/home/rmadriz/.asdf/shims/npm",
   "jedi.diagnostics.enable": false,
