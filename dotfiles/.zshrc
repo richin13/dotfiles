@@ -149,7 +149,7 @@ zplug "lib/git", from:oh-my-zsh
 zplug "lib/history", from:oh-my-zsh
 zplug "lib/key-bindings", from:oh-my-zsh
 
-zplug "richin13/0i0.zsh-theme", use:0i0.zsh-theme, as:theme
+zplug "richin13/dracula.zsh-theme", use:dracula.zsh-theme, as:theme
 
 # Cool stuff
 zplug "paulirish/git-open", as:plugin
