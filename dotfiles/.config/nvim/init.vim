@@ -125,7 +125,7 @@ function! PackagerInit() abort
 
   " call packager#add('bagrat/vim-buffet')
   call packager#add('romgrk/barbar.nvim')
-  call packager#add('Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' })
+  call packager#add('kyazdani42/nvim-tree.lua')
 
   " fuzzy finders
   call packager#add('nvim-lua/popup.nvim')
@@ -375,9 +375,8 @@ nnoremap <silent><leader>r :NumbersToggle<CR>
 inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>a
 nnoremap <silent> <C-c> :pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>
 
-" Toggle Defx
-nnoremap <silent> <space>j :Defx -toggle<CR>
-nnoremap <silent><space>J :Defx `expand('%:p:h')` -toggle<CR>
+" Toggle nvim-tree
+nnoremap <silent> <space>j :NvimTreeToggle<CR>
 
 " Toggle Vista.vim
 nnoremap <silent> <space>f :Vista!!<CR>
@@ -532,44 +531,50 @@ augroup END
 " Plugin: Defx -------------------------------- {{{
 
 function! s:defx_custom_init() abort
-  if !exists('g:loaded_defx')
-    return
-  endif
-  call defx#custom#option('_', {
-        \ 'buffer_name'  : 'defx',
-        \ 'columns'      : 'git:indent:icon:filename',
-        \ 'floating_preview': v:true,
-        \ 'direction'    : 'botright',
-        \ 'ignored_files': join([
-        \   '*.egg-info/',
-        \   '*.pyc',
-        \   '.git',
-        \   '.mypy_cache',
-        \   '.pytest_cache',
-        \   '.python-version',
-        \   '.tox',
-        \   '.venv/',
-        \   '.vim/',
-        \   '__pycache__/',
-        \   'node_modules/',
-        \   'pip-wheel-metadata',
-        \   'Session.vim',
-        \], ','),
-        \ 'root_marker'  : '[>]',
-        \ 'search'       : '`expand("%:p")`',
-        \ 'session_file' : tempname(),
-        \ 'split'        : 'floating',
-        \ 'wincol'       : &columns,
-        \ 'winrow'       : 0,
-        \ 'winheight'    : &lines,
-        \ 'winwidth'     : 31,
-        \ })
-  call defx#custom#column('git', 'indicators', {
-        \ 'Modified'  : '~',
-        \ 'Staged'    : 'ϟ',
-        \ 'Untracked' : '+',
-        \ 'Renamed'   : '➜',
-        \ })
+  let g:nvim_tree_show_icons = {
+    \ 'git': 1,
+    \ 'folders': 1,
+    \ 'files': 1,
+    \ 'folder_arrows': 0,
+    \ }
+  let g:nvim_tree_icons = {
+    \ 'git': {
+    \   'unstaged': "~",
+    \   'staged': "ϟ",
+    \   'renamed': "➜",
+    \   'untracked': "+",
+    \   },
+    \ }
+  lua require('plugins.nvim-tree')
+  " call defx#custom#option('_', {
+  "       \ 'buffer_name'  : 'defx',
+  "       \ 'columns'      : 'git:indent:icon:filename',
+  "       \ 'floating_preview': v:true,
+  "       \ 'direction'    : 'botright',
+  "       \ 'ignored_files': join([
+  "       \   '*.egg-info/',
+  "       \   '*.pyc',
+  "       \   '.git',
+  "       \   '.mypy_cache',
+  "       \   '.pytest_cache',
+  "       \   '.python-version',
+  "       \   '.tox',
+  "       \   '.venv/',
+  "       \   '.vim/',
+  "       \   '__pycache__/',
+  "       \   'node_modules/',
+  "       \   'pip-wheel-metadata',
+  "       \   'Session.vim',
+  "       \], ','),
+  "       \ 'root_marker'  : '[>]',
+  "       \ 'search'       : '`expand("%:p")`',
+  "       \ 'session_file' : tempname(),
+  "       \ 'split'        : 'floating',
+  "       \ 'wincol'       : &columns,
+  "       \ 'winrow'       : 0,
+  "       \ 'winheight'    : &lines,
+  "       \ 'winwidth'     : 31,
+  "       \ })
 endfunction
 
 function! s:defx_keybindings()
@@ -582,19 +587,6 @@ function! s:defx_keybindings()
   nnoremap <silent><buffer><expr> <C-t> defx#do_action('open', 'tabe')
   nnoremap <silent><buffer><expr> <C-s> defx#do_action('multi', ['quit', ['open', 'split']])
   nnoremap <silent><buffer><expr> <C-v> defx#do_action('multi', ['quit', ['open', 'vsplit']])
-
-  nnoremap <silent><buffer><expr> R     defx#do_action('redraw')
-  nnoremap <silent><buffer><expr> q     defx#do_action('quit')
-  nnoremap <silent><buffer><expr> H     defx#do_action('toggle_ignored_files')
-
-  nnoremap <silent><buffer><expr> ma    defx#do_action('new_file')
-  nnoremap <silent><buffer><expr> md    defx#do_action('remove')
-  nnoremap <silent><buffer><expr> mm    defx#do_action('rename')
-  nnoremap <silent><buffer><expr> mc    defx#do_action('copy')
-  nnoremap <silent><buffer><expr> mp    defx#do_action('paste')
-  nnoremap <silent><buffer><expr> mv    defx#do_action('preview')
-
-  nnoremap <silent><buffer><expr> u     defx#do_action('cd', '..')
 
   nnoremap <silent><buffer><expr> h     defx#do_action('resize', 62)
   nnoremap <silent><buffer><expr> l     defx#do_action('resize', 31)
