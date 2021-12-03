@@ -1,0 +1,12 @@
+[core]
+  pager = delta
+  editor = nvim
+
+[diff]
+  colorMoved = default
+
+[gitflow "branch"]
+  develop = develop
+
+[delta]
+  syntax-theme = Dracula
