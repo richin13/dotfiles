@@ -3,7 +3,7 @@ local gl = require('galaxyline')
 local condition = require("galaxyline.condition")
 
 local gls = gl.section
-gl.short_line_list = {'defx', 'packager', 'vista'}
+gl.short_line_list = {'NvimTree', 'packager', 'vista'}
 
 -- Colors
 local colors = {

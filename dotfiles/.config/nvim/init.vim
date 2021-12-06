@@ -178,7 +178,6 @@ function! PackagerInit() abort
   call packager#add('tpope/vim-fugitive')
   call packager#add('airblade/vim-gitgutter')
   call packager#add('rhysd/git-messenger.vim')
-  call packager#add('kristijanhusak/defx-git')
 
 " Language server
   call packager#add('neoclide/coc.nvim', {'branch': 'release'})
@@ -305,11 +304,11 @@ function! SetupSyntaxHighlighting()
 
   hi CocHighlightText    guibg=#44475a gui=underline
 
-  " defx-git
-  hi Defx_git_Modified  guifg=#8be9fd
-  hi Defx_git_Staged    guifg=#bd93f9
-  hi Defx_git_Untracked guifg=#50fa7b
-  hi Defx_git_Renamed   guifg=#f1fa8c
+  " NvimTree
+  hi NvimTreeGitDirty     guifg=#8be9fd
+  hi NvimTreeGitStaged    guifg=#bd93f9
+  hi NvimTreeGitNew       guifg=#50fa7b
+  hi NvimTreeGitRenamed   guifg=#f1fa8c
 
   " Column
   hi ColorColumn        guibg=#38393f
@@ -498,13 +497,13 @@ let g:coc_global_extensions = [
 
 " Numbers
 let g:enable_numbers = 0
-let g:numbers_exclude               = ['defx']
+let g:numbers_exclude               = ['NvimTree']
 
 " Indent Lines Plugin settings
 let g:indentLine_enabled         = v:false
 let g:indentLine_char_list       = ['|', '¦', '┆', '┊']
 let g:indentLine_color_gui       = '#44475a'
-let g:indentLine_fileTypeExclude = ['defx']
+let g:indentLine_fileTypeExclude = ['NvimTree']
 
 " GitMessenger
 " let g:git_messenger_include_diff = "current"
@@ -528,9 +527,11 @@ augroup status_line_init
 augroup END
 
 " }}}
-" Plugin: Defx -------------------------------- {{{
+" Plugin: Nvim-Tree --------------------------- {{{
 
-function! s:defx_custom_init() abort
+function! s:nvim_tree_custom_init() abort
+  let g:nvim_tree_quit_on_open = 1
+  let g:nvim_tree_git_hl = 1
   let g:nvim_tree_show_icons = {
     \ 'git': 1,
     \ 'folders': 1,
@@ -546,58 +547,11 @@ function! s:defx_custom_init() abort
     \   },
     \ }
   lua require('plugins.nvim-tree')
-  " call defx#custom#option('_', {
-  "       \ 'buffer_name'  : 'defx',
-  "       \ 'columns'      : 'git:indent:icon:filename',
-  "       \ 'floating_preview': v:true,
-  "       \ 'direction'    : 'botright',
-  "       \ 'ignored_files': join([
-  "       \   '*.egg-info/',
-  "       \   '*.pyc',
-  "       \   '.git',
-  "       \   '.mypy_cache',
-  "       \   '.pytest_cache',
-  "       \   '.python-version',
-  "       \   '.tox',
-  "       \   '.venv/',
-  "       \   '.vim/',
-  "       \   '__pycache__/',
-  "       \   'node_modules/',
-  "       \   'pip-wheel-metadata',
-  "       \   'Session.vim',
-  "       \], ','),
-  "       \ 'root_marker'  : '[>]',
-  "       \ 'search'       : '`expand("%:p")`',
-  "       \ 'session_file' : tempname(),
-  "       \ 'split'        : 'floating',
-  "       \ 'wincol'       : &columns,
-  "       \ 'winrow'       : 0,
-  "       \ 'winheight'    : &lines,
-  "       \ 'winwidth'     : 31,
-  "       \ })
 endfunction
 
-function! s:defx_keybindings()
-  nnoremap <silent><buffer><expr> <CR>
-        \                               defx#is_directory() ?
-        \                               defx#do_action('open_or_close_tree') :
-        \                               defx#async_action('multi', ['drop', 'quit'])
-  nnoremap <silent><buffer><expr> <C-c> defx#do_action('quit')
-
-  nnoremap <silent><buffer><expr> <C-t> defx#do_action('open', 'tabe')
-  nnoremap <silent><buffer><expr> <C-s> defx#do_action('multi', ['quit', ['open', 'split']])
-  nnoremap <silent><buffer><expr> <C-v> defx#do_action('multi', ['quit', ['open', 'vsplit']])
-
-  nnoremap <silent><buffer><expr> h     defx#do_action('resize', 62)
-  nnoremap <silent><buffer><expr> l     defx#do_action('resize', 31)
-endfunction
-
-augroup configure_defx
+augroup configure_nvimtree
   autocmd!
-  autocmd VimEnter * call s:defx_custom_init()
-  autocmd Filetype defx call s:defx_keybindings()
-  autocmd BufLeave,BufWinLeave  \[defx\]* call defx#call_action('add_session')
-  autocmd Filetype defx setlocal nonumber norelativenumber
+  autocmd VimEnter * call s:nvim_tree_custom_init()
 augroup end
 
 " }}}
@@ -635,12 +589,6 @@ nnoremap <silent> <A-.>          :BufferMoveNext<CR>
 nnoremap <silent> <localleader>q :BufferClose<CR>
 nnoremap <silent> <localleader>Q :BufferWipeout<CR>
 nnoremap <silent> <localleader>w :BufferCloseAllButCurrent<CR>
-
-augroup disable_buffer_nav_in_defx
-  autocmd!
-  autocmd FileType defx nnoremap <silent><buffer> H <nop>
-  autocmd FileType defx nnoremap <silent><buffer> L <nop>
-augroup END
 " }}}
 " Plugin: Autocompletion and LSP -------------- {{{
 " Coc.vim
