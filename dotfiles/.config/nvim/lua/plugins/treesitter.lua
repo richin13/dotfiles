@@ -15,6 +15,7 @@ treesitter.setup({
     'bash',
     'comment',
     'css',
+    'haskell',
     'html',
     'javascript',
     'php',
