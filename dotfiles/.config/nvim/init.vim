@@ -397,12 +397,13 @@ nnoremap <leader>ss :setlocal spell!<cr>
 nnoremap <leader>sn ]s
 " Move to previous bad word
 nnoremap <leader>sp [s
-" Open Suggestion for bad word
-nnoremap <leader>s? z=
 " Add current word in dictionary
 nnoremap <leader>sa zg
 
-" Util remappings
+" Telescope pickers
+nnoremap <C-Space> :Telescope resume<cr>
+nnoremap B :Telescope git_branches<cr>
+nnoremap S :Telescope spell_suggest<cr>
 
 " Reload config
 nnoremap <silent> <leader>` :source ~/.config/nvim/init.vim<CR>:echo "Re-loaded config"<CR>
