@@ -309,6 +309,7 @@ function! SetupSyntaxHighlighting()
   hi NvimTreeGitStaged    guifg=#bd93f9
   hi NvimTreeGitNew       guifg=#50fa7b
   hi NvimTreeGitRenamed   guifg=#f1fa8c
+  hi NvimTreeFolderIcon   guifg=#bd93f9
 
   " Column
   hi ColorColumn        guibg=#38393f
