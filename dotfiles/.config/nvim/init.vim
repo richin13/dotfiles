@@ -409,10 +409,6 @@ nnoremap S :Telescope spell_suggest<cr>
 " Reload config
 nnoremap <silent> <leader>` :source ~/.config/nvim/init.vim<CR>:echo "Re-loaded config"<CR>
 
-" Why not?
-nnoremap ; :
-nnoremap ] ;
-
 " Turn off ex mode
 nnoremap Q <nop>
 
