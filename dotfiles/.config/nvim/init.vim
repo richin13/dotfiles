@@ -171,7 +171,7 @@ function! PackagerInit() abort
 " Indentation & folding
   call packager#add('hynek/vim-python-pep8-indent' , {'type': 'opt'})
   call packager#add('vim-scripts/groovyindent-unix', {'type': 'opt'})
-  call packager#add('tmhedberg/simpylfold') " Better folding for python
+  " call packager#add('tmhedberg/simpylfold') " Better folding for python
   call packager#add('pseewald/vim-anyfold')
 
 " Git
