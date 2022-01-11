@@ -26,6 +26,8 @@ alias pinit="poetry init -n"
 alias django="python manage.py"
 
 alias dvenv="yellow 'Use vd next time' && vd"
+
+alias cc="cookiecutter"
 # ====== Functions ======
 # va: Activates a virtualenvironment ------------------------------ {{{
 function va() {
