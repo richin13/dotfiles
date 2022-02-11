@@ -480,6 +480,7 @@ let g:coc_global_extensions = [
       \ 'coc-lua',
       \ 'coc-pairs',
       \ 'coc-phpls',
+      \ 'coc-pyright',
       \ 'coc-rls',
       \ 'coc-sh',
       \ 'coc-snippets',
