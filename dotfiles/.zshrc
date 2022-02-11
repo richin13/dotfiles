@@ -96,6 +96,11 @@ if [ -d "$COMPOSER_BINS" ]; then
   path_ladd "$COMPOSER_BINS"
 fi
 
+GHCUP="$HOME/.ghcup"
+if [ -d "$GHCUP" ]; then
+  source "$GHCUP/env"
+fi
+
 # EXPORT THE FINAL, MODIFIED PATH
 export PATH
 
