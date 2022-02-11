@@ -35,10 +35,7 @@
       "sourceName": "nginx-linter",
       "command": "nginx-linter",
       "debounce": 100,
-      "args": [
-        "--include",
-        "%file"
-      ],
+      "args": ["--include", "%file"],
       "formatPattern": [
         "^\\s+(\\d+?):(\\d+?)\\s+([a-z]+?)\\s+(.*)$",
         {
@@ -60,5 +57,19 @@
       "/*open-api*.yml",
       "/*open-api*.yaml"
     ]
+  },
+  "languageserver": {
+    "haskell": {
+      "command": "haskell-language-server-wrapper",
+      "args": ["--lsp"],
+      "rootPatterns": [
+        "*.cabal",
+        "stack.yaml",
+        "cabal.project",
+        "package.yaml",
+        "hie.yaml"
+      ],
+      "filetypes": ["haskell", "lhaskell"]
+    }
   }
 }
