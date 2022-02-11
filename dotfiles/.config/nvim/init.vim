@@ -407,7 +407,7 @@ nnoremap B :Telescope git_branches<cr>
 nnoremap S :Telescope spell_suggest<cr>
 
 " Reload config
-nnoremap <silent> <leader>` :source ~/.config/nvim/init.vim<CR>:echo "Re-loaded config"<CR>
+nnoremap <silent> <leader>rc :source ~/.config/nvim/init.vim<CR>:echo "Re-loaded config"<CR>
 
 " Turn off ex mode
 nnoremap Q <nop>
