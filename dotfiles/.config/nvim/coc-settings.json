@@ -3,6 +3,8 @@
   "suggest.autoTrigger": "always",
   "tsserver.npm": "/home/rmadriz/.asdf/shims/npm",
   "pyright.disableCompletion": true,
+  "python.formatting.provider": "black",
+  "python.linting.pylintEnabled": true,
   "diagnostic.errorSign": "λ",
   "diagnostic.warningSign": "π",
   "diagnostic-languageserver.trace.server": "messages",
