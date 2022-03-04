@@ -18,5 +18,10 @@ require'nvim-tree'.setup {
       list = list
     },
     side = "right"
-  }
+  },
+  actions = {
+    open_file = {
+      quit_on_open = true,
+    },
+  },
 }
