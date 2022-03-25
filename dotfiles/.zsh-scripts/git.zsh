@@ -7,25 +7,19 @@
 
 # Section: Aliases ------------------------------------------------ {{{
 
-alias gci="gco integration"
 alias 'gp!'="gp --force"
-alias gwip="gaa && gcmsg '[WIP]'"
-alias guwip="grh HEAD~1"
+alias gwip="gaa && gcmsg 'WIP :: WIP :: WIP'"
+alias wip="gwip"
+alias guwip="unwip"
 alias gcsmg="git commit -m"
 alias gcmsgnv="git commit --no-verify -m"
+alias gcb="git switch -c"
 
 # Edit modified files
 alias vemd="vim \$(git status --porcelain=v2 | grep -P '\.M' | cut -d ' ' -f 9)"
 
 # }}}
 # Section: Functions ---------------------------------------------- {{{
-function gdiff() {
-  if [[ $# -lt 2 ]]; then
-    echo "Missing ref"
-    echo "Usage: $0 <ref1> <ref2>"
-    exit 1
-  fi
-}
 
 # cd to the current git root
 function groot() {
@@ -34,6 +28,14 @@ function groot() {
   else
     echo "'$PWD' is not inside a git repository"
     return 1
+  fi
+}
+
+function unwip() {
+  if git log -1 --pretty=%B | grep 'WIP' >/dev/null; then
+    git reset HEAD~1
+  else
+    echo "No WIP commit found"
   fi
 }
 # }}}
