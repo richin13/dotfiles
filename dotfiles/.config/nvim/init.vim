@@ -296,6 +296,7 @@ function! SetupSyntaxHighlighting()
   hi CocHintHighlight    gui=underline
   hi CocInfoHighlight    gui=underline
   hi CocWarningHighlight gui=underline
+  hi CocFadeOut          gui=undercurl
 
   hi CocHighlightText    guibg=#44475a gui=underline
 
