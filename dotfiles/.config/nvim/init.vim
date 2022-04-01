@@ -546,6 +546,7 @@ endfunction
 augroup configure_nvimtree
   autocmd!
   autocmd VimEnter * call s:nvim_tree_custom_init()
+  autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
 augroup end
 
 " }}}

@@ -11,7 +11,6 @@ local list  = {
 }
 
 require'nvim-tree'.setup {
-  auto_close = true,
   view = {
     width = 31,
     mappings = {
