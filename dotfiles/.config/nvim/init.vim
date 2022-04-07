@@ -401,6 +401,7 @@ nnoremap <leader>sa zg
 nnoremap <C-Space> :Telescope resume<cr>
 nnoremap B :Telescope git_branches<cr>
 nnoremap S :Telescope spell_suggest<cr>
+nnoremap <C-b> :Telescope buffers<cr>
 
 " Reload config
 nnoremap <silent> <leader>rc :source ~/.config/nvim/init.vim<CR>:echo "Re-loaded config"<CR>
@@ -482,6 +483,7 @@ let g:coc_global_extensions = [
       \ 'coc-sh',
       \ 'coc-snippets',
       \ 'coc-sql',
+      \ 'coc-svelte',
       \ 'coc-tsserver',
       \ 'coc-vimlsp',
       \ 'coc-yaml',
