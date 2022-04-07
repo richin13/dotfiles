@@ -474,6 +474,7 @@ let g:coc_global_extensions = [
       \ 'coc-docker',
       \ 'coc-highlight',
       \ 'coc-html',
+      \ 'coc-jedi',
       \ 'coc-json',
       \ 'coc-lua',
       \ 'coc-pairs',

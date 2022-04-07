@@ -2,6 +2,7 @@
   "coc.preferences.extensionUpdateCheck": "never",
   "suggest.autoTrigger": "always",
   "tsserver.npm": "/home/rmadriz/.asdf/shims/npm",
+  "pyright.disableCompletion": true,
   "diagnostic.errorSign": "λ",
   "diagnostic.warningSign": "π",
   "diagnostic-languageserver.trace.server": "messages",
