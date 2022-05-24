@@ -59,6 +59,9 @@
     "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json": [
       "/*open-api*.yml",
       "/*open-api*.yaml"
+    ],
+    "https://raw.githubusercontent.com/softprops/github-actions-schemas/master/workflow.json": [
+      ".github/workflows/*.yml"
     ]
   },
   "languageserver": {
