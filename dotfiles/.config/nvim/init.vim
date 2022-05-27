@@ -172,8 +172,7 @@ function! PackagerInit() abort
 
 " Git
   call packager#add('tpope/vim-fugitive')
-  call packager#add('airblade/vim-gitgutter')
-  call packager#add('rhysd/git-messenger.vim')
+  call packager#add('lewis6991/gitsigns.nvim')
 
 " Language server
   call packager#add('neoclide/coc.nvim', {'branch': 'release'})
@@ -504,8 +503,15 @@ let g:indentLine_char_list       = ['|', '¦', '┆', '┊']
 let g:indentLine_color_gui       = '#44475a'
 let g:indentLine_fileTypeExclude = ['NvimTree']
 
-" GitMessenger
-" let g:git_messenger_include_diff = "current"
+" Gitsigns
+function! ConfigGitSigns()
+  lua require('plugins.gitsigns')
+endfunction
+
+augroup gitsigns_init
+  autocmd!
+  autocmd VimEnter * call ConfigGitSigns()
+augroup END
 
 " coc-highlight
 augroup coc_highligh
