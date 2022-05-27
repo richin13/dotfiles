@@ -411,6 +411,8 @@ function dbrestore() {
 
 alias ls="ls --color=auto --group-directories-first --classify"
 alias ks="ls --color=auto --group-directories-first --classify"
+alias cp!="/usr/bin/cp -f"
+alias rm!="/usr/bin/rm -rf"
 alias cp="cp -iv"
 alias mv="mv -iv"
 alias rm="rm -Iv"
