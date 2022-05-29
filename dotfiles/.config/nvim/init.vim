@@ -529,21 +529,6 @@ augroup END
 " Plugin: Nvim-Tree --------------------------- {{{
 
 function! s:nvim_tree_custom_init() abort
-  let g:nvim_tree_git_hl = 1
-  let g:nvim_tree_show_icons = {
-    \ 'git': 1,
-    \ 'folders': 1,
-    \ 'files': 1,
-    \ 'folder_arrows': 0,
-    \ }
-  let g:nvim_tree_icons = {
-    \ 'git': {
-    \   'unstaged': "~",
-    \   'staged': "ϟ",
-    \   'renamed': "➜",
-    \   'untracked': "+",
-    \   },
-    \ }
   lua require('plugins.nvim-tree')
 endfunction
 

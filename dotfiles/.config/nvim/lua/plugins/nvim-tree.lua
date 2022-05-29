@@ -23,4 +23,23 @@ require'nvim-tree'.setup {
       quit_on_open = true,
     },
   },
+  renderer = {
+    highlight_git = true,
+    icons = {
+      show = {
+        file = true,
+        folder = true,
+        folder_arrow = false,
+        git = true,
+      },
+      glyphs = {
+        git = {
+          unstaged = "~",
+          staged = "ϟ",
+          renamed = "➜",
+          untracked = "+",
+        }
+      }
+    }
+  }
 }
