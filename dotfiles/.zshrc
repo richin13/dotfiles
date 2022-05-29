@@ -511,3 +511,5 @@ include ~/.bash/sensitive
 # Extra swag: ----------------------------------------------------- {{{
 fortune ~/.fortunes/zen | cowsay
 # }}}
+
+export PATH="$HOME/.poetry/bin:$PATH"
