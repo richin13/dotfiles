@@ -117,13 +117,12 @@ function! PackagerInit() abort
   " Basic
   call packager#add('fcpg/vim-altscreen')
   call packager#add('kyazdani42/nvim-web-devicons')
-  call packager#add('NTBBloodbath/galaxyline.nvim')
   call packager#add('tpope/vim-surround')
   call packager#add('tmux-plugins/vim-tmux-focus-events') " Tmux integration
   call packager#add('christoomey/vim-system-copy')
   call packager#add('tmhedberg/matchit')
 
-  " call packager#add('bagrat/vim-buffet')
+  call packager#add('rebelot/heirline.nvim')
   call packager#add('romgrk/barbar.nvim')
   call packager#add('kyazdani42/nvim-tree.lua')
 
@@ -215,7 +214,7 @@ augroup END
 augroup fold_settings
   autocmd!
   autocmd FileType * setlocal foldlevel=99
-  autocmd FileType yaml setlocal foldlevel=0
+  autocmd FileType yaml,vim,tmux,zsh,lua setlocal foldlevel=0 foldnestmax=2
   autocmd FileType vim,tmux,zsh,lua setlocal foldmethod=marker foldlevelstart=0
   autocmd FileType python,typescript,yaml AnyFoldActivate
 augroup END
@@ -524,7 +523,7 @@ augroup end
 " Plugin: Galaxyline -------------------------- {{{
 
 function! ConfigStatusLine()
-  lua require('plugins.status-line')
+  lua require('plugins.heirline').setup()
 endfunction
 
 augroup status_line_init
