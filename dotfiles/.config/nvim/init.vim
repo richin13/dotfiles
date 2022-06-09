@@ -219,11 +219,6 @@ augroup fold_settings
   autocmd FileType python,typescript,yaml AnyFoldActivate
 augroup END
 
-augroup fold_python_settings
-  autocmd!
-  autocmd BufRead *.py,*.js,*.jsx normal zR<CR>
-augroup END
-
 " }}}
 " General: Trailing whitespace ---------------- {{{
 
