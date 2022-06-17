@@ -337,6 +337,7 @@ nmap <silent> <leader>gy <Plug>(coc-type-definition)
 nmap <silent> <leader>gi <Plug>(coc-implementation)
 nmap <silent> <leader>gr <Plug>(coc-references)
 nmap <silent> <leader>rn <Plug>(coc-rename)
+nmap <silent> <F2> <Plug>(coc-rename)
 
 nnoremap <silent> <leader>d <cmd>call CocActionAsync('diagnosticToggle')<CR>
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -377,7 +378,7 @@ nnoremap <silent> <esc> :noh<return><esc>
 " Search and Replace
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
-nnoremap <F2> "zyiw:exe "Ack ".@z.""<CR>
+" nnoremap <F2> "zyiw:exe "Ack ".@z.""<CR>
 
 " Make CTRL-P and CTRL-N behave like <Up> & <Down>
 cnoremap <C-P> <Up>
