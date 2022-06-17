@@ -402,6 +402,19 @@ function dbrestore() {
   pg_restore -U "$db_user" -d "$db_name" -a "$backupfile"
 }
 
+function despace() {
+  local in="$@";
+  if [ -z "$in" ]; then
+    while read -r in; do
+      mv "$in" $(printf "$in" | tr -s ' ' '_')
+    done
+  else
+    for filename in "$in"; do
+      mv "$filename" $(printf "$filename" | tr -s ' ' '_')
+    done
+  fi
+}
+
 # }}}
 # Aliases --------------------------------------------------------- {{{
 # Check whether NeoVIM is installed and alias it to vim
