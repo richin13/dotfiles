@@ -394,12 +394,6 @@ nnoremap <leader>sp [s
 " Add current word in dictionary
 nnoremap <leader>sa zg
 
-" Telescope pickers
-nnoremap <C-Space> :Telescope resume<cr>
-nnoremap B :Telescope git_branches<cr>
-nnoremap S :Telescope spell_suggest<cr>
-nnoremap <C-b> :Telescope buffers<cr>
-
 " Reload config
 nnoremap <silent> <leader>rc :source ~/.config/nvim/init.vim<CR>:echo "Re-loaded config"<CR>
 
@@ -650,6 +644,14 @@ augroup END
 " Keymaps
 nnoremap <silent> <C-p> <cmd>Telescope find_files<cr>
 nnoremap <silent> <C-_> <cmd>Telescope live_grep<cr>
+nnoremap <silent> <leader>tf <cmd>Telescope find_files<cr>
+nnoremap <silent> <leader>tg <cmd>Telescope live_grep<cr>
+
+" Telescope pickers
+nnoremap <C-Space> :Telescope resume<cr>
+nnoremap B :Telescope git_branches<cr>
+nnoremap S :Telescope spell_suggest<cr>
+nnoremap <C-b> :Telescope buffers<cr>
 
 " }}}
 " Config: Code Formatting --------------------- {{{
