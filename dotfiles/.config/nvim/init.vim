@@ -139,7 +139,6 @@ function! PackagerInit() abort
   call packager#add('tyru/open-browser.vim')
   call packager#add('iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
   call packager#add('tpope/vim-ragtag')
-  call packager#add('wincent/ferret')
   call packager#add('tommcdo/vim-lion')
   call packager#add('tpope/vim-endwise')
   call packager#add('pappasam/vim-filetype-formatter')
