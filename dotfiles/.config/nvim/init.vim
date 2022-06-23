@@ -368,7 +368,8 @@ inoremap <silent> <C-c> <Esc>:pclose <BAR> helpclose <BAR> cclose <BAR> lclose<C
 nnoremap <silent> <C-c> :pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>
 
 " Toggle nvim-tree
-nnoremap <silent> <space>j :NvimTreeToggle<CR>
+nnoremap <silent> <space>J :NvimTreeToggle<CR>
+nnoremap <silent> <space>j :NvimTreeFindFileToggle<CR>
 
 " Toggle Vista.vim
 nnoremap <silent> <space>f :Vista!!<CR>
@@ -544,7 +545,11 @@ augroup END
 " Plugin: Nvim-Tree --------------------------- {{{
 
 function! s:nvim_tree_custom_init() abort
-  lua require('plugins.nvim-tree')
+  try
+    lua require('plugins.nvim-tree')
+  catch
+    echom 'Problem encountered configuring nvim-tree, skipping...'
+  endtry
 endfunction
 
 augroup configure_nvimtree
