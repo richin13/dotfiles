@@ -143,6 +143,7 @@ function! PackagerInit() abort
   call packager#add('tommcdo/vim-lion')
   call packager#add('tpope/vim-endwise')
   call packager#add('pappasam/vim-filetype-formatter')
+  call packager#add('lukas-reineke/indent-blankline.nvim')
 
 " Coloring & Syntax highlighting
   call packager#add('richin13/dracula.nvim')
@@ -494,10 +495,23 @@ let g:enable_numbers = 0
 let g:numbers_exclude               = ['NvimTree']
 
 " Indent Lines Plugin settings
-let g:indentLine_enabled         = v:false
-let g:indentLine_char_list       = ['|', '¦', '┆', '┊']
-let g:indentLine_color_gui       = '#44475a'
-let g:indentLine_fileTypeExclude = ['NvimTree']
+function! s:indent_line_custom_init() abort
+  try
+    lua require('plugins.indent-line')
+  catch
+    echom 'Problem encountered configuring indent-line, skipping...'
+  endtry
+endfunction
+
+augroup configure_indent_line
+  autocmd!
+  autocmd VimEnter * call s:indent_line_custom_init()
+augroup end
+
+" let g:indentLine_enabled         = v:false
+" let g:indentLine_char_list       = ['|', '¦', '┆', '┊']
+" let g:indentLine_color_gui       = '#44475a'
+" let g:indentLine_fileTypeExclude = ['NvimTree']
 
 " Gitsigns
 function! ConfigGitSigns()
