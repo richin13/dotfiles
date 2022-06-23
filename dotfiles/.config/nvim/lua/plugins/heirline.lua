@@ -85,7 +85,7 @@ function M.setup()
       }
     },
     provider = function(self)
-      return "%2(" .. self.mode_names[vim.fn.mode(1)] .. "%)"
+      return "%2(" .. self.mode_names[vim.fn.mode(1)] .. "%) "
     end,
     hl = function(self)
       local color = self:mode_color()
@@ -96,10 +96,6 @@ function M.setup()
       }
     end
   }
-
-  ViMode = utils.surround({"", " "},
-                          function(self) return self:mode_color() end, ViMode)
-  -- }}}
 
   -- File info --- {{{2
   local FileNameBlock = {
@@ -171,22 +167,37 @@ function M.setup()
 
     init = function(self)
       self.status_dict = vim.b.gitsigns_status_dict
-      self.has_changes =
-          self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or
-              self.status_dict.changed ~= 0
+      self.added = self.status_dict.added or 0
+      self.removed = self.status_dict.removed or 0
+      self.changed = self.status_dict.changed or 0
+      self.has_changes = self.added ~= 0 or self.removed ~= 0 or self.changed ~=
+                             0
     end,
-
-    hl = {
-      fg = colors.purple
+    static = {
+      branch_icon = " ",
+      added_icon = " ",
+      removed_icon = " ",
+      changed_icon = " "
     },
 
+    hl = {
+      -- bg = colors.alt_bg,
+      fg = colors.gray
+    },
+
+    { -- git branch name
+      hl = {
+        fg = colors.red
+      },
+      provider = function(self) return self.branch_icon end
+    },
     { -- git branch name
       provider = function(self)
         local branch_name = self.status_dict.head
         if (string.len(branch_name) > 18) then
           branch_name = string.sub(branch_name, 1, 15) .. "..."
         end
-        return " " .. branch_name
+        return branch_name
       end
     },
     {
@@ -195,8 +206,8 @@ function M.setup()
     },
     {
       provider = function(self)
-        local count = self.status_dict.added or 0
-        return count > 0 and (" " .. count)
+        local count = self.added or 0
+        return count > 0 and (self.added_icon .. count)
       end,
       hl = {
         fg = colors.green
@@ -204,14 +215,14 @@ function M.setup()
     },
     {
       provider = function(self)
-        local count = self.status_dict.added or 0
+        local count = self.added or 0
         return count > 0 and (" ")
       end
     },
     {
       provider = function(self)
-        local count = self.status_dict.removed or 0
-        return count > 0 and (" " .. count)
+        local count = self.removed or 0
+        return count > 0 and (self.removed_icon .. count)
       end,
       hl = {
         fg = colors.red
@@ -219,14 +230,14 @@ function M.setup()
     },
     {
       provider = function(self)
-        local count = self.status_dict.removed or 0
+        local count = self.changed or 0
         return count > 0 and (" ")
       end
     },
     {
       provider = function(self)
-        local count = self.status_dict.changed or 0
-        return count > 0 and (" " .. count)
+        local count = self.changed or 0
+        return count > 0 and (self.changed_icon .. count)
       end,
       hl = {
         fg = colors.cyan
@@ -234,10 +245,9 @@ function M.setup()
     },
     {
       condition = function(self) return self.has_changes end,
-      provider = ") "
+      provider = ")"
     }
   }
-  Git = utils.surround({" ", " "}, colors.alt_bg, Git)
 
   local GitBlock = {
     condition = conditions.is_git_repo,
@@ -249,30 +259,37 @@ function M.setup()
   local Diagnostics = {
     hl = {
       fg = colors.bg,
+      bg = colors.alt_bg
     },
     static = {
       error_icon = " ",
-      warning_icon = " ",
+      warning_icon = " ",
       info_icon = " ",
       hint_icon = " ",
+      clean_icon = " "
     },
     init = function(self)
       local has_info, info = pcall(vim.api.nvim_buf_get_var, 0,
                                    "coc_diagnostic_info")
       self.has_info = has_info
-      self.errors = info['error']
-      self.warnings = info['warning']
-      self.infos = info['information']
-      self.hints = info['hint']
+      self.errors = info['error'] or 0
+      self.warnings = info['warning'] or 0
+      self.infos = info['information'] or 0
+      self.hints = info['hint'] or 0
+      self.is_clean =
+          self.has_info and self.errors == 0 and self.warnings == 0 and
+              self.infos == 0 and self.hints == 0
     end,
     {
+      condition = function(self) return self.has_info end,
+      provider = " "
+    },
+    {
       hl = {
-        fg = colors.red,
+        fg = colors.red
       },
 
-      condition = function(self)
-        return self.has_info
-      end,
+      condition = function(self) return self.has_info end,
 
       provider = function(self)
         return self.errors > 0 and (self.error_icon .. self.errors .. " ")
@@ -280,11 +297,9 @@ function M.setup()
     },
     {
       hl = {
-        fg = colors.orange,
+        fg = colors.orange
       },
-      condition = function(self)
-        return self.has_info
-      end,
+      condition = function(self) return self.has_info end,
 
       provider = function(self)
         return self.warnings > 0 and (self.warning_icon .. self.warnings .. " ")
@@ -292,12 +307,10 @@ function M.setup()
     },
     {
       hl = {
-        fg = colors.cyan,
+        fg = colors.cyan
       },
 
-      condition = function(self)
-        return self.has_info
-      end,
+      condition = function(self) return self.has_info end,
 
       provider = function(self)
         return self.infos > 0 and (self.info_icon .. self.infos .. " ")
@@ -305,20 +318,25 @@ function M.setup()
     },
     {
       hl = {
-        fg = colors.white,
+        fg = colors.gray
       },
 
-      condition = function(self)
-        return self.has_info
-      end,
+      condition = function(self) return self.has_info end,
 
       provider = function(self)
         return self.hints > 0 and (self.hint_icon .. self.hints .. " ")
       end
     },
-  }
+    {
+      hl = {
+        fg = colors.green
+      },
 
-  Diagnostics = utils.surround({" ", ""}, colors.alt_bg, Diagnostics)
+      condition = function(self) return self.is_clean end,
+
+      provider = function(self) return self.clean_icon end
+    }
+  }
 
   local DiagnosticsBlock = {
     condition = function() return vim.fn.exists("*coc#rpc#start_server") ~= 0 end,
@@ -329,18 +347,13 @@ function M.setup()
 
   -- StatusLines --- {{{
   local DefaultStatusline = {
-    ViMode, Space, FileNameBlock, Space, GitBlock, Align, DiagnosticsBlock
+    ViMode, Space, FileNameBlock, Space, DiagnosticsBlock, Align, GitBlock,
+    Space
   }
 
   local InactiveStatusLine = {
     condition = function() return not conditions.is_active() end,
-    {
-      hl = {
-        fg = colors.gray,
-        force = true
-      },
-      WorkDir
-    },
+    {WorkDir},
     FileNameBlock,
     {
       provider = "%<"
@@ -372,7 +385,7 @@ function M.setup()
         }
       else
         return {
-          bg = colors.purple
+          bg = colors.alt_bg
         }
       end
     end,
