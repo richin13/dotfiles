@@ -158,6 +158,7 @@ function! PackagerInit() abort
   call packager#add('pappasam/vim-jsx-typescript.git', {'branch': 'change-to-typescriptreact'})
   call packager#add('jwalton512/vim-blade')
   call packager#add('nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'})
+  call packager#add('nvim-treesitter/nvim-treesitter-textobjects')
   call packager#add('nvim-treesitter/playground')
   call packager#add('romgrk/nvim-treesitter-context')
   call packager#add('windwp/nvim-ts-autotag')
