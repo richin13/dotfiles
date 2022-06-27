@@ -156,6 +156,7 @@ function! PackagerInit() abort
   call packager#add('nvim-treesitter/playground')
   call packager#add('romgrk/nvim-treesitter-context')
   call packager#add('windwp/nvim-ts-autotag')
+  call packager#add('JoosepAlviste/nvim-ts-context-commentstring')
 
 " Indentation & folding
   call packager#add('hynek/vim-python-pep8-indent' , {'type': 'opt'})
@@ -246,14 +247,20 @@ augroup END
 
 " }}}
 " General: Syntax highlighting ---------------- {{{
-" nvim-treesitter config
-function! ConfigTreeSitter()
-  lua require('plugins.treesitter')
-endfunction
 
 if !has('gui_running')
-  set t_Co=256
-endif
+    set t_Co=256
+  endif
+
+" nvim-treesitter config
+function! s:treesitter_init() abort
+  try
+    lua require('plugins.treesitter')
+  catch
+    echom 'Problem encountered configuring treesitter, skipping...'
+  endtry
+endfunction
+
 
 " Syntax: select global syntax scheme
 " Make sure this is at end of section
@@ -308,9 +315,9 @@ function! SetupSyntaxHighlighting()
   hi TelescopePromptPrefix   guifg=#bd93f9
 endfunction
 
-augroup syntax_highlighting_init
+augroup configure_treesitter_and_syntax_highlighting
   autocmd!
-  autocmd VimEnter * call ConfigTreeSitter()
+  autocmd VimEnter * call s:treesitter_init()
   autocmd VimEnter,ColorScheme * call SetupSyntaxHighlighting()
 augroup END
 " }}}
@@ -441,6 +448,7 @@ augroup file_extensions
   autocmd BufNewFile,BufRead,BufEnter,VimEnter *.prisma set filetype=prisma
   autocmd BufNewFile,BufRead,BufEnter *.zsh-theme,.zprofile set filetype=zsh
   autocmd BufNewFile,BufRead,BufEnter *.jsx set filetype=javascript
+  autocmd BufNewFile,BufRead,BufEnter .env.* set filetype=sh
   autocmd BufRead poetry.lock set filetype=toml
   autocmd BufRead .pylintrc set filetype=dosini
 augroup end
@@ -521,17 +529,20 @@ augroup coc_highligh
 augroup end
 
 "  }}}
-" Plugin: Galaxyline -------------------------- {{{
+" Plugin: Heirline ---------------------------- {{{
 
-function! ConfigStatusLine()
-  lua require('plugins.heirline').setup()
+function! s:heirline_init() abort
+  try
+    lua require('plugins.heirline')
+  catch
+    echom 'Problem encountered configuring heirline, skipping...'
+  endtry
 endfunction
 
-augroup status_line_init
+augroup configure_heirline
   autocmd!
-  autocmd VimEnter * call ConfigStatusLine()
-augroup END
-
+  autocmd VimEnter * call s:heirline_init()
+augroup end
 " }}}
 " Plugin: Nvim-Tree --------------------------- {{{
 
@@ -555,7 +566,7 @@ augroup end
 let bufferline = {}
 
 " Enable animations
-let bufferline.animation = v:true
+let bufferline.animation = v:false
 
 " Enable icons
 let bufferline.icons = v:true
@@ -586,9 +597,6 @@ nnoremap <silent> <localleader>Q :BufferWipeout<CR>
 nnoremap <silent> <localleader>w :BufferCloseAllButCurrent<CR>
 " }}}
 " Plugin: Autocompletion and LSP -------------- {{{
-" Coc.vim
-
-
 " Vista.vim
 let g:vista_sidebar_width = 37
 let g:vista_fold_toggle_icons = ['▼', '▶']
@@ -629,14 +637,18 @@ augroup end
 " }}}
 " Plugin: Telescope --------------------------- {{{
 
-function! ConfigTelescope()
-  lua require('plugins.telescope')
+function! s:telescope_init() abort
+  try
+    lua require('plugins.telescope')
+  catch
+    echom 'Problem encountered configuring telescope, skipping...'
+  endtry
 endfunction
 
-augroup telescope_init
+augroup configure_telescope
   autocmd!
-  autocmd VimEnter * call ConfigTelescope()
-augroup END
+  autocmd VimEnter * call s:telescope_init()
+augroup end
 
 " Keymaps
 nnoremap <silent> <C-p> <cmd>Telescope find_files<cr>
