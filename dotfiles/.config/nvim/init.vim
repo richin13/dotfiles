@@ -149,7 +149,6 @@ function! PackagerInit() abort
   call packager#add('richin13/dracula.nvim')
 
   call packager#add('chr4/nginx.vim')
-  call packager#add('docker/docker', {'rtp': '/contrib/syntax/vim/'})
   call packager#add('pangloss/vim-javascript')
   call packager#add('MaxMEllon/vim-jsx-pretty')
   call packager#add('aklt/plantuml-syntax')

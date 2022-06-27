@@ -40,7 +40,7 @@ treesitter.setup({
     enable = true
   },
   ensure_installed = {
-    'bash', 'comment', 'css', 'haskell', 'html', 'javascript', 'php', 'prisma',
+    'bash', 'comment', 'css', 'dockerfile', 'haskell', 'html', 'javascript', 'php', 'prisma',
     'python', 'query', 'rust', 'toml', 'tsx', 'typescript', 'yaml'
   }
 })
