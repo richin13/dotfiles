@@ -96,6 +96,7 @@ endif
 
 let g:python3_host_prog = $HOME . '/.asdf/shims/python3'
 let g:python_host_prog  = $HOME . '/.asdf/shims/python2'
+let g:node_host_prog = $HOME . '/.asdf/installs/nodejs/12.15.0/bin/node'
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -176,6 +177,9 @@ function! PackagerInit() abort
 " Language server
   call packager#add('neoclide/coc.nvim', {'branch': 'release'})
   call packager#add('liuchengxu/vista.vim')
+
+  " Copilot, why not
+  call packager#add('github/copilot.vim')
 endfunction
 
 command! PlugInstall call PackagerInit() |
