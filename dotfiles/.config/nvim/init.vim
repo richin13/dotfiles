@@ -149,20 +149,13 @@ function! PackagerInit() abort
   call packager#add('richin13/dracula.nvim')
 
   call packager#add('chr4/nginx.vim')
-  call packager#add('pangloss/vim-javascript')
-  call packager#add('MaxMEllon/vim-jsx-pretty')
   call packager#add('aklt/plantuml-syntax')
-  call packager#add('cespare/vim-toml')
-  call packager#add('hashivim/vim-terraform')
-  call packager#add('jparise/vim-graphql')
-  call packager#add('pappasam/vim-jsx-typescript.git', {'branch': 'change-to-typescriptreact'})
   call packager#add('jwalton512/vim-blade')
   call packager#add('nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'})
   call packager#add('nvim-treesitter/nvim-treesitter-textobjects')
   call packager#add('nvim-treesitter/playground')
   call packager#add('romgrk/nvim-treesitter-context')
   call packager#add('windwp/nvim-ts-autotag')
-  call packager#add('evanleck/vim-svelte')
 
 " Indentation & folding
   call packager#add('hynek/vim-python-pep8-indent' , {'type': 'opt'})
