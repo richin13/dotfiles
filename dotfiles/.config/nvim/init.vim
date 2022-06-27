@@ -646,6 +646,7 @@ nnoremap <silent> <C-p> <cmd>Telescope find_files<cr>
 nnoremap <silent> <C-_> <cmd>Telescope live_grep<cr>
 nnoremap <silent> <leader>tf <cmd>Telescope find_files<cr>
 nnoremap <silent> <leader>tg <cmd>Telescope live_grep<cr>
+nnoremap <silent> <leader>th <cmd>Telescope git_files<cr>
 
 " Telescope pickers
 nnoremap <C-Space> :Telescope resume<cr>
