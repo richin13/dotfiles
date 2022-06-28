@@ -464,6 +464,7 @@ augroup end
 
 let g:coc_global_extensions = [
       \ '@yaegassy/coc-nginx',
+      \ '@yaegassy/coc-tailwindcss3',
       \ 'coc-css',
       \ 'coc-diagnostic',
       \ 'coc-docker',
@@ -481,7 +482,6 @@ let g:coc_global_extensions = [
       \ 'coc-snippets',
       \ 'coc-sql',
       \ 'coc-svelte',
-      \ 'coc-tailwind-intellisense',
       \ 'coc-tsserver',
       \ 'coc-vimlsp',
       \ 'coc-yaml',
