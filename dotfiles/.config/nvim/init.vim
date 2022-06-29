@@ -124,7 +124,6 @@ function! PackagerInit() abort
   call packager#add('tmhedberg/matchit')
 
   call packager#add('rebelot/heirline.nvim')
-  call packager#add('romgrk/barbar.nvim')
   call packager#add('kyazdani42/nvim-tree.lua')
 
   " fuzzy finders
@@ -274,12 +273,6 @@ function! SetupSyntaxHighlighting()
   hi Todo         guibg=#ff5555 guifg=#282a36
   hi VertSplit    guibg=#44475a guifg=#282a36
 
-  " barbar colors
-  hi BufferCurrent              guibg=#44475a guifg=#f8f8f2
-  hi BufferCurrentMod           guibg=#44475a guifg=#f8f8f2
-  hi BufferCurrentSign          guibg=#44475a guifg=#bd93f9
-  hi BufferCurrentTarget        guibg=#44475a guifg=#ff5555
-
   " vim-gitgutter
   hi GitGutterAdd    guifg=#50fa7b
   hi GitGutterChange guifg=#8be9fd
@@ -322,6 +315,11 @@ augroup configure_treesitter_and_syntax_highlighting
 augroup END
 " }}}
 " General: Key remappings --------------------- {{{
+
+" Easily navigate buffers
+nnoremap <silent> L :bn<cr>
+nnoremap <silent> H :bp<cr>
+nnoremap <silent> <localleader>q :bd<cr>
 
 " Disable the functionality of arrow keys
 noremap <Left> <nop>
@@ -561,41 +559,6 @@ augroup configure_nvimtree
   autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
 augroup end
 
-" }}}
-"  Plugin: BarBar ------------------------------ {{{
-
-let bufferline = {}
-
-" Enable animations
-let bufferline.animation = v:false
-
-" Enable icons
-let bufferline.icons = v:true
-
-" If set, the letters for each buffer in buffer-pick mode will be
-" assigned based on their name. Otherwise or in case all letters are
-" already assigned, the behavior is to assign letters in order of
-" usability (see order below)
-let bufferline.semantic_letters = v:false
-
-" New buffer letters are assigned in this order. This order is
-" optimal for the qwerty keyboard layout but might need adjustement
-" for other layouts.
-let bufferline.letters =
-  \ 'asdfjkl;ghnmxcbziowerutyqpASDFJKLGHNMXCBZIOWERUTYQP'
-
-" Sets the maximum padding width with which to surround each tab
-let bufferline.maximum_padding = 1
-
-" BarBar Key mappings
-nnoremap <silent> <C-s>          :BufferPick<CR>
-nnoremap <silent> H              :BufferPrevious<CR>
-nnoremap <silent> L              :BufferNext<CR>
-nnoremap <silent> <A-,>          :BufferMovePrevious<CR>
-nnoremap <silent> <A-.>          :BufferMoveNext<CR>
-nnoremap <silent> <localleader>q :BufferClose<CR>
-nnoremap <silent> <localleader>Q :BufferWipeout<CR>
-nnoremap <silent> <localleader>w :BufferCloseAllButCurrent<CR>
 " }}}
 " Plugin: Autocompletion and LSP -------------- {{{
 " Vista.vim
