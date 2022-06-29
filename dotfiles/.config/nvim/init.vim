@@ -42,6 +42,8 @@ set spelllang=en_us
 
 set showtabline=2
 
+set showtabline=0
+
 set autoread
 
 " When you type the first tab hit will complete as much as possible,
