@@ -512,14 +512,18 @@ augroup end
 " let g:indentLine_fileTypeExclude = ['NvimTree']
 
 " Gitsigns
-function! ConfigGitSigns()
-  lua require('plugins.gitsigns')
+function! s:gitsigns_init() abort
+  try
+    lua require('plugins.gitsigns')
+  catch
+    echom 'Problem encountered configuring gitsigns, skipping...'
+  endtry
 endfunction
 
-augroup gitsigns_init
+augroup configure_gitsigns
   autocmd!
-  autocmd VimEnter * call ConfigGitSigns()
-augroup END
+  autocmd VimEnter * call s:gitsigns_init()
+augroup end
 
 " coc-highlight
 augroup coc_highligh
