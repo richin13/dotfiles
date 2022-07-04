@@ -315,6 +315,24 @@ augroup configure_treesitter_and_syntax_highlighting
   autocmd VimEnter * call s:treesitter_init()
   autocmd VimEnter,ColorScheme * call SetupSyntaxHighlighting()
 augroup END
+
+function! s:vim_syntax_group()
+  let l:s = synID(line('.'), col('.'), 1)
+  if l:s == ''
+    echo 'none'
+  else
+    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+  endif
+endfun
+
+function! s:syntax_group()
+  if &syntax == ''
+    TSHighlightCapturesUnderCursor
+  else
+    call s:vim_syntax_group()
+  endif
+endfunction
+nnoremap <silent> zS <cmd>call <SID>syntax_group()<CR>
 " }}}
 " General: Key remappings --------------------- {{{
 
