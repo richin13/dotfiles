@@ -551,6 +551,8 @@ augroup coc_highligh
   autocmd CursorHold * silent call CocActionAsync('highlight')
 augroup end
 
+let g:copilot_enabled = v:false
+
 "  }}}
 " Plugin: Heirline ---------------------------- {{{
 
