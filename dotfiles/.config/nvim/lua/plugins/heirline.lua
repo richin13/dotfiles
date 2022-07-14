@@ -98,6 +98,14 @@ function M.setup()
   }
 
   -- File info --- {{{2
+  local FileType = {
+    provider = function() return string.upper(vim.bo.filetype) end,
+    hl = {
+      fg = utils.get_highlight("Type").fg,
+      bold = true
+    }
+  }
+
   local FileNameBlock = {
     init = function(self) self.filename = vim.api.nvim_buf_get_name(0) end
   }
@@ -346,14 +354,10 @@ function M.setup()
   -- }}}
 
   -- StatusLines --- {{{
-  local DefaultStatusline = {
-    ViMode, Space, FileNameBlock, Space, DiagnosticsBlock, Align, GitBlock,
-    Space
-  }
+  local DefaultStatusline = {DiagnosticsBlock, Align, GitBlock, Space}
 
   local InactiveStatusLine = {
     condition = function() return not conditions.is_active() end,
-    {WorkDir},
     FileNameBlock,
     {
       provider = "%<"
@@ -416,7 +420,67 @@ function M.setup()
   }
   -- }}}
 
-  require("heirline").setup(StatusLines)
+  -- Winbars --- {{{
+  local DefaultWinbar = {ViMode, Space, FileNameBlock, Space}
+
+  local InactiveWinbar = {
+    condition = function() return not conditions.is_active() end,
+    hl = {
+      fg = colors.red,
+      force = true
+    },
+    FileNameBlock
+  }
+
+  local WinBars = {
+    hl = function()
+      if conditions.is_active() then
+        return {
+          bg = colors.alt_bg
+        }
+      else
+        return {
+          bg = colors.bg
+        }
+      end
+    end,
+    static = {
+      mode_colors = {
+        n = colors.cyan,
+        i = colors.green,
+        v = colors.purple,
+        ["\22"] = colors.cyan,
+        c = colors.orange,
+        s = colors.purple,
+        ["\19"] = colors.purple,
+        r = colors.red,
+        ["!"] = colors.orange,
+        t = colors.yellow
+      },
+      mode_color = function(self)
+        local mode = conditions.is_active() and vim.fn.mode(1):lower() or "n"
+        return self.mode_colors[mode]
+      end
+    },
+    init = utils.pick_child_on_condition,
+    {   -- Hide the winbar for special buffers
+        condition = function()
+            return conditions.buffer_matches({
+                buftype = { "nofile", "prompt", "help", "quickfix" },
+                filetype = { "^git.*", "fugitive" },
+            })
+        end,
+        init = function()
+            vim.opt_local.winbar = "NO"
+        end
+    },
+
+    InactiveWinbar,
+    DefaultWinbar
+  }
+  -- }}}
+
+  require("heirline").setup(StatusLines, WinBars)
 end
 
 M.setup()
