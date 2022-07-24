@@ -62,10 +62,12 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 
+export ASDF_ROOT="$XDG_CONFIG_HOME/asdf"
+export ZPLUG_ROOT="$XDG_CONFIG_HOME/zplug"
+
 # }}}
 # Path appends + Misc env setup ----------------------------------- {{{
 
-ASDF_ROOT="$HOME/.asdf"
 if [ -d "$ASDF_ROOT" ]; then
   export ASDF_ROOT
   . "$ASDF_ROOT/asdf.sh"
@@ -135,7 +137,7 @@ function yellow() { echo -e "${YELLOW}$@${NC}" }
 #                                                    #
 ######################################################
 # Plugins --------------------------------------------------------- {{{
-source ~/.zplug/init.zsh
+source $ZPLUG_ROOT/init.zsh
 
 # Old Oh-my-zsh setup
 # zplug "plugins/magic-enter", from:oh-my-zsh
