@@ -500,10 +500,10 @@ if [ -d "$ASDF_ROOT" ]; then
 fi
 # }}}
 # Extra scripts: -------------------------------------------------- {{{
-include "$HOME/.zsh-scripts/python.zsh"
-include "$HOME/.zsh-scripts/git.zsh"
-include "$HOME/.zsh-scripts/docker.zsh"
-include "$HOME/.zsh-scripts/ls.zsh"
+include "$XDG_CONFIG_HOME/zsh/scripts/python.zsh"
+include "$XDG_CONFIG_HOME/zsh/scripts/git.zsh"
+include "$XDG_CONFIG_HOME/zsh/scripts/docker.zsh"
+include "$XDG_CONFIG_HOME/zsh/scripts/ls.zsh"
 
 # Sensitive information includes
 include ~/.bash/sensitive
