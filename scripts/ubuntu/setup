@@ -1,0 +1,107 @@
+#!/usr/bin/env bash
+# Author: Ricardo Madriz
+# Setup a fresh Ubuntu installation
+set -euo pipefail
+
+source "${BASH_SOURCE%/*}/../utils.sh"
+
+if [ -z "$DISTRO" ]; then
+  echo_warning "DISTRO env var not found"
+  exit 1
+fi
+echo_green "DISTRO env var found: [$DISTRO]"
+
+# if [[ "$DISTRO" != ubuntu ]];then
+#   echo_error "Value of DISTRO is not 'ubuntu', cancelling..."
+#   exit 1
+# fi
+
+echo "Installing base packages"
+echo_warning sudo add-apt-repository ppa:peek-developers/stable
+
+echo_warning sudo apt update
+echo_warning sudo apt install -y \
+  bison \
+  build-essential \
+  cowsay \
+  curl \
+  fd-find \
+  flameshot \
+  fortune \
+  git \
+  htop \
+  jq \
+  libbz2-dev \
+  libclang-6.0-dev \
+  libcurl4-openssl-dev \
+  libedit-dev \
+  libevent-dev \
+  libffi-dev \
+  libfreetype6-dev \
+  libgd-dev \
+  libicu-dev \
+  libjpeg-dev \
+  libldap2-dev \
+  libldb-dev \
+  liblzma-dev \
+  libmagick++-dev \
+  libmapnik-dev \
+  libmysqlclient-dev \
+  libncurses-dev \
+  libncurses5 \
+  libncurses5-dev \
+  libncursesw5 \
+  libncursesw5-dev \
+  libonig-dev \
+  libpng-dev \
+  libpq-dev \
+  libreadline-dev \
+  librsvg2-bin \
+  libsasl2-dev \
+  libsqlite3-dev \
+  libssl-dev \
+  libtool \
+  libtool-bin \
+  libvips-tools \
+  libx11-doc \
+  libxcb-xfixes0-dev \
+  libxml2-dev \
+  libxpm-dev \
+  libxslt-dev \
+  libyaml-dev \
+  libzip-dev \
+  make \
+  openssl \
+  peek \
+  ripgrep \
+  tree \
+  wget \
+  xclip \
+  xsel \
+  xstow \
+  zsh
+echo_warning sudo apt autoclean
+echo_warning sudo apt autoremove
+
+echo_green "Installed all basic packages"
+echo "Installing custom patched JetBrainsMono font"
+pushd /tmp
+mkdir fonts
+cd fonts
+local fontname="JetBrainsMono.zip"
+wget $(curl https://api.github.com/repos/ryanoasis/nerd-fonts/releases | jq '.[] | select(.prerelease == false) | .assets[] | select(.name == $fontname) | .browser_download_url' | xargs)
+unzip "$fontname"
+sudo cp -r *.ttf /usr/share/fonts/truetype/
+fc-cache -f -v
+rm *.ttf
+rm $fontname
+cd ..
+popd
+echo_green "Installed fonts ;)"
+
+echo "Installing rust (and company)"
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+echo_warning "Temporarily adding cargo bin to path"
+export PATH="$HOME/.cargo/bin:$PATH"
+cargo install alacritty
+cargo install git-delta
