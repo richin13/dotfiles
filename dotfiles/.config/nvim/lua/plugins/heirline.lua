@@ -2,6 +2,14 @@ local vim = vim
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 
+function insertspace(count)
+  if count and count > 0 then
+    return " "
+  else
+    return ""
+  end
+end
+
 local M = {}
 function M.setup()
   -- Global Mappings -------------------------- {{{
@@ -215,7 +223,7 @@ function M.setup()
     {
       provider = function(self)
         local count = self.added or 0
-        return count > 0 and (self.added_icon .. count)
+        return count > 0 and (self.added_icon .. count .. insertspace(self.changed + self.removed))
       end,
       hl = {
         fg = colors.green
@@ -223,24 +231,12 @@ function M.setup()
     },
     {
       provider = function(self)
-        local count = self.added or 0
-        return count > 0 and (" ")
-      end
-    },
-    {
-      provider = function(self)
         local count = self.removed or 0
-        return count > 0 and (self.removed_icon .. count)
+        return count > 0 and (self.removed_icon .. count .. insertspace(self.removed))
       end,
       hl = {
         fg = colors.red
       }
-    },
-    {
-      provider = function(self)
-        local count = self.changed or 0
-        return count > 0 and (" ")
-      end
     },
     {
       provider = function(self)
