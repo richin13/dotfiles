@@ -1,11 +1,13 @@
 #!/bin/bash
 
 function dst {
-  local ny_time=$(TZ=US/Eastern date +%R);
-  echo "#[fg=#bd93f9,bold]$ny_time"
+  local caldate=$(date +%m.%d)
+  local cr_time=$(TZ=America/Costa_Rica date +%H)
+  local ny_time=$(TZ=US/Eastern date +%H);
+  local minute=$(date +%M)
 
-  # local tz_abbr=$(TZ=US/Eastern date +%Z);
-  # [ $tz_abbr == "EDT" ] && echo "#[fg=#50fa7b,bold]dst" || echo "#[fg=#ff5555,bold]dst"
+  local cmp_et="#[fg=#bd93f9,bold]$ny_time#[fg=#f8f8f2,none]"
+  echo "#[fg=#f8f8f2]$caldate $cr_time($cmp_et):$minute"
 }
 
 dst
