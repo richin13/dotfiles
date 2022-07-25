@@ -294,7 +294,7 @@ function M.setup()
       warning_icon = " ",
       info_icon = " ",
       hint_icon = " ",
-      clean_icon = " ",
+      clean_icon = "  ",
     },
     init = function(self)
       local has_info, info = pcall(vim.api.nvim_buf_get_var, 0, "coc_diagnostic_info")
