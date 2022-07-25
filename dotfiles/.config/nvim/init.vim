@@ -662,7 +662,7 @@ let g:vim_filetype_formatter_commands = {
       \ 'bash': 'shfmt -ci -i 2',
       \ 'sh': 'shfmt -ci -i 2',
       \ 'php': 'npx --no-install prettier --parser=php',
-      \ 'lua': 'lua-format',
+      \ 'lua': 'stylua --indent-type=Spaces --indent-width=2 -',
       \ }
 
 augroup formatting
