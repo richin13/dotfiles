@@ -151,6 +151,10 @@ function M.setup()
 
   local FileFlags = {
     {
+        provider = function() if vim.bo.modified then return " ﯽ" end end,
+        hl = { fg = colors.cyan }
+    },
+    {
       provider = function()
         if (not vim.bo.modifiable) or vim.bo.readonly then return " " end
       end,
@@ -467,7 +471,7 @@ function M.setup()
             })
         end,
         init = function()
-            vim.opt_local.winbar = "NO"
+            vim.opt_local.winbar = nil
         end
     },
 
