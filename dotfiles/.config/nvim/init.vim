@@ -147,7 +147,7 @@ function! PackagerInit() abort
   call packager#add('lukas-reineke/indent-blankline.nvim')
 
 " Coloring & Syntax highlighting
-  call packager#add('richin13/dracula.nvim')
+  call packager#add('Mofiqul/dracula.nvim')
 
   call packager#add('chr4/nginx.vim')
   call packager#add('aklt/plantuml-syntax')
@@ -267,47 +267,26 @@ endfunction
 " Make sure this is at end of section
 function! SetupSyntaxHighlighting()
   " General misc colors
-  hi LineNr       guibg=#282a36 guifg=#44475a
-  hi CursorLineNr guifg=#50fa7b
-  hi Folded       guibg=#44475a guifg=#6272a4
-  hi MatchParen   guibg=#44475a guifg=#f8f8f2 gui=underline
-  hi Search       guibg=#ffb86c guifg=#282a36
-  hi Todo         guibg=#ff5555 guifg=#282a36
-  hi VertSplit    guibg=#44475a guifg=#282a36
-
-  " vim-gitgutter
-  hi GitGutterAdd    guifg=#50fa7b
-  hi GitGutterChange guifg=#8be9fd
-  hi GitGutterDelete guifg=#ff5555
+  hi! link LineNr       NonText
+  hi! link CursorLineNr Character
+  " hi Folded       guibg=#44475a guifg=#6272a4
+  " hi MatchParen   guibg=#44475a guifg=#f8f8f2 gui=underline
+  " hi Search       guibg=#ffb86c guifg=#282a36
+  " hi Todo         guibg=#ff5555 guifg=#282a36
+  " hi VertSplit    guibg=#44475a guifg=#282a36
 
   " coc.nvim
-  hi CocErrorSign        guifg=#ff5555
-  hi CocHintSign         guifg=#f8f8f2
-  hi CocInfoSign         guifg=#8be9fd
-  hi CocWarningSign      guifg=#ffb86c
+  hi! link CocErrorSign        DiagnosticError
+  hi! link CocWarningSign      DiagnosticWarn
+  hi! link CocInfoSign         DiagnosticInfo
+  hi! link CocHintSign         DiagnosticHint
+  hi! link CocErrorHighlight   DiagnosticUnderlineError
+  hi! link CocWarningHighlight DiagnosticUnderlineWarn
+  hi! link CocInfoHighlight    DiagnosticUnderlineInfo
+  hi! link CocHintHighlight    DiagnosticUnderlineHint
+  hi! link CocHighlightText    CursorLine
 
-  hi CocErrorHighlight   guifg=#ff5555 gui=undercurl
-  hi CocHintHighlight    gui=underline
-  hi CocInfoHighlight    gui=underline
-  hi CocWarningHighlight gui=underline
   hi CocFadeOut          gui=undercurl
-
-  hi CocHighlightText    guibg=#44475a gui=underline
-
-  " NvimTree
-  hi NvimTreeGitDirty     guifg=#8be9fd
-  hi NvimTreeGitStaged    guifg=#bd93f9
-  hi NvimTreeGitNew       guifg=#50fa7b
-  hi NvimTreeGitRenamed   guifg=#f1fa8c
-  hi NvimTreeFolderIcon   guifg=#bd93f9
-
-  " Column
-  hi ColorColumn        guibg=#38393f
-
-  " Telescope
-  hi TelescopeBorder         guifg=#8be9fd
-  hi TelescopePromptBorder   guifg=#50fa7b
-  hi TelescopePromptPrefix   guifg=#bd93f9
 endfunction
 
 augroup configure_treesitter_and_syntax_highlighting

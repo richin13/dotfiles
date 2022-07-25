@@ -1,6 +1,7 @@
 local vim = vim
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
+local colors = require("dracula").colors()
 
 local function insertspace(count)
   if count and count > 0 then
@@ -12,27 +13,6 @@ end
 
 local M = {}
 function M.setup()
-  -- Global Mappings -------------------------- {{{
-  local colors = {
-    bg = "#282A36",
-    alt_bg = utils.get_highlight("DraculaSelection").bg,
-    red = utils.get_highlight("DraculaRed").fg,
-    green = utils.get_highlight("DraculaGreen").fg,
-    gray = utils.get_highlight("DraculaFg").fg,
-    orange = utils.get_highlight("DraculaOrange").fg,
-    purple = utils.get_highlight("DraculaPurple").fg,
-    cyan = utils.get_highlight("DraculaCyan").fg,
-    yellow = utils.get_highlight("DraculaYellow").fg,
-    pink = utils.get_highlight("DraculaPink").fg,
-    diag = {
-      warn = utils.get_highlight("DraculaYellow").fg,
-      error = utils.get_highlight("DraculaRed").fg,
-      hint = utils.get_highlight("DraculaCyan").fg,
-      info = utils.get_highlight("DraculaFg").fg,
-    },
-  }
-  -- }}}
-
   -- Components --- {{{
 
   -- Helpers / common --- {{{2
@@ -108,10 +88,10 @@ function M.setup()
   -- File info --- {{{2
   local FileType = {
     provider = function()
-      return string.upper(vim.bo.filetype)
+      return vim.bo.filetype
     end,
     hl = {
-      fg = utils.get_highlight("Type").fg,
+      fg = colors.white,
       bold = true,
     },
   }
@@ -194,6 +174,19 @@ function M.setup()
     },
   }
 
+  local ScrollBar = {
+    static = {
+      sbar = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" },
+    },
+    provider = function(self)
+      local curr_line = vim.api.nvim_win_get_cursor(0)[1]
+      local lines = vim.api.nvim_buf_line_count(0)
+      local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
+      return string.rep(self.sbar[i], 2)
+    end,
+    hl = { fg = colors.orange },
+  }
+
   -- 2}}}
 
   -- Git --- {{{2
@@ -215,7 +208,7 @@ function M.setup()
     },
 
     hl = {
-      -- bg = colors.alt_bg,
+      -- bg = colors.menu,
       fg = colors.gray,
     },
 
@@ -287,7 +280,6 @@ function M.setup()
   local Diagnostics = {
     hl = {
       fg = colors.bg,
-      bg = colors.alt_bg,
     },
     static = {
       error_icon = " ",
@@ -387,7 +379,7 @@ function M.setup()
   -- }}}
 
   -- StatusLines --- {{{
-  local DefaultStatusline = { DiagnosticsBlock, Align, GitBlock, Space }
+  local DefaultStatusline = { GitBlock, Align, DiagnosticsBlock, FileType, Space, ScrollBar }
 
   local InactiveStatusLine = {
     condition = function()
@@ -420,11 +412,11 @@ function M.setup()
     hl = function()
       if conditions.is_active() then
         return {
-          bg = colors.bg,
+          bg = colors.visual,
         }
       else
         return {
-          bg = colors.alt_bg,
+          bg = colors.selection,
         }
       end
     end,
@@ -473,7 +465,7 @@ function M.setup()
     hl = function()
       if conditions.is_active() then
         return {
-          bg = colors.alt_bg,
+          bg = colors.selection,
         }
       else
         return {
