@@ -1,6 +1,6 @@
 -- Telescope.nvim configuration
-local ts = require('telescope')
-local actions = require('telescope.actions')
+local ts = require("telescope")
+local actions = require("telescope.actions")
 
 ts.setup({
   defaults = {
@@ -11,7 +11,7 @@ ts.setup({
     },
     mappings = {
       i = {
-        ['<esc>'] = actions.close,
+        ["<esc>"] = actions.close,
       },
     },
   },

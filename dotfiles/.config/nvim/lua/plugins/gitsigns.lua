@@ -1,12 +1,12 @@
 local vim = vim
 
-require("gitsigns").setup {
+require("gitsigns").setup({
   signs = {
     add = {
-      text = '+',
+      text = "+",
     },
     change = {
-      text = '~',
+      text = "~",
     },
   },
   attach_to_untracked = false,
@@ -19,25 +19,32 @@ require("gitsigns").setup {
       vim.keymap.set(mode, l, r, opts)
     end
 
-    map('n', ']c', function()
-      if vim.wo.diff then return ']c' end
-      vim.schedule(function() gs.next_hunk() end)
-      return '<Ignore>'
+    map("n", "]c", function()
+      if vim.wo.diff then
+        return "]c"
+      end
+      vim.schedule(function()
+        gs.next_hunk()
+      end)
+      return "<Ignore>"
     end, {
-      expr = true
+      expr = true,
     })
 
-    map('n', '[c', function()
-      if vim.wo.diff then return '[c' end
-      vim.schedule(function() gs.prev_hunk() end)
-      return '<Ignore>'
+    map("n", "[c", function()
+      if vim.wo.diff then
+        return "[c"
+      end
+      vim.schedule(function()
+        gs.prev_hunk()
+      end)
+      return "<Ignore>"
     end, {
-      expr = true
+      expr = true,
     })
 
-    map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
-    map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
-    map('n', '<leader>hp', gs.preview_hunk)
-  end
-
-}
+    map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
+    map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
+    map("n", "<leader>hp", gs.preview_hunk)
+  end,
+})
