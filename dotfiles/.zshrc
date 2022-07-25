@@ -51,6 +51,7 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 export EDITOR=nvim
 export SHELL=zsh
+export DISTRO=$(grep '^ID' /etc/os-release | cut -d '=' -f 2)
 
 export GDK_SCALE=0
 
@@ -465,7 +466,7 @@ alias aptup="sudo apt update && sudo apt upgrade -y && sudo apt autoremove"
 # Pacman aliases
 alias pac="pacman"
 alias pacss="pacman -Ss"
-alias pacs="sudo pacman -S"
+alias pacs="sudo pacman -S --noconfirm --needed"
 alias pacsy="sudo pacman -Syyy"
 alias pacsu="sudo pacman -Su"
 alias pacr="sudo pacman -R"
