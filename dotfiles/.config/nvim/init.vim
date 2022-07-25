@@ -147,7 +147,7 @@ function! PackagerInit() abort
   call packager#add('lukas-reineke/indent-blankline.nvim')
 
 " Coloring & Syntax highlighting
-  call packager#add('Mofiqul/dracula.nvim')
+  call packager#add('richin13/dracula-nvim')
 
   call packager#add('chr4/nginx.vim')
   call packager#add('aklt/plantuml-syntax')
@@ -266,15 +266,6 @@ endfunction
 " Syntax: select global syntax scheme
 " Make sure this is at end of section
 function! SetupSyntaxHighlighting()
-  " General misc colors
-  hi! link LineNr       NonText
-  hi! link CursorLineNr Character
-  " hi Folded       guibg=#44475a guifg=#6272a4
-  " hi MatchParen   guibg=#44475a guifg=#f8f8f2 gui=underline
-  " hi Search       guibg=#ffb86c guifg=#282a36
-  " hi Todo         guibg=#ff5555 guifg=#282a36
-  " hi VertSplit    guibg=#44475a guifg=#282a36
-
   " coc.nvim
   hi! link CocErrorSign        DiagnosticError
   hi! link CocWarningSign      DiagnosticWarn
