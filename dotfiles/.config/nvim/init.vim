@@ -347,8 +347,8 @@ function! s:show_documentation()
 endfunction
 
 " Use C-e & C-y to scroll down/up when there's an opened floating window
-nnoremap <expr><C-e> coc#float#has_float() ? coc#util#float_scroll(1) : "\<C-e>"
-nnoremap <expr><C-y> coc#float#has_float() ? coc#util#float_scroll(0) : "\<C-y>"
+nnoremap <expr><C-e> coc#float#has_float() ? coc#float#scroll(1) : "\<C-e>"
+nnoremap <expr><C-y> coc#float#has_float() ? coc#float#scroll(0) : "\<C-y>"
 
 " inoremap <CR> <ESC><Plug>(coc-snippets-expand)i<CR>
 imap <C-j> <Plug>(coc-snippets-expand-jump)
@@ -369,7 +369,7 @@ nnoremap <silent> <space>f :Vista!!<CR>
 nnoremap <silent> <esc> :noh<return><esc>
 
 " Search and Replace
-nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+nnoremap <F2> :%s/\<<C-r><C-w>\>/
 
 " nnoremap <F2> "zyiw:exe "Ack ".@z.""<CR>
 
