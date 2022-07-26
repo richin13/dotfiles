@@ -1,14 +1,6 @@
 local vim = vim
 
 require("gitsigns").setup({
-  signs = {
-    add = {
-      text = "+",
-    },
-    change = {
-      text = "~",
-    },
-  },
   attach_to_untracked = false,
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns

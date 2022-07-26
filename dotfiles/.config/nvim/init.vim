@@ -26,7 +26,7 @@ set mouse=a
 set colorcolumn=80
 
 " Always show signcolumn
-set signcolumn=yes
+set signcolumn=yes:2
 
 " Highlight current line
 set cursorline
