@@ -32,7 +32,7 @@ zplug: ## Install zplug
 
 .PHONY: asdf-vm
 asdf-vm: ## Install asdf-vm
-	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.4 --depth=1
+	git clone https://github.com/asdf-vm/asdf.git ~/.config/asdf --branch v0.10.2 --depth=1
 
 .PHONY: vim-packager
 vim-packager: ## Install vim-packager
@@ -46,7 +46,7 @@ tools: zplug asdf-vim vim-packager ## Install required tools
 ################################################################################
 .PHONY: tpm
 tpm: ## Install tpm tmux plugin manager
-	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+	git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 	@echo "Remember to execute <prefix>I inside tmux to install your plugins"
 
 .PHONY: poetry
