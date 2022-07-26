@@ -51,7 +51,7 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 export EDITOR=nvim
 export SHELL=zsh
-export DISTRO=$(grep '^ID' /etc/os-release | cut -d '=' -f 2)
+export DISTRO=$(grep '^ID' /etc/os-release | cut -d '=' -f 2 | head -n1)
 
 export GDK_SCALE=0
 
