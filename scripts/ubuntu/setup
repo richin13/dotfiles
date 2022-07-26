@@ -3,7 +3,8 @@
 # Setup a fresh Ubuntu installation
 set -euo pipefail
 
-source "${BASH_SOURCE%/*}/../utils.sh"
+# shellcheck source=../helpers.sh
+source "${BASH_SOURCE%/*}/../helpers.sh"
 
 if [ -z "$DISTRO" ]; then
   echo_warning "DISTRO env var not found"
@@ -11,16 +12,16 @@ if [ -z "$DISTRO" ]; then
 fi
 echo_green "DISTRO env var found: [$DISTRO]"
 
-# if [[ "$DISTRO" != ubuntu ]];then
-#   echo_error "Value of DISTRO is not 'ubuntu', cancelling..."
-#   exit 1
-# fi
+if [[ "$DISTRO" != ubuntu ]];then
+  echo_error "Value of DISTRO is not 'ubuntu', cancelling..."
+  exit 1
+fi
 
 echo "Installing base packages"
-echo_warning sudo add-apt-repository ppa:peek-developers/stable
+sudo add-apt-repository ppa:peek-developers/stable
 
-echo_warning sudo apt update
-echo_warning sudo apt install -y \
+sudo apt update
+sudo apt install -y \
   bison \
   build-essential \
   cowsay \
@@ -82,20 +83,21 @@ echo_warning sudo apt install -y \
   zsh
 echo_warning sudo apt autoclean
 echo_warning sudo apt autoremove
-
 echo_green "Installed all basic packages"
+
 echo "Installing custom patched JetBrainsMono font"
 pushd /tmp
 mkdir fonts
 cd fonts
-local fontname="JetBrainsMono.zip"
-wget $(curl https://api.github.com/repos/ryanoasis/nerd-fonts/releases | jq '.[] | select(.prerelease == false) | .assets[] | select(.name == $fontname) | .browser_download_url' | xargs)
-unzip "$fontname"
-sudo cp -r *.ttf /usr/share/fonts/truetype/
+FONT_NAME="JetBrainsMono.zip"
+wget "$(curl https://api.github.com/repos/ryanoasis/nerd-fonts/releases | jq ".[] | select(.prerelease == false) | .assets[] | select(.name == \"${FONT_NAME}\") | .browser_download_url" | xargs)"
+unzip "$FONT_NAME"
+sudo cp -r ./*.ttf /usr/share/fonts/truetype/
 fc-cache -f -v
-rm *.ttf
-rm $fontname
+rm ./*.ttf
+rm $FONT_NAME
 cd ..
+rm -rf fonts
 popd
 echo_green "Installed fonts ;)"
 
