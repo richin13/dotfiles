@@ -1,12 +1,15 @@
 {
-  "coc.preferences.extensionUpdateCheck": "never",
+  "coc.preferences.extensionUpdateCheck": "daily",
   "suggest.autoTrigger": "always",
   "tsserver.npm": "/home/rmadriz/.asdf/shims/npm",
   "pyright.disableCompletion": true,
+  "pyright.disableProgressNotifications": true,
   "python.formatting.provider": "black",
   "python.linting.pylintEnabled": true,
   "diagnostic.errorSign": "λ",
   "diagnostic.warningSign": "π",
+  "diagnostic.hintSign": ">",
+  "diagnostic.infoSign": "!",
   "diagnostic-languageserver.trace.server": "messages",
   "diagnostic-languageserver.filetypes": {
     "python": ["pylint", "mypy"],
