@@ -53,6 +53,7 @@ treesitter.setup({
     "help",
     "html",
     "javascript",
+    "lua",
     "make",
     "php",
     "prisma",
