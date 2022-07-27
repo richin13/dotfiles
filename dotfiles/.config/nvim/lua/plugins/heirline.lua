@@ -247,7 +247,7 @@ function M.setup()
     {
       provider = function(self)
         local count = self.removed or 0
-        return count > 0 and (self.removed_icon .. count .. insertspace(self.removed))
+        return count > 0 and (self.removed_icon .. count .. insertspace(self.changed))
       end,
       hl = {
         fg = colors.red,
