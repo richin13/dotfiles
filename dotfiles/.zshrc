@@ -238,8 +238,8 @@ function manipulate_last_file() {
   fi
 }
 
-function clubhouse() {
-  echo -e "## Goal\n## Reason\n## Acceptance Criteria" | xsel -ib
+function scstory() {
+  echo -e "## GOAL\n## VAL\n## COMPL" | xsel -ib
 }
 
 function exclude() {
@@ -416,6 +416,15 @@ function despace() {
       mv "$filename" $(printf "$filename" | tr -s ' ' '_')
     done
   fi
+}
+
+function vim-grep() {
+  if [[ $# -lt 1 ]]; then
+    red "Please specify the search criteria"
+    return 1
+  fi
+
+  nvim -c "/$1" -- "$(rg -l $1)"
 }
 
 # }}}
