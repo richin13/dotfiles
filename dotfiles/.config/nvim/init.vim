@@ -534,10 +534,7 @@ function! s:heirline_init() abort
   endtry
 endfunction
 
-augroup configure_heirline
-  autocmd!
-  autocmd VimEnter * call s:heirline_init()
-augroup end
+call s:heirline_init()
 " }}}
 " Plugin: Nvim-Tree --------------------------- {{{
 
