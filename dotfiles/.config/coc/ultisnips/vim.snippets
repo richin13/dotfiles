@@ -1,18 +1,3 @@
 snippet padd
 call packager#add('$0')
 endsnippet
-
-snippet init
-function! s:$0_init() abort
-  try
-    lua require('plugins.$0')
-  catch
-    echom 'Problem encountered configuring $0, skipping...'
-  endtry
-endfunction
-
-augroup configure_$0
-  autocmd!
-  autocmd VimEnter * call s:$0_init()
-augroup end
-endsnippet

@@ -197,6 +197,36 @@ augroup enable_opt_plugins
 augroup END
 
 " }}}
+" General: Lua Plugins Setup ------------------ {{{
+
+function! s:safe_require(package)
+  try
+    execute "lua require('" . a:package . "')"
+  catch
+    echom "Error with lua require('" . a:package . "')"
+  endtry
+endfunction
+
+function! s:setup_lua_packages()
+  call s:safe_require("plugins.heirline")
+  call s:safe_require("plugins.indent-line")
+  call s:safe_require("plugins.nvim-tree")
+  call s:safe_require("plugins.telescope")
+  call s:safe_require("plugins.gitsigns")
+  call s:safe_require("plugins.treesitter")
+endfunction
+
+call s:setup_lua_packages()
+
+augroup custom_general_lua_extensions
+  autocmd!
+  autocmd FileType vim let &l:path .= ','.stdpath('config').'/lua'
+  autocmd FileType vim setlocal
+        \ includeexpr=substitute(v:fname,'\\.','/','g')
+        \ suffixesadd^=.lua
+augroup end
+
+" }}}
 " General: Indentation ------------------------ {{{
 
 augroup indentation_sr
@@ -253,39 +283,6 @@ if !has('gui_running')
     set t_Co=256
   endif
 
-" nvim-treesitter config
-function! s:treesitter_init() abort
-  try
-    lua require('plugins.treesitter')
-  catch
-    echom 'Problem encountered configuring treesitter, skipping...'
-  endtry
-endfunction
-
-
-" Syntax: select global syntax scheme
-" Make sure this is at end of section
-function! SetupSyntaxHighlighting()
-  " coc.nvim
-  hi! link CocErrorSign        DiagnosticError
-  hi! link CocWarningSign      DiagnosticWarn
-  hi! link CocInfoSign         DiagnosticInfo
-  hi! link CocHintSign         DiagnosticHint
-  hi! link CocErrorHighlight   DiagnosticUnderlineError
-  hi! link CocWarningHighlight DiagnosticUnderlineWarn
-  hi! link CocInfoHighlight    DiagnosticUnderlineInfo
-  hi! link CocHintHighlight    DiagnosticUnderlineHint
-  hi! link CocHighlightText    CursorLine
-
-  hi CocFadeOut          gui=undercurl
-endfunction
-
-augroup configure_treesitter_and_syntax_highlighting
-  autocmd!
-  autocmd VimEnter * call s:treesitter_init()
-  autocmd VimEnter,ColorScheme * call SetupSyntaxHighlighting()
-augroup END
-
 function! s:vim_syntax_group()
   let l:s = synID(line('.'), col('.'), 1)
   if l:s == ''
@@ -330,6 +327,18 @@ nmap <silent> <leader>gi <Plug>(coc-implementation)
 nmap <silent> <leader>gr <Plug>(coc-references)
 nmap <silent> <leader>rn <Plug>(coc-rename)
 nmap <silent> <F2> <Plug>(coc-rename)
+
+" Telescope pickers
+nnoremap <silent> <C-Space> <cmd>Telescope resume<cr>
+nnoremap <silent> <C-p> <cmd>Telescope find_files<cr>
+nnoremap <silent> <leader>tf <cmd>Telescope find_files<cr>
+nnoremap <silent> <C-_> <cmd>Telescope live_grep<cr>
+nnoremap <silent> <leader>tg <cmd>Telescope live_grep<cr>
+nnoremap <silent> <C-b> <cmd>Telescope buffers<cr>
+nnoremap <silent> <leader>b <cmd>Telescope buffers<cr>
+nnoremap <silent> <leader>th <cmd>Telescope git_files<cr>
+nnoremap <silent> B <cmd>Telescope git_branches<cr>
+nnoremap <silent> S <cmd>Telescope spell_suggest<cr>
 
 nnoremap <silent> <leader>d <cmd>call CocActionAsync('diagnosticToggle')<CR>
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -482,38 +491,12 @@ let g:coc_global_extensions = [
 let g:enable_numbers = 0
 let g:numbers_exclude               = ['NvimTree']
 
-" Indent Lines Plugin settings
-function! s:indent_line_custom_init() abort
-  try
-    lua require('plugins.indent-line')
-  catch
-    echom 'Problem encountered configuring indent-line, skipping...'
-  endtry
-endfunction
-
-augroup configure_indent_line
-  autocmd!
-  autocmd VimEnter * call s:indent_line_custom_init()
-augroup end
+" indentLine settings
 
 " let g:indentLine_enabled         = v:false
 " let g:indentLine_char_list       = ['|', '¦', '┆', '┊']
 " let g:indentLine_color_gui       = '#44475a'
 " let g:indentLine_fileTypeExclude = ['NvimTree']
-
-" Gitsigns
-function! s:gitsigns_init() abort
-  try
-    lua require('plugins.gitsigns')
-  catch
-    echom 'Problem encountered configuring gitsigns, skipping...'
-  endtry
-endfunction
-
-augroup configure_gitsigns
-  autocmd!
-  autocmd VimEnter * call s:gitsigns_init()
-augroup end
 
 " coc-highlight
 augroup coc_highligh
@@ -521,38 +504,10 @@ augroup coc_highligh
   autocmd CursorHold * silent call CocActionAsync('highlight')
 augroup end
 
+" Github Copilot
 let g:copilot_enabled = v:false
 
 "  }}}
-" Plugin: Heirline ---------------------------- {{{
-
-function! s:heirline_init() abort
-  try
-    lua require('plugins.heirline')
-  catch
-    echom 'Problem encountered configuring heirline, skipping...'
-  endtry
-endfunction
-
-call s:heirline_init()
-" }}}
-" Plugin: Nvim-Tree --------------------------- {{{
-
-function! s:nvim_tree_custom_init() abort
-  try
-    lua require('plugins.nvim-tree')
-  catch
-    echom 'Problem encountered configuring nvim-tree, skipping...'
-  endtry
-endfunction
-
-augroup configure_nvimtree
-  autocmd!
-  autocmd VimEnter * call s:nvim_tree_custom_init()
-  autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
-augroup end
-
-" }}}
 " Plugin: Autocompletion and LSP -------------- {{{
 " Vista.vim
 let g:vista_sidebar_width = 37
@@ -590,36 +545,6 @@ let g:ragtag_global_maps = 1
 augroup ragtag_config
  autocmd FileType javascript,typescript call RagtagInit()
 augroup end
-
-" }}}
-" Plugin: Telescope --------------------------- {{{
-
-function! s:telescope_init() abort
-  try
-    lua require('plugins.telescope')
-  catch
-    echom 'Problem encountered configuring telescope, skipping...'
-  endtry
-endfunction
-
-augroup configure_telescope
-  autocmd!
-  autocmd VimEnter * call s:telescope_init()
-augroup end
-
-" Keymaps
-nnoremap <silent> <C-p> <cmd>Telescope find_files<cr>
-nnoremap <silent> <C-_> <cmd>Telescope live_grep<cr>
-nnoremap <silent> <leader>tf <cmd>Telescope find_files<cr>
-nnoremap <silent> <leader>b <cmd>Telescope buffers<cr>
-nnoremap <silent> <leader>tg <cmd>Telescope live_grep<cr>
-nnoremap <silent> <leader>th <cmd>Telescope git_files<cr>
-
-" Telescope pickers
-nnoremap <C-Space> :Telescope resume<cr>
-nnoremap B :Telescope git_branches<cr>
-nnoremap S :Telescope spell_suggest<cr>
-nnoremap <C-b> :Telescope buffers<cr>
 
 " }}}
 " Config: Code Formatting --------------------- {{{
