@@ -14,6 +14,9 @@ alias guwip="unwip"
 alias gcsmg="git commit -m"
 alias gcmsgnv="git commit --no-verify -m"
 alias gcb="git switch -c"
+#: This assumes latest version of git (^2.37)
+alias 'gc!'="git commit -v --amend --no-edit"
+alias 'gcc!'="git commit -v --amend"
 
 # Edit modified files
 alias vemd="vim \$(git status --porcelain=v2 | grep -P '\.M' | cut -d ' ' -f 9)"

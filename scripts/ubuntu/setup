@@ -18,7 +18,8 @@ if [[ "$DISTRO" != ubuntu ]];then
 fi
 
 echo "Installing base packages"
-sudo add-apt-repository ppa:peek-developers/stable
+sudo add-apt-repository --yes --no-update ppa:peek-developers/stable
+sudo add-apt-repository --yes --no-update ppa:git-core/ppa
 
 sudo apt update
 sudo apt install -y \
