@@ -86,6 +86,25 @@ function M.setup()
   }
 
   -- File info --- {{{2
+
+  local WorkDir = {
+    provider = function()
+      local cwd = vim.fn.expand('%:h')
+      cwd = vim.fn.fnamemodify(cwd, ":.")
+      if not conditions.width_percent_below(#cwd, 0.25) then
+        cwd = vim.fn.pathshorten(cwd)
+      end
+      local trail = cwd:sub(-1) == "/" and "" or "/"
+      return cwd .. trail
+    end,
+    condition = function ()
+        return not conditions.buffer_matches({
+          buftype = {"nofile", "prompt", "help", "quickfix" },
+          filetype = { "^git.*", "fugitive" },
+        })
+    end,
+    hl = { fg = colors.comment, italic = true },
+  }
   local FileType = {
     provider = function()
       return vim.bo.filetype
@@ -157,7 +176,7 @@ function M.setup()
     },
   }
 
-  FileNameBlock = utils.insert(FileNameBlock, FileIcon, FileName, FileFlags, {
+  FileNameBlock = utils.insert(FileNameBlock, FileIcon, WorkDir, FileName, FileFlags, {
     provider = "%<",
   })
 
@@ -455,10 +474,12 @@ function M.setup()
       return not conditions.is_active()
     end,
     hl = {
-      fg = colors.red,
+      bg = colors.visual,
+      fg = colors.white,
       force = true,
     },
     FileNameBlock,
+    Space,
   }
 
   local WinBars = {
