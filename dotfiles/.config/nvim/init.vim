@@ -330,7 +330,7 @@ nmap <silent> <F2> <Plug>(coc-rename)
 
 " Telescope pickers
 nnoremap <silent> <C-Space> <cmd>Telescope resume<cr>
-nnoremap <silent> <C-p> <cmd>Telescope find_files<cr>
+nnoremap <silent> <C-p> <cmd>Telescope git_files<cr>
 nnoremap <silent> <leader>tf <cmd>Telescope find_files<cr>
 nnoremap <silent> <C-_> <cmd>Telescope live_grep<cr>
 nnoremap <silent> <leader>tg <cmd>Telescope live_grep<cr>

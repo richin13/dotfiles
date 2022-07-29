@@ -292,6 +292,14 @@ function M.setup()
   local GitBlock = {
     condition = conditions.is_git_repo,
     Git,
+    on_click = {
+      callback = function()
+        vim.defer_fn(function()
+          require("telescope.builtin").git_branches()
+        end, 100)
+      end,
+      name = "heirline_git_branches",
+    },
   }
   -- 2}}}
 
