@@ -484,6 +484,23 @@ let g:coc_global_extensions = [
       \ 'coc-yaml',
       \ ]
 
+function! s:setup_coc()
+  if !exists("g:coc_service_initialized")
+    return
+  endif
+
+  " coc-highlight
+  augroup coc_highligh
+    autocmd!
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+  augroup end
+endfunction
+
+augroup custom_coc
+  autocmd!
+  autocmd VimEnter * call s:setup_coc()
+augroup end
+
 "  }}}
 "  Plugin: Configure --------------------------- {{{
 
@@ -498,11 +515,6 @@ let g:numbers_exclude               = ['NvimTree']
 " let g:indentLine_color_gui       = '#44475a'
 " let g:indentLine_fileTypeExclude = ['NvimTree']
 
-" coc-highlight
-augroup coc_highligh
-  autocmd!
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-augroup end
 
 " Github Copilot
 let g:copilot_enabled = v:false
