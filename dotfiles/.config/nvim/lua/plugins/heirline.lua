@@ -91,7 +91,7 @@ function M.setup()
     provider = function()
       local cwd = vim.fn.expand('%:h')
       cwd = vim.fn.fnamemodify(cwd, ":.")
-      if not conditions.width_percent_below(#cwd, 0.25) then
+      if not conditions.width_percent_below(#cwd, 0.33) then
         cwd = vim.fn.pathshorten(cwd)
       end
       local trail = cwd:sub(-1) == "/" and "" or "/"
