@@ -119,6 +119,14 @@ function M.setup()
     init = function(self)
       self.filename = vim.api.nvim_buf_get_name(0)
     end,
+    on_click = {
+      callback = function()
+        vim.defer_fn(function()
+          require("telescope.builtin").buffers()
+        end, 100)
+      end,
+      name = "heirline_buffers",
+    },
   }
 
   local FileIcon = {
