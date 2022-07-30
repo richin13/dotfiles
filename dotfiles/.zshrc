@@ -516,7 +516,9 @@ include "$XDG_CONFIG_HOME/zsh/scripts/docker.zsh"
 include "$XDG_CONFIG_HOME/zsh/scripts/ls.zsh"
 
 # Sensitive information includes
-include ~/.bash/sensitive
+if [ -f "$XDG_CONFIG_HOME/zsh/sensitive.zsh" ];then
+  include "$XDG_CONFIG_HOME/zsh/sensitive.zsh"
+fi
 # }}}
 # Extra swag: ----------------------------------------------------- {{{
 fortune ~/.fortunes/zen | cowsay
