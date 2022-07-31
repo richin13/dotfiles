@@ -466,26 +466,28 @@ fi
 # Execute the previous command
 alias jk="fc -e -"
 
-# APT aliases
-alias apti="sudo apt install -y"
-alias apts="apt search"
-alias aptu="sudo apt remove -y"
-alias aptup="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
+# Ubuntu-only aliases
+if [ "$DISTRO" = "ubuntu" ]; then
+  alias apti="sudo apt install -y"
+  alias apts="apt search"
+  alias aptu="sudo apt remove -y"
+  alias aptup="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
+fi
 
-# Pacman aliases
-alias pac="pacman"
-alias pacss="pacman -Ss"
-alias pacs="sudo pacman -S --noconfirm --needed"
-alias pacsy="sudo pacman -Syyy"
-alias pacsu="sudo pacman -Su"
-alias pacr="sudo pacman -R"
-alias pacrs="sudo pacman -Rs"
+# Arch Linux-only aliases
+if [ "$DISTRO" = "arch" ]; then
+  alias pacss="pacman -Ss"
+  alias pacs="sudo pacman -S --noconfirm --needed"
+  alias pacsy="sudo pacman -Syyy"
+  alias pacsu="sudo pacman -Syyu"
+  alias pacrs="sudo pacman -Rs"
+  alias pkg="makepkg -cris"
+fi
 
 # Js ecosystem aliases
-alias yins="yarn install"
-alias yadd="yarn add"
-alias yrm="yarn remove"
-alias cra="create-react-app"
+alias yi="yarn install"
+alias ya="yarn add"
+alias yr="yarn remove"
 
 ############# Utils ###############
 alias so="clear && exec $SHELL"
