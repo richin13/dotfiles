@@ -427,6 +427,16 @@ function vim-grep() {
   nvim -c "/$1" -- "$(rg -l $1)"
 }
 
+function yat() {
+  if [[ $# -lt 1 ]]; then
+    red "Please specify the name of the package"
+    return 1
+  fi
+  local pkgs=("$@")
+  local typepkgs=$(for pkg in "${pkgs[@]}"; do echo "@types/$pkg"; done)
+  yarn add -D "$typepkgs"
+}
+
 # }}}
 # Aliases --------------------------------------------------------- {{{
 # Check whether NeoVIM is installed and alias it to vim
@@ -487,6 +497,7 @@ fi
 # Js ecosystem aliases
 alias yi="yarn install"
 alias ya="yarn add"
+alias yad="yarn add -D"
 alias yr="yarn remove"
 
 ############# Utils ###############
