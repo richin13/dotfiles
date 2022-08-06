@@ -1,6 +1,4 @@
 {
-  "coc.preferences.extensionUpdateCheck": "daily",
-  "coc.preferences.silentAutoupdate": true,
   "suggest.autoTrigger": "always",
   "notification.disabledProgressSources": ["*"],
   "tsserver.npm": "/home/rmadriz/.asdf/shims/npm",
