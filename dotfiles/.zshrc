@@ -514,6 +514,8 @@ alias sam-dotfiles="o https://github.com/pappasam/dotfiles/tree/master/dotfiles"
 
 alias sail="bash vendor/bin/sail"
 alias artisan="sail artisan"
+
+alias servedir="python -m http.server"
 ###################################
 # }}}
 # Autocompletion -------------------------------------------------- {{{
