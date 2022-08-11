@@ -430,7 +430,7 @@ function vim-grep() {
     return 1
   fi
 
-  nvim -c "/$1" -- "$(rg -l $1)"
+  nvim -- "$(rg -l $1)"
 }
 
 function yat() {
