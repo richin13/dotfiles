@@ -55,6 +55,8 @@ treesitter.setup({
     "javascript",
     "lua",
     "make",
+    "markdown",
+    "markdown_inline",
     "php",
     "prisma",
     "python",
