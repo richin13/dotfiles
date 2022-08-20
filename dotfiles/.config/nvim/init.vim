@@ -171,6 +171,7 @@ function! PackagerInit() abort
 " Language server
   call packager#add('neoclide/coc.nvim', {'branch': 'release'})
   call packager#add('liuchengxu/vista.vim')
+  call packager#add('andrewferrier/textobj-diagnostic.nvim')
 
   " Copilot, why not
   call packager#add('github/copilot.vim')
@@ -214,6 +215,7 @@ function! s:setup_lua_packages()
   call s:safe_require("plugins.telescope")
   call s:safe_require("plugins.gitsigns")
   call s:safe_require("plugins.treesitter")
+  call s:safe_require("plugins.textobj-diagnostic")
 endfunction
 
 call s:setup_lua_packages()
