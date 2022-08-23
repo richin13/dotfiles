@@ -379,7 +379,7 @@ function check_input_port() {
 }
 
 function zoomy() {
-  check_input_port
+  # check_input_port
   xdg-open "zoommtg://zoom.us/join?action=join&confno=$1" > /dev/null 2>&1
 }
 
