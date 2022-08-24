@@ -305,6 +305,8 @@ nnoremap <silent> zS <cmd>call <SID>syntax_group()<CR>
 " }}}
 " General: Key remappings --------------------- {{{
 
+nnoremap ' ,
+
 " Easily navigate buffers
 nnoremap <silent> L :bn<cr>
 nnoremap <silent> H :bp<cr>
