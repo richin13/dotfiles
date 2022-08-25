@@ -460,7 +460,6 @@ alias rm="rm -Iv"
 alias mkdir="mkdir -v"
 alias rf="rm -rf"
 alias rmdir="rm -rf"
-alias sudo="sudo "
 alias o=xdg-open
 alias itree="tree --dirsfirst -I '__pycache__|venv|node_modules'"
 alias srm="shred -n 100 -z -u"
