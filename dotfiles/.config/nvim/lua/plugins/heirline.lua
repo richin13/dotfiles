@@ -474,7 +474,7 @@ function M.setup()
       end,
     },
 
-    init = utils.pick_child_on_condition,
+    fallthrough = false,
 
     SpecialStatusline,
     InactiveStatusLine,
@@ -528,7 +528,7 @@ function M.setup()
         return self.mode_colors[mode]
       end,
     },
-    init = utils.pick_child_on_condition,
+    fallthrough = false,
     { -- Hide the winbar for special buffers
       condition = function()
         return conditions.buffer_matches({
