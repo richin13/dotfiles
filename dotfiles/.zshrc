@@ -110,6 +110,9 @@ if [ -d "$ANDROID_SDK_ROOT" ]; then
   path_ladd "$ANDROID_SDK_ROOT/emulator"
 fi
 
+#: Envman
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
 # EXPORT THE FINAL, MODIFIED PATH
 export PATH
 
