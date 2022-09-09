@@ -16,16 +16,15 @@ alias pipff="pip freeze > requirements.txt"
 alias pip-dev="pipi -U $DEV_PKGS"
 
 alias pt="poetry"
-alias pta="poetry add"
-alias pti="poetry install"
-alias ptu="poetry update"
-alias ptr="poetry remove"
-alias ptrun="poetry run"
+alias pa="poetry add"
+alias pad="poetry add --group dev"
+alias pi="poetry install"
+alias pu="poetry update"
+alias pr="poetry remove"
+alias prun="poetry run"
 alias pinit="poetry init -n"
 
 alias django="python manage.py"
-
-alias dvenv="yellow 'Use vd next time' && vd"
 
 alias cc="cookiecutter"
 # ====== Functions ======
