@@ -12,7 +12,7 @@ alias dckrr="docker run"
 alias dckrrit="docker run -it"
 alias dckrp="docker ps"
 
-alias dc="docker-compose"
+alias dc="USERID=${UID} docker-compose"
 alias dcbuild="dc build"
 alias dcup="dc up"
 alias dcdown="dc down -v"
