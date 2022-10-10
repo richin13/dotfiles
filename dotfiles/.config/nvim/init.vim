@@ -145,6 +145,7 @@ function! PackagerInit() abort
   call packager#add('tpope/vim-endwise')
   call packager#add('pappasam/vim-filetype-formatter')
   call packager#add('lukas-reineke/indent-blankline.nvim')
+  call packager#add('windwp/nvim-autopairs')
 
 " Coloring & Syntax highlighting
   call packager#add('richin13/dracula-nvim')
@@ -209,6 +210,7 @@ function! s:safe_require(package)
 endfunction
 
 function! s:setup_lua_packages()
+  call s:safe_require("plugins.autopairs")
   call s:safe_require("plugins.heirline")
   call s:safe_require("plugins.indent-line")
   call s:safe_require("plugins.nvim-tree")
@@ -470,7 +472,6 @@ let g:coc_global_extensions = [
       \ 'coc-html',
       \ 'coc-json',
       \ 'coc-lua',
-      \ 'coc-pairs',
       \ 'coc-phpls',
       \ 'coc-prisma',
       \ 'coc-pyright',
