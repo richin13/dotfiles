@@ -452,7 +452,8 @@ augroup end
 
 augroup filetype_specific_configs
   autocmd!
-  autocmd Filetype gitcommit setlocal spell textwidth=72
+  autocmd FileType gitcommit setlocal colorcolumn=73 textwidth=72
+  autocmd Filetype html,text,markdown,rst,fzf setlocal colorcolumn=0
   autocmd Filetype php setlocal iskeyword-=$
 augroup end
 
@@ -572,6 +573,7 @@ augroup formatting
   au!
   command! -nargs=0 Format :call CocAction('format')
   au Filetype * nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
+  au Filetype prisma nnoremap <silent> <buffer> <leader>f :Format<cr>
   au Filetype * vnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
 augroup END
 " }}}
