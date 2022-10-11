@@ -146,6 +146,7 @@ function! PackagerInit() abort
   call packager#add('pappasam/vim-filetype-formatter')
   call packager#add('lukas-reineke/indent-blankline.nvim')
   call packager#add('windwp/nvim-autopairs')
+  call packager#add('norcalli/nvim-colorizer.lua')
 
 " Coloring & Syntax highlighting
   call packager#add('richin13/dracula-nvim')
@@ -211,6 +212,7 @@ endfunction
 
 function! s:setup_lua_packages()
   call s:safe_require("plugins.autopairs")
+  call s:safe_require("plugins.colorizer")
   call s:safe_require("plugins.heirline")
   call s:safe_require("plugins.indent-line")
   call s:safe_require("plugins.nvim-tree")
