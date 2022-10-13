@@ -160,6 +160,7 @@ function! PackagerInit() abort
   call packager#add('romgrk/nvim-treesitter-context')
   call packager#add('windwp/nvim-ts-autotag')
   call packager#add('JoosepAlviste/nvim-ts-context-commentstring')
+  call packager#add('s1n7ax/nvim-comment-frame')
 
 " Indentation & folding
   call packager#add('hynek/vim-python-pep8-indent' , {'type': 'opt'})
