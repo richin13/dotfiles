@@ -21,6 +21,7 @@ alias pad="poetry add --group dev"
 alias pi="poetry install"
 alias pu="poetry update"
 alias pr="poetry remove"
+alias prd="poetry remove --group=dev"
 alias prun="poetry run"
 alias pinit="poetry init -n"
 
