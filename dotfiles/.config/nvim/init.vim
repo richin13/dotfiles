@@ -307,6 +307,7 @@ function! s:syntax_group()
   endif
 endfunction
 nnoremap <silent> zS <cmd>call <SID>syntax_group()<CR>
+nnoremap <silent> <F9> <cmd>call <SID>syntax_group()<CR>
 " }}}
 " General: Key remappings --------------------- {{{
 
@@ -603,32 +604,6 @@ augroup comment_str_config
   au Filetype dosini setlocal commentstring=#\ %s
   au Filetype dosini setlocal comments=:#,:;
 augroup END
-" }}}
-" Config: Custom functions -------------------- {{{
-function! MakePhony(confirm)
-  let line = getline('.')
-  let target = matchstr(line, '^\zs\f*\ze:')
-
-  if a:confirm
-    let answer = confirm('Insert ".PHONY: ' . target . '"?', "&Yes\n&No", 1)
-    if answer != 1
-      return
-    endif
-  endif
-
-  " Workaround to remove the auto-indentation
-  execute "normal! O"
-  execute "normal! a.PHONY: " . target
-endfunction
-
-command! -nargs=? MakePh call MakePhony(<args>)
-
-augroup activate_make_phony_on_makefiles
-  autocmd!
-  autocmd Filetype make nnoremap <localleader>m :MakePh v:false<CR>
-  autocmd Filetype make nnoremap <localleader>M :MakePh v:true<CR>
-augroup end
-
 " }}}
 " General: Cleanup ---------------------------- {{{
 " commands that need to run at the end of my vimrc
