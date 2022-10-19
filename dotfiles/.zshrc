@@ -65,6 +65,7 @@ export XDG_DATA_HOME=$HOME/.local/share
 
 export ASDF_ROOT="$XDG_CONFIG_HOME/asdf"
 export ZPLUG_ROOT="$XDG_CONFIG_HOME/zplug"
+export ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 # }}}
 # Path appends + Misc env setup ----------------------------------- {{{
@@ -147,39 +148,41 @@ function yellow() { echo -e "${YELLOW}$@${NC}" }
 #                                                    #
 ######################################################
 # Plugins --------------------------------------------------------- {{{
-source $ZPLUG_ROOT/init.zsh
+source "${ZINIT_HOME}/zinit.zsh"
 
 # Old Oh-my-zsh setup
-# zplug "plugins/magic-enter", from:oh-my-zsh
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/git-flow", from:oh-my-zsh
-zplug "plugins/pylint", from:oh-my-zsh
-zplug "plugins/python", from:oh-my-zsh
-zplug "plugins/web-search", from:oh-my-zsh
-zplug "plugins/docker-compose", from:oh-my-zsh
+zinit snippet OMZP::git
+zinit snippet OMZP::python
+zinit snippet OMZP::docker-compose
 
-zplug "lib/completion", from:oh-my-zsh
-zplug "lib/compfix", from:oh-my-zsh
-zplug "lib/directories", from:oh-my-zsh
-zplug "lib/git", from:oh-my-zsh
-zplug "lib/history", from:oh-my-zsh
-zplug "lib/key-bindings", from:oh-my-zsh
+# zinit snippet OMZL::theme-and-appearance.zsh
+zinit snippet OMZL::completion.zsh
+zinit snippet OMZL::compfix.zsh
+zinit snippet OMZL::directories.zsh
+zinit snippet OMZL::git.zsh
+zinit snippet OMZL::history.zsh
+zinit snippet OMZL::key-bindings.zsh
 
-zplug "richin13/dracula.zsh-theme", use:dracula.zsh-theme, as:theme
+zinit ice src"dracula.zsh-theme"
+zinit light richin13/dracula.zsh-theme
+# zinit ice pick"async.zsh" src"pure.zsh" # with zsh-async library that's bundled with it.
+# zinit light sindresorhus/pure
 
 # Cool stuff
-zplug "paulirish/git-open", as:plugin
-zplug "zdharma-zmirror/fast-syntax-highlighting", as:plugin
+zinit light paulirish/git-open
+zinit light zdharma-continuum/fast-syntax-highlighting
 
 # zplug "supercrabtree/k"
 
 # Final thoughts
-if ! zplug check; then
-  zplug install
-fi
+# if ! zplug check; then
+#   zplug install
+# fi
 
-zplug load
+# zplug load
 
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 # }}}
 # ZSH setup ------------------------------------------------------- {{{
 function chpwd() {
@@ -191,6 +194,7 @@ function chpwd() {
 }
 
 setopt auto_cd
+setopt prompt_subst
 
 # Completion settings
 # zstyle ':completion:*' ignored-patterns '__pycache__' '*?.pyc' 'poetry.lock' 'yarn.lock' 'node_modules' 'pip-wheel-metadata' '*.egg-info'

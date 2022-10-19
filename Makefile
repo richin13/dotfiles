@@ -26,9 +26,10 @@ config_directories: $(CONFIG_DIRS_HOME) ## Create the directories in the HOME fo
 ################################################################################
 # Tools
 ################################################################################
-.PHONY: zplug
-zplug: ## Install zplug
-	curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+.PHONY: zinit
+zinit: ## Install zinit
+	mkdir -p "$(dirname $ZINIT_HOME)"
+	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 
 .PHONY: asdf-vm
 asdf-vm: ## Install asdf-vm
