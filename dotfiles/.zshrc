@@ -194,6 +194,8 @@ function chpwd() {
   fi
 }
 
+autoload -Uz compinit
+compinit
 setopt auto_cd
 setopt prompt_subst
 
@@ -550,4 +552,6 @@ fi
 # }}}
 # Extra swag: ----------------------------------------------------- {{{
 fortune ~/.fortunes/zen | cowsay
+
+zinit cdreplay -q
 # }}}
