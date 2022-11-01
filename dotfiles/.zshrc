@@ -1,8 +1,6 @@
 # Based on @pappasam's dotfiles
 #     https://github.com/pappasam/dotfiles
 #
-
-
 ######################################################
 #                                                    #
 #                 Environment setup                  #
@@ -207,6 +205,10 @@ zstyle ":completion:*" ignored-patterns "(*/)#(__pycache__|*.pyc|node_modules|.g
 bindkey '^P' up-line-or-beginning-search
 bindkey '^N' down-line-or-beginning-search
 # }}}
+if [ ! -z $ZPROF ]; then
+  zmodload zsh/zprof
+fi
+
 # Exports --------------------------------------------------------- {{{
 export MANPAGER="less"
 export DOCS_DIRECTORY=$HOME/.config/docs
@@ -557,3 +559,6 @@ fortune ~/.fortunes/zen | cowsay
 
 zinit cdreplay -q
 # }}}
+if [ ! -z $ZPROF ]; then
+  zprof
+fi
