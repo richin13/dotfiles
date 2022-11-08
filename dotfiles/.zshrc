@@ -500,6 +500,15 @@ if [ "$DISTRO" = "ubuntu" ]; then
   alias apts="apt search"
   alias aptu="sudo apt remove -y"
   alias aptup="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
+
+  # only applicable when on ubuntu
+  function upgradezoom() {
+    local filename=zoom_amd64.deb
+    curl -L "https://zoom.us/client/latest/$filename" -o $filename
+    sudo dpkg -i $filename
+    sudo apt-get install -f
+    rm -rf $filename
+  }
 fi
 
 # Arch Linux-only aliases
