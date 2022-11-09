@@ -8,6 +8,11 @@
 ######################################################
 # Functions ------------------------------------------------------- {{{
 
+#: Profiling
+if [ ! -z $ZPROF ]; then
+  zmodload zsh/zprof
+fi
+
 path_ladd() {
   # Takes 1 argument and adds it to the beginning of the PATH
   if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
@@ -205,10 +210,6 @@ zstyle ":completion:*" ignored-patterns "(*/)#(__pycache__|*.pyc|node_modules|.g
 bindkey '^P' up-line-or-beginning-search
 bindkey '^N' down-line-or-beginning-search
 # }}}
-if [ ! -z $ZPROF ]; then
-  zmodload zsh/zprof
-fi
-
 # Exports --------------------------------------------------------- {{{
 export MANPAGER="less"
 export DOCS_DIRECTORY=$HOME/.config/docs
@@ -567,7 +568,8 @@ fi
 fortune ~/.fortunes/zen | cowsay
 
 zinit cdreplay -q
-# }}}
+
 if [ ! -z $ZPROF ]; then
   zprof
 fi
+# }}}
