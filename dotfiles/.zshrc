@@ -532,6 +532,7 @@ alias sail="bash vendor/bin/sail"
 alias artisan="sail artisan"
 
 alias servedir="python -m http.server"
+alias fixm="autorandr --change"
 ###################################
 # }}}
 # Autocompletion -------------------------------------------------- {{{
