@@ -154,6 +154,7 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit snippet OMZP::git
 zinit snippet OMZP::python
 zinit snippet OMZP::docker-compose
+zinit snippet OMZP::terraform
 
 # zinit snippet OMZL::theme-and-appearance.zsh
 zinit snippet OMZL::completion.zsh
