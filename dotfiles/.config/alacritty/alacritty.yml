@@ -7,6 +7,9 @@ window:
   # Startup Mode (changes require restart)
   startup_mode: Maximized
 
+  padding:
+    y: 4
+
 # Font configuration
 font:
   # Normal (roman) font face
