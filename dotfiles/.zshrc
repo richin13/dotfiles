@@ -397,20 +397,6 @@ function zoomy() {
   xdg-open "zoommtg://zoom.us/join?action=join&confno=$1" > /dev/null 2>&1
 }
 
-# upgrade relevant local systems
-function upgrade() {
-  sudo apt update
-  sudo apt upgrade -y
-  sudo apt autoremove -y
-  pushd .
-  cd ~/dotfiles
-  git pull
-  popd
-  asdf uninstall neovim nightly
-  asdf install neovim nightly
-  nvim -c 'PlugUpdate'
-}
-
 function dbrestore() {
   local backupfile=${1}
   local db_user=${2:-$DB_USER}
@@ -509,6 +495,21 @@ if [ "$DISTRO" = "ubuntu" ]; then
     sudo dpkg -i $filename
     sudo apt-get install -f
     rm -rf $filename
+  }
+
+  # upgrade relevant local systems
+  function upgrade() {
+    sudo apt update
+    sudo apt upgrade -y
+    sudo apt autoremove -y
+    pushd .
+    cd ~/dotfiles
+    git pull
+    popd
+    asdf uninstall neovim nightly
+    asdf install neovim nightly
+    nvim -c 'PlugUpdate' -c 'qa'
+    nvim -c 'CocUpdate'
   }
 fi
 
