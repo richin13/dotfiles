@@ -546,6 +546,7 @@ alias artisan="sail artisan"
 
 alias servedir="python -m http.server"
 alias fixm="autorandr --change"
+alias coc-settings="vim ~/.config/nvim/coc-settings.json"
 ###################################
 # }}}
 # Autocompletion -------------------------------------------------- {{{
