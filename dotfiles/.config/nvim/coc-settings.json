@@ -11,7 +11,7 @@
   "diagnostic.infoSign": " ",
   "diagnostic-languageserver.trace.server": "messages",
   "diagnostic-languageserver.filetypes": {
-    "python": ["pylint", "mypy"],
+    "python": ["ruff", "mypy"],
     "nginx": ["nginx-linter"]
   },
   "diagnostic-languageserver.linters": {
@@ -32,6 +32,38 @@
       "rootPatterns": ["nginx.conf", ".git"],
       "securities": {
         "error": "info"
+      }
+    },
+    "ruff": {
+      "sourceName": "ruff",
+      "command": "ruff",
+      "args": ["--quiet", "%file"],
+      "formatPattern": [
+        "^[\\w/\\.]+:(\\d+):(\\d+):\\s([A-Z]{1,3}\\d+)\\s(.+)$",
+        {
+          "line": 1,
+          "column": 2,
+          "security": 3,
+          "message": 4
+        }
+      ],
+      "securities": {
+        "F": "error",
+        "E": "warning",
+        "W": "warning",
+        "I": "info",
+        "D": "warning",
+        "U": "info",
+        "N": "warning",
+        "S": "info",
+        "C": "warning",
+        "FBT": "warning",
+        "B": "warning",
+        "A": "info",
+        "T": "hint",
+        "Q": "hint",
+        "ANN": "warning",
+        "M": "hint"
       }
     }
   },
