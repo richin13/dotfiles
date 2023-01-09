@@ -479,6 +479,7 @@ let g:coc_global_extensions = [
       \ 'coc-phpls',
       \ 'coc-prisma',
       \ 'coc-pyright',
+      \ 'coc-r-lsp',
       \ 'coc-rls',
       \ 'coc-sh',
       \ 'coc-snippets',

@@ -223,6 +223,8 @@ if [ -x "$(command -v fd)" ]; then
 fi
 
 export DOTFILES="$HOME/dotfiles"
+export R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo'
+export PYTHON_CONFIGURE_OPTS='--enable-shared'
 # }}}
 # Key Bindings ---------------------------------------------------- {{{
 
