@@ -546,7 +546,10 @@ function M.setup()
   }
   -- }}}
 
-  require("heirline").setup(StatusLines, WinBars)
+  require("heirline").setup({
+    statusline = StatusLines,
+    winbar = WinBars,
+  })
 end
 
 M.setup()
