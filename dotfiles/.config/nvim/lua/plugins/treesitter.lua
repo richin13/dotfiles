@@ -61,6 +61,7 @@ treesitter.setup({
     "prisma",
     "python",
     "query",
+    "r",
     "rust",
     "svelte",
     "toml",
