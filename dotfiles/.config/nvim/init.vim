@@ -448,6 +448,7 @@ nnoremap <C-k> zk
 " General: File type detection ---------------- {{{
 augroup file_extensions
   autocmd!
+  autocmd BufEnter *.config,.cookiecutterrc,DESCRIPTION,.lintr set filetype=yaml
   autocmd BufNewFile,BufRead,BufEnter,VimEnter *.prisma set filetype=prisma
   autocmd BufNewFile,BufRead,BufEnter *.zsh-theme,.zprofile set filetype=zsh
   autocmd BufNewFile,BufRead,BufEnter *.jsx set filetype=javascript
@@ -475,7 +476,7 @@ let g:coc_global_extensions = [
       \ 'coc-highlight',
       \ 'coc-html',
       \ 'coc-json',
-      \ 'coc-lua',
+      \ 'coc-sumneko-lua',
       \ 'coc-phpls',
       \ 'coc-prisma',
       \ 'coc-pyright',
