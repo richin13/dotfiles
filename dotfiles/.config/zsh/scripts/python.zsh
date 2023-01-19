@@ -2,7 +2,7 @@
 # Bash helpers to improve my Python development workflow
 #
 # ===== Variables =====
-DEV_PKGS=(neovim bpython jedi-language-server isort toml-sort docformatter)
+DEV_PKGS=(pip neovim bpython jedi-language-server isort toml-sort docformatter)
 PY_DEFAULT_VERSION=python3.8
 PYTHON_VENV_DIR=.venv
 # ====== Aliases ======
