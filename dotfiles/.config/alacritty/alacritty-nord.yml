@@ -1,0 +1,98 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+window:
+  # Window decorations
+  decorations: full
+
+  # Startup Mode (changes require restart)
+  startup_mode: Maximized
+
+  padding:
+    y: 4
+
+# Font configuration
+font:
+  # Normal (roman) font face
+  normal:
+    # Font family
+    family: JetBrainsMono Nerd Font
+    style: Bold
+
+  # Bold font face
+  bold:
+    style: Extra Bold
+
+  # Italic font face
+  italic:
+    style: Bold Italic
+
+  # Bold italic font face
+  bold_italic:
+    style: Extra Bold Italic
+
+  # Point size
+  size: 14.0
+
+# If `true`, bold text is drawn using the bright color variants.
+#draw_bold_text_with_bright_colors: false
+
+# Colors (Dracula)
+colors:
+  # COLORSCHEME: nord.yaml
+  # Default colors
+  primary:
+    background: '0x2E3440'
+    foreground: '0xD8DEE9'
+
+  # Normal colors
+  cursor:
+    text: '0x000000'
+    cursor: '0xfefffe'
+  vi_mode_cursor:
+    text: CellBackground
+    cursor: CellForeground
+  search:
+    matches:
+      foreground: '#44475a'
+      background: '#50fa7b'
+    focused_match:
+      foreground: '#44475a'
+      background: '#ffb86c'
+  footer_bar:
+    background: '#282a36'
+    foreground: '#f8f8f2'
+  line_indicator:
+    foreground: None
+    background: None
+  selection:
+    text: '0x000000'
+    background: '0xb3d7ff'
+  normal:
+    black: '0x3B4252'
+    red: '0xBF616A'
+    green: '0xA3BE8C'
+    yellow: '0xEBCB8B'
+    blue: '0x81A1C1'
+    magenta: '0xB48EAD'
+    cyan: '0x88C0D0'
+    white: '0xE5E9F0'
+
+  # Bright colors
+  bright:
+    black: '0x4C566A'
+    red: '0xBF616A'
+    green: '0xA3BE8C'
+    yellow: '0xEBCB8B'
+    blue: '0x81A1C1'
+    magenta: '0xB48EAD'
+    cyan: '0x8FBCBB'
+    white: '0xECEFF4'
+  dim:
+    black: '#14151b'
+    red: '#ff2222'
+    green: '#1ef956'
+    yellow: '#ebf85b'
+    blue: '#4d5b86'
+    magenta: '#ff46b0'
+    cyan: '#59dffc'
+    white: '#e6e6d1'
