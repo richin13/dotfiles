@@ -455,6 +455,7 @@ augroup file_extensions
   autocmd BufNewFile,BufRead,BufEnter .env.* set filetype=sh
   autocmd BufRead poetry.lock set filetype=toml
   autocmd BufRead .pylintrc set filetype=dosini
+  autocmd BufNewFile,BufRead,BufEnter *.tf set filetype=hcl
 augroup end
 
 augroup filetype_specific_configs
