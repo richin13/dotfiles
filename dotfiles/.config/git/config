@@ -10,3 +10,6 @@
 
 [delta]
   syntax-theme = Dracula
+[user]
+	email = richin13@gmail.com
+	name = Ricardo Madriz

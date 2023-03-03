@@ -118,7 +118,6 @@ function! PackagerInit() abort
   call packager#add('kristijanhusak/vim-packager', { 'type': 'opt' })
 
   " Basic
-  call packager#add('fcpg/vim-altscreen')
   call packager#add('kyazdani42/nvim-web-devicons')
   call packager#add('tpope/vim-surround')
   call packager#add('tmux-plugins/vim-tmux-focus-events') " Tmux integration
@@ -135,16 +134,11 @@ function! PackagerInit() abort
 
   " Utils
   call packager#add('tpope/vim-commentary')
-  call packager#add('myusuf3/numbers.vim')
   call packager#add('tpope/vim-abolish')
-  call packager#add('weirongxu/plantuml-previewer.vim')
-  call packager#add('tyru/open-browser.vim')
-  call packager#add('iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
   call packager#add('tpope/vim-ragtag')
   call packager#add('tommcdo/vim-lion')
   call packager#add('tpope/vim-endwise')
   call packager#add('pappasam/vim-filetype-formatter')
-  call packager#add('lukas-reineke/indent-blankline.nvim')
   call packager#add('windwp/nvim-autopairs')
   call packager#add('norcalli/nvim-colorizer.lua')
 
@@ -173,7 +167,6 @@ function! PackagerInit() abort
 
 " Language server
   call packager#add('neoclide/coc.nvim', {'branch': 'release'})
-  call packager#add('liuchengxu/vista.vim')
   call packager#add('andrewferrier/textobj-diagnostic.nvim')
 
   " Copilot, why not
@@ -215,7 +208,6 @@ function! s:setup_lua_packages()
   call s:safe_require("plugins.autopairs")
   call s:safe_require("plugins.colorizer")
   call s:safe_require("plugins.heirline")
-  call s:safe_require("plugins.indent-line")
   call s:safe_require("plugins.nvim-tree")
   call s:safe_require("plugins.telescope")
   call s:safe_require("plugins.gitsigns")
