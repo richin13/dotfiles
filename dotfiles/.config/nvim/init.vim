@@ -70,6 +70,8 @@ set shell=/usr/bin/zsh
 set splitbelow
 set splitright
 
+set shortmess+=c shortmess+=I
+
 " Keep 2 lines visible above/below the cursor when scrolling
 set scrolloff=2
 
@@ -80,6 +82,11 @@ set noshowmode
 augroup redraw_on_refocus
   autocmd!
   au FocusGained * redraw!
+augroup END
+
+augroup custom_vim_resized
+  autocmd!
+  au VimResized * wincmd =
 augroup END
 
 " Ignore annoying patterns
@@ -522,10 +529,6 @@ let g:numbers_exclude               = ['NvimTree']
 " let g:indentLine_char_list       = ['|', '¦', '┆', '┊']
 " let g:indentLine_color_gui       = '#44475a'
 " let g:indentLine_fileTypeExclude = ['NvimTree']
-
-
-" Github Copilot
-let g:copilot_enabled = v:false
 
 "  }}}
 " Plugin: Autocompletion and LSP -------------- {{{
