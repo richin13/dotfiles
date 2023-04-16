@@ -442,6 +442,10 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
 
+" Use ALT-(v-s) to jump to definition on a (v)split (Coc)
+nnoremap <silent> <A-v> <cmd>call CocActionAsync('jumpDefinition', 'vsplit')<CR>
+nnoremap <silent> <A-s> <cmd>call CocActionAsync('jumpDefinition', 'split')<CR>
+
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
