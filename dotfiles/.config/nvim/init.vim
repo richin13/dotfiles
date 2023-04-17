@@ -489,7 +489,7 @@ let g:coc_global_extensions = [
       \ 'coc-prisma',
       \ 'coc-pyright',
       \ 'coc-r-lsp',
-      \ 'coc-rls',
+      \ 'coc-rust-analyzer',
       \ 'coc-sh',
       \ 'coc-snippets',
       \ 'coc-sql',
