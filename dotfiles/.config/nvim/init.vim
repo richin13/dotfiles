@@ -134,6 +134,7 @@ function! PackagerInit() abort
 
   call packager#add('rebelot/heirline.nvim')
   call packager#add('kyazdani42/nvim-tree.lua')
+  call packager#add('akinsho/bufferline.nvim')
 
   " fuzzy finders
   call packager#add('nvim-lua/popup.nvim')
@@ -220,12 +221,14 @@ endfunction
 
 function! s:setup_lua_packages()
   call s:safe_require("plugins.autopairs")
+  call s:safe_require("plugins.bufferline")
   call s:safe_require("plugins.colorizer")
-  call s:safe_require("plugins.heirline")
+  " call s:safe_require("plugins.heirline")
+  call s:safe_require("plugins.gitsigns")
+  call s:safe_require("plugins.new-heirline")
   call s:safe_require("plugins.indent-line")
   call s:safe_require("plugins.nvim-tree")
   call s:safe_require("plugins.telescope")
-  call s:safe_require("plugins.gitsigns")
   call s:safe_require("plugins.treesitter")
   call s:safe_require("plugins.textobj-diagnostic")
 endfunction
