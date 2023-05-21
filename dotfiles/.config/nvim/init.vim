@@ -481,7 +481,6 @@ augroup end
 
 let g:coc_global_extensions = [
       \ '@yaegassy/coc-nginx',
-      \ '@yaegassy/coc-tailwindcss3',
       \ 'coc-css',
       \ 'coc-diagnostic',
       \ 'coc-docker',
