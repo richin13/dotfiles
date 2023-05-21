@@ -120,5 +120,8 @@
     "borderhighlight": "Boolean",
     "winblend": 10,
     "border": true
-  }
+  },
+  "Lua.diagnostics.globals": [
+    "vim"
+  ]
 }
