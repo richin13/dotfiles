@@ -30,46 +30,46 @@ function M.setup()
     static = {
       mode_names = {
         -- normal
-        n = " N  ",
-        no = " N  ",
-        nov = " N  ",
-        noV = " N  ",
-        ["\22 n"] = " N  ",
-        niI = " N  ",
-        niR = " N  ",
-        niV = " N  ",
-        nt = " N  ",
+        n = " N  ",
+        no = " N  ",
+        nov = " N  ",
+        noV = " N  ",
+        ["\22 n"] = " N  ",
+        niI = " N  ",
+        niR = " N  ",
+        niV = " N  ",
+        nt = " N  ",
         -- visual
-        v = " V  ",
-        vs = " V  ",
-        V = " V  ",
-        Vs = " V  ",
-        ["\22"] = " V  ",
-        ["\22s"] = " V  ",
+        v = " V  ",
+        vs = " V  ",
+        V = " V  ",
+        Vs = " V  ",
+        ["\22"] = " V  ",
+        ["\22s"] = " V  ",
         -- insert
-        i = " I פֿ ",
-        ic = " I פֿ ",
-        ix = " I פֿ ",
+        i = " I  ",
+        ic = " I  ",
+        ix = " I  ",
         -- command
-        c = " C  ",
-        s = " S  ",
-        S = " S  ",
-        ["\19"] = " S  ",
+        c = " C  ",
+        s = " S  ",
+        S = " S  ",
+        ["\19"] = " S  ",
         -- replace
-        R = " R  ",
-        Rc = " R  ",
-        Rx = " R  ",
-        Rv = " R  ",
-        Rvc = " R  ",
-        Rvx = " R  ",
+        R = " R  ",
+        Rc = " R  ",
+        Rx = " R  ",
+        Rv = " R  ",
+        Rvc = " R  ",
+        Rvx = " R  ",
 
         -- x
-        cv = " E  ",
-        r = " .  ",
-        rm = " M  ",
-        ["r?"] = " ?  ",
-        ["!"] = " !  ",
-        t = " T  ",
+        cv = " E  ",
+        r = " .  ",
+        rm = " M  ",
+        ["r?"] = " ?  ",
+        ["!"] = " !  ",
+        t = " T  ",
       },
     },
     provider = function(self)
@@ -167,7 +167,7 @@ function M.setup()
     {
       provider = function()
         if vim.bo.modified then
-          return " ﯽ"
+          return " "
         end
       end,
       hl = { fg = colors.cyan },
@@ -175,7 +175,7 @@ function M.setup()
     {
       provider = function()
         if not vim.bo.modifiable or vim.bo.readonly then
-          return " "
+          return " "
         end
       end,
       hl = {
@@ -317,11 +317,11 @@ function M.setup()
       fg = colors.bg,
     },
     static = {
-      error_icon = " ",
-      warning_icon = " ",
-      info_icon = " ",
-      hint_icon = " ",
-      clean_icon = "  ",
+      error_icon = " ",
+      warning_icon = " ",
+      info_icon = " ",
+      hint_icon = " ",
+      clean_icon = " ",
     },
     init = function(self)
       local has_info, info = pcall(vim.api.nvim_buf_get_var, 0, "coc_diagnostic_info")

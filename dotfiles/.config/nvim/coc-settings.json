@@ -6,13 +6,13 @@
   "python.formatting.provider": "black",
   "python.linting.pylintEnabled": true,
   "python.linting.ruffEnabled": true,
-  "diagnostic.errorSign": " ",
-  "diagnostic.warningSign": " ",
-  "diagnostic.hintSign": " ",
-  "diagnostic.infoSign": " ",
+  "diagnostic.errorSign": " ",
+  "diagnostic.warningSign": " ",
+  "diagnostic.hintSign": " ",
+  "diagnostic.infoSign": " ",
   "diagnostic-languageserver.trace.server": "messages",
   "diagnostic-languageserver.filetypes": {
-    "python": ["ruff", "mypy"],
+    "python": ["mypy"],
     "nginx": ["nginx-linter"]
   },
   "diagnostic-languageserver.linters": {

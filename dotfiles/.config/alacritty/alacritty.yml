@@ -20,7 +20,7 @@ font:
 
   # Bold font face
   bold:
-    style: Extra Bold
+    style: ExtraBold
 
   # Italic font face
   italic:
@@ -28,10 +28,10 @@ font:
 
   # Bold italic font face
   bold_italic:
-    style: Extra Bold Italic
+    style: ExtraBold Italic
 
   # Point size
-  size: 14.0
+  size: 15.0
 
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
