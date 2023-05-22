@@ -1,11 +1,11 @@
 local colors = require("dracula").colors()
 local conditions = require("heirline.conditions")
 
-local common = require("plugins.new-heirline.common")
-local diagnostics = require("plugins.new-heirline.diagnostics")
-local file_info = require("plugins.new-heirline.file-info")
-local git = require("plugins.new-heirline.git")
-local mode = require("plugins.new-heirline.mode")
+local common = require("plugins.heirline.common")
+local diagnostics = require("plugins.heirline.diagnostics")
+local file_info = require("plugins.heirline.file-info")
+local git = require("plugins.heirline.git")
+local mode = require("plugins.heirline.mode")
 
 local Align = common.Align
 local Cut = common.Cut

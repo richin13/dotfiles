@@ -2,7 +2,7 @@ local colors = require("dracula").colors()
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 
-local common = require("plugins.new-heirline.common")
+local common = require("plugins.heirline.common")
 
 local M = {}
 

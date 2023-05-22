@@ -1,6 +1,6 @@
 local colors = require("dracula").colors()
 local conditions = require("heirline.conditions")
-local common = require("plugins.new-heirline.common")
+local common = require("plugins.heirline.common")
 
 local M = {}
 
@@ -85,15 +85,6 @@ M.Git = {
 }
 
 M.GitBlock = {
-  {
-    provider = function()
-      print(vim.b.gitsigns_status_dict)
-      return "BANANA"
-    end,
-    hl = {
-      fg = colors.gray,
-    },
-  },
   M.Git,
   on_click = {
     callback = function()
