@@ -67,6 +67,8 @@ local FileIcon = {
   end,
 }
 
+M.FileIcon = FileIcon
+
 M.FileName = {
   provider = function(self)
     local filename = vim.fn.fnamemodify(self.filename, ":t.")

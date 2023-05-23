@@ -40,14 +40,14 @@ local InactiveStatusLine = {
 }
 
 local DefaultStatusline = {
-    mode.ViMode,
-    Space,
-    git.GitBlock,
-    Space,
-    file_info.FileNameBlock,
-    Align,
-    diagnostics.DiagnosticsBlock,
-    Space,
+  mode.ViMode,
+  Space,
+  git.GitBlock,
+  Space,
+  file_info.FileNameBlock,
+  Align,
+  diagnostics.DiagnosticsBlock,
+  Space,
 }
 
 local StatusLines = {
@@ -152,6 +152,8 @@ M.setup = function()
     winbar = WinBars,
     tabline = tabline.BufferLine,
   })
+  vim.o.showtabline = 2
+  vim.cmd([[au FileType * if index(['wipe', 'delete'], &bufhidden) >= 0 | set nobuflisted | endif]])
 end
 
 M.setup()

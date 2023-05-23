@@ -1,18 +1,13 @@
+local colors = require("dracula").colors()
 local utils = require("heirline.utils")
+
+local common = require("plugins.heirline.common")
+local file_info = require("plugins.heirline.file-info")
 
 local M = {}
 
-local TablineBufnr = {
-  provider = function(self)
-    return tostring(self.bufnr) .. ". "
-  end,
-  hl = "Comment",
-}
-
--- we redefine the filename component, as we probably only want the tail and not the relative path
 local TablineFileName = {
   provider = function(self)
-    -- self.filename will be defined later, just keep looking at the example!
     local filename = self.filename
     filename = filename == "" and "[No Name]" or vim.fn.fnamemodify(filename, ":t")
     return filename
@@ -56,12 +51,15 @@ local TablineFileNameBlock = {
   end,
   hl = function(self)
     if self.is_active then
-      return "TabLineSel"
+      return { fg = colors.black, bg = colors.cyan }
       -- why not?
       -- elseif not vim.api.nvim_buf_is_loaded(self.bufnr) then
       --     return { fg = "gray" }
     else
-      return "TabLine"
+      return {
+        fg = vim.api.nvim_buf_get_option(self.bufnr, "modified") and colors.green or colors.fg,
+        bg = colors.selection,
+      }
     end
   end,
   on_click = {
@@ -79,8 +77,8 @@ local TablineFileNameBlock = {
     end,
     name = "heirline_tabline_buffer_callback",
   },
-  TablineBufnr,
-  FileIcon, -- turns out the version defined in #crash-course-part-ii-filename-and-friends can be reutilized as is here!
+  common.Space,
+  file_info.FileIcon,
   TablineFileName,
   TablineFileFlags,
 }
@@ -93,7 +91,7 @@ local TablineCloseButton = {
   { provider = " " },
   {
     provider = "",
-    hl = { fg = "gray" },
+    hl = { fg = colors.red },
     on_click = {
       callback = function(_, minwid)
         vim.schedule(function()
@@ -144,9 +142,9 @@ vim.api.nvim_create_autocmd({ "VimEnter", "UIEnter", "BufAdd", "BufDelete" }, {
 -- The final touch!
 local TablineBufferBlock = utils.surround({ "", "" }, function(self)
   if self.is_active then
-    return utils.get_highlight("TabLineSel").bg
+    return colors.cyan
   else
-    return utils.get_highlight("TabLine").bg
+    return colors.selection
   end
 end, { TablineFileNameBlock, TablineCloseButton })
 
