@@ -477,6 +477,7 @@ augroup filetype_specific_configs
   autocmd FileType gitcommit setlocal colorcolumn=73 textwidth=72
   autocmd Filetype html,text,markdown,rst,fzf setlocal colorcolumn=0
   autocmd Filetype php setlocal iskeyword-=$
+  autocmd Filetype rust setlocal colorcolumn=99
 augroup end
 
 " }}}
