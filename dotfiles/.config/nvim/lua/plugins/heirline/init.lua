@@ -6,6 +6,7 @@ local diagnostics = require("plugins.heirline.diagnostics")
 local file_info = require("plugins.heirline.file-info")
 local git = require("plugins.heirline.git")
 local mode = require("plugins.heirline.mode")
+local tabline = require("plugins.heirline.tabline")
 
 local Align = common.Align
 local Cut = common.Cut
@@ -109,7 +110,7 @@ local InactiveWinbar = {
 }
 
 local WinBars = {
-  hl = { bg = colors.bg },
+  hl = { bg = colors.selection },
   static = {
     mode_colors = {
       n = colors.cyan,
@@ -149,6 +150,7 @@ M.setup = function()
   require("heirline").setup({
     statusline = StatusLines,
     winbar = WinBars,
+    tabline = tabline.BufferLine,
   })
 end
 

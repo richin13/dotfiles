@@ -221,7 +221,7 @@ endfunction
 
 function! s:setup_lua_packages()
   call s:safe_require("plugins.autopairs")
-  call s:safe_require("plugins.bufferline")
+  " call s:safe_require("plugins.bufferline")
   call s:safe_require("plugins.colorizer")
   " call s:safe_require("plugins.heirline")
   call s:safe_require("plugins.gitsigns")
