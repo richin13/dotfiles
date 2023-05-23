@@ -26,7 +26,7 @@ local TablineFileFlags = {
       return vim.api.nvim_buf_get_option(self.bufnr, "modified")
     end,
     provider = "[+]",
-    hl = { fg = "green" },
+    hl = { fg = colors.green },
   },
   {
     condition = function(self)
@@ -40,7 +40,7 @@ local TablineFileFlags = {
         return ""
       end
     end,
-    hl = { fg = "orange" },
+    hl = { fg = colors.orange },
   },
 }
 
@@ -51,7 +51,7 @@ local TablineFileNameBlock = {
   end,
   hl = function(self)
     if self.is_active then
-      return { fg = colors.black, bg = colors.cyan }
+      return { fg = colors.black, bg = colors.bright_blue }
       -- why not?
       -- elseif not vim.api.nvim_buf_is_loaded(self.bufnr) then
       --     return { fg = "gray" }
@@ -142,7 +142,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "UIEnter", "BufAdd", "BufDelete" }, {
 -- The final touch!
 local TablineBufferBlock = utils.surround({ "", "" }, function(self)
   if self.is_active then
-    return colors.cyan
+    return colors.bright_blue
   else
     return colors.selection
   end
