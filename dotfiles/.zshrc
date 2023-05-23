@@ -307,11 +307,11 @@ _kplr() {
 
 compdef _kplr kplr
 
-function rocket() {
+function rckt() {
   cd "$ROCKET_FOLDER/$1"
 }
 
-_rocket() {
+_rckt() {
   local state
 
   _arguments \
@@ -322,7 +322,7 @@ _rocket() {
   esac
 }
 
-compdef _rocket rocket
+compdef _rckt rckt
 
 function cloneme() {
   if [[ $# -ne 1 ]]; then
@@ -443,6 +443,15 @@ function yat() {
   local pkgs=("$@")
   local typepkgs=$(for pkg in "${pkgs[@]}"; do echo "@types/$pkg"; done)
   yarn add -D "$typepkgs"
+}
+
+function bb() {
+  if [[ $# -lt 1 ]]; then
+    red "Please specify the string to decode using base64 -d"
+    return 1
+  fi
+
+  echo "$1" | base64 -d
 }
 
 # }}}
