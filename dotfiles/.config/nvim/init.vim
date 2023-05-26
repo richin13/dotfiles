@@ -500,6 +500,7 @@ let g:coc_global_extensions = [
       \ 'coc-snippets',
       \ 'coc-sql',
       \ 'coc-svelte',
+      \ 'coc-symbol-line',
       \ 'coc-tsserver',
       \ 'coc-vimlsp',
       \ 'coc-yaml',
