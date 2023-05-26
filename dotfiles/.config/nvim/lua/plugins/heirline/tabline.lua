@@ -1,7 +1,6 @@
 local colors = require("dracula").colors()
 local utils = require("heirline.utils")
 
-local common = require("plugins.heirline.common")
 local file_info = require("plugins.heirline.file-info")
 
 local M = {}
@@ -13,7 +12,7 @@ local TablineFileName = {
     return filename
   end,
   hl = function(self)
-    return { bold = self.is_active or self.is_visible, italic = true }
+    return { bold = self.is_active or self.is_visible, italic = vim.api.nvim_buf_get_option(self.bufnr, "modified") }
   end,
 }
 
@@ -25,8 +24,8 @@ local TablineFileFlags = {
     condition = function(self)
       return vim.api.nvim_buf_get_option(self.bufnr, "modified")
     end,
-    provider = "[+]",
-    hl = { fg = colors.green },
+    provider = "  ",
+    hl = { fg = colors.cyan },
   },
   {
     condition = function(self)
@@ -51,13 +50,10 @@ local TablineFileNameBlock = {
   end,
   hl = function(self)
     if self.is_active then
-      return { fg = colors.black, bg = colors.bright_blue }
-      -- why not?
-      -- elseif not vim.api.nvim_buf_is_loaded(self.bufnr) then
-      --     return { fg = "gray" }
+      return { fg = colors.fg, bg = colors.bg }
     else
       return {
-        fg = vim.api.nvim_buf_get_option(self.bufnr, "modified") and colors.green or colors.fg,
+        fg = colors.white,
         bg = colors.selection,
       }
     end
@@ -77,7 +73,6 @@ local TablineFileNameBlock = {
     end,
     name = "heirline_tabline_buffer_callback",
   },
-  common.Space,
   file_info.FileIcon,
   TablineFileName,
   TablineFileFlags,
@@ -105,60 +100,42 @@ local TablineCloseButton = {
       name = "heirline_tabline_close_buffer_callback",
     },
   },
+  { provider = " " },
 }
 
--- this is the default function used to retrieve buffers
-local get_bufs = function()
-  return vim.tbl_filter(function(bufnr)
-    return vim.api.nvim_buf_get_option(bufnr, "buflisted")
-  end, vim.api.nvim_list_bufs())
-end
-
--- initialize the buflist cache
-local buflist_cache = {}
-
--- setup an autocmd that updates the buflist_cache every time that buffers are added/removed
-vim.api.nvim_create_autocmd({ "VimEnter", "UIEnter", "BufAdd", "BufDelete" }, {
-  callback = function()
-    vim.schedule(function()
-      local buffers = get_bufs()
-      for i, v in ipairs(buffers) do
-        buflist_cache[i] = v
-      end
-      for i = #buffers + 1, #buflist_cache do
-        buflist_cache[i] = nil
-      end
-
-      -- check how many buffers we have and set showtabline accordingly
-      if #buflist_cache > 1 then
-        vim.o.showtabline = 2 -- always
-      else
-        vim.o.showtabline = 1 -- only when #tabpages > 1
-      end
-    end)
+local TablineBufferBlock = {
+  hl = function(self)
+    if self.is_active then
+      return { bg = colors.bg, fg = colors.bg }
+    else
+      return {
+        fg = colors.selection,
+        bg = colors.selection,
+      }
+    end
   end,
-})
-
--- The final touch!
-local TablineBufferBlock = utils.surround({ "", "" }, function(self)
-  if self.is_active then
-    return colors.bright_blue
-  else
-    return colors.selection
-  end
-end, { TablineFileNameBlock, TablineCloseButton })
+  {
+    provider = "▌",
+    hl = function(self)
+      if self.is_active then
+        return { bg = colors.bg, fg = colors.green }
+      else
+        return {
+          fg = colors.selection,
+          bg = colors.selection,
+        }
+      end
+    end,
+  },
+  TablineFileNameBlock,
+  TablineCloseButton,
+}
 
 -- and here we go
 local BufferLine = utils.make_buflist(
   TablineBufferBlock,
-  { provider = " ", hl = { fg = "gray" } },
-  { provider = " ", hl = { fg = "gray" } },
-  -- out buf_func simply returns the buflist_cache
-  function()
-    return buflist_cache
-  end,
-  -- no cache, as we're handling everything ourselves
-  false
+  { provider = "  ", hl = { fg = colors.fg, bg = colors.selection } },
+  { provider = "  ", hl = { fg = colors.fg, bg = colors.selection } }
 )
 
 M.BufferLine = BufferLine

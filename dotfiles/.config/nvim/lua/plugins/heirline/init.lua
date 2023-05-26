@@ -118,7 +118,7 @@ local InactiveWinbar = {
 }
 
 local WinBars = {
-  hl = { bg = colors.selection },
+  hl = { bg = colors.bg },
   static = {
     mode_colors = {
       n = colors.cyan,
@@ -141,7 +141,7 @@ local WinBars = {
   { -- Hide the winbar for special buffers
     condition = function()
       return conditions.buffer_matches({
-        buftype = { "nofile", "prompt", "help", "quickfix" },
+        buftype = { "", "nofile", "prompt", "help", "quickfix" },
         filetype = { "^git.*", "fugitive" },
       })
     end,
