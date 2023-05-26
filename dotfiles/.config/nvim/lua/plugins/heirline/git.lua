@@ -15,7 +15,7 @@ M.Git = {
     self.has_changes = self.added ~= 0 or self.removed ~= 0 or self.changed ~= 0
   end,
   static = {
-    branch_icon  = " ",
+    branch_icon  = " ",
     added_icon   = " ",
     removed_icon = " ",
     changed_icon = " ",

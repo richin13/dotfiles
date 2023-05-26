@@ -134,7 +134,6 @@ function! PackagerInit() abort
 
   call packager#add('rebelot/heirline.nvim')
   call packager#add('kyazdani42/nvim-tree.lua')
-  call packager#add('akinsho/bufferline.nvim')
 
   " fuzzy finders
   call packager#add('nvim-lua/popup.nvim')
