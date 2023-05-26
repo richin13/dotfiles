@@ -88,7 +88,15 @@ local StatusLines = {
   DefaultStatusline,
 }
 
+local Navic = {
+  provider = function()
+    return vim.b.coc_symbol_line or ""
+  end,
+}
+
 local DefaultWinbar = {
+  Align,
+  Navic,
   Align,
   file_info.FileType,
   Space,
