@@ -68,7 +68,7 @@ M.Diagnostics = {
   },
   {
     hl = {
-      fg = colors.gray,
+      fg = colors.yellow,
     },
 
     condition = function(self)
