@@ -1,12 +1,18 @@
+[user]
+	email = richin13@gmail.com
+	name = Ricardo Madriz
 [core]
   pager = delta
   editor = nvim
-
-[diff]
-  colorMoved = default
-
 [gitflow "branch"]
   develop = develop
-
 [delta]
   syntax-theme = Dracula
+[diff]
+  colorMoved = default
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[push]
+	autoSetupRemote = true
