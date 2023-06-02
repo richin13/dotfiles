@@ -4,12 +4,20 @@
 [core]
   pager = delta
   editor = nvim
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	defaultKeyCommand = ssh-add -L
+
 [gitflow "branch"]
   develop = develop
 [delta]
   syntax-theme = Dracula
+
 [diff]
   colorMoved = default
+[commit]
+	gpgsign = true
 [init]
 	defaultBranch = main
 [pull]
