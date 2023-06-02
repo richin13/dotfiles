@@ -6,6 +6,10 @@ This dotfiles provide configurations for [Zsh](https://www.zsh.org/), [Neovim](h
 
 The color scheme used everywhere is [Dracula](https://github.com/dracula/dracula-theme).
 
+![Alacritty-ZSH-Tmux](./img/alacritty-zsh-tmux.png)
+
+![Neovim-Treesitter-DraculaTheme](./img/nvim-treesitter-dracula.png)
+
 ## Pre-flight checks
 
 Make sure to install:
