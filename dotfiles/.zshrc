@@ -194,7 +194,7 @@ function chpwd() {
   local owner=$(stat -L -c "%U" $PWD)
 
   if [[ $USER = $owner ]]; then
-    ls --color=auto --group-directories-first --classify
+    lsd
   fi
 }
 
@@ -461,18 +461,18 @@ function bb() {
 
 [[ -x "$(command -v bat)" ]] && alias cat="bat --style='numbers,changes'"
 
-alias ls="ls --color=auto --group-directories-first --classify"
-alias ks="ls --color=auto --group-directories-first --classify"
+[[ -x "$(command -v lsd)" ]] && alias ls="lsd --classify"
+
 alias cp!="/usr/bin/cp -f"
 alias rm!="/usr/bin/rm -rf"
 alias cp="cp -iv"
 alias mv="mv -iv"
 alias rm="rm -Iv"
-alias mkdir="mkdir -v"
+alias mkdir="mkdir -pv"
 alias rf="rm -rf"
 alias rmdir="rm -rf"
 alias o=xdg-open
-alias itree="tree --dirsfirst -I '__pycache__|venv|node_modules'"
+alias tree="lsd --tree -I __pycache__ -I .venv -I node_modules -I .git"
 alias srm="shred -n 100 -z -u"
 alias ff="grep -rnw . -e"
 alias m="make"

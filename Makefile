@@ -56,3 +56,7 @@ poetry: ## Install Poetry
 
 .PHONY: optionals
 optionals: tpm poetry ## Install optional tools
+
+.PHONY: rust-tools
+rust-tools: ## Install rust tools
+	cargo install lsd ripgrep fd-find bat git-delta
