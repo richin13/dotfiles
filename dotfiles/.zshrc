@@ -226,9 +226,10 @@ export DOTFILES="$HOME/dotfiles"
 export R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo'
 export PYTHON_CONFIGURE_OPTS='--enable-shared'
 
-# If on arch linux, setup the SSH_AUTH_SOCK
+# If on arch linux, setup the SSH_AUTH_SOCK and run ssh-add
 if [ -f /etc/arch-release ]; then
   export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+  ssh-add
 fi
 # }}}
 # Key Bindings ---------------------------------------------------- {{{
