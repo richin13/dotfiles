@@ -118,7 +118,7 @@ endtry
 augroup color_column
   autocmd!
   autocmd FileType * setlocal colorcolumn=0
-  autocmd FileType python,javascript,typescript,javascriptreact,typescriptreact setlocal colorcolumn=80
+  autocmd FileType python,javascript,typescript,javascriptreact,typescriptreact,r setlocal colorcolumn=80
   autocmd FileType rust setlocal colorcolumn=99
 augroup END
 
