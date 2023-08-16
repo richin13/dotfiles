@@ -1,6 +1,5 @@
 -- Configuration for the nvim-tree.lua plugin.
 local vim = vim
-local tree_cb = require("nvim-tree.config").nvim_tree_callback
 
 local function on_attach(bufnr)
   local api = require('nvim-tree.api')
