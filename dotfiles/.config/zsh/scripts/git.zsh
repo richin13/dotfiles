@@ -17,6 +17,7 @@ alias gcb="git switch -c"
 #: This assumes latest version of git (^2.37)
 alias 'gc!'="git commit -v --amend --no-edit"
 alias 'gcc!'="git commit -v --amend"
+alias gdlc="git diff HEAD~1..HEAD"
 
 # Edit modified files
 alias vemd="vim \$(git status --porcelain=v2 | grep -P '\.M' | cut -d ' ' -f 9)"
