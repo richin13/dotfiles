@@ -250,10 +250,10 @@ augroup end
 
 augroup indentation_sr
   autocmd!
-  autocmd Filetype * setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=8
+  autocmd Filetype * if &filetype !=# 'make' | setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=8 | endif
   autocmd Filetype python,php,rust setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype yaml setlocal indentkeys-=<:>
-  autocmd Filetype make setlocal noexpandtab softtabstop=0
+  autocmd Filetype make setlocal noexpandtab tabstop=4
 augroup END
 
 " }}}
