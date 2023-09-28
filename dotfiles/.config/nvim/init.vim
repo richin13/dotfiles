@@ -483,6 +483,14 @@ augroup filetype_specific_configs
 augroup end
 
 " }}}
+" General: Custom functions ---------------- {{{
+function! GenerateUUID4()
+  let l:uuid = system('uuidgen -r')
+  return substitute(l:uuid, '\n', '', 'g')
+endfunction
+inoremap <buffer> <silent> <localleader>u <C-R>=GenerateUUID4()<CR>
+
+" }}}
 "  Plugin: Coc --------------------------- {{{
 
 let g:coc_global_extensions = [
