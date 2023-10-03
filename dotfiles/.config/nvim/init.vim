@@ -122,6 +122,8 @@ augroup color_column
   autocmd FileType rust setlocal colorcolumn=99
 augroup END
 
+set list listchars=tab:>\ ,nbsp:+,leadmultispace:\ ,multispace:-
+
 " }}}
 " General: Plugin Install --------------------- {{{
 function! PackagerInit() abort
@@ -209,7 +211,7 @@ augroup enable_opt_plugins
   autocmd Filetype python packadd vim-python-pep8-indent
   autocmd Filetype groovy packadd groovyindent-unix
   autocmd Filetype json packadd vim-jsonpath
-  autocmd FileType python,typescript,yaml packadd vim-anyfold
+  autocmd FileType python,typescript packadd vim-anyfold
 augroup END
 
 " }}}
@@ -262,9 +264,9 @@ augroup END
 augroup fold_settings
   autocmd!
   autocmd FileType * setlocal foldlevel=99
-  autocmd FileType yaml,vim,tmux,zsh,lua setlocal foldlevel=0 foldnestmax=2
+  autocmd FileType vim,tmux,zsh,lua setlocal foldlevel=0 foldnestmax=2
   autocmd FileType vim,tmux,zsh,lua setlocal foldmethod=marker foldlevelstart=0
-  autocmd FileType python,typescript,yaml AnyFoldActivate
+  autocmd FileType python,typescript AnyFoldActivate
 augroup END
 
 " }}}
