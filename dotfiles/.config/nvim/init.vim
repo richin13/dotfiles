@@ -154,7 +154,6 @@ function! PackagerInit() abort
   call packager#add('weirongxu/plantuml-previewer.vim')
   call packager#add('tyru/open-browser.vim')
   call packager#add('iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
-  call packager#add('tpope/vim-ragtag')
   call packager#add('tommcdo/vim-lion')
   call packager#add('tpope/vim-endwise')
   call packager#add('pappasam/vim-filetype-formatter')
@@ -187,7 +186,6 @@ function! PackagerInit() abort
 
 " Language server
   call packager#add('neoclide/coc.nvim', {'branch': 'release'})
-  call packager#add('liuchengxu/vista.vim')
   call packager#add('andrewferrier/textobj-diagnostic.nvim')
 
   " Copilot, why not
@@ -346,17 +344,6 @@ noremap <Down> <nop>
 " Omnicompletion now works with Ctrl-Space
 " inoremap <C-@> <C-x><C-o>
 " inoremap <C-space> <C-x><C-o>
-
-function! s:coc_remappings()
-  echomsg "Setting up coc remappings"
-
-  " Check filetype, if it's help then keep default mapping for C-]
-endfunction
-
-augroup custom_cocc
-  autocmd!
-  autocmd Filetype * call s:coc_remappings()
-augroup END
 
 " GoTo code navigation.
 nmap <silent> <leader>gy <Plug>(coc-type-definition)
@@ -560,53 +547,7 @@ augroup end
 let g:enable_numbers = 0
 let g:numbers_exclude               = ['NvimTree']
 
-" indentLine settings
-
-" let g:indentLine_enabled         = v:false
-" let g:indentLine_char_list       = ['|', '¦', '┆', '┊']
-" let g:indentLine_color_gui       = '#44475a'
-" let g:indentLine_fileTypeExclude = ['NvimTree']
-
 "  }}}
-" Plugin: Autocompletion and LSP -------------- {{{
-" Vista.vim
-let g:vista_sidebar_width = 37
-let g:vista_fold_toggle_icons = ['▼', '▶']
-let g:vista_default_executive = 'coc'
-let g:vista#renderer#enable_icon = 1
-let g:vista#renderer#icons = {
-\   "function": "λ",
-\   "variable": "ν",
-\   "module"  : "ϟ",
-\   "class"   : "ͼ",
-\  }
-let g:vista_echo_cursor_strategy = 'floating_win'
-let g:vista_finder_alternative_executives = []
-
-augroup custom_vista
-  autocmd!
-  autocmd FileType vista,vista_kind nnoremap <buffer> <silent> <2-LeftMouse> <cmd>call vista#cursor#FoldOrJump()<CR>
-augroup end
-
-" Echodoc
-let g:echodoc#enable_at_startup    = v:true
-let g:echodoc#highlight_arguments  = "QuickScopePrimary"
-let g:echodoc#highlight_identifier = "Identifier"
-let g:echodoc#highlight_trailing   = "Type"
-let g:echodoc#type                 = "floating"
-
-" }}}
-" Plugin: Ragtag ------------------------------ {{{
-
-" Load mappings on every filetype
-let g:ragtag_global_maps = 1
-
-" Additional files for whice ragtag will initialize
-augroup ragtag_config
- autocmd FileType javascript,typescript call RagtagInit()
-augroup end
-
-" }}}
 " Config: Code Formatting --------------------- {{{
 
 let g:vim_filetype_formatter_commands = {
