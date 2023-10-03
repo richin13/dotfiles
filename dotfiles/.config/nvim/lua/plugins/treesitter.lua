@@ -73,7 +73,17 @@ treesitter.setup({
 
 -------------------------------------------------------------------------------
 --                   Comment frame (depends on treesitter)                   --
+--                     <leader>cf - Single line comment                      --
+--                      <leader>cm - Multiline comment                       --
 -------------------------------------------------------------------------------
 require('nvim-comment-frame').setup({
   frame_width = 79,
+})
+
+-------------------------------------------------------------------------------
+--                            TreeSitter Context                             --
+-------------------------------------------------------------------------------
+require("treesitter-context").setup({
+  enable = true,
+  max_lines = 3,
 })
