@@ -225,6 +225,11 @@ function! s:safe_require(package)
   endtry
 endfunction
 
+" For debugging purposes.
+function! s:unsafe_require(package)
+  execute "lua require('" . a:package . "')"
+endfunction
+
 function! s:setup_lua_packages()
   call s:safe_require("plugins.autopairs")
   call s:safe_require("plugins.colorizer")
@@ -341,9 +346,17 @@ noremap <Down> <nop>
 " Omnicompletion now works with Ctrl-Space
 " inoremap <C-@> <C-x><C-o>
 " inoremap <C-space> <C-x><C-o>
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-nmap <silent> <C-]> <Plug>(coc-definition)
+
+function! s:coc_remappings()
+  echomsg "Setting up coc remappings"
+
+  " Check filetype, if it's help then keep default mapping for C-]
+endfunction
+
+augroup custom_cocc
+  autocmd!
+  autocmd Filetype * call s:coc_remappings()
+augroup END
 
 " GoTo code navigation.
 nmap <silent> <leader>gy <Plug>(coc-type-definition)
@@ -395,9 +408,6 @@ nnoremap <silent> <C-c> :pclose <BAR> helpclose <BAR> cclose <BAR> lclose<CR>
 " Toggle nvim-tree
 nnoremap <silent> <space>J :NvimTreeToggle<CR>
 nnoremap <silent> <space>j :NvimTreeFindFileToggle<CR>
-
-" Toggle Vista.vim
-nnoremap <silent> <space>f :Vista!!<CR>
 
 nnoremap <silent> <esc> :noh<return><esc>
 
@@ -529,6 +539,13 @@ function! s:setup_coc()
     autocmd!
     autocmd CursorHold * silent call CocActionAsync('highlight')
   augroup end
+  " Use <c-space> to trigger completion.
+  inoremap <silent><expr> <c-space> coc#refresh()
+  nnoremap <space>f <Cmd>call CocActionAsync(coc#window#find('cocViewId', 'OUTLINE') == -1 ? 'showOutline' : 'hideOutline')<CR>
+
+  if &filetype != 'help'
+    nmap <silent> <C-]> <Plug>(coc-definition)
+  endif
 endfunction
 
 augroup custom_coc
