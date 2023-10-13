@@ -460,6 +460,10 @@ function bb() {
   echo "$1" | base64 -d
 }
 
+function wnip() {
+  xdg-open "https://docs.python.org/3/whatsnew/$1.html"
+}
+
 # }}}
 # Aliases --------------------------------------------------------- {{{
 # Check whether NeoVIM is installed and alias it to vim
