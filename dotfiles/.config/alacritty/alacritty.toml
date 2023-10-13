@@ -61,7 +61,7 @@ cursor = "CellForeground"
 text = "CellBackground"
 
 [font]
-size = 15.0
+size = 13.0
 
 [font.bold]
 style = "ExtraBold"
