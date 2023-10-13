@@ -17,7 +17,8 @@
   "diagnostic-languageserver.trace.server": "messages",
   "diagnostic-languageserver.filetypes": {
     "python": ["mypy"],
-    "nginx": ["nginx-linter"]
+    "nginx": ["nginx-linter"],
+    "dockerfile": ["hadolint"]
   },
   "diagnostic-languageserver.linters": {
     "nginx-linter": {
@@ -69,6 +70,24 @@
         "Q": "hint",
         "ANN": "warning",
         "M": "hint"
+      }
+    },
+    "hadolint": {
+      "command": "hadolint",
+      "sourceName": "hadolint",
+      "args": ["-f", "json", "-"],
+      "rootPatterns": [".hadolint.yaml", "Dockerfile"],
+      "parseJson": {
+        "line": "line",
+        "column": "column",
+        "security": "level",
+        "message": "${message} [${code}]"
+      },
+      "securities": {
+        "error": "error",
+        "warning": "warning",
+        "info": "info",
+        "style": "hint"
       }
     }
   },
@@ -130,7 +149,5 @@
     "winblend": 10,
     "border": true
   },
-  "Lua.diagnostics.globals": [
-    "vim"
-  ]
+  "Lua.diagnostics.globals": ["vim"]
 }

@@ -1,0 +1,3 @@
+#: Global hadolint config
+ignored:
+  - "DL3008" # Pin versions in apt get install.
