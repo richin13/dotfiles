@@ -14,9 +14,9 @@ function rnd_music_icon {
   elif [ "$status" == "Playing" ]; then
     local rnd=$((1 + RANDOM % 12))
     if [ $rnd -lt 6 ]; then
-      echo ""
+      echo "󰽴"
     else
-      echo ""
+      echo "󰷞"
     fi
   fi
 
