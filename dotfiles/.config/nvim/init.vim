@@ -334,6 +334,7 @@ nnoremap ' ,
 nnoremap <silent> L :bn<cr>
 nnoremap <silent> H :bp<cr>
 nnoremap <silent> <localleader>q :bd<cr>
+nnoremap <silent> <localleader>w :%bd\|e#\|bd#<cr>\|'"
 
 " Disable the functionality of arrow keys
 noremap <Left> <nop>
@@ -471,6 +472,7 @@ augroup file_extensions
   autocmd BufRead poetry.lock set filetype=toml
   autocmd BufRead .pylintrc set filetype=dosini
   autocmd BufNewFile,BufRead,BufEnter *.tf set filetype=hcl
+  autocmd BufNewFile,BufRead *.service*,*.timer set ft=systemd
 augroup end
 
 augroup filetype_specific_configs
