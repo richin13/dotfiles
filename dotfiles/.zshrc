@@ -109,9 +109,11 @@ if [ -d "$GHCUP" ]; then
 fi
 
 export ANDROID_SDK_ROOT="$HOME/.config/Android/Sdk"
+export ANDROID_HOME=$ANDROID_SDK_ROOT
 if [ -d "$ANDROID_SDK_ROOT" ]; then
   path_ladd "$ANDROID_SDK_ROOT/platform-tools"
   path_ladd "$ANDROID_SDK_ROOT/emulator"
+  path_ladd "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin"
 fi
 
 #: Envman
