@@ -247,7 +247,14 @@ function sa() { alias | grep "${*}" }
 function ignore() { curl -L -s "https://gitignore.io/api/$@" ;}
 
 function wttr() {
-  curl "wttr.in/?0"
+  #: If no argument giving, use ?0 to get the current location
+  #: Otherwise, use the argument as the location
+
+  if [[ $# -ge 1 ]]; then
+    curl "wttr.in/$1?format=1"
+    return
+  fi
+  curl "wttr.in/Tucurrique?format=1"
 }
 
 # Edit the file manipulated in the last command
