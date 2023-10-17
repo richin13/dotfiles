@@ -536,8 +536,7 @@ if [ "$DISTRO" = "ubuntu" ]; then
     popd
     asdf uninstall neovim nightly
     asdf install neovim nightly
-    nvim -c 'PlugUpdate' -c 'qa'
-    nvim -c 'CocUpdate'
+    nvim -c 'PlugUpdate' -c 'CocUpdate'
   }
 fi
 
@@ -577,6 +576,8 @@ alias fixm="autorandr --change"
 alias coc-settings="vim ~/.config/nvim/coc-settings.json"
 
 alias zzz="systemctl suspend"
+
+alias ssol="aws sso login"
 ###################################
 # }}}
 # Autocompletion -------------------------------------------------- {{{
