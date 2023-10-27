@@ -482,6 +482,8 @@ function wnip() {
 
 [[ -x "$(command -v lsd)" ]] && alias ls="lsd --classify"
 
+alias cat!="/usr/bin/cat"
+alias l!="/usr/bin/ls"
 alias cp!="/usr/bin/cp -f"
 alias rm!="/usr/bin/rm -rf"
 alias cp="cp -iv"
