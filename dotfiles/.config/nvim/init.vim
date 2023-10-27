@@ -238,6 +238,7 @@ function! s:setup_lua_packages()
   call s:safe_require("plugins.telescope")
   call s:safe_require("plugins.treesitter")
   call s:safe_require("plugins.textobj-diagnostic")
+  call s:safe_require("misc")
 endfunction
 
 call s:setup_lua_packages()
