@@ -473,6 +473,10 @@ function wnip() {
   xdg-open "https://docs.python.org/3/whatsnew/$1.html"
 }
 
+function dmp3() {
+  yt-dlp -x --audio-format mp3 --audio-quality 0 --embed-metadata "$@"
+}
+
 # }}}
 # Aliases --------------------------------------------------------- {{{
 # Check whether NeoVIM is installed and alias it to vim
