@@ -269,7 +269,7 @@ augroup fold_settings
   autocmd!
   autocmd FileType * setlocal foldlevel=99
   autocmd FileType vim,tmux,zsh,lua setlocal foldlevel=0 foldnestmax=2
-  autocmd FileType vim,tmux,zsh,lua setlocal foldmethod=marker foldlevelstart=0
+  autocmd FileType vim,tmux,zsh,lua,sh setlocal foldmethod=marker foldlevelstart=0
   autocmd FileType python,typescript AnyFoldActivate
 augroup END
 
