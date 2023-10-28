@@ -1,7 +1,3 @@
-# Inspired in https://raw.githubusercontent.com/pappasam/dotfiles/master/Makefile
-.EXPORT_ALL_VARIABLES:
-ZSH_CUSTOM=./dotfiles/.oh-my-zsh/custom
-
 CONFIG_DIRS_DOTFILES := $(sort $(dir $(wildcard dotfiles/.config/*/) ) )
 CONFIG_DIRS_HOME := $(subst dotfiles, ~, $(CONFIG_DIRS_DOTFILES))
 
@@ -49,13 +45,6 @@ tools: zplug asdf-vim vim-packager ## Install required tools
 tpm: ## Install tpm tmux plugin manager
 	git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 	@echo "Remember to execute <prefix>I inside tmux to install your plugins"
-
-.PHONY: poetry
-poetry: ## Install Poetry
-	curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python - --no-modify-path
-
-.PHONY: optionals
-optionals: tpm poetry ## Install optional tools
 
 .PHONY: rust-tools
 rust-tools: ## Install rust tools
