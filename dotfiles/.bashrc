@@ -429,6 +429,7 @@ if [ "$DISTRO" = "ubuntu" ]; then
 fi
 
 #: Python aliases
+alias py="python"
 alias pipi="pip install"
 alias pipf="pip freeze"
 alias pip-dev='pipi -U $DEFAULT_PYTHON_PACKAGES'
@@ -440,6 +441,7 @@ alias pr="poetry remove"
 alias prd="poetry remove --group=dev"
 alias django="python manage.py"
 alias cc="cookiecutter"
+alias vaa='source $DEFAULT_PYTHON_VENV_DIR/bin/activate'
 
 if [ -x "$(command -v python)" ]; then
   alias p="bpython"
@@ -531,7 +533,15 @@ alias yr="yarn remove"
 alias sail="bash vendor/bin/sail"
 alias artisan="sail artisan"
 # }}}
+# Prompt config ----------------------------------------------------- {{{
 
+green='\[\e[0;32m\]'
+purple="\[\e[0;34m\]"
+pink="\[\e[0;35m\]"
+reset='\[\e[0m\]'
+export PS1="${green}\u@\h${reset}:${purple?}\w${reset}\n${pink}\$${reset} "
+
+# }}}
 if [ -d "$FORTUNES_FOLDER" ] && [ -x "$(command -v fortune)" ]; then
   fortune_=$(fortune -a -e "$FORTUNES_FOLDER")
 
