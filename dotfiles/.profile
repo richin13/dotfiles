@@ -1,3 +1,126 @@
+# Bash profile file
+# Here we will include the base configuration for my shell
+# Such as ENV variables and global functions
+
+function path_ladd() {
+  # Takes 1 argument and adds it to the beginning of the PATH
+  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+    PATH="$1${PATH:+":$PATH"}"
+  fi
+}
+
+function path_radd() {
+  # Takes 1 argument and adds it to the end of the PATH
+  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+    PATH="${PATH:+"$PATH:"}$1"
+  fi
+}
+
+function include() {
+  # shellcheck disable=SC1090
+  [[ -f "$1" ]] && source "$1"
+}
+
+export SHELL=bash
+export PAGER="less"
+export LESS='FRSX~'      #: Global less options
+export HISTSIZE=5000     #: How many lines of history to keep in memory
+export HISTFILESIZE=5000 #: How many lines of history to keep in file
+
+if [ -x "$(command -v nvim)" ]; then
+  export EDITOR=nvim
+  export VISUAL=nvim
+  export MANPAGER='nvim +Man!' #: Use nvim as pager for man pages
+else
+  export EDITOR=vim
+  export VISUAL=vim
+fi
+
+#: colored GCC warnings and errors (for when we install from source)
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# XDG Base directory
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+
+export ASDF_DIR="$XDG_CONFIG_HOME/asdf"
+export ZPLUG_ROOT="$XDG_CONFIG_HOME/zplug"
+export ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+DISTRO=$(grep '^ID' /etc/os-release | cut -d '=' -f 2 | head -n1)
+export DISTRO
+
+export REPOS_FOLDER="$HOME/src"
+export DOCS_FOLDER="$XDG_CONFIG_HOME/docs"
+export FORTUNES_FOLDER="$XDG_CONFIG_HOME/fortunes"
+export DOTFILES="$HOME/dotfiles"
+
+LOCAL_BINS="$HOME/.local/bin"
+if [ -d "$LOCAL_BINS" ]; then
+  path_ladd "$LOCAL_BINS"
+fi
+
+YARN_BINS="$HOME/.yarn/bin"
+if [ -d "$YARN_BINS" ]; then
+  path_ladd "$YARN_BINS"
+fi
+
+CARGO_BINS="$HOME/.cargo/bin"
+if [ -d "$CARGO_BINS" ]; then
+  path_ladd "$CARGO_BINS"
+fi
+
+COMPOSER_BINS="$HOME/.config/composer/vendor/bin"
+if [ -d "$COMPOSER_BINS" ]; then
+  path_ladd "$COMPOSER_BINS"
+fi
+
+export ANDROID_SDK_ROOT="$HOME/.config/Android/Sdk"
+export ANDROID_HOME=$ANDROID_SDK_ROOT
+if [ -d "$ANDROID_SDK_ROOT" ]; then
+  path_ladd "$ANDROID_SDK_ROOT/platform-tools"
+  path_ladd "$ANDROID_SDK_ROOT/emulator"
+  path_ladd "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin"
+fi
+
+# EXPORT THE FINAL, MODIFIED PATH
+export PATH
+
+#: Setup asdf
+if [ -d "$ASDF_DIR" ]; then
+  export ASDF_DIR
+  include "$ASDF_DIR/asdf.sh"
+  include "$ASDF_DIR/completions/asdf.bash" 2>/dev/null
+fi
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BOLD='\033[1m'
+NC='\033[0m'
+
+function bold() {
+  echo -e "${BOLD}$*${NC}"
+}
+function red() {
+  echo -e "${RED}$*${NC}"
+}
+function green() {
+  echo -e "${GREEN}$*${NC}"
+}
+function yellow() {
+  echo -e "${YELLOW}$*${NC}"
+}
+
+# MANPATH: add asdf man pages to my man path
+if [ -x "$(command -v fd)" ]; then
+  for value in $(fd man1 ~/.asdf/installs --type directory | sort -hr); do
+    MANPATH="$MANPATH:$(dirname "$value")"
+  done
+  export MANPATH
+fi
+
 LS_COLORS="bd=38;5;68"
 LS_COLORS+=":ca=38;5;17"
 LS_COLORS+=":cd=38;5;113;1"
