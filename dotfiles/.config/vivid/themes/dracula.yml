@@ -1,0 +1,160 @@
+colors:
+  black: "282a36"
+  green: "50fa7b"
+  purple: "bd93f9"
+  red: "ff5555"
+  yellow: "f1fa8c"
+  cyan: "8be9fd"
+  pink: "ff79c6"
+  orange: "ffb86c"
+  white: "f8f8f2"
+  base01: "3a3c4e"
+
+core:
+  normal_text:
+    foreground: white
+
+  regular_file:
+    foreground: white
+
+  reset_to_normal:
+    foreground: orange
+
+  directory:
+    foreground: purple
+
+  symlink:
+    foreground: cyan
+
+  multi_hard_link: {}
+
+  fifo:
+    foreground: yellow
+    background: black
+
+  socket:
+    foreground: pink
+    background: black
+    font-style: bold
+
+  door:
+    foreground: pink
+    background: black
+    font-style: bold
+
+  block_device:
+    foreground: yellow
+    background: black
+    font-style: bold
+
+  character_device:
+    foreground: yellow
+    background: black
+    font-style: bold
+
+  broken_symlink:
+    foreground: red
+    background: black
+    font-style: bold
+
+  missing_symlink_target:
+    foreground: red
+    background: black
+
+  setuid:
+    foreground: white
+    background: red
+
+  setgid:
+    foreground: black
+    background: yellow
+
+  file_with_capability: {}
+
+  sticky_other_writable:
+    foreground: black
+    background: green
+
+  other_writable:
+    foreground: purple
+    background: green
+
+  sticky:
+    foreground: white
+    background: purple
+
+  executable_file:
+    foreground: green
+
+text:
+  special:
+    foreground: orange
+
+  todo:
+    foreground: pink
+    font-style: bold
+
+  licenses:
+    foreground: white
+
+  configuration:
+    foreground: yellow
+    dockerfile:
+      foreground: cyan
+      font-style: italic
+
+  other:
+    foreground: white
+    font-style: italic
+
+markup:
+  foreground: cyan
+
+programming:
+  source:
+    foreground: green
+    javascript:
+      foreground: yellow
+    lua:
+      foreground: cyan
+    php:
+      foreground: purple
+    typescript:
+      foreground: cyan
+  tooling:
+    foreground: yellow
+    packaging:
+      foreground: yellow
+      python:
+        foreground: cyan
+    build:
+      foreground: cyan
+      font-style: italic
+
+
+media:
+  image:
+    foreground: pink
+
+  audio:
+    foreground: cyan
+
+  video:
+    foreground: orange
+    font-style: bold
+
+  fonts:
+    foreground: orange
+
+office:
+  foreground: cyan
+
+archives:
+  foreground: red
+  font-style: underline
+
+executable:
+  foreground: green
+
+unimportant:
+  foreground: base01

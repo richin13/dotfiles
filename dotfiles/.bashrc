@@ -106,6 +106,8 @@ if [ -d "$ASDF_DIR" ]; then
   fi
 fi
 
+[[ -x "$(command -v vivid)" ]] && export LS_COLORS="$(vivid generate dracula)"
+
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'

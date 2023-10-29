@@ -48,4 +48,4 @@ tpm: ## Install tpm tmux plugin manager
 
 .PHONY: rust-tools
 rust-tools: ## Install rust tools
-	cargo install lsd ripgrep fd-find bat git-delta
+	cargo install lsd ripgrep fd-find bat git-delta vivid
