@@ -24,8 +24,8 @@ config_directories: $(CONFIG_DIRS_HOME) ## Create the directories in the HOME fo
 ################################################################################
 .PHONY: zinit
 zinit: ## Install zinit
-	mkdir -p "$(dirname $ZINIT_HOME)"
-	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+	mkdir -p "$$(dirname $$ZINIT_HOME)"
+	git clone https://github.com/zdharma-continuum/zinit.git "$$ZINIT_HOME"
 
 .PHONY: asdf-vm
 asdf-vm: ## Install asdf-vm
