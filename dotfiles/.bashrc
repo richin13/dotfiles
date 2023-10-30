@@ -351,6 +351,13 @@ if [ "$DISTRO" = "ubuntu" ]; then
     nvim -c 'PlugUpdate' -c 'CocUpdate'
   }
 fi
+
+function relwords() { #: Fetch related words from relatedwords.org
+  local url="https://relatedwords.org/api/related?"
+  local term=$1
+  curl -s "$url" -G --data-urlencode "term=$term" | jq -r '.[] | .word'
+}
+
 # }}}
 # Aliases ----------------------------------------------------------- {{{
 #: General aliases
