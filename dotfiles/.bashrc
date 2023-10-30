@@ -355,6 +355,7 @@ fi
 function relwords() { #: Fetch related words from relatedwords.org
   local url="https://relatedwords.org/api/related?"
   local term=$1
+  echo "$term"
   curl -s "$url" -G --data-urlencode "term=$term" | jq -r '.[] | .word'
 }
 
