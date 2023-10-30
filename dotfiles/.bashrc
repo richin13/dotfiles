@@ -104,6 +104,14 @@ if [ -d "$ASDF_DIR" ]; then
   if [ -n "$BASH_VERSION" ]; then #: Only run when we're in bash
     include "$ASDF_DIR/completions/asdf.bash"
   fi
+
+  # MANPATH: add asdf man pages to my man path
+  if [ -x "$(command -v fd)" ]; then
+    for value in $(fd man1 ~/.asdf/installs --type directory | sort -hr); do
+      MANPATH="$MANPATH:$(dirname "$value")"
+    done
+    export MANPATH
+  fi
 fi
 
 [[ -x "$(command -v vivid)" ]] && export LS_COLORS="$(vivid generate dracula)"
@@ -126,14 +134,6 @@ function green() {
 function yellow() {
   echo -e "${YELLOW}$*${NC}"
 }
-
-# MANPATH: add asdf man pages to my man path
-if [ -x "$(command -v fd)" ]; then
-  for value in $(fd man1 ~/.asdf/installs --type directory | sort -hr); do
-    MANPATH="$MANPATH:$(dirname "$value")"
-  done
-  export MANPATH
-fi
 
 # If on arch linux, setup the SSH_AUTH_SOCK and run ssh-add
 if [ "$DISTRO" = "arch" ]; then
