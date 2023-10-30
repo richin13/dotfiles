@@ -31,6 +31,10 @@ $ cd ~/dotfiles
 $ make dotfiles
 ```
 
+# Aftermath
+
+- (Map Caps Lock to Ctrl)[https://dev.to/tallesl/change-caps-lock-to-ctrl-3c4]
+
 ## Troubleshoot
 
 You might run into some issues when running `make dotfiles`. Under the hood, make will
