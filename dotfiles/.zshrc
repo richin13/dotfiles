@@ -159,9 +159,9 @@ function _py_venv_activation_hook() {
   local ret=$?
 
   if [ -n "$VIRTUAL_ENV" ]; then
-    source $PYTHON_VENV_DIR/bin/activate 2>/dev/null || deactivate || true
+    source $DEFAULT_PYTHON_VENV_DIR/bin/activate 2>/dev/null || deactivate || true
   else
-    source $PYTHON_VENV_DIR/bin/activate 2>/dev/null || true
+    source $DEFAULT_PYTHON_VENV_DIR/bin/activate 2>/dev/null || true
   fi
 
   return $ret
