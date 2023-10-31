@@ -409,6 +409,7 @@ fi
 [[ -x "$(command -v fd)" ]] || alias fd="red 'fd is not installed' && find . -type f -iname"
 
 #: Config files aliases
+alias bashrc='nvim $HOME/.bashrc'
 alias zshrc='nvim $HOME/.zshrc'
 alias vimrc='nvim $XDG_CONFIG_HOME/nvim/init.vim'
 alias tmuxconf='nvim $HOME/.tmux.conf'
@@ -429,11 +430,12 @@ if [ "$DISTRO" = "arch" ]; then
 fi
 
 #: Ubuntu-only aliases
-if [ "$DISTRO" = "ubuntu" ]; then
+if [ -x "$(command -v apt)" ]; then
   alias apti="sudo apt install -y"
   alias apts="apt search"
   alias aptu="sudo apt remove -y"
   alias aptup="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
+  alias aptar="sudo apt autoremove -y"
 fi
 
 #: Python aliases
@@ -504,6 +506,7 @@ alias gstp="git stash pop"
 alias gstd="git stash drop"
 alias gstl="git stash list"
 alias gst="git status"
+alias gsw="git switch"
 alias gcb="git switch -c"
 alias gcd="git switch develop"
 alias gcm="git switch master"
@@ -516,6 +519,7 @@ alias unwip="git rev-list --max-count=1 --format=\"%s\" HEAD | grep -q \"--wip--
 alias dc="docker compose"
 alias dcb="docker compose build"
 alias dcbuild="docker compose build"
+alias dcup="docker compose up"
 alias dcd="docker compose down --remove-orphans --volumes"
 alias dcdown="docker compose down --remove-orphans --volumes"
 alias dce="docker compose exec"
