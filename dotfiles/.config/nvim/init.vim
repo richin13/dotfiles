@@ -558,7 +558,8 @@ let g:vim_filetype_formatter_commands = {
       \ 'bash': 'shfmt -ci -i 2',
       \ 'php': 'npx --no-update-notifier --silent prettier --parser=php',
       \ 'lua': 'stylua --indent-type=Spaces --indent-width=2 -',
-      \ 'toml': 'toml-sort --trailing-comma-inline-array'
+      \ 'toml': 'toml-sort --trailing-comma-inline-array',
+      \ 'yml': 'yamlfmt -'
       \ }
 
 let g:vim_filetype_formatter_ft_maps = {
