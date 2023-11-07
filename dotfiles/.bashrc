@@ -233,7 +233,7 @@ function vim-grep() {
     return 1
   fi
 
-  nvim -- $(rg -l "$1")
+  nvim -- "$(rg -l "$1")"
 }
 
 function bsfd() { #: Base64 Decode a string
@@ -309,6 +309,7 @@ function pyclean() {
   find "${@:-.}" -depth -type d -name ".mypy_cache" -exec sh -c 'rm -r $1' shell {} \;
   find "${@:-.}" -depth -type d -name ".pytest_cache" -exec sh -c 'rm -r $1' shell {} \;
   find "${@:-.}" -depth -type d -name ".ruff_cache" -exec sh -c 'rm -r $1' shell {} \;
+  find "${@:-.}" -depth -type d -name ".tox" -exec sh -c 'rm -r $1' shell {} \;
 }
 
 function groot() { #: Go to the root of the git repository
@@ -513,7 +514,7 @@ alias gcm="git switch master"
 # Edit modified files
 alias vemd="vim \$(git status --porcelain=v2 | grep -P '\.M' | cut -d ' ' -f 9)"
 alias wip='git add -A; command git rm $(git ls-files --deleted) 2> /dev/null; command git commit --no-verify --no-gpg-sign --message "--wip-- [skip ci]"'
-alias unwip="git rev-list --max-count=1 --format=\"%s\" HEAD | grep -q \"--wip--\" && git reset HEAD~1"
+alias unwip="git rev-list --max-count=1 --format=\"%s\" HEAD | grep -q \"\--wip--\" && git reset HEAD~1"
 
 #: Docker aliases
 alias dc="docker compose"
@@ -544,6 +545,14 @@ alias yr="yarn remove"
 #: PHP / Laravel aliases
 alias sail="bash vendor/bin/sail"
 alias artisan="sail artisan"
+
+# Pentesting / Bug Bounting
+alias nmap="sudo nmap"
+alias nmapq="nmap -T4 -F " #: Quick
+alias nmapqp="nmap -sV -T4 -O -F --version-light " #: Quick plus
+alias nmapatcp="nmap -p- -T4 -A -sC -Pn " #: All TCP, no ping
+alias nmapa!="nmap -sS -sU -T4 -A -v -Pn " #: All TCP and UDP, no ping
+alias gobusterz='gobuster dir -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u '
 # }}}
 # Prompt config ----------------------------------------------------- {{{
 
