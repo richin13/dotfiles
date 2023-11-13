@@ -518,15 +518,14 @@ alias unwip="git rev-list --max-count=1 --format=\"%s\" HEAD | grep -q \"\--wip-
 
 #: Docker aliases
 alias dc="docker compose"
-alias dcb="docker compose build"
-alias dcbuild="docker compose build"
-alias dcup="docker compose up"
-alias dcd="docker compose down --remove-orphans --volumes"
-alias dcdown="docker compose down --remove-orphans --volumes"
-alias dce="docker compose exec"
-alias dcl="docker compose logs --follow"
-alias dcrestart="docker compose restart"
-alias dcps="docker compose ps"
+alias dcbuild="dc build"
+alias dcdown="dc down --remove-orphans --volumes"
+alias dcexec="dc exec"
+alias dclogs="dc logs --follow"
+alias dcps="dc ps"
+alias dcrestart="dc restart"
+alias dcrun="dc run --rm"
+alias dcup="dc up"
 
 #: Kubernetes aliases
 alias k="kubectl"
