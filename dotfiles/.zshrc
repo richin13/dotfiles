@@ -110,22 +110,6 @@ _repos() {
 }
 compdef _repos repos
 
-function rckt() {
-  cd "$ROCKET_FOLDER/$1"
-}
-
-_rckt() {
-  local state
-
-  _arguments \
-    '1: :->dir'
-
-  case $state in
-    dir) _arguments '1:projects:($(ls $ROCKET_FOLDER))' ;;
-  esac
-}
-compdef _rckt rckt
-
 _docs() {
   local state
 
