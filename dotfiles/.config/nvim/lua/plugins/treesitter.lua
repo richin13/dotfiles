@@ -36,9 +36,6 @@ treesitter.setup({
   indent = {
     enable = false,
   },
-  context_commentstring = {
-    enable = true,
-  },
   autotag = {
     enable = true,
   },
@@ -87,3 +84,8 @@ require("treesitter-context").setup({
   enable = true,
   max_lines = 3,
 })
+
+-------------------------------------------------------------------------------
+------------------------- Treesitter Context Comment --------------------------
+-------------------------------------------------------------------------------
+require('ts_context_commentstring').setup({})
