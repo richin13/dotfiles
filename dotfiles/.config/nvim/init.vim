@@ -178,7 +178,6 @@ function! PackagerInit() abort
 " Indentation & folding
   call packager#add('hynek/vim-python-pep8-indent' , {'type': 'opt'})
   call packager#add('vim-scripts/groovyindent-unix', {'type': 'opt'})
-  call packager#add('pseewald/vim-anyfold', {'type': 'opt'})
 
 " Git
   call packager#add('tpope/vim-fugitive')
@@ -209,7 +208,6 @@ augroup enable_opt_plugins
   autocmd Filetype python packadd vim-python-pep8-indent
   autocmd Filetype groovy packadd groovyindent-unix
   autocmd Filetype json packadd vim-jsonpath
-  autocmd FileType python,typescript packadd vim-anyfold
 augroup END
 
 " }}}
@@ -270,7 +268,6 @@ augroup fold_settings
   autocmd FileType * setlocal foldlevel=99
   autocmd FileType vim,tmux,zsh,lua setlocal foldlevel=0 foldnestmax=2
   autocmd FileType vim,tmux,zsh,lua,sh setlocal foldmethod=marker foldlevelstart=0
-  autocmd FileType python,typescript AnyFoldActivate
 augroup END
 
 " }}}
