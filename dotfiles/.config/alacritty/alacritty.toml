@@ -73,7 +73,7 @@ style = "ExtraBold Italic"
 style = "Bold Italic"
 
 [font.normal]
-family = "JetBrainsMono Nerd Font"
+family = "JetBrainsMono NF"
 style = "Bold"
 
 [window]
