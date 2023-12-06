@@ -33,6 +33,14 @@ M.FileType = {
     fg = colors.white,
     bold = true,
   },
+  on_click = {
+    callback = function()
+      vim.defer_fn(function()
+        require("telescope.builtin").filetypes()
+      end, 100)
+    end,
+    name = "heirline_filetypes",
+  },
 }
 
 local FileNameBlock = {

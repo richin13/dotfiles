@@ -3,6 +3,34 @@ local conditions = require("heirline.conditions")
 local common = require("plugins.heirline.common")
 
 local M = {}
+local LIMIT = 25
+
+M.GitBranch = {
+  init = function(self)
+    self.status_dict = vim.b.gitsigns_status_dict
+    self.branch_name = self.status_dict.head or ""
+  end,
+  condition = conditions.is_git_repo,
+  hl = {
+    fg = colors.gray,
+  },
+
+  { -- git branch icon
+    hl = {
+      fg = colors.red,
+    },
+    provider = " ",
+  },
+  { -- git branch name
+    provider = function(self)
+      local branch_name = self.branch_name
+      if string.len(branch_name) > LIMIT then
+        branch_name = string.sub(branch_name, 1, LIMIT - 3) .. "..."
+      end
+      return branch_name
+    end,
+  },
+}
 
 M.Git = {
   condition = conditions.is_git_repo,
@@ -15,34 +43,12 @@ M.Git = {
     self.has_changes = self.added ~= 0 or self.removed ~= 0 or self.changed ~= 0
   end,
   static = {
-    branch_icon  = " ",
     added_icon   = " ",
     removed_icon = " ",
     changed_icon = " ",
   },
 
-  hl = {
-    -- bg = colors.menu,
-    fg = colors.gray,
-  },
-
-  { -- git branch icon
-    hl = {
-      fg = colors.red,
-    },
-    provider = function(self)
-      return self.branch_icon
-    end,
-  },
-  { -- git branch name
-    provider = function(self)
-      local branch_name = self.status_dict.head
-      if string.len(branch_name) > 18 then
-        branch_name = string.sub(branch_name, 1, 15) .. "..."
-      end
-      return branch_name
-    end,
-  },
+  M.GitBranch,
   {
     condition = function(self)
       return self.has_changes

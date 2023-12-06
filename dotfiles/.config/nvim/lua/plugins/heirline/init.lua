@@ -9,7 +9,6 @@ local mode = require("plugins.heirline.mode")
 local tabline = require("plugins.heirline.tabline")
 
 local Align = common.Align
-local Cut = common.Cut
 local Space = common.Space
 
 local M = {}
@@ -31,22 +30,27 @@ local SpecialStatusline = {
 }
 
 local InactiveStatusLine = {
-  condition = function()
-    return not conditions.is_active()
-  end,
-  common.FileNameBlock,
-  Cut,
+  hl = {
+    bg = colors.selection,
+    fg = colors.white,
+    force = true,
+  },
+  condition = conditions.is_not_active,
+  Space,
+  file_info.FileNameBlock,
   Align,
+  git.GitBranch,
+  Space,
 }
 
 local DefaultStatusline = {
   mode.ViMode,
   Space,
-  git.GitBlock,
-  Space,
   file_info.FileNameBlock,
-  Align,
+  Space,
   diagnostics.DiagnosticsBlock,
+  Align,
+  git.GitBlock,
   Space,
 }
 
@@ -76,11 +80,10 @@ local StatusLines = {
       t = colors.yellow,
     },
     mode_color = function(self)
-      local mode = conditions.is_active() and vim.fn.mode(1):lower() or "n"
-      return self.mode_colors[mode]
+      local mode_ = conditions.is_active() and vim.fn.mode(1):lower() or "n"
+      return self.mode_colors[mode_]
     end,
   },
-
   fallthrough = false,
 
   SpecialStatusline,
@@ -90,7 +93,12 @@ local StatusLines = {
 
 local Navic = {
   provider = function()
-    return vim.b.coc_symbol_line or ""
+    local coc_symbol_line = vim.b.coc_symbol_line or ""
+    -- If coc_symbol_line contains the filename, return empty string
+    if vim.fn.stridx(coc_symbol_line, "%f") ~= -1 then
+      return ""
+    end
+    return coc_symbol_line
   end,
 }
 
@@ -109,34 +117,16 @@ local InactiveWinbar = {
     return not conditions.is_active()
   end,
   hl = {
-    bg = colors.visual,
+    bg = colors.bg,
     fg = colors.white,
     force = true,
   },
-  file_info.FileNameBlock,
-  Space,
+  Align,
+  file_info.FileType,
 }
 
 local WinBars = {
   hl = { bg = colors.bg },
-  static = {
-    mode_colors = {
-      n = colors.cyan,
-      i = colors.green,
-      v = colors.purple,
-      ["\22"] = colors.cyan,
-      c = colors.orange,
-      s = colors.purple,
-      ["\19"] = colors.purple,
-      r = colors.red,
-      ["!"] = colors.orange,
-      t = colors.yellow,
-    },
-    mode_color = function(self)
-      local mode = conditions.is_active() and vim.fn.mode(1):lower() or "n"
-      return self.mode_colors[mode]
-    end,
-  },
   fallthrough = false,
   { -- Hide the winbar for special buffers
     condition = function()
