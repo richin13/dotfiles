@@ -27,6 +27,7 @@ set signcolumn=yes:2
 
 " Highlight current line
 set cursorline
+set cursorlineopt=number
 
 " Remove query for terminal version
 " This prevents un-editable garbage characters from being printed
