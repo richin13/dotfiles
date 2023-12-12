@@ -57,7 +57,7 @@ local FileNameBlock = {
   },
 }
 
-local FileIcon = {
+M.FileIcon = {
   init = function(self)
     local filename = self.filename
     local extension = vim.fn.fnamemodify(filename, ":e")
@@ -74,8 +74,6 @@ local FileIcon = {
     }
   end,
 }
-
-M.FileIcon = FileIcon
 
 M.FileName = {
   provider = function(self)
@@ -114,7 +112,7 @@ M.FileFlags = {
   },
 }
 
-M.FileNameBlock = utils.insert(FileNameBlock, FileIcon, M.WorkDir, M.FileName, M.FileFlags, common.Cut)
+M.FileNameBlock = utils.insert(FileNameBlock, M.FileIcon, M.WorkDir, M.FileName, M.FileFlags, common.Cut)
 
 M.HelpFilename = {
   condition = function()

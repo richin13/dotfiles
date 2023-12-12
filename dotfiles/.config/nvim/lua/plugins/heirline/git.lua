@@ -11,10 +11,6 @@ M.GitBranch = {
     self.branch_name = self.status_dict.head or ""
   end,
   condition = conditions.is_git_repo,
-  hl = {
-    fg = colors.gray,
-  },
-
   { -- git branch icon
     hl = {
       fg = colors.red,

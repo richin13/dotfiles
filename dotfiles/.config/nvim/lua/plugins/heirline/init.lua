@@ -10,7 +10,7 @@ local tabline = require("plugins.heirline.tabline")
 
 local Align = common.Align
 local Space = common.Space
-
+vim.opt_local.winbar = nil
 local M = {}
 
 local SpecialStatusline = {
@@ -71,7 +71,7 @@ local StatusLines = {
       n = colors.cyan,
       i = colors.green,
       v = colors.purple,
-      ["\22"] = colors.cyan,
+      ["\22"] = colors.purple,
       c = colors.orange,
       s = colors.purple,
       ["\19"] = colors.purple,

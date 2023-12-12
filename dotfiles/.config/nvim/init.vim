@@ -186,7 +186,6 @@ function! PackagerInit() abort
 
 " Language server
   call packager#add('neoclide/coc.nvim', {'branch': 'release'})
-  call packager#add('andrewferrier/textobj-diagnostic.nvim')
 
   " Copilot, why not
   call packager#add('github/copilot.vim')
@@ -214,34 +213,11 @@ augroup END
 " }}}
 " General: Lua Plugins Setup ------------------ {{{
 
-function! s:safe_require(package)
-  try
-    execute "lua require('" . a:package . "')"
-  catch
-    echom "Error with lua require('" . a:package . "')"
-  endtry
-endfunction
+lua require('packages')
+lua require('plugins.heirline')
+lua require('misc')
 
-" For debugging purposes.
-function! s:unsafe_require(package)
-  execute "lua require('" . a:package . "')"
-endfunction
-
-function! s:setup_lua_packages()
-  call s:safe_require("plugins.autopairs")
-  call s:safe_require("plugins.colorizer")
-  call s:safe_require("plugins.gitsigns")
-  call s:safe_require("plugins.heirline")
-  call s:safe_require("plugins.indent-line")
-  call s:safe_require("plugins.nvim-tree")
-  call s:safe_require("plugins.telescope")
-  call s:safe_require("plugins.treesitter")
-  call s:safe_require("plugins.textobj-diagnostic")
-  call s:safe_require("misc")
-endfunction
-
-call s:setup_lua_packages()
-
+" `gf` to open lua file under cursor
 augroup custom_general_lua_extensions
   autocmd!
   autocmd FileType vim let &l:path .= ','.stdpath('config').'/lua'
@@ -362,7 +338,7 @@ nnoremap <silent> <C-b> <cmd>Telescope buffers<cr>
 nnoremap <silent> <leader>b <cmd>Telescope buffers<cr>
 nnoremap <silent> <leader>th <cmd>Telescope git_files<cr>
 nnoremap <silent> B <cmd>Telescope git_branches<cr>
-nnoremap <silent> S <cmd>Telescope spell_suggest<cr>
+nnoremap <silent> <leader>s <cmd>Telescope spell_suggest<cr>
 
 nnoremap <silent> <leader>d <cmd>call CocActionAsync('diagnosticToggle')<CR>
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
