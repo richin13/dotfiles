@@ -150,7 +150,6 @@ M.setup = function()
     winbar = WinBars,
     tabline = tabline.BufferLine,
   })
-  vim.o.showtabline = 2
   vim.cmd([[au FileType * if index(['wipe', 'delete'], &bufhidden) >= 0 | set nobuflisted | endif]])
 end
 

@@ -3,78 +3,37 @@
 " Author: Ricardo Madriz
 
 " General: global config ---------------------- {{{
-
-" This config assumes you have nvim installed
 if !has('nvim')
   echo "⚠ Configuration is invalid outside Neovim"
 endif
 
-" Leader mappings
 let mapleader = ","
 let maplocalleader = "\\"
-
-"A comma separated list of options for Insert mode completion
-set completeopt=menu,longest,preview
-
-" Enable buffer deletion instead of having to write each buffer
-set hidden
-
-" Mouse: enable GUI mouse support in all modes
-set mouse=a
-
-" Always show signcolumn
-set signcolumn=yes:2
-
-" Highlight current line
-set cursorline
-set cursorlineopt=number
-
-" Remove query for terminal version
-" This prevents un-editable garbage characters from being printed
-" after the 80 character highlight line
-set t_RV=
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let g:python3_host_prog = $HOME . '/.asdf/shims/python3'
+let g:python_host_prog  = $HOME . '/.asdf/shims/python2'
+let g:node_host_prog = $HOME . '/.asdf/installs/nodejs/12.15.0/bin/node'
 
 filetype plugin indent on
-
-set spelllang=en_us
-
-set showtabline=2
-
-set showtabline=0
-
-set autoread
-
-" When you type the first tab hit will complete as much as possible,
-" the second tab hit will provide a list, the third and subsequent tabs
-" will cycle through completion options so you can complete the file
-" without further keys
-set wildmode=longest,list,full
-set wildmenu
-
-" Enable using local vimrc
+set completeopt=menu,longest,preview
+set cursorline cursorlineopt=number
 set exrc
-
-" Make sure numbering is set
-set number
-
-" Disable Swap file
-set nobackup
-set noswapfile
-
-" My shell is ZSH
-set shell=/usr/bin/zsh
-
-" More natural splitting
-set splitbelow
-set splitright
-
-set shortmess+=c shortmess+=I
-
-" Keep 2 lines visible above/below the cursor when scrolling
-set scrolloff=2
-
-" Hide mode (LightLine provides what we need to tell the mode we're in
+set list listchars=tab:>\ ,nbsp:+,leadmultispace:\ ,multispace:-
+set noshowcmd
 set noshowmode
+set noswapfile
+set number
+set secure
+set scrolloff=2
+set shell=/usr/bin/zsh
+set shortmess+=c shortmess+=I
+set showtabline=2
+set signcolumn=yes:2
+set spelllang=en_us
+set splitbelow splitright
+set updatetime=300
+set wildignorecase wildignore=*.pyc,**/__pycache__/*,**/node_modules/*,.coverage.*,.eggs,*.egg-info/
+set wildmenu wildmode=longest,list,full
 
 " Redraw window whenever I've regained focus
 augroup redraw_on_refocus
@@ -86,28 +45,6 @@ augroup custom_vim_resized
   autocmd!
   au VimResized * wincmd =
 augroup END
-
-" Ignore annoying patterns
-set wildignore=*.pyc,**/__pycache__/*,**/node_modules/*,.coverage.*,.eggs,*.egg-info/
-
-" Ignore casing when performing completion
-set wildignorecase
-
-" Better color support
-if (has("nvim"))
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
-if (has("termguicolors"))
-  set termguicolors
-endif
-
-let g:python3_host_prog = $HOME . '/.asdf/shims/python3'
-let g:python_host_prog  = $HOME . '/.asdf/shims/python2'
-let g:node_host_prog = $HOME . '/.asdf/installs/nodejs/12.15.0/bin/node'
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
 
 try
   colorscheme dracula
@@ -122,8 +59,6 @@ augroup color_column
   autocmd FileType python,javascript,typescript,javascriptreact,typescriptreact,r setlocal colorcolumn=80
   autocmd FileType rust setlocal colorcolumn=99
 augroup END
-
-set list listchars=tab:>\ ,nbsp:+,leadmultispace:\ ,multispace:-
 
 " }}}
 " General: Plugin Install --------------------- {{{
@@ -178,7 +113,6 @@ function! PackagerInit() abort
 
 " Indentation & folding
   call packager#add('hynek/vim-python-pep8-indent' , {'type': 'opt'})
-  call packager#add('vim-scripts/groovyindent-unix', {'type': 'opt'})
 
 " Git
   call packager#add('tpope/vim-fugitive')
@@ -206,8 +140,6 @@ command! -bang PlugStartOver call PackagerInit() |
 augroup enable_opt_plugins
   autocmd!
   autocmd Filetype python packadd vim-python-pep8-indent
-  autocmd Filetype groovy packadd groovyindent-unix
-  autocmd Filetype json packadd vim-jsonpath
 augroup END
 
 " }}}
@@ -377,18 +309,12 @@ nnoremap <silent> <esc> :noh<return><esc>
 " Search and Replace
 nnoremap <F2> :%s/\<<C-r><C-w>\>/
 
-" nnoremap <F2> "zyiw:exe "Ack ".@z.""<CR>
-
 " Make CTRL-P and CTRL-N behave like <Up> & <Down>
 cnoremap <C-P> <Up>
 cnoremap <C-N> <Down>
 
 " Toggle Spell Check
 nnoremap <leader>ss :setlocal spell!<cr>
-" Move to next bad word
-nnoremap <leader>sn ]s
-" Move to previous bad word
-nnoremap <leader>sp [s
 " Add current word in dictionary
 nnoremap <leader>sa zg
 
@@ -401,16 +327,6 @@ nnoremap Q <nop>
 " Like i_o & i_O but returns to normal mode
 nnoremap <leader>o moo<ESC>k`o
 nnoremap <leader>O moO<ESC>k`o
-
-" Navigate with C-hjkl in insert mode
-" inoremap <C-h> <C-o>h
-" inoremap <C-j> <C-o>j
-" inoremap <C-k> <C-o>k
-" inoremap <C-l> <C-o>l
-
-" Shifting: in visual mode, make shifts keep selection
-vnoremap D <gv
-vnoremap T >gv
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -570,16 +486,4 @@ augroup comment_str_config
   au Filetype dosini setlocal commentstring=#\ %s
   au Filetype dosini setlocal comments=:#,:;
 augroup END
-" }}}
-" General: Cleanup ---------------------------- {{{
-" commands that need to run at the end of my vimrc
-
-" disable unsafe commands in your project-specific .vimrc files
-" This will prevent :autocmd, shell and write commands from being
-" run inside project-specific .vimrc files unless they’re owned by you.
-set secure
-
-" ShowCommand: turn off character printing to vim status line
-set noshowcmd
-
 " }}}
