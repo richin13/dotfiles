@@ -62,80 +62,68 @@ augroup END
 
 " }}}
 " General: Plugin Install --------------------- {{{
-function! PackagerInit() abort
-  packadd vim-packager
-  call packager#init({'depth': 1})
-  call packager#add('kristijanhusak/vim-packager', { 'type': 'opt' })
+function! s:packager_init(packager) abort
+  call a:packager.add('https://github.com/kristijanhusak/vim-packager', { 'type': 'opt' })
 
   " Basic
-  call packager#add('fcpg/vim-altscreen')
-  call packager#add('kyazdani42/nvim-web-devicons')
-  call packager#add('tpope/vim-surround')
-  call packager#add('tmux-plugins/vim-tmux-focus-events') " Tmux integration
-  call packager#add('christoomey/vim-system-copy')
-  call packager#add('tmhedberg/matchit')
+  call a:packager.add('https://github.com/fcpg/vim-altscreen')
+  call a:packager.add('https://github.com/kyazdani42/nvim-web-devicons')
+  call a:packager.add('https://github.com/tpope/vim-surround')
+  call a:packager.add('https://github.com/christoomey/vim-system-copy')
 
-  call packager#add('rebelot/heirline.nvim')
-  call packager#add('kyazdani42/nvim-tree.lua')
+  call a:packager.add('https://github.com/rebelot/heirline.nvim')
+  call a:packager.add('https://github.com/kyazdani42/nvim-tree.lua')
 
   " fuzzy finders
-  call packager#add('nvim-lua/popup.nvim')
-  call packager#add('nvim-lua/plenary.nvim')
-  call packager#add('nvim-telescope/telescope.nvim')
+  call a:packager.add('https://github.com/nvim-lua/popup.nvim')
+  call a:packager.add('https://github.com/nvim-lua/plenary.nvim')
+  call a:packager.add('https://github.com/nvim-telescope/telescope.nvim')
 
   " Utils
-  call packager#add('tpope/vim-commentary')
-  call packager#add('myusuf3/numbers.vim')
-  call packager#add('tpope/vim-abolish')
-  call packager#add('weirongxu/plantuml-previewer.vim')
-  call packager#add('tyru/open-browser.vim')
-  call packager#add('iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
-  call packager#add('tommcdo/vim-lion')
-  call packager#add('tpope/vim-endwise')
-  call packager#add('pappasam/vim-filetype-formatter')
-  call packager#add('lukas-reineke/indent-blankline.nvim')
-  call packager#add('windwp/nvim-autopairs')
-  call packager#add('norcalli/nvim-colorizer.lua')
+  call a:packager.add('https://github.com/tpope/vim-commentary')
+  call a:packager.add('https://github.com/myusuf3/numbers.vim')
+  call a:packager.add('https://github.com/tpope/vim-abolish')
+  call a:packager.add('https://github.com/weirongxu/plantuml-previewer.vim')
+  call a:packager.add('https://github.com/tyru/open-browser.vim')
+  call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
+  call a:packager.add('https://github.com/tommcdo/vim-lion')
+  call a:packager.add('https://github.com/tpope/vim-endwise')
+  call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
+  call a:packager.add('https://github.com/lukas-reineke/indent-blankline.nvim')
+  call a:packager.add('https://github.com/windwp/nvim-autopairs')
+  call a:packager.add('https://github.com/norcalli/nvim-colorizer.lua')
 
 " Coloring & Syntax highlighting
-  call packager#add('richin13/dracula-nvim')
+  call a:packager.add('https://github.com/richin13/dracula-nvim')
 
-  call packager#add('chr4/nginx.vim')
-  call packager#add('aklt/plantuml-syntax')
-  call packager#add('jwalton512/vim-blade')
-  call packager#add('nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'})
-  call packager#add('nvim-treesitter/nvim-treesitter-textobjects')
-  call packager#add('nvim-treesitter/playground')
-  call packager#add('romgrk/nvim-treesitter-context')
-  call packager#add('windwp/nvim-ts-autotag')
-  call packager#add('JoosepAlviste/nvim-ts-context-commentstring')
-  call packager#add('s1n7ax/nvim-comment-frame')
+  call a:packager.add('https://github.com/chr4/nginx.vim')
+  call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'})
+  call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter-textobjects')
+  call a:packager.add('https://github.com/romgrk/nvim-treesitter-context')
+  call a:packager.add('https://github.com/windwp/nvim-ts-autotag')
+  call a:packager.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring')
+  call a:packager.add('https://github.com/s1n7ax/nvim-comment-frame')
 
 " Indentation & folding
-  call packager#add('hynek/vim-python-pep8-indent' , {'type': 'opt'})
+  call a:packager.add('https://github.com/hynek/vim-python-pep8-indent' , {'type': 'opt'})
 
 " Git
-  call packager#add('tpope/vim-fugitive')
-  call packager#add('lewis6991/gitsigns.nvim')
+  call a:packager.add('https://github.com/tpope/vim-fugitive')
+  call a:packager.add('https://github.com/lewis6991/gitsigns.nvim')
 
 " Language server
-  call packager#add('neoclide/coc.nvim', {'branch': 'release'})
+  call a:packager.add('https://github.com/neoclide/coc.nvim', {'branch': 'release'})
 
   " Copilot, why not
-  call packager#add('github/copilot.vim')
+  call a:packager.add('https://github.com/github/copilot.vim')
 endfunction
 
-command! PlugInstall call PackagerInit() |
-      \ call packager#install()
-command! -bang PlugUpdate call PackagerInit() |
-      \ call packager#update({'force_hooks': '<bang>'})
-command! -bang PlugClean call PackagerInit() |
-      \ call packager#clean()
-command! -bang PlugStatus call PackagerInit() |
-      \ call packager#status()
-command! -bang PlugStartOver call PackagerInit() |
-      \ call packager#clean()
-      \ call packager#update({'force_hooks': '<bang>'})
+packadd vim-packager
+call packager#setup(function('s:packager_init'), {'depth': 1, 'window_cmd': 'edit'})
+
+command! PlugInstall echom 'Use :PackagerInstall instead' | :PackagerInstall
+command! PlugUpdate echom 'Use :PackagerUpdate instead' | :PackagerUpdate
+command! PlugClean echom 'Use :PackagerClean instead' | :PackagerClean
 
 augroup enable_opt_plugins
   autocmd!
@@ -176,7 +164,7 @@ augroup fold_settings
   autocmd!
   autocmd FileType * setlocal foldlevel=99
   autocmd FileType vim,tmux,zsh,lua setlocal foldlevel=0 foldnestmax=2
-  autocmd FileType vim,tmux,zsh,lua,sh setlocal foldmethod=marker foldlevelstart=0
+  autocmd FileType vim,tmux,zsh,lua,sh,make setlocal foldmethod=marker foldlevelstart=0
 augroup END
 
 " }}}
