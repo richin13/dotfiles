@@ -99,6 +99,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/chr4/nginx.vim')
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'})
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter-textobjects')
+  call a:packager.add('https://github.com/nvim-treesitter/playground')
   call a:packager.add('https://github.com/romgrk/nvim-treesitter-context')
   call a:packager.add('https://github.com/windwp/nvim-ts-autotag')
   call a:packager.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring')
