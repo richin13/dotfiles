@@ -159,3 +159,9 @@ fi
 if [ ! -z $ZPROF ]; then
   zprof
 fi
+
+#: https://github.com/rsteube/carapace-bin (external autocompletion for docker compose)
+if [ $commands[carapace] ]; then
+  source <(carapace docker);
+  source <(carapace docker-compose);
+fi
