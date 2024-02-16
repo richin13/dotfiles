@@ -94,6 +94,11 @@ if [ -d "$ANDROID_SDK_ROOT" ]; then
   path_ladd "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin"
 fi
 
+RYE_SHIMS="$HOME/.local/rye/shims"
+if [ -d "$RYE_SHIMS" ]; then
+  path_ladd "$RYE_SHIMS"
+fi
+
 # EXPORT THE FINAL, MODIFIED PATH
 export PATH
 
