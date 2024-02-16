@@ -46,6 +46,10 @@ tpm: ## Install tpm tmux plugin manager
 	git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 	@echo "Remember to execute <prefix>I inside tmux to install your plugins"
 
+.PHONY: zoxide
+zoxide: ## Install zoxide
+	curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+
 .PHONY: rust-tools
 rust-tools: ## Install rust tools
 	cargo install lsd ripgrep fd-find bat git-delta vivid

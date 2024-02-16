@@ -121,6 +121,14 @@ fi
 
 [[ -x "$(command -v vivid)" ]] && export LS_COLORS="$(vivid generate dracula)"
 
+if [ -x "$(command -v zoxide)" ]; then
+  if [ -n "$BASH_VERSION" ]; then
+    eval "$(zoxide init --cmd cd bash)"
+  else
+    eval "$(zoxide init --cmd cd zsh)"
+  fi
+fi
+
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
