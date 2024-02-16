@@ -79,6 +79,5 @@ style = "Bold"
 [window]
 decorations = "full"
 startup_mode = "Maximized"
-
-[window.padding]
-y = 4
+padding = { y = 4 }
+opacity = 1
