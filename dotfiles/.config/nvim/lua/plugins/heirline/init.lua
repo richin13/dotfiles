@@ -126,6 +126,7 @@ local InactiveWinbar = {
 }
 
 local WinBars = {
+  hl = { bg = colors.bg },
   fallthrough = false,
   { -- Hide the winbar for special buffers
     condition = function()
