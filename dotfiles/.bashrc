@@ -124,8 +124,6 @@ fi
 if [ -x "$(command -v zoxide)" ]; then
   if [ -n "$BASH_VERSION" ]; then
     eval "$(zoxide init --cmd cd bash)"
-  else
-    eval "$(zoxide init --cmd cd zsh)"
   fi
 fi
 
