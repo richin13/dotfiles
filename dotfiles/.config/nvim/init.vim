@@ -87,7 +87,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/tyru/open-browser.vim')
   call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
   call a:packager.add('https://github.com/tommcdo/vim-lion')
-  call a:packager.add('https://github.com/tpope/vim-endwise')
+  " call a:packager.add('https://github.com/tpope/vim-endwise')
   call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
   call a:packager.add('https://github.com/lukas-reineke/indent-blankline.nvim')
   call a:packager.add('https://github.com/windwp/nvim-autopairs')
