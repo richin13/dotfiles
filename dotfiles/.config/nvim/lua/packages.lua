@@ -179,7 +179,6 @@ require("nvim-treesitter.configs").setup({
     "graphql",
     "haskell",
     "hcl",
-    "help",
     "html",
     "javascript",
     "lua",
