@@ -89,7 +89,7 @@ zstyle '*' single-ignored show #: Show ignored when pressing tab twice
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-ASDF_COMPLETIONS="${ASDF_DIR}/completions/_asdf"
+ASDF_COMPLETIONS="${ASDF_DIR}/completions"
 if [ -d "$ASDF_COMPLETIONS" ]; then
   unset _asdf
   fpath+=(${ASDF_COMPLETIONS})
