@@ -96,6 +96,7 @@ fi
 
 RYE_SHIMS="$HOME/.local/rye/shims"
 if [ -d "$RYE_SHIMS" ]; then
+  export RYE_HOME="$HOME/.local/rye"
   path_ladd "$RYE_SHIMS"
 fi
 
