@@ -104,6 +104,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/windwp/nvim-ts-autotag')
   call a:packager.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring')
   call a:packager.add('https://github.com/s1n7ax/nvim-comment-frame')
+  call a:packager.add('https://github.com/lepture/vim-jinja')
 
 " Indentation & folding
   call a:packager.add('https://github.com/hynek/vim-python-pep8-indent' , {'type': 'opt'})
@@ -353,6 +354,7 @@ augroup file_extensions
   autocmd BufRead .pylintrc set filetype=dosini
   autocmd BufNewFile,BufRead,BufEnter *.tf set filetype=hcl
   autocmd BufNewFile,BufRead *.service*,*.timer set ft=systemd
+  autocmd BufNewFile,BufRead *.jinja,*.jinja2 set ft=jinja
 augroup end
 
 augroup filetype_specific_configs
