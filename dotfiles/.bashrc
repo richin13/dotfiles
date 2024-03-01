@@ -454,6 +454,7 @@ fi
 #: Python aliases
 alias py="python"
 alias pipi="pip install"
+alias pipu="pip uninstall"
 alias pipf="pip freeze"
 alias pip-dev='pipi -U $DEFAULT_PYTHON_PACKAGES'
 alias pa="poetry add"
