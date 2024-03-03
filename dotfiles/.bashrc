@@ -372,6 +372,10 @@ function relwords() { #: Fetch related words from relatedwords.org
   curl -s "$url" -G --data-urlencode "term=$term" | jq -r '.[] | .word'
 }
 
+function restart-plasma() { #: Restart plasma
+  kquitapp5 plasmashell && kstart5 plasmashell
+}
+
 # }}}
 # Aliases ----------------------------------------------------------- {{{
 #: General aliases
