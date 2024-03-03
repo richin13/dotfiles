@@ -86,6 +86,8 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
         usbmux uucp vcsa wwwrun xfs '_*'
 zstyle '*' single-ignored show #: Show ignored when pressing tab twice
 
+autoload -Uz compinit && compinit
+
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
@@ -97,7 +99,6 @@ if [ -d "$ASDF_COMPLETIONS" ]; then
   compdef _asdf asdf
 fi
 
-autoload -Uz compinit && compinit
 _repos() {
   local state
 
