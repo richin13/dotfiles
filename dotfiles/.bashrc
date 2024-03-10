@@ -29,7 +29,7 @@ function include() {
 
 export SHELL=bash
 export PAGER="less"
-export LESS='FRSX~'      #: Global less options
+export LESS='FRSX~' #: Global less options
 ## History file configuration
 if [ -n "$BASH_VERSION" ]; then
   export HISTFILE="$HOME/.bash_history"
@@ -568,10 +568,10 @@ alias artisan="sail artisan"
 
 # Pentesting / Bug Bounting
 alias nmap="sudo nmap"
-alias nmapq="nmap -T4 -F " #: Quick
+alias nmapq="nmap -T4 -F "                         #: Quick
 alias nmapqp="nmap -sV -T4 -O -F --version-light " #: Quick plus
-alias nmapatcp="nmap -p- -T4 -A -sC -Pn " #: All TCP, no ping
-alias nmapa!="nmap -sS -sU -T4 -A -v -Pn " #: All TCP and UDP, no ping
+alias nmapatcp="nmap -p- -T4 -A -sC -Pn "          #: All TCP, no ping
+alias nmapa!="nmap -sS -sU -T4 -A -v -Pn "         #: All TCP and UDP, no ping
 alias gobusterz='gobuster dir -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u '
 # }}}
 # Prompt config ----------------------------------------------------- {{{
