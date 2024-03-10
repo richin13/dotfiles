@@ -274,7 +274,7 @@ function dmp3() { #: Download a yt as mp3
   yt-dlp -x --audio-format mp3 --audio-quality 0 --embed-metadata "$@"
 }
 
-function d () {
+function d() {
   if [[ -n $1 ]]; then
     cd "-$1" || return 1
   else
@@ -376,6 +376,16 @@ function restart-plasma() { #: Restart plasma
   kquitapp5 plasmashell && kstart5 plasmashell
 }
 
+function p() { #: Runs a python REPL (on batteries, if installed)
+  if [ -x "$(command -v ipython)" ]; then
+    ipython
+  elif [ -x "$(command -v bpython)" ]; then
+    bpython
+  else
+    python
+  fi
+}
+
 # }}}
 # Aliases ----------------------------------------------------------- {{{
 #: General aliases
@@ -470,12 +480,6 @@ alias prd="poetry remove --group=dev"
 alias django="python manage.py"
 alias cc="cookiecutter"
 alias vaa='source $DEFAULT_PYTHON_VENV_DIR/bin/activate'
-
-if [ -x "$(command -v python)" ]; then
-  alias p="bpython"
-else
-  alias p="python"
-fi
 
 #: Git aliases
 alias g="git"
