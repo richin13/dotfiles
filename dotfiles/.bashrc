@@ -154,7 +154,7 @@ if [ "$DISTRO" = "arch" ]; then
 fi
 
 export DEFAULT_PYTHON_VENV_DIR=.venv
-export DEFAULT_PYTHON_PACKAGES=(pip neovim bpython ruff)
+export DEFAULT_PYTHON_PACKAGES=(pip neovim ipython ruff)
 
 # }}}
 # Functions --------------------------------------------------------- {{{
@@ -378,7 +378,7 @@ function restart-plasma() { #: Restart plasma
 
 function p() { #: Runs a python REPL (on batteries, if installed)
   if [ -x "$(command -v ipython)" ]; then
-    ipython
+    ipython --no-confirm-exit
   elif [ -x "$(command -v bpython)" ]; then
     bpython
   else
