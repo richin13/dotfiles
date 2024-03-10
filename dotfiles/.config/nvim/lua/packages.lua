@@ -180,6 +180,7 @@ require("nvim-treesitter.configs").setup({
     "haskell",
     "hcl",
     "html",
+    "hurl",
     "javascript",
     "lua",
     "make",
