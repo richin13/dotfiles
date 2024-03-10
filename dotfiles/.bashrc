@@ -154,7 +154,7 @@ if [ "$DISTRO" = "arch" ]; then
 fi
 
 export DEFAULT_PYTHON_VENV_DIR=.venv
-export DEFAULT_PYTHON_PACKAGES=(pip neovim bpython isort docformatter black ruff)
+export DEFAULT_PYTHON_PACKAGES=(pip neovim bpython ruff)
 
 # }}}
 # Functions --------------------------------------------------------- {{{

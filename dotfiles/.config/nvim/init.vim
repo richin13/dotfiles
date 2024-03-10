@@ -434,8 +434,15 @@ let g:numbers_exclude               = ['NvimTree']
 "  }}}
 " Config: Code Formatting --------------------- {{{
 
+function s:ruff()
+  return printf(
+        \ 'ruff check -q --fix-only --stdin-filename="%1$s" - | ' ..
+        \ 'ruff format -q --stdin-filename="%1$s" -',
+        \ expand('%:p'))
+endfunction
+
 let g:vim_filetype_formatter_commands = {
-      \ 'python': 'black -l 79 -q - | isort - | docformatter -',
+      \ 'python': function('s:ruff'),
       \ 'bash': 'shfmt -ci -i 2',
       \ 'php': 'npx --no-update-notifier --silent prettier --parser=php',
       \ 'lua': 'stylua --indent-type=Spaces --indent-width=2 -',
