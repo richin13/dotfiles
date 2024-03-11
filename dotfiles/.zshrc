@@ -171,3 +171,5 @@ fi
 if [ -x "$(command -v zoxide)" ]; then
   eval "$(zoxide init --cmd cd zsh)"
 fi
+
+compdef _cd cd
