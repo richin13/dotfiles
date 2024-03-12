@@ -1,111 +1,16 @@
 {
-  "suggest.autoTrigger": "always",
-  "notification.disabledProgressSources": ["*"],
-  "tsserver.npm": "/home/rmadriz/.asdf/shims/npm",
-  "tree.key.toggleSelection": "m",
-  "tree.key.toggle": "o",
-  "tree.key.close": "<Space>l",
-  "tree.key.collapseAll": "W",
-  "tree.key.expandAll": "w",
-  "inlayHint.enable": false,
-  "python.formatting.provider": "black",
-  "python.linting.ruffEnabled": true,
+  // Coc settings (see :h coc-config)
   "diagnostic.errorSign": " ",
   "diagnostic.warningSign": " ",
   "diagnostic.hintSign": " ",
   "diagnostic.infoSign": " ",
-  "diagnostic-languageserver.trace.server": "messages",
-  "diagnostic-languageserver.filetypes": {
-    "python": ["mypy"],
-    "nginx": ["nginx-linter"],
-    "dockerfile": ["hadolint"]
+  "diagnostic.level": "information",
+  "hover.floatConfig": {
+    "borderhighlight": "Boolean",
+    "winblend": 10,
+    "border": true
   },
-  "diagnostic-languageserver.linters": {
-    "nginx-linter": {
-      "sourceName": "nginx-linter",
-      "command": "nginx-linter",
-      "debounce": 100,
-      "args": ["--include", "%file"],
-      "formatPattern": [
-        "^\\s+(\\d+?):(\\d+?)\\s+([a-z]+?)\\s+(.*)$",
-        {
-          "line": 1,
-          "column": 2,
-          "security": 3,
-          "message": 4
-        }
-      ],
-      "rootPatterns": ["nginx.conf", ".git"],
-      "securities": {
-        "error": "info"
-      }
-    },
-    "ruff": {
-      "sourceName": "ruff",
-      "command": "ruff",
-      "args": ["--quiet", "%file"],
-      "formatPattern": [
-        "^[\\w/\\.]+:(\\d+):(\\d+):\\s([A-Z]{1,3}\\d+)\\s(.+)$",
-        {
-          "line": 1,
-          "column": 2,
-          "security": 3,
-          "message": 4
-        }
-      ],
-      "securities": {
-        "F": "error",
-        "E": "warning",
-        "W": "warning",
-        "I": "info",
-        "D": "warning",
-        "U": "info",
-        "N": "warning",
-        "S": "info",
-        "C": "warning",
-        "FBT": "warning",
-        "B": "warning",
-        "A": "info",
-        "T": "hint",
-        "Q": "hint",
-        "ANN": "warning",
-        "M": "hint"
-      }
-    },
-    "hadolint": {
-      "command": "hadolint",
-      "sourceName": "hadolint",
-      "args": ["-f", "json", "-"],
-      "rootPatterns": [".hadolint.yaml", "Dockerfile"],
-      "parseJson": {
-        "line": "line",
-        "column": "column",
-        "security": "level",
-        "message": "${message} [${code}]"
-      },
-      "securities": {
-        "error": "error",
-        "warning": "warning",
-        "info": "info",
-        "style": "hint"
-      }
-    }
-  },
-  "highlight.colorNames.enable": false,
-  "yaml.enable": true,
-  "yaml.schemas": {
-    "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json": [
-      "docker-compose*.yml",
-      "*-compose*.yaml"
-    ],
-    "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json": [
-      "/*open-api*.yml",
-      "/*open-api*.yaml"
-    ],
-    "https://raw.githubusercontent.com/softprops/github-actions-schemas/master/workflow.json": [
-      ".github/workflows/*.yml"
-    ]
-  },
+  "inlayHint.enable": true,
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
@@ -115,7 +20,8 @@
       "settings": {}
     }
   },
-
+  "notification.disabledProgressSources": ["*"],
+  "suggest.autoTrigger": "always",
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
     "variable": "\ue79b",
@@ -143,11 +49,84 @@
     "typeParameter": "\uf728",
     "default": "\uf29c"
   },
-  "svelte.enable-ts-plugin": true,
-  "hover.floatConfig": {
-    "borderhighlight": "Boolean",
-    "winblend": 10,
-    "border": true
+
+  // coc-diagnostic (https://github.com/iamcco/coc-diagnostic/)
+  "diagnostic-languageserver.trace.server": "messages",
+  "diagnostic-languageserver.filetypes": {
+    "nginx": ["nginx-linter"],
+    "dockerfile": ["hadolint"]
   },
-  "Lua.diagnostics.globals": ["vim"]
+  "diagnostic-languageserver.linters": {
+    "nginx-linter": {
+      "sourceName": "nginx-linter",
+      "command": "nginx-linter",
+      "debounce": 100,
+      "args": ["--include", "%file"],
+      "formatPattern": [
+        "^\\s+(\\d+?):(\\d+?)\\s+([a-z]+?)\\s+(.*)$",
+        {
+          "line": 1,
+          "column": 2,
+          "security": 3,
+          "message": 4
+        }
+      ],
+      "rootPatterns": ["nginx.conf", ".git"],
+      "securities": {
+        "error": "info"
+      }
+    },
+    "hadolint": {
+      "command": "hadolint",
+      "sourceName": "hadolint",
+      "args": ["-f", "json", "-"],
+      "rootPatterns": [".hadolint.yaml", "Dockerfile"],
+      "parseJson": {
+        "line": "line",
+        "column": "column",
+        "security": "level",
+        "message": "${message} [${code}]"
+      },
+      "securities": {
+        "error": "error",
+        "warning": "warning",
+        "info": "info",
+        "style": "hint"
+      }
+    }
+  },
+
+  // coc-highlight (https://github.com/neoclide/coc-highlight)
+  "highlight.colorNames.enable": false,
+
+  // coc-pyright (https://github.com/fannheyward/coc-pyright)
+  "python.formatting.provider": "ruff",
+  "python.linting.mypyEnabled": true,
+  "python.linting.ruffEnabled": true,
+  "pyright.organizeimports.provider": "ruff",
+
+  // coc-sumneko-lua (https://github.com/xiyaowong/coc-sumneko-lua)
+  "Lua.diagnostics.globals": ["vim"],
+
+  // coc-svelte (https://github.com/coc-extensions/coc-svelte)
+  "svelte.enable-ts-plugin": true,
+
+  // coc-tsserver (https://github.com/neoclide/coc-tsserver)
+  "tsserver.npm": "/home/rmadriz/.asdf/shims/npm",
+
+  // coc-yaml (https://github.com/neoclide/coc-yaml)
+  "yaml.enable": true,
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json": [
+      "docker-compose*.yml",
+      "*-compose*.yaml"
+    ],
+    "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.3/schemas/v3.0/schema.json": [
+      "/*open-api*.yml",
+      "/*open-api*.yaml"
+    ],
+    "https://raw.githubusercontent.com/softprops/github-actions-schemas/master/workflow.json": [
+      ".github/workflows/*.yml"
+    ]
+  }
 }
