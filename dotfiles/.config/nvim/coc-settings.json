@@ -10,7 +10,7 @@
     "winblend": 10,
     "border": true
   },
-  "inlayHint.enable": true,
+  "inlayHint.enable": false,
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
