@@ -239,15 +239,6 @@ function despace() {
   fi
 }
 
-function vim-grep() {
-  if [[ $# -lt 1 ]]; then
-    red "Please specify the search criteria"
-    return 1
-  fi
-
-  nvim -- "$(rg -l "$1")"
-}
-
 function bsfd() { #: Base64 Decode a string
   if [[ $# -lt 1 ]]; then
     red "Please specify the string to decode using base64 -d"
@@ -500,9 +491,11 @@ alias gcsmg="git commit --message"
 alias gc!="git commit -v --amend --no-edit"
 alias gcc!="git commit -v --amend"
 alias gcnv="git commit --no-verify -m"
-alias gd="git diff | delta"
-alias gds="git diff --staged | delta"
-alias gdw="git diff --word-diff | delta"
+alias gd="git diff"
+alias gd!="GIT_PAGER=less git diff"
+alias gds="git diff --staged"
+alias gds!="GIT_PAGER=less git diff --staged"
+alias gdw="git diff --word-diff"
 alias gdlc="git diff HEAD~1..HEAD"
 alias gf="git fetch"
 alias gfa="git fetch --all --prune"

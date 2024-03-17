@@ -2,6 +2,7 @@
 	email = richin13@gmail.com
 	name = Ricardo Madriz
 [core]
+  pager = delta
   editor = nvim
 [gpg]
 	format = ssh
