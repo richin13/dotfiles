@@ -80,7 +80,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/nvim-telescope/telescope.nvim')
 
   " Utils
-  call a:packager.add('https://github.com/tpope/vim-commentary')
   call a:packager.add('https://github.com/myusuf3/numbers.vim')
   call a:packager.add('https://github.com/tpope/vim-abolish')
   call a:packager.add('https://github.com/weirongxu/plantuml-previewer.vim')
