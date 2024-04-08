@@ -377,6 +377,32 @@ function p() { #: Runs a python REPL (on batteries, if installed)
   fi
 }
 
+function gh-install() { #: Install the latest deb package from a Github release
+  local repo=$1
+  if [ -z "$repo" ]; then
+    red "Please provide a repo name: user/repo"
+    return 1
+  fi
+  if ! echo "$repo" | grep -q '/'; then
+    red "Invalid repo name: $repo, must be user/repo"
+    return 1
+  fi
+  local url="https://api.github.com/repos/$repo/releases/latest"
+  local arch
+  local url
+  local filename
+  arch=$(dpkg --print-architecture)
+  url=$(curl -s "$url" | jq -r ".assets[] | select(.name | test(\"$arch.deb\")) | .browser_download_url")
+  if [ -z "$url" ]; then
+    red "No deb package found for $arch in https://github.com/$repo"
+    return 1
+  fi
+  filename=$(basename "$url")
+  curl -L "$url" -o "$filename"
+  sudo dpkg -i "$filename"
+  rm -rf "$filename"
+}
+
 # }}}
 # Aliases ----------------------------------------------------------- {{{
 #: General aliases
