@@ -82,7 +82,6 @@ function! s:packager_init(packager) abort
   " Utils
   call a:packager.add('https://github.com/myusuf3/numbers.vim')
   call a:packager.add('https://github.com/tpope/vim-abolish')
-  call a:packager.add('https://github.com/weirongxu/plantuml-previewer.vim')
   call a:packager.add('https://github.com/tyru/open-browser.vim')
   call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
   call a:packager.add('https://github.com/tommcdo/vim-lion')
@@ -466,8 +465,6 @@ augroup END
 function! _Preview()
   if &filetype ==? 'markdown'
     exec 'MarkdownPreview'
-  elseif &filetype ==? 'plantuml'
-    exec 'PlantumlOpen'
   else
     !gio open %:p
   endif
