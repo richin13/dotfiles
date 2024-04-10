@@ -41,18 +41,14 @@ require("gitsigns").setup({
   end,
 })
 -- }}}
--- indent-blankline.nvim {{{
--- https://github.com/lukas-reineke/indent-blankline.nvim
-require("ibl").setup({
-  -- space_char_blankline = " ",
-  -- show_current_context = true,
-  scope = {
-    enabled = false,
-  },
-})
--- }}}
 -- mini.nvim {{{
 -- https://github.com/echasnovski/mini.nvim
+require('mini.indentscope').setup({
+  draw = {
+    animation = require('mini.indentscope').gen_animation.none(),
+  },
+  symbol = "▎"
+})
 require('mini.pairs').setup()
 local MiniStatusline = require("mini.statusline")
 

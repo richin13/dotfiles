@@ -86,8 +86,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/tommcdo/vim-lion')
   call a:packager.add('https://github.com/tpope/vim-endwise')
   call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
-  call a:packager.add('https://github.com/lukas-reineke/indent-blankline.nvim')
-  "call a:packager.add('https://github.com/windwp/nvim-autopairs')
   call a:packager.add('https://github.com/norcalli/nvim-colorizer.lua')
   call a:packager.add('https://github.com/echasnovski/mini.nvim')
 
