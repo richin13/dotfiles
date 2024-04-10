@@ -79,9 +79,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/nvim-telescope/telescope.nvim')
 
   " Utils
-  call a:packager.add('https://github.com/myusuf3/numbers.vim')
   call a:packager.add('https://github.com/tpope/vim-abolish')
-  call a:packager.add('https://github.com/tyru/open-browser.vim')
   call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
   call a:packager.add('https://github.com/tommcdo/vim-lion')
   call a:packager.add('https://github.com/tpope/vim-endwise')
@@ -102,9 +100,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/s1n7ax/nvim-comment-frame')
   call a:packager.add('https://github.com/lepture/vim-jinja')
 
-" Indentation & folding
-  call a:packager.add('https://github.com/hynek/vim-python-pep8-indent' , {'type': 'opt'})
-
 " Git
   call a:packager.add('https://github.com/tpope/vim-fugitive')
   call a:packager.add('https://github.com/lewis6991/gitsigns.nvim')
@@ -122,11 +117,6 @@ call packager#setup(function('s:packager_init'), {'depth': 1, 'window_cmd': 'edi
 command! PlugInstall echom 'Use :PackagerInstall instead' | :PackagerInstall
 command! PlugUpdate echom 'Use :PackagerUpdate instead' | :PackagerUpdate
 command! PlugClean echom 'Use :PackagerClean instead' | :PackagerClean
-
-augroup enable_opt_plugins
-  autocmd!
-  autocmd Filetype python packadd vim-python-pep8-indent
-augroup END
 
 " }}}
 " General: Lua Plugins Setup ------------------ {{{
