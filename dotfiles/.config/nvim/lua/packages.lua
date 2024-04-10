@@ -1,11 +1,3 @@
--- nvim-autoparis {{{
--- https://github.com/windwp/nvim-autopairs
-require("nvim-autopairs").setup({})
--- }}}
--- nvim-colorizer.lua {{{
--- https://github.com/norcalli/nvim-colorizer.lua
-require("colorizer").setup({})
--- }}}
 -- gitsigns.nvim {{{
 -- https://github.com/lewis6991/gitsigns.nvim
 require("gitsigns").setup({
@@ -59,6 +51,14 @@ require("ibl").setup({
   },
 })
 -- }}}
+-- nvim-autoparis {{{
+-- https://github.com/windwp/nvim-autopairs
+require("nvim-autopairs").setup({})
+-- }}}
+-- nvim-colorizer.lua {{{
+-- https://github.com/norcalli/nvim-colorizer.lua
+require("colorizer").setup({})
+-- }}}
 -- nvim-tree.lua {{{
 -- https://github.com/nvim-tree/nvim-tree.lua
 require("nvim-tree").setup({
@@ -108,25 +108,6 @@ require("nvim-tree").setup({
     vim.keymap.set('n', 'mm', api.fs.rename, opts('Rename'))
     vim.keymap.set('n', 'u', api.tree.change_root_to_parent, opts('Up'))
   end,
-})
--- }}}
--- telescope.nvim {{{
--- https://github.com/nvim-telescope/telescope.nvim
-local actions = require("telescope.actions")
-
-require("telescope").setup({
-  defaults = {
-    prompt_prefix = " ",
-    layout_strategy = "vertical",
-    layout_config = {
-      vertical = { width = 0.90 },
-    },
-    mappings = {
-      i = {
-        ["<esc>"] = actions.close,
-      },
-    },
-  },
 })
 -- }}}
 -- nvim-treesitter and related {{{
@@ -222,4 +203,23 @@ require("treesitter-context").setup({
 ------------------------- Treesitter Context Comment --------------------------
 -------------------------------------------------------------------------------
 require('ts_context_commentstring').setup({})
+-- }}}
+-- telescope.nvim {{{
+-- https://github.com/nvim-telescope/telescope.nvim
+local actions = require("telescope.actions")
+
+require("telescope").setup({
+  defaults = {
+    prompt_prefix = " ",
+    layout_strategy = "vertical",
+    layout_config = {
+      vertical = { width = 0.90 },
+    },
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close,
+      },
+    },
+  },
+})
 -- }}}
