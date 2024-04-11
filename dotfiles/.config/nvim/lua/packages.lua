@@ -43,32 +43,45 @@ require("gitsigns").setup({
 -- }}}
 -- mini.nvim {{{
 -- https://github.com/echasnovski/mini.nvim
-require('mini.indentscope').setup({
+require("mini.indentscope").setup({
   draw = {
-    animation = require('mini.indentscope').gen_animation.none(),
+    animation = require("mini.indentscope").gen_animation.none(),
   },
-  symbol = "▎"
+  symbol = "▎",
 })
-require('mini.pairs').setup()
+require("mini.pairs").setup()
 local MiniStatusline = require("mini.statusline")
 
 local function coc_diagnostics()
+  local coc_initialized = pcall(vim.api.nvim_get_var, "coc_service_initialized")
   local has_info, info = pcall(vim.api.nvim_buf_get_var, 0, "coc_diagnostic_info")
   local diagnostics = ""
+  local function append_diagnostics(diagnostics, text)
+    if diagnostics == "" then
+      diagnostics = text
+    else
+      diagnostics = diagnostics .. " " .. text
+    end
+    return diagnostics
+  end
   if info["error"] and info["error"] > 0 then
     diagnostics = diagnostics .. "%#MiniStatuslineDiagnosticsError# " .. info["error"]
   end
   if info["warning"] and info["warning"] > 0 then
-    diagnostics = diagnostics .. "%#MiniStatuslineDiagnosticsWarning# " .. info["warning"]
+    diagnostics = append_diagnostics(diagnostics, "%#MiniStatuslineDiagnosticsWarning# " .. info["warning"])
   end
   if info["information"] and info["information"] > 0 then
-    diagnostics = diagnostics .. "%#MiniStatuslineDiagnosticsInfo# " .. info["information"]
+    diagnostics = append_diagnostics(diagnostics, "%#MiniStatuslineDiagnosticsInfo# " .. info["information"])
   end
   if info["hint"] and info["hint"] > 0 then
-    diagnostics = diagnostics .. "%#MiniStatuslineDiagnosticsHint# " .. info["hint"]
+    diagnostics = append_diagnostics(diagnostics, "%#MiniStatuslineDiagnosticsHint# " .. info["hint"])
   end
   if diagnostics == "" then
-    diagnostics = "%#MiniStatuslineDiagnosticsClean#"
+    if coc_initialized then
+      diagnostics = "%#MiniStatuslineDiagnosticsClean# "
+    else
+      diagnostics = diagnostics .. "%#MiniStatuslineDiagnosticsLoading#󱦣 "
+    end
   end
   return diagnostics
 end
@@ -97,7 +110,7 @@ MiniStatusline.setup({
   },
 })
 require("mini.tabline").setup({
-  tabpage_section = "right"
+  tabpage_section = "right",
 })
 -- }}}
 -- nvim-colorizer.lua {{{
