@@ -36,7 +36,7 @@ vim-packager: ## Install vim-packager
 	git clone https://github.com/kristijanhusak/vim-packager ~/.config/nvim/pack/packager/opt/vim-packager
 
 .PHONY: tools
-tools: zplug asdf-vim vim-packager ## Install required tools
+tools: asdf-vim vim-packager ## Install required tools
 
 ################################################################################
 # Optionals
