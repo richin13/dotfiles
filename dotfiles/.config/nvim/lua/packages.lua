@@ -52,8 +52,9 @@ require("ibl").setup({
 })
 -- }}}
 -- mini.nvim {{{
--- https://github.com/echasnovski/mini.nvim
-require('mini.pairs').setup()
+require("mini.tabline").setup({
+  tabpage_section = "right"
+})
 local MiniStatusline = require("mini.statusline")
 
 local function coc_diagnostics()
@@ -116,6 +117,9 @@ MiniStatusline.setup({
 require("mini.tabline").setup({
   tabpage_section = "right",
 })
+-- }}}
+-- nvim-autopairs {{{
+require("nvim-autopairs").setup({})
 -- }}}
 -- nvim-colorizer.lua {{{
 -- https://github.com/norcalli/nvim-colorizer.lua
