@@ -24,3 +24,5 @@
 	rebase = true
 [push]
 	autoSetupRemote = true
+[credential]
+	helper = cache
