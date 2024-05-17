@@ -128,5 +128,6 @@
     "https://raw.githubusercontent.com/softprops/github-actions-schemas/master/workflow.json": [
       ".github/workflows/*.yml"
     ]
-  }
+  },
+  "snippets.ultisnips.pythonPrompt": false
 }

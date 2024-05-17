@@ -154,7 +154,7 @@ if [ "$DISTRO" = "arch" ]; then
 fi
 
 export DEFAULT_PYTHON_VENV_DIR=.venv
-export DEFAULT_PYTHON_PACKAGES=(pip neovim ipython ruff)
+export DEFAULT_PYTHON_PACKAGES=(pip ipython ruff)
 
 # }}}
 # Functions --------------------------------------------------------- {{{

@@ -10,8 +10,6 @@ endif
 let mapleader = ","
 let maplocalleader = "\\"
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:python3_host_prog = $HOME . '/.asdf/shims/python3'
-let g:python_host_prog  = $HOME . '/.asdf/shims/python2'
 let g:node_host_prog = $HOME . '/.asdf/installs/nodejs/12.15.0/bin/node'
 
 filetype plugin indent on
