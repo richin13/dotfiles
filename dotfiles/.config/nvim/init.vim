@@ -28,7 +28,7 @@ set scrolloff=2
 set shell=/usr/bin/zsh
 set shortmess+=c shortmess+=I
 set showtabline=2
-set signcolumn=yes:2
+set signcolumn=yes
 set spelllang=en_us
 set splitbelow splitright
 set updatetime=300
@@ -151,7 +151,7 @@ augroup END
 
 augroup fold_settings
   autocmd!
-  autocmd FileType * setlocal foldlevel=99
+  autocmd FileType * setlocal foldlevel=99 foldcolumn=auto
   autocmd FileType vim,tmux,zsh,lua setlocal foldlevel=0 foldnestmax=2
   autocmd FileType vim,tmux,zsh,lua,sh,make setlocal foldmethod=marker foldlevelstart=0
 augroup END
