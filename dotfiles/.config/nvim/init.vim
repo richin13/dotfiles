@@ -433,6 +433,7 @@ let g:vim_filetype_formatter_commands = {
       \ 'php': 'npx --no-update-notifier --silent prettier --parser=php',
       \ 'lua': 'stylua --indent-type=Spaces --indent-width=2 -',
       \ 'toml': 'toml-sort --trailing-comma-inline-array',
+      \ 'sql': 'sqlfluff format --nocolor -',
       \ 'yml': 'yamlfmt -'
       \ }
 
