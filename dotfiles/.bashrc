@@ -54,7 +54,6 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 
-export ASDF_DIR="$XDG_CONFIG_HOME/asdf"
 export ZPLUG_ROOT="$XDG_CONFIG_HOME/zplug"
 export ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -103,21 +102,9 @@ fi
 # EXPORT THE FINAL, MODIFIED PATH
 export PATH
 
-#: Setup asdf
-if [ -d "$ASDF_DIR" ]; then
-  export ASDF_DIR
-  include "$ASDF_DIR/asdf.sh"
-  if [ -n "$BASH_VERSION" ]; then #: Only run when we're in bash
-    include "$ASDF_DIR/completions/asdf.bash"
-  fi
-
-  # MANPATH: add asdf man pages to my man path
-  if [ -x "$(command -v fd)" ]; then
-    for value in $(fd man1 ~/.asdf/installs --type directory | sort -hr); do
-      MANPATH="$MANPATH:$(dirname "$value")"
-    done
-    export MANPATH
-  fi
+#: Setup mise
+if [ -f "$HOME/.local/bin/mise" ] && [ -n "$BASH_VERSION" ]; then
+  eval "$(~/.local/bin/mise activate bash)"
 fi
 
 [[ -x "$(command -v vivid)" ]] && export LS_COLORS="$(vivid generate dracula)"
@@ -350,8 +337,7 @@ if [ "$DISTRO" = "ubuntu" ]; then
     cd ~/dotfiles || return 1
     git pull
     popd || return 1
-    asdf uninstall neovim nightly
-    asdf install neovim nightly
+    mise install -f neovim@nightly
     nvim -c 'PlugUpdate' -c 'CocUpdate'
   }
 

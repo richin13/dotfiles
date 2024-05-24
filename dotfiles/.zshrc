@@ -91,14 +91,6 @@ autoload -Uz compinit && compinit
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-ASDF_COMPLETIONS="${ASDF_DIR}/completions"
-if [ -d "$ASDF_COMPLETIONS" ]; then
-  unset _asdf
-  fpath+=(${ASDF_COMPLETIONS})
-  autoload -Uz _asdf
-  compdef _asdf asdf
-fi
-
 _repos() {
   local state
 
@@ -173,3 +165,7 @@ if [ -x "$(command -v zoxide)" ]; then
 fi
 
 compdef _cd cd
+
+if [ -f ~/.local/bin/mise ]; then
+  eval "$(~/.local/bin/mise activate zsh)"
+fi
