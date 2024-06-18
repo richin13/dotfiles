@@ -29,7 +29,7 @@ set showtabline=2
 set signcolumn=yes
 set spelllang=en_us
 set splitbelow splitright
-set updatetime=300
+set updatetime=250
 set wildignorecase wildignore=*.pyc,**/__pycache__/*,**/node_modules/*,.coverage.*,.eggs,*.egg-info/
 set wildmenu wildmode=longest,list,full
 
@@ -105,7 +105,15 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/lewis6991/gitsigns.nvim')
 
 " Language server
-  call a:packager.add('https://github.com/neoclide/coc.nvim', {'branch': 'release'})
+  call a:packager.add('https://github.com/neovim/nvim-lspconfig')
+  call a:packager.add('https://github.com/hrsh7th/cmp-nvim-lsp')
+  call a:packager.add('https://github.com/hrsh7th/cmp-buffer')
+  call a:packager.add('https://github.com/hrsh7th/cmp-path')
+  call a:packager.add('https://github.com/hrsh7th/cmp-cmdline')
+  call a:packager.add('https://github.com/hrsh7th/nvim-cmp')
+  call a:packager.add('https://github.com/hrsh7th/cmp-vsnip')
+  call a:packager.add('https://github.com/hrsh7th/vim-vsnip')
+  call a:packager.add('https://github.com/onsails/lspkind.nvim')
 
   " Copilot, why not
   call a:packager.add('https://github.com/github/copilot.vim')
@@ -124,6 +132,7 @@ command! PlugClean echom 'Use :PackagerClean instead' | :PackagerClean
 lua require('packages')
 lua require('plugins.heirline')
 lua require('misc')
+lua require('lsp')
 
 " `gf` to open lua file under cursor
 augroup custom_general_lua_extensions
@@ -190,24 +199,7 @@ if !has('gui_running')
     set t_Co=256
   endif
 
-function! s:vim_syntax_group()
-  let l:s = synID(line('.'), col('.'), 1)
-  if l:s == ''
-    echo 'none'
-  else
-    echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
-  endif
-endfun
-
-function! s:syntax_group()
-  if &syntax == ''
-    TSHighlightCapturesUnderCursor
-  else
-    call s:vim_syntax_group()
-  endif
-endfunction
-nnoremap <silent> zS <cmd>call <SID>syntax_group()<CR>
-nnoremap <silent> <F9> <cmd>call <SID>syntax_group()<CR>
+nnoremap <silent> zS <cmd>Inspect<CR>
 " }}}
 " General: Key remappings --------------------- {{{
 
@@ -230,11 +222,6 @@ noremap <Down> <nop>
 " inoremap <C-space> <C-x><C-o>
 
 " GoTo code navigation.
-nmap <silent> <leader>gy <Plug>(coc-type-definition)
-nmap <silent> <leader>gi <Plug>(coc-implementation)
-nmap <silent> <leader>gr <Plug>(coc-references)
-nmap <silent> <leader>rn <Plug>(coc-rename)
-nmap <silent> <F2> <Plug>(coc-rename)
 
 " Telescope pickers
 nnoremap <silent> <C-Space> <cmd>Telescope resume<cr>
@@ -248,12 +235,8 @@ nnoremap <silent> <leader>th <cmd>Telescope git_files<cr>
 nnoremap <silent> B <cmd>Telescope git_branches<cr>
 nnoremap <silent> <leader>s <cmd>Telescope spell_suggest<cr>
 
-nnoremap <silent> <leader>d <cmd>call CocActionAsync('diagnosticToggle')<CR>
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+"nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -262,13 +245,6 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-
-" Use C-e & C-y to scroll down/up when there's an opened floating window
-nnoremap <expr><C-e> coc#float#has_float() ? coc#float#scroll(1) : "\<C-e>"
-nnoremap <expr><C-y> coc#float#has_float() ? coc#float#scroll(0) : "\<C-y>"
-
-" inoremap <CR> <ESC><Plug>(coc-snippets-expand)i<CR>
-imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 nnoremap <silent><leader>r :NumbersToggle<CR>
 
@@ -303,25 +279,6 @@ nnoremap Q <nop>
 " Like i_o & i_O but returns to normal mode
 nnoremap <leader>o moo<ESC>k`o
 nnoremap <leader>O moO<ESC>k`o
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-" Insert <tab> when previous text is space, refresh completion if not.
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#_select_confirm():
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
-
-" Use ALT-(v-s) to jump to definition on a (v)split (Coc)
-nnoremap <silent> <A-v> <cmd>call CocActionAsync('jumpDefinition', 'vsplit')<CR>
-nnoremap <silent> <A-s> <cmd>call CocActionAsync('jumpDefinition', 'split')<CR>
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
 
 " Use C-k and C-j to navigate folds
 nnoremap <C-j> zj
@@ -360,58 +317,6 @@ endfunction
 inoremap <buffer> <silent> <localleader>u <C-R>=GenerateUUID4()<CR>
 
 " }}}
-"  Plugin: Coc --------------------------- {{{
-
-let g:coc_global_extensions = [
-      \ '@yaegassy/coc-nginx',
-      \ 'coc-css',
-      \ 'coc-diagnostic',
-      \ 'coc-docker',
-      \ 'coc-eslint',
-      \ 'coc-highlight',
-      \ 'coc-html',
-      \ 'coc-json',
-      \ 'coc-sumneko-lua',
-      \ 'coc-phpls',
-      \ 'coc-prisma',
-      \ 'coc-pyright',
-      \ 'coc-r-lsp',
-      \ 'coc-rust-analyzer',
-      \ 'coc-sh',
-      \ 'coc-snippets',
-      \ 'coc-sql',
-      \ 'coc-svelte',
-      \ 'coc-symbol-line',
-      \ 'coc-tsserver',
-      \ 'coc-vimlsp',
-      \ 'coc-yaml',
-      \ ]
-
-function! s:setup_coc()
-  if !exists("g:coc_service_initialized")
-    return
-  endif
-
-  " coc-highlight
-  augroup coc_highligh
-    autocmd!
-    autocmd CursorHold * silent call CocActionAsync('highlight')
-  augroup end
-  " Use <c-space> to trigger completion.
-  inoremap <silent><expr> <c-space> coc#refresh()
-  nnoremap <space>f <Cmd>call CocActionAsync(coc#window#find('cocViewId', 'OUTLINE') == -1 ? 'showOutline' : 'hideOutline')<CR>
-
-  if &filetype != 'help'
-    nmap <silent> <C-]> <Plug>(coc-definition)
-  endif
-endfunction
-
-augroup custom_coc
-  autocmd!
-  autocmd VimEnter * call s:setup_coc()
-augroup end
-
-"  }}}
 "  Plugin: Configure --------------------------- {{{
 
 " Numbers
