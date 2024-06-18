@@ -383,7 +383,7 @@ function gh-install() { #: Install the latest deb package from a Github release
   local url
   local filename
   arch=$(dpkg --print-architecture)
-  url=$(curl -s "$url" | jq -r ".assets[] | select(.name | test(\"$arch.deb\")) | .browser_download_url")
+  url=$(curl -s "$url" | jq -r ".assets[] | .browser_download_url" | grep 'amd64' | grep 'linux' | grep '.deb')
   if [ -z "$url" ]; then
     red "No deb package found for $arch in https://github.com/$repo"
     return 1
