@@ -394,6 +394,33 @@ function gh-install() { #: Install the latest deb package from a Github release
   rm -rf "$filename"
 }
 
+function install-language-servers() {
+  local npm_packages=(
+    #: https://github.com/bash-lsp/bash-language-server
+    bash-language-server
+    #: https://github.com/rcjsuen/dockerfile-language-server-nodejs
+    dockerfile-language-server-nodejs
+    #: https://github.com/microsoft/compose-language-service
+    @microsoft/compose-language-service
+    #: https://github.com/microsoft/pyright
+    pyright
+    #: https://github.com/typescript-language-server/typescript-language-server
+    typescript
+    typescript-language-server
+    #: https://github.com/iamcco/vim-language-server
+    vim-language-server
+  )
+  echo "Installing language servers with npm: ${npm_packages[*]}..."
+  npm install -g "${npm_packages[@]}"
+
+  local pip_packages=(
+    #: https://github.com/termux/termux-language-server/
+    termux-language-server
+  )
+  echo "Installing language servers with pipx: ${pip_packages[*]}..."
+  pipx install "${pip_packages[@]}"
+}
+
 # }}}
 # Aliases ----------------------------------------------------------- {{{
 #: General aliases
