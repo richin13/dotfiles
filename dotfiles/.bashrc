@@ -419,6 +419,14 @@ function install-language-servers() {
   )
   echo "Installing language servers with pipx: ${pip_packages[*]}..."
   pipx install "${pip_packages[@]}"
+
+  echo "Installing lua-language-server..."
+  curl -Ss "https://api.github.com/repos/LuaLS/lua-language-server/releases/latest" |
+    jq -r ".assets[] | .browser_download_url" |
+    grep 'linux-x64.tar.gz' |
+    xargs -I {} curl -sL {} |
+    tar -xzf - -C /tmp/ &&
+    sudo mv /tmp/bin/lua-language-server /usr/local/bin/
 }
 
 # }}}
