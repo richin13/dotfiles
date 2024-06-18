@@ -69,6 +69,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/tpope/vim-surround')
   call a:packager.add('https://github.com/christoomey/vim-system-copy')
 
+  call a:packager.add('https://github.com/rebelot/heirline.nvim')
   call a:packager.add('https://github.com/kyazdani42/nvim-tree.lua')
 
   " fuzzy finders
@@ -85,7 +86,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/lukas-reineke/indent-blankline.nvim')
   call a:packager.add('https://github.com/windwp/nvim-autopairs')
   call a:packager.add('https://github.com/norcalli/nvim-colorizer.lua')
-  call a:packager.add('https://github.com/echasnovski/mini.nvim')
 
 " Coloring & Syntax highlighting
   call a:packager.add('https://github.com/richin13/dracula-nvim')
@@ -122,6 +122,7 @@ command! PlugClean echom 'Use :PackagerClean instead' | :PackagerClean
 " General: Lua Plugins Setup ------------------ {{{
 
 lua require('packages')
+lua require('plugins.heirline')
 lua require('misc')
 
 " `gf` to open lua file under cursor
