@@ -1,41 +1,34 @@
 local colors = require("dracula").colors()
+local conditions = require("heirline.conditions")
 
 local M = {}
 
 M.Diagnostics = {
+  condition = conditions.has_diagnostics,
   hl = {
     fg = colors.bg,
   },
   static = {
-    error_icon = " ",
-    warning_icon = " ",
-    info_icon = " ",
-    hint_icon = " ",
+    error_icon = vim.fn.sign_getdefined("DiagnosticSignError")[1].text,
+    warn_icon = vim.fn.sign_getdefined("DiagnosticSignWarn")[1].text,
+    info_icon = vim.fn.sign_getdefined("DiagnosticSignInfo")[1].text,
+    hint_icon = vim.fn.sign_getdefined("DiagnosticSignHint")[1].text,
     clean_icon = " ",
   },
   init = function(self)
-    local has_info, info = pcall(vim.api.nvim_buf_get_var, 0, "coc_diagnostic_info")
-    self.has_info = has_info
-    self.errors = info["error"] or 0
-    self.warnings = info["warning"] or 0
-    self.infos = info["information"] or 0
-    self.hints = info["hint"] or 0
-    self.is_clean = self.has_info and self.errors == 0 and self.warnings == 0 and self.infos == 0 and self.hints == 0
+    self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+    self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+    self.hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
+    self.infos = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+    self.is_clean = self.errors == 0 and self.warnings == 0 and self.infos == 0 and self.hints == 0
   end,
   {
-    condition = function(self)
-      return self.has_info
-    end,
     provider = " ",
   },
   {
     hl = {
       fg = colors.red,
     },
-
-    condition = function(self)
-      return self.has_info
-    end,
 
     provider = function(self)
       return self.errors > 0 and (self.error_icon .. self.errors .. " ")
@@ -45,9 +38,6 @@ M.Diagnostics = {
     hl = {
       fg = colors.orange,
     },
-    condition = function(self)
-      return self.has_info
-    end,
 
     provider = function(self)
       return self.warnings > 0 and (self.warning_icon .. self.warnings .. " ")
@@ -58,10 +48,6 @@ M.Diagnostics = {
       fg = colors.cyan,
     },
 
-    condition = function(self)
-      return self.has_info
-    end,
-
     provider = function(self)
       return self.infos > 0 and (self.info_icon .. self.infos .. " ")
     end,
@@ -70,10 +56,6 @@ M.Diagnostics = {
     hl = {
       fg = colors.yellow,
     },
-
-    condition = function(self)
-      return self.has_info
-    end,
 
     provider = function(self)
       return self.hints > 0 and (self.hint_icon .. self.hints .. " ")
@@ -95,9 +77,6 @@ M.Diagnostics = {
 }
 
 M.DiagnosticsBlock = {
-  condition = function()
-    return vim.fn.exists("*coc#rpc#start_server") ~= 0
-  end,
   M.Diagnostics,
 }
 

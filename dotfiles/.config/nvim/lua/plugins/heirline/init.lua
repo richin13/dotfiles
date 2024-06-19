@@ -149,6 +149,14 @@ M.setup = function()
     statusline = StatusLines,
     winbar = WinBars,
     tabline = tabline.BufferLine,
+    opts = {
+      disable_winbar_cb = function(args)
+        return conditions.buffer_matches({
+          buftype = { "nofile", "prompt", "help", "quickfix" },
+          filetype = { "^git.*", "fugitive", "Trouble", "dashboard" },
+        }, args.buf)
+      end,
+    }
   })
   vim.cmd([[au FileType * if index(['wipe', 'delete'], &bufhidden) >= 0 | set nobuflisted | endif]])
 end
