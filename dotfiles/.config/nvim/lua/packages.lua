@@ -55,6 +55,40 @@ require("ibl").setup({
 -- https://github.com/windwp/nvim-autopairs
 require("nvim-autopairs").setup({})
 -- }}}
+-- nvim-cmp {{{
+-- https://github.com/hrsh7th/nvim-cmp
+-- https://github.com/onsails/lspkind.nvim
+local cmp = require("cmp")
+local lspkind = require("lspkind")
+
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
+    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+  }),
+  sources = cmp.config.sources({
+    { name = "nvim_lsp" },
+    { name = "vsnip" },
+    { name = "path" },
+    { name = "buffer" },
+  }),
+  formatting = {
+    format = lspkind.cmp_format(),
+  },
+})
+-- }}}
 -- nvim-colorizer.lua {{{
 -- https://github.com/norcalli/nvim-colorizer.lua
 require("colorizer").setup({})
@@ -92,7 +126,7 @@ require("nvim-tree").setup({
     },
   },
   on_attach = function(bufnr)
-    local api = require "nvim-tree.api"
+    local api = require("nvim-tree.api")
 
     local function opts(desc)
       return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
@@ -103,10 +137,10 @@ require("nvim-tree").setup({
 
     -- Custom key mappings
     -- Old habits are hard to forget
-    vim.keymap.set('n', 'ma', api.fs.create, opts('Create'))
-    vim.keymap.set('n', 'md', api.fs.remove, opts('Delete'))
-    vim.keymap.set('n', 'mm', api.fs.rename, opts('Rename'))
-    vim.keymap.set('n', 'u', api.tree.change_root_to_parent, opts('Up'))
+    vim.keymap.set("n", "ma", api.fs.create, opts("Create"))
+    vim.keymap.set("n", "md", api.fs.remove, opts("Delete"))
+    vim.keymap.set("n", "mm", api.fs.rename, opts("Rename"))
+    vim.keymap.set("n", "u", api.tree.change_root_to_parent, opts("Up"))
   end,
 })
 -- }}}
@@ -187,7 +221,7 @@ require("nvim-treesitter.configs").setup({
 --                     <leader>cf - Single line comment                      --
 --                      <leader>cm - Multiline comment                       --
 -------------------------------------------------------------------------------
-require('nvim-comment-frame').setup({
+require("nvim-comment-frame").setup({
   frame_width = 79,
 })
 
@@ -202,7 +236,7 @@ require("treesitter-context").setup({
 -------------------------------------------------------------------------------
 ------------------------- Treesitter Context Comment --------------------------
 -------------------------------------------------------------------------------
-require('ts_context_commentstring').setup({})
+require("ts_context_commentstring").setup({})
 -- }}}
 -- telescope.nvim {{{
 -- https://github.com/nvim-telescope/telescope.nvim
