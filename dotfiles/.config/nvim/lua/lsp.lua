@@ -89,8 +89,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-    if client and client.name == "dockerls" then
-      -- Disable semantic tokens for dockerls
+    if client and (client.name == "dockerls" or client.name == "tsserver") then
+      -- Disable semantic tokens for dockerls and tsserver
       client.server_capabilities.semanticTokensProvider = nil
     end
 
@@ -124,9 +124,9 @@ vim.diagnostic.config({
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "",
-      [vim.diagnostic.severity.WARN]  = "",
-      [vim.diagnostic.severity.INFO]  = "",
-      [vim.diagnostic.severity.HINT]  = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.HINT] = "",
     },
   },
   float = {
