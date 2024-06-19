@@ -2,10 +2,8 @@ local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local on_attach = function(client, bufnr)
-  if client and (client.name == "dockerls" or client.name == "tsserver") then
-    -- Disable semantic tokens for dockerls and tsserver
-    client.server_capabilities.semanticTokensProvider = nil
-  end
+  -- Disable semantic tokens
+  client.server_capabilities.semanticTokensProvider = nil
 
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
