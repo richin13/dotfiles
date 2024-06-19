@@ -1,7 +1,18 @@
 local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local _border = "rounded"
 
 local on_attach = function(client, bufnr)
+  require("lsp_signature").on_attach({
+    bind = true,
+    doc_lines = 2,
+    floating_window = true,
+    hint_enable = false,
+    use_lspsaga = false,
+    handler_opts = {
+      border = _border,
+    },
+  })
   -- Disable semantic tokens
   client.server_capabilities.semanticTokensProvider = nil
 
@@ -24,7 +35,6 @@ local on_attach = function(client, bufnr)
     })
   end
 
-  local _border = "rounded"
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = _border,
   })
