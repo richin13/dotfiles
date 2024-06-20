@@ -33,12 +33,12 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_create_autocmd("CursorMoved", {
       callback = function()
         vim.lsp.buf.clear_references()
-    for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
-      if vim.api.nvim_win_get_config(winid).zindex then
-        return
-      end
-    end
-    vim.diagnostic.open_float({focusable = false})
+        for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+          if vim.api.nvim_win_get_config(winid).zindex then
+            return
+          end
+        end
+        vim.diagnostic.open_float({ focusable = false })
       end,
       buffer = bufnr,
       group = "lsp_document_highlight",
