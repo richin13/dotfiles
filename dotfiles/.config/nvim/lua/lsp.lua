@@ -29,6 +29,12 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_create_autocmd("CursorMoved", {
       callback = function()
         vim.lsp.buf.clear_references()
+    for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+      if vim.api.nvim_win_get_config(winid).zindex then
+        return
+      end
+    end
+    vim.diagnostic.open_float({focusable = false})
       end,
       buffer = bufnr,
       group = "lsp_document_highlight",
@@ -65,9 +71,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, opts)
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-  vim.keymap.set("n", "<space>d", function()
-    vim.diagnostic.open_float(bufnr, { scope = "cursor" })
-  end, opts)
 end
 
 -- See https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md

@@ -234,18 +234,7 @@ nnoremap <silent> <C-b> <cmd>Telescope buffers<cr>
 nnoremap <silent> <leader>b <cmd>Telescope buffers<cr>
 nnoremap <silent> <leader>th <cmd>Telescope git_files<cr>
 nnoremap <silent> B <cmd>Telescope git_branches<cr>
-nnoremap <silent> <leader>s <cmd>Telescope spell_suggest<cr>
-
-" Use K to show documentation in preview window.
-"nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'help ' . expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+nnoremap <silent> S <cmd>Telescope spell_suggest<cr>
 
 nnoremap <silent><leader>r :NumbersToggle<CR>
 
