@@ -65,16 +65,6 @@ export DOCS_FOLDER="$XDG_CONFIG_HOME/docs"
 export FORTUNES_FOLDER="$XDG_CONFIG_HOME/fortunes"
 export DOTFILES="$HOME/dotfiles"
 
-LOCAL_BINS="$HOME/.local/bin"
-if [ -d "$LOCAL_BINS" ]; then
-  path_ladd "$LOCAL_BINS"
-fi
-
-YARN_BINS="$HOME/.yarn/bin"
-if [ -d "$YARN_BINS" ]; then
-  path_ladd "$YARN_BINS"
-fi
-
 CARGO_BINS="$HOME/.cargo/bin"
 if [ -d "$CARGO_BINS" ]; then
   path_ladd "$CARGO_BINS"
@@ -93,10 +83,9 @@ if [ -d "$ANDROID_SDK_ROOT" ]; then
   path_ladd "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin"
 fi
 
-RYE_SHIMS="$HOME/.local/rye/shims"
-if [ -d "$RYE_SHIMS" ]; then
-  export RYE_HOME="$HOME/.local/rye"
-  path_ladd "$RYE_SHIMS"
+LOCAL_BINS="$HOME/.local/bin"
+if [ -d "$LOCAL_BINS" ]; then
+  path_ladd "$LOCAL_BINS"
 fi
 
 # EXPORT THE FINAL, MODIFIED PATH

@@ -159,13 +159,6 @@ if [ $commands[carapace] ]; then
   source <(carapace docker-compose);
 fi
 
-# zoxide
-if [ -x "$(command -v zoxide)" ]; then
-  eval "$(zoxide init --cmd cd zsh)"
-fi
-
-compdef _cd cd
-
 if [ -f ~/.local/bin/mise ]; then
   eval "$(~/.local/bin/mise activate zsh)"
 fi
