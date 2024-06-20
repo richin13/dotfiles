@@ -99,6 +99,7 @@ require("nvim-navic").setup({
   highlight = true,
   click = true,
   safe_output = true,
+  separator = "  ",
 })
 -- }}}
 -- nvim-tree.lua {{{
