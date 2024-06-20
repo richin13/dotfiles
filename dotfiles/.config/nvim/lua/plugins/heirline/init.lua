@@ -92,14 +92,13 @@ local StatusLines = {
 }
 
 local Navic = {
-  provider = function()
-    local coc_symbol_line = vim.b.coc_symbol_line or ""
-    -- If coc_symbol_line contains the filename, return empty string
-    if vim.fn.stridx(coc_symbol_line, "%f") ~= -1 then
-      return ""
-    end
-    return coc_symbol_line
+  condition = function()
+    return require("nvim-navic").is_available()
   end,
+  provider = function()
+    return require("nvim-navic").get_location({ highlight = true })
+  end,
+  update = "CursorMoved",
 }
 
 local DefaultWinbar = {
@@ -156,7 +155,7 @@ M.setup = function()
           filetype = { "^git.*", "fugitive", "Trouble", "dashboard" },
         }, args.buf)
       end,
-    }
+    },
   })
   vim.cmd([[au FileType * if index(['wipe', 'delete'], &bufhidden) >= 0 | set nobuflisted | endif]])
 end

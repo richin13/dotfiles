@@ -93,6 +93,14 @@ cmp.setup({
 -- https://github.com/norcalli/nvim-colorizer.lua
 require("colorizer").setup({})
 -- }}}
+-- nvim-navic.lua {{{
+-- https://github.com/SmiteshP/nvim-navic
+require("nvim-navic").setup({
+  highlight = true,
+  click = true,
+  safe_output = true,
+})
+-- }}}
 -- nvim-tree.lua {{{
 -- https://github.com/nvim-tree/nvim-tree.lua
 require("nvim-tree").setup({
