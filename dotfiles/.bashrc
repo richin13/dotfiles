@@ -343,7 +343,7 @@ if [ "$DISTRO" = "ubuntu" ]; then
 
   function update-ff-dev() { #: Upgrade firefox developer edition
     wget "https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=en-US" -O Firefox-dev.tar.bz2
-    sudo tar xjf  Firefox-dev.tar.bz2 -C /opt/
+    sudo tar xjf Firefox-dev.tar.bz2 -C /opt/
   }
 fi
 
@@ -420,13 +420,23 @@ function install-language-servers() {
   echo "Installing language servers with pipx: ${pip_packages[*]}..."
   pipx install "${pip_packages[@]}"
 
-  echo "Installing lua-language-server..."
-  curl -Ss "https://api.github.com/repos/LuaLS/lua-language-server/releases/latest" |
-    jq -r ".assets[] | .browser_download_url" |
-    grep 'linux-x64.tar.gz' |
-    xargs -I {} curl -sL {} |
-    tar -xzf - -C /tmp/ &&
-    sudo mv /tmp/bin/lua-language-server /usr/local/bin/
+  if [ "$DISTRO" = "ubuntu" ]; then
+    echo "Installing lua-language-server..."
+    rm -rf ~/.local/bin/lls && mkdir ~/.local/bin/lls
+    curl -Ss "https://api.github.com/repos/LuaLS/lua-language-server/releases/latest" |
+      jq -r ".assets[] | .browser_download_url" |
+      grep 'linux-x64.tar.gz' |
+      xargs -I {} curl -sL {} |
+      tar -xzf - -C ~/.local/bin/lls &&
+      ln -s ~/.local/bin/lls/bin/lua-language-server ~/.local/bin/lua-language-server &&
+      chmod +x ~/.local/bin/lua-language-server
+
+    # https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary
+    echo "Installing rust-analyzer"
+    curl -sL https://github.com/rust-lang/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz |
+      gunzip -c - >~/.local/bin/rust-analyzer &&
+      chmod +x ~/.local/bin/rust-analyzer
+  fi
 }
 
 # }}}
