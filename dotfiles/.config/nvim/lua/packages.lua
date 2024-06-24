@@ -192,9 +192,6 @@ require("nvim-treesitter.configs").setup({
   indent = {
     enable = true,
   },
-  autotag = {
-    enable = true,
-  },
   ensure_installed = {
     "bash",
     "comment",
@@ -234,6 +231,11 @@ require("nvim-treesitter.configs").setup({
 require("nvim-comment-frame").setup({
   frame_width = 79,
 })
+
+-------------------------------------------------------------------------------
+--                              nvim-ts-autotag                              --
+-------------------------------------------------------------------------------
+require("nvim-ts-autotag").setup()
 
 -------------------------------------------------------------------------------
 --                            TreeSitter Context                             --
