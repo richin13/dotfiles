@@ -100,6 +100,7 @@ require("nvim-navic").setup({
   click = true,
   safe_output = true,
   separator = "  ",
+  depth_limit = 4,
 })
 -- }}}
 -- nvim-tree.lua {{{
