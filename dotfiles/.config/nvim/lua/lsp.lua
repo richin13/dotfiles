@@ -61,7 +61,9 @@ local on_attach = function(client, bufnr)
         [vim.diagnostic.severity.HINT] = "",
       },
     },
+    severity_sort = true,
     float = {
+      style = "minimal",
       border = _border,
       header = "",
       prefix = "",
