@@ -398,6 +398,8 @@ function install-language-servers() {
     typescript-language-server
     #: https://github.com/iamcco/vim-language-server
     vim-language-server
+    #: https://github.com/hrsh7th/vscode-langservers-extracted
+    vscode-langservers-extracted
   )
   echo "Installing language servers with npm: ${npm_packages[*]}..."
   npm install -g "${npm_packages[@]}"

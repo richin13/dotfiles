@@ -85,6 +85,8 @@ local configs = {
   docker_compose_language_service = {},
   -- https://github.com/rcjsuen/dockerfile-language-server-nodejs
   dockerls = {},
+  -- https://github.com/hrsh7th/vscode-langservers-extracted
+  html = {},
   -- https://github.com/luals/lua-language-server
   lua_ls = {
     on_init = function(client)
