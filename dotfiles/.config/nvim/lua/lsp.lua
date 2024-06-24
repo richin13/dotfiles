@@ -38,7 +38,7 @@ local on_attach = function(client, bufnr)
             return
           end
         end
-        vim.diagnostic.open_float({ focusable = false })
+        vim.diagnostic.open_float({ scope = "cursor", focusable = false })
       end,
       buffer = bufnr,
       group = "lsp_document_highlight",
