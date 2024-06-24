@@ -115,6 +115,11 @@ _docs() {
 }
 compdef _docs docs
 
+if command -v mise &> /dev/null; then
+  #: mise completion
+  eval "$(mise completion zsh)"
+fi
+
 zinit cdreplay -q
 # }}}
 
