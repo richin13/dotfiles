@@ -117,7 +117,25 @@ local configs = {
     },
   },
   -- https://github.com/microsoft/pyright
-  pyright = {},
+  pyright = {
+    settings = {
+      pyright = {
+        disableOrganizeImports = true,
+        disableTaggedHints = true,
+      },
+      python = {
+        analysis = {
+          diagnosticSeverityOverrides = {
+            reportUnusedImport = "none",
+            reportUnusedFunction = "none",
+            reportUnusedVariable = "none",
+          },
+        },
+      },
+    },
+  },
+  -- https://github.com/astral-sh/ruff
+  ruff = {},
   -- https://github.com/rust-lang/rust-analyzer
   rust_analyzer = {},
   -- https://github.com/termux/termux-language-server/
