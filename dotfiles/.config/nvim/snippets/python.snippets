@@ -1,0 +1,32 @@
+snippet #!
+	#!/usr/bin/env python3
+
+snippet ifmain "main entrypoint python script"
+	def main():
+	    """Main entrypoint."""
+	    ${0:...}
+
+	if __name__ == '__main__':
+	    main()
+
+snippet skip
+	@pytest.mark.skip
+
+snippet lprint
+	print("#" * 80)
+	print(f"{${0}}")
+	print("#" * 80)
+
+
+snippet cli
+	import click
+
+	@click.group()
+	def cli() -> None:
+	    """CLI entrypoint."""
+	    pass
+
+	@cli.command()
+	def ${1:command}() -> None:
+	    """${2:Command description}."""
+	    ${0:...}
