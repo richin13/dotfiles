@@ -153,7 +153,7 @@ augroup indentation_sr
   autocmd Filetype * if &filetype !=# 'make' | setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=8 | endif
   autocmd Filetype python,php,rust setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype yaml setlocal indentkeys-=<:>
-  autocmd Filetype make setlocal noexpandtab tabstop=4
+  autocmd Filetype make,snippets,tsv setlocal noexpandtab tabstop=4
 augroup END
 
 " }}}
@@ -310,9 +310,24 @@ inoremap <buffer> <silent> <localleader>u <C-R>=GenerateUUID4()<CR>
 " }}}
 "  Plugin: Configure --------------------------- {{{
 
+" Copilot
+let g:copilot_no_tab_map = v:true
+imap <silent><script><expr> <C-y> copilot#Accept("\<CR>")
+
 " Numbers
 let g:enable_numbers = 0
 let g:numbers_exclude               = ['NvimTree']
+
+" vim-vsnip
+let g:vsnip_snippet_dir = expand('~/.config/nvim/snippets')
+
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+nmap s <Plug>(vsnip-cut-text)
+xmap s <Plug>(vsnip-cut-text)
+smap s <Plug>(vsnip-cut-text)
 
 "  }}}
 " Config: Code Formatting --------------------- {{{
