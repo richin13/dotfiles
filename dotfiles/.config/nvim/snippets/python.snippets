@@ -6,6 +6,7 @@ snippet ifmain "main entrypoint python script"
 	    """Main entrypoint."""
 	    ${0:...}
 
+
 	if __name__ == '__main__':
 	    main()
 
@@ -20,6 +21,7 @@ snippet lprint
 
 snippet cli
 	import click
+
 
 	@click.group()
 	def cli() -> None:
