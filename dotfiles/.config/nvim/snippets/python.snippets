@@ -32,3 +32,10 @@ snippet cli
 	def ${1:command}() -> None:
 	    """${2:Command description}."""
 	    ${0:...}
+
+
+snippet clicmd
+	@${3:click}.command()
+	def ${1:command}() -> None:
+	    """${2:Command description}."""
+	    ${0:...}
