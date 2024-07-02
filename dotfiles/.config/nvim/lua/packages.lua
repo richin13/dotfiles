@@ -248,7 +248,15 @@ require("treesitter-context").setup({
 -------------------------------------------------------------------------------
 ------------------------- Treesitter Context Comment --------------------------
 -------------------------------------------------------------------------------
-require("ts_context_commentstring").setup({})
+require("ts_context_commentstring").setup({
+  enable_autocmd = false,
+})
+local get_option = vim.filetype.get_option
+vim.filetype.get_option = function(filetype, option)
+  return option == "commentstring"
+    and require("ts_context_commentstring.internal").calculate_commentstring()
+    or get_option(filetype, option)
+end
 -- }}}
 -- telescope.nvim {{{
 -- https://github.com/nvim-telescope/telescope.nvim
