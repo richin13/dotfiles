@@ -114,6 +114,19 @@ M.FileFlags = {
 
 M.FileNameBlock = utils.insert(FileNameBlock, M.FileIcon, M.WorkDir, M.FileName, M.FileFlags, common.Cut)
 
+M.SimpleFileName = {
+  M.FileIcon,
+  {
+  provider = function()
+    local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t")
+    return filename == "" and "[No Name]" or filename
+  end,
+  hl = {
+    fg = colors.gray,
+  },
+  },
+}
+
 M.HelpFilename = {
   condition = function()
     return vim.bo.filetype == "help"

@@ -103,6 +103,14 @@ local Navic = {
 
 local DefaultWinbar = {
   Align,
+  file_info.SimpleFileName,
+  {
+    condition = function()
+      return require("nvim-navic").is_available()
+        and string.len(require("nvim-navic").get_location({ highlight = true })) > 0
+    end,
+    provider = "  ",
+  },
   Navic,
   Align,
   file_info.FileType,
