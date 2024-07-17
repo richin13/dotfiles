@@ -46,6 +46,31 @@ installed `xstow`
 $ sudo apt install -y xstow
 ```
 
+### Mouse waking up the computer
+
+Noticed Ubuntu 24 waking up from sleep when moving the mouse. Following this instructions fixes the issue:
+
+```
+The solution I'm using is a udev rule that disables wakeup from a particular USB device. It should be agnostic to which port the device is plugged in to.
+
+Create /etc/udev/rules.d/90-usb-wakeup.rules with the following content (modify idVendor and idProduct as appropriate, see output from lsusb which gives the IDs in the form: vendor:product):
+
+# Disable waking up from Logitech unified receiver
+ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c52b", ATTR{power/wakeup}="disabled"
+
+To get it applied without rebooting:
+
+    Run:
+
+    sudo udevadm control --reload-rules
+
+    Disconnect and reconnect the USB device.
+
+Inspiration comes from https://wiki.archlinux.org/title/udev#Waking_from_suspend_with_USB_device
+```
+
+https://askubuntu.com/a/1385877
+
 Another issue you might run into is `xstow` not being able to create the symlinks. This
 happens when the files already exists in you home directory and are not symlinks.
 Make sure to backup your existing dotfiles before proceeding.
