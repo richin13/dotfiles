@@ -494,8 +494,9 @@ fi
 if [ "$DISTRO" = "arch" ]; then
   alias pacss="pacman -Ss"
   alias pacs="sudo pacman -S --noconfirm --needed"
-  alias pacsy="sudo pacman -Syyy"
-  alias pacsu="sudo pacman -Syyu"
+  alias pacsy="sudo pacman -Sy"
+  alias pacsu="sudo pacman -Syu"
+  alias pacsu!="sudo pacman -Syyu"
   alias pacrs="sudo pacman -Rs"
   alias pkg="makepkg -cris"
 fi
