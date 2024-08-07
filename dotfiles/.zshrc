@@ -86,6 +86,7 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
         usbmux uucp vcsa wwwrun xfs '_*'
 zstyle '*' single-ignored show #: Show ignored when pressing tab twice
 
+autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
 
 autoload -Uz _zinit
@@ -119,6 +120,8 @@ if command -v mise &> /dev/null; then
   #: mise completion
   eval "$(mise completion zsh)"
 fi
+
+complete -C '/usr/local/bin/aws_completer' aws
 
 zinit cdreplay -q
 # }}}
