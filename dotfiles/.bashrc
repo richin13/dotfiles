@@ -393,6 +393,8 @@ function install-language-servers() {
     @microsoft/compose-language-service
     #: https://github.com/microsoft/pyright
     pyright
+    #: https://github.com/tailwindlabs/tailwindcss-intellisense
+    @tailwindcss/language-server
     #: https://github.com/typescript-language-server/typescript-language-server
     typescript
     typescript-language-server

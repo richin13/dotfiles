@@ -148,6 +148,8 @@ local configs = {
   rust_analyzer = {},
   -- https://github.com/termux/termux-language-server/
   pkgbuild_language_server = {},
+  -- https://github.com/tailwindlabs/tailwindcss-intellisense
+  tailwindcss = {},
   -- https://github.com/typescript-language-server/typescript-language-server
   tsserver = {},
   -- https://github.com/iamcco/vim-language-server
