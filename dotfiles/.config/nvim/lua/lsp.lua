@@ -31,7 +31,7 @@ local on_attach = function(client, bufnr)
   capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
   if client.server_capabilities.documentHighlightProvider then
-    vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+    vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
     vim.api.nvim_clear_autocmds({ buffer = bufnr, group = "lsp_document_highlight" })
     vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
       callback = function()
