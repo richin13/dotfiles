@@ -1,14 +1,20 @@
 colors:
-  black: "282a36"
-  green: "50fa7b"
-  purple: "bd93f9"
-  red: "ff5555"
-  yellow: "f1fa8c"
-  cyan: "8be9fd"
-  pink: "ff79c6"
-  orange: "ffb86c"
-  white: "f8f8f2"
-  base01: "3a3c4e"
+  # based off of solarized vivid theme and dracula/dircolors
+  # Based on 'dracula' theme
+  # (https://draculatheme.com/)
+  #
+  # The assignment of colors to file types roughly follows `dircolors`
+
+  black   :  '282a36'
+  green   :  '50fa7b'
+  purple  :  'bd93f9'
+  red     :  'ff5555'
+  yellow  :  'f1fa8c'
+  cyan    :  '8be9fd'
+  pink    :  'ff79c6'
+  orange  :  'ffb86c'
+  white   :  'f8f8f2'
+  base01  :  '3a3c4e'
 
 core:
   normal_text:
@@ -91,46 +97,23 @@ text:
     foreground: orange
 
   todo:
-    foreground: pink
+    foreground: orange
     font-style: bold
 
   licenses:
-    foreground: white
+    foreground: orange
 
   configuration:
-    foreground: yellow
-    dockerfile:
-      foreground: cyan
-      font-style: italic
+    foreground: orange
 
   other:
-    foreground: white
-    font-style: italic
+    foreground: orange
 
 markup:
-  foreground: cyan
+  foreground: orange
 
 programming:
-  source:
-    foreground: green
-    javascript:
-      foreground: yellow
-    lua:
-      foreground: cyan
-    php:
-      foreground: purple
-    typescript:
-      foreground: cyan
-  tooling:
-    foreground: yellow
-    packaging:
-      foreground: yellow
-      python:
-        foreground: cyan
-    build:
-      foreground: cyan
-      font-style: italic
-
+  foreground: orange
 
 media:
   image:
@@ -146,12 +129,15 @@ media:
   fonts:
     foreground: orange
 
+  3d:
+    foreground: pink
+
 office:
-  foreground: cyan
+  foreground: orange
 
 archives:
   foreground: red
-  font-style: underline
+  font-style: bold
 
 executable:
   foreground: green
