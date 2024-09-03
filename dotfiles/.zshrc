@@ -59,7 +59,7 @@ zinit light richin13/dracula.zsh-theme
 
 # Cool stuff
 zinit light paulirish/git-open
-zinit light zdharma-continuum/fast-syntax-highlighting
+zinit light zsh-users/zsh-syntax-highlighting
 zinit light zdharma-continuum/history-search-multi-word
 
 # Completions ----------------------------------------------------- {{{
