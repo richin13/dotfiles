@@ -91,6 +91,10 @@ end
 local configs = {
   -- https://github.com/bash-lsp/bash-language-server
   bashls = {},
+  -- https://github.com/denoland/deno
+  denols = {
+    root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", "import_map.json"),
+  },
   -- https://github.com/microsoft/compose-language-service
   docker_compose_language_service = {},
   -- https://github.com/rcjsuen/dockerfile-language-server-nodejs
@@ -151,7 +155,9 @@ local configs = {
   -- https://github.com/tailwindlabs/tailwindcss-intellisense
   tailwindcss = {},
   -- https://github.com/typescript-language-server/typescript-language-server
-  tsserver = {},
+  tsserver = {
+    single_file_support = false,
+  },
   -- https://github.com/iamcco/vim-language-server
   vimls = {},
 }
