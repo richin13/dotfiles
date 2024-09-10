@@ -155,7 +155,7 @@ local configs = {
   -- https://github.com/tailwindlabs/tailwindcss-intellisense
   tailwindcss = {},
   -- https://github.com/typescript-language-server/typescript-language-server
-  tsserver = {
+  ts_ls = {
     single_file_support = false,
   },
   -- https://github.com/iamcco/vim-language-server
