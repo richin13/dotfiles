@@ -85,6 +85,8 @@ local on_attach = function(client, bufnr)
     vim.lsp.buf.clear_references()
     vim.lsp.buf.hover()
   end, opts)
+  vim.keymap.set("n", "]g", function () vim.diagnostic.jump({ count = 1}) end, opts)
+  vim.keymap.set("n", "[g", function () vim.diagnostic.jump({ count = -1}) end, opts)
 end
 
 -- See https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
