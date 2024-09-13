@@ -105,9 +105,30 @@ require("nvim-navic").setup({
 -- }}}
 -- nvim-tree.lua {{{
 -- https://github.com/nvim-tree/nvim-tree.lua
+local VIEW_WIDTH_FIXED = 30
+local view_width_max = VIEW_WIDTH_FIXED -- fixed to start
+
+-- toggle the width and redraw
+local function toggle_width_adaptive()
+  if view_width_max == -1 then
+    view_width_max = VIEW_WIDTH_FIXED
+  else
+    view_width_max = -1
+  end
+
+  require("nvim-tree.api").tree.reload()
+end
+
+local function get_view_width_max()
+  return view_width_max
+end
+
 require("nvim-tree").setup({
   view = {
-    width = 31,
+    width = {
+      min = VIEW_WIDTH_FIXED,
+      max = get_view_width_max,
+    },
     side = "right",
   },
   actions = {
@@ -146,13 +167,10 @@ require("nvim-tree").setup({
     api.config.mappings.default_on_attach(bufnr)
 
     -- Custom key mappings
-    -- Old habits are hard to forget
-    vim.keymap.set("n", "ma", api.fs.create, opts("Create"))
-    vim.keymap.set("n", "md", api.fs.remove, opts("Delete"))
-    vim.keymap.set("n", "mm", api.fs.rename, opts("Rename"))
-    vim.keymap.set("n", "u", api.tree.change_root_to_parent, opts("Up"))
+    vim.keymap.set("n", "h", toggle_width_adaptive, opts("Toggle Adaptive Width"))
   end,
 })
+
 -- }}}
 -- nvim-treesitter and related {{{
 -- https://github.com/nvim-treesitter/nvim-treesitter
@@ -165,7 +183,7 @@ require("nvim-treesitter.configs").setup({
   },
   highlight = {
     enable = true,
-    disable = {"dockerfile"},
+    disable = { "dockerfile" },
     additional_vim_regex_highlighting = { "php" },
   },
   textobjects = {
@@ -254,8 +272,7 @@ require("ts_context_commentstring").setup({
 })
 local get_option = vim.filetype.get_option
 vim.filetype.get_option = function(filetype, option)
-  return option == "commentstring"
-    and require("ts_context_commentstring.internal").calculate_commentstring()
+  return option == "commentstring" and require("ts_context_commentstring.internal").calculate_commentstring()
     or get_option(filetype, option)
 end
 -- }}}
