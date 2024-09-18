@@ -52,4 +52,12 @@ zoxide: ## Install zoxide
 
 .PHONY: rust-tools
 rust-tools: ## Install rust tools
-	cargo install lsd ripgrep fd-find bat git-delta vivid tailspin
+	cargo install \
+		bat \
+		fd-find \
+		git-delta \
+		lsd \
+		ripgrep \
+		sd \
+		tailspin \
+		vivid
