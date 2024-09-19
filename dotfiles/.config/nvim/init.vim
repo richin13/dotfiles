@@ -336,12 +336,21 @@ function s:ruff()
         \ expand('%:p'))
 endfunction
 
+function s:prettier()
+  return printf(
+  \ 'npx --no-update-notifier --silent --no-install prettier --stdin-filepath="%s"',
+  \ expand('%:p')
+  \ )
+endfunction
+
 let g:vim_filetype_formatter_commands = {
       \ 'python': function('s:ruff'),
       \ 'bash': 'shfmt -ci -i 2',
       \ 'php': 'npx --no-update-notifier --silent prettier --parser=php',
       \ 'lua': 'stylua --indent-type=Spaces --indent-width=2 -',
       \ 'toml': 'toml-sort --trailing-comma-inline-array',
+      \ 'typescript': function('s:prettier'),
+      \ 'typescriptreact': function('s:prettier'),
       \ 'sql': 'sqlfluff format --nocolor -',
       \ 'yml': 'yamlfmt -'
       \ }
