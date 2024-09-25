@@ -86,6 +86,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/lukas-reineke/indent-blankline.nvim')
   call a:packager.add('https://github.com/windwp/nvim-autopairs')
   call a:packager.add('https://github.com/norcalli/nvim-colorizer.lua')
+  call a:packager.add('git@github.com:Vimjas/vim-python-pep8-indent.git', { 'type': 'opt' })
 
 " Coloring & Syntax highlighting
   call a:packager.add('https://github.com/richin13/dracula-nvim')
@@ -128,6 +129,10 @@ command! PlugInstall echom 'Use :PackagerInstall instead' | :PackagerInstall
 command! PlugUpdate echom 'Use :PackagerUpdate instead' | :PackagerUpdate
 command! PlugClean echom 'Use :PackagerClean instead' | :PackagerClean
 
+augroup enable_opt_plugins
+  autocmd!
+  autocmd Filetype python packadd vim-python-pep8-indent
+augroup END
 " }}}
 " General: Lua Plugins Setup ------------------ {{{
 
