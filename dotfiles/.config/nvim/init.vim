@@ -282,6 +282,9 @@ nnoremap <C-k> zk
 
 " Use <leader>d to toggle diagnostics
 nnoremap <silent> <leader>d :lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>
+
+" Convert posarg to kwarg
+nnoremap <leader>x yiwi<C-r>"=<Esc>
 " }}}
 " General: File type detection ---------------- {{{
 augroup file_extensions
