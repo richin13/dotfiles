@@ -1,0 +1,13 @@
+[tools]
+node = "latest"
+python = "3.12.4"
+lua = "5.4.7"
+
+neovim = "nightly"
+usage = "latest"
+tmux = "latest"
+postgres = "16"
+"npm:prettier" = "latest"
+
+[settings]
+experimental = true
