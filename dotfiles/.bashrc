@@ -130,7 +130,6 @@ if [ "$DISTRO" = "arch" ]; then
 fi
 
 export DEFAULT_PYTHON_VENV_DIR=.venv
-export DEFAULT_PYTHON_PACKAGES=(pip ipython ruff)
 
 # }}}
 # Functions --------------------------------------------------------- {{{
@@ -267,7 +266,7 @@ function va() { #: Create a virtualenv
   python -m venv "$venv_name"
 
   # shellcheck disable=SC1091
-  source "$venv_name/bin/activate" && pip install -U pip "${DEFAULT_PYTHON_PACKAGES[@]}"
+  source "$venv_name/bin/activate"
 }
 function vd() {
   local venv_name=$DEFAULT_PYTHON_VENV_DIR
@@ -517,7 +516,6 @@ alias py="python"
 alias pipi="pip install"
 alias pipu="pip uninstall -y"
 alias pipf="pip freeze"
-alias pip-dev='pipi -U $DEFAULT_PYTHON_PACKAGES'
 alias pa="poetry add"
 alias pad="poetry add --group dev"
 alias pi="poetry install"

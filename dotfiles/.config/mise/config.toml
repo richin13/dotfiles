@@ -8,6 +8,9 @@ usage = "latest"
 tmux = "latest"
 postgres = "16"
 "npm:prettier" = "latest"
+"pipx:ipython" = "latest"
+"pipx:ruff" = "latest"
+"pipx:poetry" = "latest"
 
 [settings]
 experimental = true
