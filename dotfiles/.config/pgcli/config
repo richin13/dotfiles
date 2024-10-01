@@ -1,0 +1,19 @@
+# vim:ft=dosini
+[main]
+
+# Table format. Possible values: psql, plain, simple, grid, fancy_grid, pipe,
+# ascii, double, github, orgtbl, rst, mediawiki, html, latex, latex_booktabs,
+# textile, moinmoin, jira, vertical, tsv, csv.
+# Recommended: psql, fancy_grid and grid.
+table_format = github
+
+# Syntax Style. Possible values: manni, igor, xcode, vim, autumn, vs, rrt,
+# native, perldoc, borland, tango, emacs, friendly, monokai, paraiso-dark,
+# colorful, murphy, bw, pastie, paraiso-light, trac, default, fruity
+syntax_style = paraiso-dark
+
+[alias_dsn]
+
+# Alias for a default postgresql DB running with default settings (docker)
+# use `pgcli -D local` to connect to this DB
+local = postgresql://postgres:postgres@localhost:5432/postgres

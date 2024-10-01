@@ -11,6 +11,7 @@ postgres = "16"
 "pipx:ipython" = "latest"
 "pipx:ruff" = "latest"
 "pipx:poetry" = "latest"
+"pipx:pgcli" = "latest"
 
 [settings]
 experimental = true
