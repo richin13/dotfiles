@@ -102,6 +102,8 @@ local configs = {
   -- https://github.com/rcjsuen/dockerfile-language-server-nodejs
   dockerls = {},
   -- https://github.com/hrsh7th/vscode-langservers-extracted
+  eslint = {},
+  -- https://github.com/hrsh7th/vscode-langservers-extracted
   html = {},
   -- https://github.com/luals/lua-language-server
   lua_ls = {
