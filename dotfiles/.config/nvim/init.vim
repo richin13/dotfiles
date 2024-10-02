@@ -275,6 +275,8 @@ nnoremap <leader>O moO<ESC>k`o
 nnoremap <C-j> zj
 nnoremap <C-k> zk
 
+" Use <leader>d to toggle diagnostics
+nnoremap <silent> <leader>d :lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>
 " }}}
 " General: File type detection ---------------- {{{
 augroup file_extensions
