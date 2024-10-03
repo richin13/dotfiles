@@ -291,6 +291,7 @@ augroup file_extensions
   autocmd!
   autocmd BufEnter *.config,.cookiecutterrc,DESCRIPTION,.lintr set filetype=yaml
   autocmd BufNewFile,BufRead,BufEnter,VimEnter *.prisma set filetype=prisma
+  autocmd BufNewFile,BufRead,BufEnter docker-compose*.yml,docker-compose*.yaml,compose*.yml,compose*.yaml set filetype=yaml.docker-compose
   autocmd BufNewFile,BufRead,BufEnter *.zsh-theme,.zprofile set filetype=zsh
   autocmd BufNewFile,BufRead,BufEnter *.jsx set filetype=javascript
   autocmd BufNewFile,BufRead,BufEnter .env.* set filetype=sh
