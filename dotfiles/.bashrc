@@ -383,46 +383,7 @@ function gh-install() { #: Install the latest deb package from a Github release
 }
 
 function install-language-servers() {
-  local npm_packages=(
-    #: https://github.com/bash-lsp/bash-language-server
-    bash-language-server
-    #: https://github.com/rcjsuen/dockerfile-language-server-nodejs
-    dockerfile-language-server-nodejs
-    #: https://github.com/microsoft/compose-language-service
-    @microsoft/compose-language-service
-    #: https://github.com/microsoft/pyright
-    pyright
-    #: https://github.com/tailwindlabs/tailwindcss-intellisense
-    @tailwindcss/language-server
-    #: https://github.com/typescript-language-server/typescript-language-server
-    typescript
-    typescript-language-server
-    #: https://github.com/iamcco/vim-language-server
-    vim-language-server
-    #: https://github.com/hrsh7th/vscode-langservers-extracted
-    vscode-langservers-extracted
-  )
-  echo "Installing language servers with npm: ${npm_packages[*]}..."
-  npm install -g "${npm_packages[@]}"
-
-  local pip_packages=(
-    #: https://github.com/termux/termux-language-server/
-    termux-language-server
-  )
-  echo "Installing language servers with pipx: ${pip_packages[*]}..."
-  pipx install "${pip_packages[@]}"
-
   if [ "$DISTRO" = "ubuntu" ]; then
-    echo "Installing lua-language-server..."
-    rm -rf ~/.local/bin/lls && mkdir ~/.local/bin/lls
-    curl -Ss "https://api.github.com/repos/LuaLS/lua-language-server/releases/latest" |
-      jq -r ".assets[] | .browser_download_url" |
-      grep 'linux-x64.tar.gz' |
-      xargs -I {} curl -sL {} |
-      tar -xzf - -C ~/.local/bin/lls &&
-      ln -s ~/.local/bin/lls/bin/lua-language-server ~/.local/bin/lua-language-server &&
-      chmod +x ~/.local/bin/lua-language-server
-
     # https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary
     echo "Installing rust-analyzer"
     curl -sL https://github.com/rust-lang/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz |
