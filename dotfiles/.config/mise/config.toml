@@ -23,6 +23,7 @@ neovim = "nightly"
 postgres = "16"
 tmux = "latest"
 usage = "latest"
+"npm:yaml-language-server" = "latest"
 
 [settings]
 experimental = true

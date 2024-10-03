@@ -164,6 +164,16 @@ local configs = {
   },
   -- https://github.com/iamcco/vim-language-server
   vimls = {},
+  -- https://github.com/redhat-developer/yaml-language-server
+  yamlls = {
+    settings = {
+      yaml = {
+        schemas = {
+          ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+        }
+      }
+    }
+  },
 }
 
 for server, config in pairs(configs) do
