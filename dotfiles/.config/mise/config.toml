@@ -1,6 +1,6 @@
 [tools]
-node = "latest"
-python = "3.12.4"
+node = "20.17.0"
+python = "3.12.6"
 lua = "5.4.7"
 
 neovim = "nightly"
