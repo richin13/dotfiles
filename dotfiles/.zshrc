@@ -165,6 +165,9 @@ fi
 if [ $commands[carapace] ]; then
   source <(carapace docker);
   source <(carapace docker-compose);
+  if [ $commands[gcloud] ]; then
+    source <(carapace gcloud);
+  fi
 fi
 
 if [ -f ~/.local/bin/mise ]; then
