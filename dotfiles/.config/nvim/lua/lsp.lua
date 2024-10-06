@@ -158,6 +158,8 @@ local configs = {
   pkgbuild_language_server = {},
   -- https://github.com/tailwindlabs/tailwindcss-intellisense
   tailwindcss = {},
+  -- https://github.com/juliosueiras/terraform-lsp
+  terraformls = {},
   -- https://github.com/typescript-language-server/typescript-language-server
   ts_ls = {
     single_file_support = false,
