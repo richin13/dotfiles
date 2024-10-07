@@ -321,12 +321,13 @@ if [ "$DISTRO" = "ubuntu" ]; then
     sudo apt update
     sudo apt upgrade -y
     sudo apt autoremove -y
+    sudo snap refresh
     pushd .
     cd ~/dotfiles || return 1
     git pull
     popd || return 1
-    mise install -f neovim@nightly
-    nvim -c 'PlugUpdate' -c 'CocUpdate'
+    mise upgrade
+    nvim -c 'PlugUpdate'
   }
 
   function update-ff-dev() { #: Upgrade firefox developer edition
