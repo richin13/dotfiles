@@ -24,7 +24,7 @@ set number
 set secure
 set scrolloff=2
 set shell=/usr/bin/zsh
-set shortmess+=c shortmess+=I
+set shortmess+=c
 set showtabline=2
 set signcolumn=yes
 set spelllang=en_us
