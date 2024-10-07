@@ -79,7 +79,7 @@ function! s:packager_init(packager) abort
 
   " Utils
   call a:packager.add('https://github.com/tpope/vim-abolish')
-  call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & yarn install'})
+  call a:packager.add('https://github.com/iamcco/markdown-preview.nvim', {'do': 'cd app & npm i'})
   call a:packager.add('https://github.com/tommcdo/vim-lion')
   call a:packager.add('https://github.com/tpope/vim-endwise')
   call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
