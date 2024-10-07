@@ -111,7 +111,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/hrsh7th/cmp-buffer')
   call a:packager.add('https://github.com/hrsh7th/cmp-path')
   call a:packager.add('https://github.com/hrsh7th/cmp-cmdline')
-  call a:packager.add('https://github.com/hrsh7th/nvim-cmp')
+  call a:packager.add('https://github.com/iguanacucumber/magazine.nvim')
   call a:packager.add('https://github.com/hrsh7th/cmp-vsnip')
   call a:packager.add('https://github.com/hrsh7th/vim-vsnip')
   call a:packager.add('https://github.com/onsails/lspkind.nvim')
