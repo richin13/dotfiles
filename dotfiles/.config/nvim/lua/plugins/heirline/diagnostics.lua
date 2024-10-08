@@ -9,10 +9,10 @@ M.Diagnostics = {
     fg = colors.bg,
   },
   static = {
-    error_icon = " ",
-    warning_icon = " ",
-    info_icon = " ",
-    hint_icon = " ",
+    error_icon = " ",
+    warning_icon = " ",
+    info_icon = " ",
+    hint_icon = " ",
     clean_icon = " ",
   },
   init = function(self)
