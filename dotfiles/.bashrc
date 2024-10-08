@@ -304,6 +304,10 @@ function gccd() { #: Clone and cd into a repo
   cd "${lastarg%.git}" || return 1
 }
 
+function printcolors() {
+  curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/e50a28ec54188d2413518788de6c6367ffcea4f7/print256colours.sh | bash
+}
+
 # Ubuntu-only functions
 if [ "$DISTRO" = "ubuntu" ]; then
   function upgradezoom() { #: Upgrade zoom
