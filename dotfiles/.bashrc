@@ -423,6 +423,7 @@ alias ssol="aws sso login"
 alias tks="tmux kill-server"
 alias tree="lsd --tree -I __pycache__ -I .venv -I node_modules -I .git"
 alias zzz="systemctl suspend"
+alias vplug="cd ~/.config/nvim/pack/packager/start"
 
 if [ -n "$BASH_VERSION" ]; then
   alias ..="cd .." #: No auto_cd in bash :(
