@@ -1,9 +1,4 @@
 local lspconfig = require("lspconfig")
-local capabilities = vim.tbl_deep_extend(
-  "force",
-  vim.lsp.protocol.make_client_capabilities(),
-  require("cmp_nvim_lsp").default_capabilities()
-)
 local _border = "rounded"
 
 local on_attach = function(client, bufnr)
@@ -23,12 +18,6 @@ local on_attach = function(client, bufnr)
 
   -- Disable semantic tokens
   client.server_capabilities.semanticTokensProvider = nil
-
-  -- Prevent nvim crash: https://github.com/neovim/neovim/issues/23291
-  -- Resolved: https://www.reddit.com/r/neovim/comments/1b4bk5h/psa_new_fswatch_watchfunc_backend_available_on/
-  -- Must `sudo apt install fswatch`
-  -- Keeping code for now because it's highly unstable
-  capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })

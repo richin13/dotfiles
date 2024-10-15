@@ -107,14 +107,8 @@ function! s:packager_init(packager) abort
 
 " Language server
   call a:packager.add('https://github.com/neovim/nvim-lspconfig')
-  call a:packager.add('https://github.com/hrsh7th/cmp-nvim-lsp')
-  call a:packager.add('https://github.com/hrsh7th/cmp-buffer')
-  call a:packager.add('https://github.com/hrsh7th/cmp-path')
-  call a:packager.add('https://github.com/hrsh7th/cmp-cmdline')
-  call a:packager.add('https://github.com/iguanacucumber/magazine.nvim')
-  call a:packager.add('https://github.com/hrsh7th/cmp-vsnip')
+  call a:packager.add('git@github.com:Saghen/blink.cmp.git')
   call a:packager.add('https://github.com/hrsh7th/vim-vsnip')
-  call a:packager.add('https://github.com/onsails/lspkind.nvim')
   call a:packager.add('https://github.com/ray-x/lsp_signature.nvim')
   call a:packager.add('https://github.com/SmiteshP/nvim-navic')
 
