@@ -88,7 +88,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/norcalli/nvim-colorizer.lua')
   call a:packager.add('git@github.com:Vimjas/vim-python-pep8-indent.git', { 'type': 'opt' })
 
-" Coloring & Syntax highlighting
+  " Coloring & Syntax highlighting
   call a:packager.add('https://github.com/richin13/dracula-nvim')
 
   call a:packager.add('https://github.com/chr4/nginx.vim')
@@ -101,11 +101,11 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/s1n7ax/nvim-comment-frame')
   call a:packager.add('https://github.com/lepture/vim-jinja')
 
-" Git
+  " Git
   call a:packager.add('https://github.com/tpope/vim-fugitive')
   call a:packager.add('https://github.com/lewis6991/gitsigns.nvim')
 
-" Language server
+  " Language server
   call a:packager.add('https://github.com/neovim/nvim-lspconfig')
   call a:packager.add('git@github.com:Saghen/blink.cmp.git')
   call a:packager.add('https://github.com/hrsh7th/vim-vsnip')
@@ -197,8 +197,8 @@ augroup END
 " General: Syntax highlighting ---------------- {{{
 
 if !has('gui_running')
-    set t_Co=256
-  endif
+  set t_Co=256
+endif
 
 nnoremap <silent> zS <cmd>Inspect<CR>
 " }}}
@@ -352,8 +352,8 @@ let g:vim_filetype_formatter_commands = {
       \ }
 
 let g:vim_filetype_formatter_ft_maps = {
-  \ 'sh': 'bash',
-  \ }
+      \ 'sh': 'bash',
+      \ }
 
 augroup formatting
   au!
