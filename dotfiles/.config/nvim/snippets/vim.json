@@ -1,0 +1,7 @@
+{
+  "Packager Add Package": {
+    "prefix": "padd",
+    "description": "Install a package with the packager",
+    "body": ["call packager#add('$0')"]
+  }
+}

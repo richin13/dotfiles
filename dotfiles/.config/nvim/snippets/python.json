@@ -1,0 +1,55 @@
+{
+  "Shebang": {
+    "prefix": "!#",
+    "description": "Add a shebang line",
+    "body": ["#!/usr/bin/env python3"]
+  },
+  "Main Script Entrypoint": {
+    "prefix": "ifmain",
+    "description": "Add a main script entrypoint",
+    "body": [
+      "def main():",
+      "    \"\"\"Main entrypoint.\"\"\"",
+      "    $0",
+      "",
+      "",
+      "if __name__ == '__main__':",
+      "    main()"
+    ]
+  },
+  "Loud Print": {
+    "prefix": "loud",
+    "description": "Print a message with a loud comment",
+    "body": [
+      "print('##########################################################################')",
+      "print('# $0')",
+      "print('##########################################################################')"
+    ]
+  },
+  "Pytest Skip Test": {
+    "prefix": "skip",
+    "description": "Skip a test in pytest",
+    "body": ["import pytest", "@pytest.mark.skip(reason='$0')"]
+  },
+  "Click CMD App Skeleton": {
+    "prefix": "click",
+    "description": "Create a skeleton for a Click command-line app",
+    "body": [
+      "import typing as t",
+      "",
+      "import click",
+      "",
+      "",
+      "@click.group()",
+      "def cli() -> None:",
+      "    \"\"\"CLI Entrypoint.\"\"\"",
+      "    pass",
+      "",
+      "",
+      "@cli.command()",
+      "def ${1:command}() -> t.Any:",
+      "    \"\"\"${2:Command help message}\"\"\"",
+      "    $0"
+    ]
+  }
+}

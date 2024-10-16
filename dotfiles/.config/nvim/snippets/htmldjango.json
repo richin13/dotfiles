@@ -1,0 +1,11 @@
+{
+  "If Statement": {
+    "prefix": "if",
+    "description": "If Statement",
+    "body": [
+      "{% if $1 %}",
+      "\t$0",
+      "{% endif %}"
+    ]
+  }
+}

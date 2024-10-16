@@ -1,0 +1,31 @@
+{
+  "Help": {
+    "prefix": "help",
+    "description": "Generate a help command",
+    "body": [
+      ".PHONY: help",
+      "help: ## Print each target and its associated help message",
+      "\t@grep -E '^[%a-zA-Z_-]+:.*?## .*\\$\\$' \\$(MAKEFILE_LIST) | \\",
+      "\t\tawk 'BEGIN {FS = \":.*?## \"}; {printf \"\\033[36m%-30s\\033[0m %s\\n\", \\$\\$1, \\$\\$2}'",
+        "$0"
+      ]
+  },
+  "Phony Target": {
+    "prefix": "phony",
+    "description": "Generate a phony target",
+    "body": [
+      ".PHONY: $1",
+      "$1: ## $2",
+      "\t$0"
+    ]
+  },
+  "Comment section": {
+    "prefix": "section",
+    "description": "Generate a comment section",
+    "body": [
+      "##########################################################################",
+      "# $0",
+      "##########################################################################"
+    ]
+  }
+}

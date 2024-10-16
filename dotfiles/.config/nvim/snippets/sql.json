@@ -1,0 +1,7 @@
+{
+  "SQLFluff dialect directive": {
+    "prefix": "dialect",
+    "description": "Add a dialect directive to configure SQLFluff",
+    "body": ["-- sqlfluff:dialect:athena", "-- sqlfluff:max_line_length:120"]
+  }
+}
