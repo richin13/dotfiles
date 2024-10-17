@@ -1,3 +1,6 @@
+-- Load custom theme
+require("dracula").load()
+
 -- gitsigns.nvim {{{
 -- https://github.com/lewis6991/gitsigns.nvim
 require("gitsigns").setup({
@@ -81,7 +84,9 @@ require("blink-cmp").setup({
 -- }}}
 -- nvim-colorizer.lua {{{
 -- https://github.com/norcalli/nvim-colorizer.lua
-require("colorizer").setup({})
+require("colorizer").setup({
+  'lua';
+})
 -- }}}
 -- nvim-navic.lua {{{
 -- https://github.com/SmiteshP/nvim-navic

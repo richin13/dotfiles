@@ -44,12 +44,6 @@ augroup custom_vim_resized
   au VimResized * wincmd =
 augroup END
 
-try
-  colorscheme dracula
-catch
-  echo 'Error loading theme'
-endtry
-
 " Set colorcolumn based on filetype
 augroup color_column
   autocmd!
@@ -87,9 +81,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/windwp/nvim-autopairs')
   call a:packager.add('https://github.com/norcalli/nvim-colorizer.lua')
   call a:packager.add('git@github.com:Vimjas/vim-python-pep8-indent.git', { 'type': 'opt' })
-
-  " Coloring & Syntax highlighting
-  call a:packager.add('https://github.com/richin13/dracula-nvim')
 
   call a:packager.add('https://github.com/chr4/nginx.vim')
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'})
