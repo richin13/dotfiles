@@ -44,9 +44,6 @@ M.FileType = {
 }
 
 local FileNameBlock = {
-  init = function(self)
-    self.filename = vim.api.nvim_buf_get_name(0)
-  end,
   on_click = {
     callback = function()
       vim.defer_fn(function()
@@ -59,7 +56,7 @@ local FileNameBlock = {
 
 M.FileIcon = {
   init = function(self)
-    local filename = self.filename
+    local filename = vim.api.nvim_buf_get_name(0)
     local extension = vim.fn.fnamemodify(filename, ":e")
     self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(filename, extension, {
       default = true,
@@ -75,9 +72,11 @@ M.FileIcon = {
   end,
 }
 
+M.FileIconType = { M.FileIcon, M.FileType}
+
 M.FileName = {
   provider = function(self)
-    local filename = vim.fn.fnamemodify(self.filename, ":t.")
+    local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t.")
     if filename == "" then
       return "[No Name]"
     end
@@ -112,7 +111,7 @@ M.FileFlags = {
   },
 }
 
-M.FileNameBlock = utils.insert(FileNameBlock, M.FileIcon, M.WorkDir, M.FileName, M.FileFlags, common.Cut)
+M.FileNameBlock = utils.insert(FileNameBlock, M.WorkDir, M.FileName, M.FileFlags, common.Cut)
 
 M.SimpleFileName = {
   M.FileIcon,

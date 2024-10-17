@@ -7,6 +7,7 @@ local file_info = require("plugins.heirline.file-info")
 local git = require("plugins.heirline.git")
 local mode = require("plugins.heirline.mode")
 local tabline = require("plugins.heirline.tabline")
+local winbar = require("plugins.heirline.winbar")
 
 local Align = common.Align
 local Space = common.Space
@@ -68,8 +69,8 @@ local StatusLines = {
   end,
   static = {
     mode_colors = {
-      n = colors.cyan,
-      i = colors.green,
+      n = colors.green,
+      i = colors.cyan,
       v = colors.purple,
       ["\22"] = colors.purple,
       c = colors.orange,
@@ -91,76 +92,16 @@ local StatusLines = {
   DefaultStatusline,
 }
 
-local Navic = {
-  condition = function()
-    return require("nvim-navic").is_available()
-  end,
-  provider = function()
-    return require("nvim-navic").get_location({ highlight = true })
-  end,
-  update = "CursorMoved",
-}
-
-local DefaultWinbar = {
-  Align,
-  file_info.SimpleFileName,
-  {
-    condition = function()
-      return require("nvim-navic").is_available()
-        and string.len(require("nvim-navic").get_location({ highlight = true })) > 0
-    end,
-    provider = "  ",
-  },
-  Navic,
-  Align,
-  file_info.FileType,
-  Space,
-  file_info.ScrollBar,
-  Space,
-}
-
-local InactiveWinbar = {
-  condition = function()
-    return not conditions.is_active()
-  end,
-  hl = {
-    bg = colors.bg,
-    fg = colors.white,
-    force = true,
-  },
-  Align,
-  file_info.FileType,
-}
-
-local WinBars = {
-  hl = { bg = colors.bg },
-  fallthrough = false,
-  { -- Hide the winbar for special buffers
-    condition = function()
-      return conditions.buffer_matches({
-        buftype = { "nofile", "prompt", "help", "quickfix" },
-        filetype = { "^git.*", "fugitive" },
-      })
-    end,
-    init = function()
-      vim.opt_local.winbar = nil
-    end,
-  },
-
-  InactiveWinbar,
-  DefaultWinbar,
-}
-
 M.setup = function()
   require("heirline").setup({
     statusline = StatusLines,
-    winbar = WinBars,
+    winbar = winbar.WinBars,
     tabline = tabline.BufferLine,
     opts = {
       disable_winbar_cb = function(args)
         return conditions.buffer_matches({
           buftype = { "nofile", "prompt", "help", "quickfix" },
-          filetype = { "^git.*", "fugitive", "Trouble", "dashboard" },
+          filetype = { "^git.*", "fugitive", "dashboard" },
         }, args.buf)
       end,
     },
