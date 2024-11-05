@@ -60,10 +60,7 @@ require("nvim-autopairs").setup({})
 -- }}}
 -- blink-cmp {{{
 require("blink-cmp").setup({
-  keymap = {
-    scroll_documentation_up = "<C-b>",
-    scroll_documentation_down = "<C-f>",
-  },
+  keymap = 'super-tab',
   trigger = {
     signature_help = {
       enabled = true,
