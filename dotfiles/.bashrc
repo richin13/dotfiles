@@ -287,7 +287,7 @@ function pyclean() {
   find "${@:-.}" -depth -type d -name ".tox" -exec sh -c 'rm -r $1' shell {} \;
 }
 
-function groot() { #: Go to the root of the git repository
+function ,,() { #: Go to the root of the git repository
   if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]; then
     cd "$(git rev-parse --show-toplevel)" || return 1
   else
