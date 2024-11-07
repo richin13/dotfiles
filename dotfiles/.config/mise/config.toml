@@ -4,6 +4,7 @@ python = "3.12.6"
 lua = "5.4.7"
 
 "npm:@microsoft/compose-language-service" = "latest"
+"npm:@prisma/language-server" = "latest"
 "npm:@tailwindcss/language-server" = "latest"
 "npm:bash-language-server" = "latest"
 "npm:dockerfile-language-server-nodejs" = "latest"

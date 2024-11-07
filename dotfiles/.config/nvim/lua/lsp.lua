@@ -121,6 +121,8 @@ local configs = {
       Lua = {},
     },
   },
+  -- https://github.com/prisma/language-tools
+  prismals = {},
   -- https://github.com/microsoft/pyright
   pyright = {
     settings = {
