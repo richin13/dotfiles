@@ -272,6 +272,11 @@ nnoremap <silent> <leader>d :lua vim.diagnostic.enable(not vim.diagnostic.is_ena
 
 " Convert posarg to kwarg
 nnoremap <leader>x yiwi<C-r>"=<Esc>
+
+" Format code
+nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
+vnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>"
+
 " }}}
 " General: File type detection ---------------- {{{
 augroup file_extensions
@@ -337,6 +342,7 @@ endfunction
 let g:vim_filetype_formatter_commands = {
       \ 'bash': 'shfmt -ci -i 2',
       \ 'lua': 'stylua --indent-type=Spaces --indent-width=2 -',
+      \ 'prisma': {-> printf(':silent lua vim.lsp.buf.format()')},
       \ 'php': 'npx --no-update-notifier --silent prettier --parser=php',
       \ 'python': function('s:ruff'),
       \ 'sql': 'sqlfluff format --nocolor -',
@@ -347,14 +353,6 @@ let g:vim_filetype_formatter_commands = {
 let g:vim_filetype_formatter_ft_maps = {
       \ 'sh': 'bash',
       \ }
-
-augroup formatting
-  au!
-  command! -nargs=0 Format :call CocAction('format')
-  au Filetype * nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
-  au Filetype prisma nnoremap <silent> <buffer> <leader>f :Format<cr>
-  au Filetype * vnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
-augroup END
 " }}}
 " Config: Preview ----------------------------- {{{
 function! _Preview()
