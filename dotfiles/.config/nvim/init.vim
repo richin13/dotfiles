@@ -353,6 +353,13 @@ let g:vim_filetype_formatter_commands = {
 let g:vim_filetype_formatter_ft_maps = {
       \ 'sh': 'bash',
       \ }
+
+augroup formatting
+  au!
+  command! -nargs=0 Format :call CocAction('format')
+  au Filetype * nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
+  au Filetype * vnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
+augroup END
 " }}}
 " Config: Preview ----------------------------- {{{
 function! _Preview()
