@@ -203,6 +203,7 @@ nnoremap <silent> L :bn<cr>
 nnoremap <silent> H :bp<cr>
 nnoremap <silent> <localleader>q :bd<cr>
 nnoremap <silent> <localleader>w :%bd\|e#\|bd#<cr>\|'"
+nnoremap <silent> <localleader><Space> :IBLToggle<cr>
 
 " Disable the functionality of arrow keys
 noremap <Left> <nop>

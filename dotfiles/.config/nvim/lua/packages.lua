@@ -47,6 +47,7 @@ require("gitsigns").setup({
 -- indent-blankline.nvim {{{
 -- https://github.com/lukas-reineke/indent-blankline.nvim
 require("ibl").setup({
+  enabled = false,
   -- space_char_blankline = " ",
   -- show_current_context = true,
   scope = {
