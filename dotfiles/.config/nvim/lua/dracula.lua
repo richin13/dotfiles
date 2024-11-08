@@ -110,7 +110,7 @@ local function apply()
 
     ErrorMsg = { fg = colors.bright_red },
     Folded = { fg = colors.comment, bg = colors.selection },
-    FoldColumn = { fg = colors.cyan },
+    FoldColumn = { fg = colors.comment },
     Search = { fg = colors.black, bg = colors.orange },
     IncSearch = { fg = colors.orange, bg = colors.comment },
     LineNr = { fg = colors.selection, bg = colors.bg },
