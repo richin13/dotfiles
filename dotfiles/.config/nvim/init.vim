@@ -335,12 +335,12 @@ function s:ruff()
 endfunction
 
 let g:vim_filetype_formatter_commands = {
-      \ 'python': function('s:ruff'),
       \ 'bash': 'shfmt -ci -i 2',
-      \ 'php': 'npx --no-update-notifier --silent prettier --parser=php',
       \ 'lua': 'stylua --indent-type=Spaces --indent-width=2 -',
-      \ 'toml': 'toml-sort --trailing-comma-inline-array',
+      \ 'php': 'npx --no-update-notifier --silent prettier --parser=php',
+      \ 'python': function('s:ruff'),
       \ 'sql': 'sqlfluff format --nocolor -',
+      \ 'toml': 'toml-sort --trailing-comma-inline-array',
       \ 'yml': 'yamlfmt -'
       \ }
 
