@@ -78,6 +78,14 @@ M.Diagnostics = {
 
 M.DiagnosticsBlock = {
   M.Diagnostics,
+  on_click = {
+    callback = function()
+      vim.defer_fn(function()
+        require("telescope.builtin").diagnostics()
+      end, 100)
+    end,
+    name = "heirline_diagnotics",
+  },
 }
 
 return M
