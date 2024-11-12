@@ -51,5 +51,34 @@
       "    \"\"\"${2:Command help message}\"\"\"",
       "    $0"
     ]
+  },
+  "Pydantic API Resource Schemas": {
+    "prefix": "api:resource",
+    "description": "Create Pydantic API resource schemas",
+    "body": [
+      "class ${1:Resource}Base(BaseModel):",
+      "    \"\"\"${2:Resource} base schema.\"\"\"",
+      "    pass",
+      "",
+      "",
+      "class ${1:Resource}Create(${1:Resource}Base):",
+      "    \"\"\"${2:Resource} create schema.\"\"\"",
+      "    pass",
+      "",
+      "",
+      "class ${1:Resource}Patch(BaseModel):",
+      "    \"\"\"${2:Resource} patch schema.\"\"\"",
+      "    pass",
+      "",
+      "",
+      "class ${3:Resources}Response(${1:Resource}Base):",
+      "    \"\"\"${2:Resource} response schema for when multiple records are returned.\"\"\"",
+      "    pass",
+      "",
+      "",
+      "class ${1:Resource}Response(${3:Resources}Response):",
+      "    \"\"\"${2:Resource} response schema for when individual record returned.\"\"\"",
+      "    pass"
+    ]
   }
 }
