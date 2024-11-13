@@ -32,6 +32,9 @@ set splitbelow splitright
 set updatetime=250
 set wildignorecase wildignore=*.pyc,**/__pycache__/*,**/node_modules/*,.coverage.*,.eggs,*.egg-info/
 set wildmenu wildmode=longest,list,full
+set termguicolors
+set background=dark
+colorscheme dracula
 
 " Redraw window whenever I've regained focus
 augroup redraw_on_refocus
