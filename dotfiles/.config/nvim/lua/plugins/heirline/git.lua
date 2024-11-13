@@ -1,4 +1,4 @@
-local colors = require("dracula").colors()
+local colors = require("plugins.heirline.colors")
 local conditions = require("heirline.conditions")
 local common = require("plugins.heirline.common")
 

@@ -1,4 +1,4 @@
-local colors = require("dracula").colors()
+local colors = require("plugins.heirline.colors")
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 
@@ -89,7 +89,7 @@ M.FileName = {
     return filename
   end,
   hl = {
-    fg = colors.gray,
+    fg = colors.fg,
   },
 }
 
@@ -124,7 +124,7 @@ M.SimpleFileName = {
     return filename == "" and "[No Name]" or filename
   end,
   hl = {
-    fg = colors.gray,
+    fg = colors.fg,
   },
   },
 }
