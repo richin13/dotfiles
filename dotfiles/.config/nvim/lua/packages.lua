@@ -59,27 +59,6 @@ require("ibl").setup({
 -- https://github.com/windwp/nvim-autopairs
 require("nvim-autopairs").setup({})
 -- }}}
--- blink-cmp {{{
-require("blink-cmp").setup({
-  keymap = 'super-tab',
-  trigger = {
-    signature_help = {
-      enabled = true,
-    },
-  },
-  windows = {
-    autocomplete = {
-      -- draw = 'reversed',
-      border = 'rounded',
-    },
-    documentation = {
-      border = 'rounded',
-      auto_show = true,
-      auto_show_delay_ms = 1000,
-    }
-  }
-})
--- }}}
 -- nvim-colorizer.lua {{{
 -- https://github.com/norcalli/nvim-colorizer.lua
 require("colorizer").setup({

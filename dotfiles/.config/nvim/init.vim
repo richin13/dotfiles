@@ -100,7 +100,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/neovim/nvim-lspconfig')
   call a:packager.add('git@github.com:Saghen/blink.cmp.git', { 'do': 'cargo build --release'})
   call a:packager.add('https://github.com/hrsh7th/vim-vsnip')
-  call a:packager.add('https://github.com/ray-x/lsp_signature.nvim')
   call a:packager.add('https://github.com/SmiteshP/nvim-navic')
 
   " Copilot, why not

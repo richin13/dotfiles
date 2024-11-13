@@ -1,17 +1,32 @@
 local lspconfig = require("lspconfig")
 local _border = "rounded"
 
-local on_attach = function(client, bufnr)
-  require("lsp_signature").on_attach({
-    bind = true,
-    doc_lines = 2,
-    floating_window = true,
-    hint_enable = false,
-    use_lspsaga = false,
-    handler_opts = {
+require("blink-cmp").setup({
+  keymap = "super-tab",
+  highlight = {
+    use_nvim_cmp_as_default = false,
+  },
+  trigger = {
+    signature_help = {
+      enabled = true,
+    },
+  },
+  windows = {
+    autocomplete = {
       border = _border,
     },
-  })
+    documentation = {
+      border = _border,
+      auto_show = true,
+      auto_show_delay_ms = 800,
+    },
+    signature_help = {
+      border = _border,
+    },
+  },
+})
+
+local on_attach = function(client, bufnr)
   if client.server_capabilities.documentSymbolProvider then
     require("nvim-navic").attach(client, bufnr)
   end
@@ -39,12 +54,6 @@ local on_attach = function(client, bufnr)
     })
   end
 
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = _border,
-  })
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = _border,
-  })
   vim.diagnostic.config({
     virtual_text = false,
     signs = {
@@ -72,10 +81,14 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
   vim.keymap.set("n", "K", function()
     vim.lsp.buf.clear_references()
-    vim.lsp.buf.hover()
+    vim.lsp.buf.hover({ border = _border })
   end, opts)
-  vim.keymap.set("n", "]g", function () vim.diagnostic.jump({ count = 1}) end, opts)
-  vim.keymap.set("n", "[g", function () vim.diagnostic.jump({ count = -1}) end, opts)
+  vim.keymap.set("n", "]g", function()
+    vim.diagnostic.jump({ count = 1 })
+  end, opts)
+  vim.keymap.set("n", "[g", function()
+    vim.diagnostic.jump({ count = -1 })
+  end, opts)
 end
 
 -- See https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
@@ -163,15 +176,14 @@ local configs = {
       yaml = {
         schemas = {
           ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-        }
-      }
-    }
+        },
+      },
+    },
   },
 }
 
 for server, config in pairs(configs) do
   lspconfig[server].setup(vim.tbl_deep_extend("force", {
     on_attach = on_attach,
-    capabilities = capabilities,
   }, config))
 end
