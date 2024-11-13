@@ -1,6 +1,3 @@
--- Load custom theme
-require("dracula").load()
-
 -- gitsigns.nvim {{{
 -- https://github.com/lewis6991/gitsigns.nvim
 require("gitsigns").setup({
@@ -59,31 +56,10 @@ require("ibl").setup({
 -- https://github.com/windwp/nvim-autopairs
 require("nvim-autopairs").setup({})
 -- }}}
--- blink-cmp {{{
-require("blink-cmp").setup({
-  keymap = 'super-tab',
-  trigger = {
-    signature_help = {
-      enabled = true,
-    },
-  },
-  windows = {
-    autocomplete = {
-      -- draw = 'reversed',
-      border = 'rounded',
-    },
-    documentation = {
-      border = 'rounded',
-      auto_show = true,
-      auto_show_delay_ms = 1000,
-    }
-  }
-})
--- }}}
 -- nvim-colorizer.lua {{{
 -- https://github.com/norcalli/nvim-colorizer.lua
 require("colorizer").setup({
-  'lua';
+  "lua",
 })
 -- }}}
 -- nvim-navic.lua {{{
@@ -94,6 +70,13 @@ require("nvim-navic").setup({
   safe_output = true,
   separator = "  ",
   depth_limit = 4,
+  icons = {
+    String = " ",
+    Number = " ",
+    Boolean = " ",
+    Array = " ",
+    Object = " ",
+  },
 })
 -- }}}
 -- nvim-tree.lua {{{
@@ -132,6 +115,9 @@ require("nvim-tree").setup({
   renderer = {
     full_name = true,
     highlight_git = true,
+    indent_markers = {
+      enable = true,
+    },
     icons = {
       show = {
         file = true,
@@ -141,10 +127,10 @@ require("nvim-tree").setup({
       },
       glyphs = {
         git = {
-          unstaged = "~",
+          unstaged = "",
           staged = "ϟ",
           renamed = "➜",
-          untracked = "+",
+          untracked = "",
         },
       },
     },

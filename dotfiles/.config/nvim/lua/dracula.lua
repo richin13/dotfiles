@@ -374,6 +374,10 @@ local function apply()
     -- Vim Packager
     packagerCheck = { fg = colors.green },
     packagerX = { fg = colors.red },
+
+    -- Blink.cmp
+    BlinkCmpDoc = { fg = colors.green, bg = colors.green },
+    BlinkCmpDocBorder = { fg = colors.green, bg = colors.green },
   }
 
   -- set defined highlights
