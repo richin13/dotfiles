@@ -158,6 +158,8 @@ function exclude() {
   fi
 
   [[ -f .git/info/exclude ]] && echo "$1" >>.git/info/exclude
+  # if .git is a file, we're in a submodule
+  [[ -f .git ]] && echo "$1" >> "../.git/modules/$(basename "$(pwd)")/info/exclude"
 }
 
 function rndpw() {
