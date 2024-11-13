@@ -153,7 +153,7 @@ augroup END
 
 augroup fold_settings
   autocmd!
-  " autocmd FileType * setlocal foldlevel=99
+  autocmd FileType * setlocal foldlevel=99
   autocmd FileType python,rust setlocal foldcolumn=1 foldmethod=expr foldexpr=v:lua.vim.treesitter.foldexpr() foldlevelstart=99
   autocmd FileType vim,tmux,zsh,lua setlocal foldlevel=0 foldnestmax=2
   autocmd FileType vim,tmux,zsh,lua,sh,make setlocal foldmethod=marker foldlevelstart=0
@@ -221,7 +221,7 @@ noremap <Down> <nop>
 
 " Telescope pickers
 nnoremap <silent> <C-Space> <cmd>Telescope resume<cr>
-nnoremap <silent> <C-p> <cmd>Telescope find_files<cr>
+nnoremap <silent> <C-p> <cmd>Telescope find_files hidden=true<cr>
 nnoremap <silent> <leader>tf <cmd>Telescope find_files<cr>
 nnoremap <silent> <C-_> <cmd>Telescope live_grep<cr>
 nnoremap <silent> <leader>tg <cmd>Telescope live_grep<cr>
