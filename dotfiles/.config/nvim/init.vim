@@ -47,14 +47,6 @@ augroup custom_vim_resized
   au VimResized * wincmd =
 augroup END
 
-" Set colorcolumn based on filetype
-augroup color_column
-  autocmd!
-  autocmd FileType * setlocal colorcolumn=0
-  autocmd FileType python,javascript,typescript,javascriptreact,typescriptreact,r setlocal colorcolumn=80
-  autocmd FileType rust setlocal colorcolumn=99
-augroup END
-
 " }}}
 " General: Plugin Install --------------------- {{{
 function! s:packager_init(packager) abort
@@ -299,9 +291,7 @@ augroup end
 augroup filetype_specific_configs
   autocmd!
   autocmd FileType gitcommit setlocal colorcolumn=73 textwidth=72
-  autocmd Filetype html,text,markdown,rst,fzf setlocal colorcolumn=0
   autocmd Filetype php setlocal iskeyword-=$
-  autocmd Filetype rust setlocal colorcolumn=99
 augroup end
 
 " }}}
