@@ -34,7 +34,7 @@ set wildignorecase wildignore=*.pyc,**/__pycache__/*,**/node_modules/*,.coverage
 set wildmenu wildmode=longest,list,full
 set termguicolors
 let &background = $ALACRITTY_TERM_BACKGROUND
-colorscheme dracula
+colorscheme theme
 
 " Redraw window whenever I've regained focus
 augroup redraw_on_refocus
