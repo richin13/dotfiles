@@ -10,29 +10,58 @@ end
 
 vim.g.colors_name = "dracula"
 
-local colors = {
-  color_0_black = "#282A36",
-  color_1_red = "#FF5555",
-  color_2_green = "#50fa7b",
-  color_3_yellow = "#F1FA8C",
-  color_4_blue = "#BD93F9",
-  color_5_magenta = "#FF79C6",
-  color_6_cyan = "#8BE9FD",
-  color_7_white = "#F8F8F2",
+local colors
 
-  color_8_bright_black = "#44475A",
-  color_9_bright_red = "#FF6E6E",
-  color_10_bright_green = "#69FF94",
-  color_11_bright_yellow = "#FFFFA5",
-  color_12_bright_blue = "#D6ACFF",
-  color_13_bright_magenta = "#FF92DF",
-  color_14_bright_cyan = "#A4FFFF",
-  color_15_bright_white = "#FFFFFF",
+-- Check background
+if vim.fn.eval("&background") == "dark" then
+  colors = {
+    color_0_black = "#282A36",
+    color_1_red = "#FF5555",
+    color_2_green = "#50fa7b",
+    color_3_yellow = "#F1FA8C",
+    color_4_blue = "#BD93F9",
+    color_5_magenta = "#FF79C6",
+    color_6_cyan = "#8BE9FD",
+    color_7_white = "#F8F8F2",
 
-  -- extra dracula colors
-  comment = "#6272A4",
-  orange = "#FFB86C",
-}
+    color_8_bright_black = "#44475A",
+    color_9_bright_red = "#FF6E6E",
+    color_10_bright_green = "#69FF94",
+    color_11_bright_yellow = "#FFFFA5",
+    color_12_bright_blue = "#D6ACFF",
+    color_13_bright_magenta = "#FF92DF",
+    color_14_bright_cyan = "#A4FFFF",
+    color_15_bright_white = "#FFFFFF",
+
+    -- extra dracula colors
+    comment = "#6272A4",
+    orange = "#FFB86C",
+  }
+else
+  colors = {
+    color_0_black = "#faf4ed",
+    color_1_red = "#b4637a",
+    color_2_green = "#286983",
+    color_3_yellow = "#ea9d34",
+    color_4_blue = "#56949f",
+    color_5_magenta = "#907aa9",
+    color_6_cyan = "#d7827e",
+    color_7_white = "#575279",
+
+    color_8_bright_black = "#dfdad9",
+    color_9_bright_red = "#b4637a",
+    color_10_bright_green = "#286983",
+    color_11_bright_yellow = "#ea9d34",
+    color_12_bright_blue = "#56949f",
+    color_13_bright_magenta = "#907aa9",
+    color_14_bright_cyan = "#d7827e",
+    color_15_bright_white = "##cecacd",
+
+    -- extra dracula colors
+    comment = "#797593",
+    orange = "#FFB86C",
+  }
+end
 
 vim.g.terminal_color_0 = colors.color_0_black
 vim.g.terminal_color_1 = colors.color_1_red
