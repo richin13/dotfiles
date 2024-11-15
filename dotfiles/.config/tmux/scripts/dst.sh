@@ -7,8 +7,8 @@ function dst {
   ny_time_diff=$((10#$(TZ=US/Eastern date +%H) - 10#$(date +%H)))
   minute=$(date +%M)
 
-  local cmp_et="#[fg=#bd93f9,bold]+$ny_time_diff#[fg=#f8f8f2,none]"
-  echo "#[fg=#f8f8f2]$caldate $cr_time$cmp_et:$minute"
+  local cmp_et="#[fg=colour15,bold]+$ny_time_diff#[fg=colour15,none]"
+  echo "#[fg=colour15]$caldate $cr_time$cmp_et:$minute"
 }
 
 dst
