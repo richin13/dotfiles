@@ -61,6 +61,18 @@ export REPOS_FOLDER="$HOME/src"
 export DOCS_FOLDER="$XDG_CONFIG_HOME/docs"
 export FORTUNES_FOLDER="$XDG_CONFIG_HOME/fortunes"
 export DOTFILES="$HOME/dotfiles"
+export DARK_THEME="dracula"
+export LIGHT_THEME="rose-pine-dawn"
+
+if [ -z "$ALACRITTY_TERM_BACKGROUND" ]; then
+  ALACRITTY_TERM_BACKGROUND=$(grep -o "\(light\|dark\).toml" "$XDG_CONFIG_HOME/alacritty/alacritty.toml" | cut -d'.' -f1)
+  export ALACRITTY_TERM_BACKGROUND
+fi
+if [ "$ALACRITTY_TERM_BACKGROUND" = "dark" ]; then
+  export ACTIVE_THEME="$DARK_THEME"
+else
+  export ACTIVE_THEME="$LIGHT_THEME"
+fi
 
 CARGO_BINS="$HOME/.cargo/bin"
 if [ -d "$CARGO_BINS" ]; then
@@ -93,7 +105,7 @@ if [ -f "$HOME/.local/bin/mise" ] && [ -n "$BASH_VERSION" ]; then
   eval "$(~/.local/bin/mise activate bash)"
 fi
 
-[[ -x "$(command -v vivid)" ]] && export LS_COLORS="$(vivid generate dracula)"
+[[ -x "$(command -v vivid)" ]] && export LS_COLORS="$(vivid generate $ACTIVE_THEME)"
 
 if [ -x "$(command -v zoxide)" ]; then
   if [ -n "$BASH_VERSION" ]; then
@@ -394,6 +406,25 @@ function install-language-servers() {
       gunzip -c - >~/.local/bin/rust-analyzer &&
       chmod +x ~/.local/bin/rust-analyzer
   fi
+}
+
+function togglebg() {
+  local cur_bg
+  local new_bg
+  local theme
+  cur_bg="$ALACRITTY_TERM_BACKGROUND"
+  if [ "$cur_bg" = "dark" ]; then
+    new_bg="light"
+    theme="$LIGHT_THEME"
+  else
+    new_bg="dark"
+    theme="$DARK_THEME"
+  fi
+  sed -i "s/$cur_bg.toml\"/$new_bg.toml\"/" "$XDG_CONFIG_HOME/alacritty/alacritty.toml"
+  export ALACRITTY_TERM_BACKGROUND="$new_bg"
+  export ACTIVE_THEME="$theme"
+  LS_COLORS="$(vivid generate $theme)"
+  export LS_COLORS
 }
 
 # }}}

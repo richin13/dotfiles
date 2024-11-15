@@ -33,7 +33,7 @@ set updatetime=250
 set wildignorecase wildignore=*.pyc,**/__pycache__/*,**/node_modules/*,.coverage.*,.eggs,*.egg-info/
 set wildmenu wildmode=longest,list,full
 set termguicolors
-set background=dark
+let &background = $ALACRITTY_TERM_BACKGROUND
 colorscheme dracula
 
 " Redraw window whenever I've regained focus
