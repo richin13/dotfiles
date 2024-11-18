@@ -167,9 +167,17 @@ function exclude() {
     return 1
   fi
 
-  [[ -f .git/info/exclude ]] && echo "$1" >>.git/info/exclude
+  if [ -f .git/info/exclude ]; then
+    echo "$1" >>.git/info/exclude
+    return
+  fi
   # if .git is a file, we're in a submodule
-  [[ -f .git ]] && echo "$1" >> "../.git/modules/$(basename "$(pwd)")/info/exclude"
+  if [ -f .git ]; then
+    echo "$1" >>"$(dirname "$(pwd)")/.git/info/exclude"
+    return
+  fi
+  red "Not a git repository"
+  return 1
 }
 
 function rndpw() {
