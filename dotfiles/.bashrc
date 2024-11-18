@@ -64,10 +64,8 @@ export DOTFILES="$HOME/dotfiles"
 export DARK_THEME="dracula"
 export LIGHT_THEME="rose-pine-dawn"
 
-if [ -z "$ALACRITTY_TERM_BACKGROUND" ]; then
-  ALACRITTY_TERM_BACKGROUND=$(grep -o "\(light\|dark\).toml" "$XDG_CONFIG_HOME/alacritty/alacritty.toml" | cut -d'.' -f1)
-  export ALACRITTY_TERM_BACKGROUND
-fi
+ALACRITTY_TERM_BACKGROUND=$(grep -o "\(light\|dark\).toml" "$XDG_CONFIG_HOME/alacritty/alacritty.toml" | cut -d'.' -f1)
+export ALACRITTY_TERM_BACKGROUND
 if [ "$ALACRITTY_TERM_BACKGROUND" = "dark" ]; then
   export ACTIVE_THEME="$DARK_THEME"
 else
