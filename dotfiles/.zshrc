@@ -59,7 +59,7 @@ zinit light richin13/dracula.zsh-theme
 
 # Cool stuff
 zinit light paulirish/git-open
-zinit light zsh-users/zsh-syntax-highlighting
+# zinit light zsh-users/zsh-syntax-highlighting
 zinit light zdharma-continuum/history-search-multi-word
 
 # Completions ----------------------------------------------------- {{{
@@ -85,9 +85,6 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
         rpc rpcuser rpm rtkit scard shutdown squid sshd statd svn sync tftp \
         usbmux uucp vcsa wwwrun xfs '_*'
 zstyle '*' single-ignored show #: Show ignored when pressing tab twice
-
-autoload bashcompinit && bashcompinit
-autoload -Uz compinit && compinit
 
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
@@ -120,8 +117,6 @@ if command -v mise &> /dev/null; then
   #: mise completion
   eval "$(mise completion zsh)"
 fi
-
-complete -C '/usr/local/bin/aws_completer' aws
 
 zinit cdreplay -q
 # }}}
@@ -163,11 +158,7 @@ fi
 
 #: https://github.com/rsteube/carapace-bin (external autocompletion for docker compose)
 if [ $commands[carapace] ]; then
-  source <(carapace docker);
-  source <(carapace docker-compose);
-  if [ $commands[gcloud] ]; then
-    source <(carapace gcloud);
-  fi
+  source <(carapace _carapace);
 fi
 
 if [ -f ~/.local/bin/mise ]; then
