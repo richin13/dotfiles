@@ -253,7 +253,7 @@ local groups = {
   GitSignsDelete = { link = "DiffDelete" },
 
   -- Telescope
-  TelescopeMatching = { link = "Special" },
+  TelescopeMatching = { link = "Function" },
   TelescopeMultiSelection = { link = "Character" },
   TelescopeNormal = { link = "Normal" },
   TelescopePreviewBorder = { link = "FloatBorder" },
@@ -321,6 +321,7 @@ local groups = {
   -- Vim Packager
   packagerCheck = { link = "Function" },
   packagerX = { link = "Error" },
+  packagerProgress = { link = "Statement" },
 
   -- Blink.cmp
   BlinkCmpDoc = { link = "NormalFloat" },
