@@ -433,6 +433,20 @@ function togglebg() {
   export LS_COLORS
 }
 
+function padl() {
+  #: Takes a list of dependencies and adds them with poetry add --group=dev "<dep>@*"
+  if [ -z "$1" ]; then
+    red "No dependencies provided"
+    return 1
+  fi
+
+  local deps=()
+  for dep in "$@"; do
+    deps+=("${dep}@*")
+  done
+  poetry add --group=dev "${deps[@]}"
+}
+
 # }}}
 # Aliases ----------------------------------------------------------- {{{
 #: General aliases
