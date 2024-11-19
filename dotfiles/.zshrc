@@ -86,7 +86,10 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
         usbmux uucp vcsa wwwrun xfs '_*'
 zstyle '*' single-ignored show #: Show ignored when pressing tab twice
 
-autoload -Uz compinit && compinit
+if [[ -n ${ZSH_COMPDUMP} ]]; then
+  autoload -Uz compinit && compinit
+fi
+
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
