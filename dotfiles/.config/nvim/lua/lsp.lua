@@ -185,5 +185,6 @@ local configs = {
 for server, config in pairs(configs) do
   lspconfig[server].setup(vim.tbl_deep_extend("force", {
     on_attach = on_attach,
+    capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities()),
   }, config))
 end
