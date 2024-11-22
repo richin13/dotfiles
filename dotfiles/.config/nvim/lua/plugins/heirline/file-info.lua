@@ -75,7 +75,7 @@ M.FileIcon = {
   end,
 }
 
-M.FileIconType = { M.FileIcon, M.FileType}
+M.FileIconType = { M.FileIcon, M.FileType }
 
 M.FileName = {
   provider = function(self)
@@ -119,13 +119,13 @@ M.FileNameBlock = utils.insert(FileNameBlock, M.WorkDir, M.FileName, M.FileFlags
 M.SimpleFileName = {
   M.FileIcon,
   {
-  provider = function()
-    local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t")
-    return filename == "" and "[No Name]" or filename
-  end,
-  hl = {
-    fg = colors.fg,
-  },
+    provider = function()
+      local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t")
+      return filename == "" and "[No Name]" or filename
+    end,
+    hl = {
+      fg = colors.fg,
+    },
   },
 }
 

@@ -33,7 +33,7 @@ local TablineFileFlags = {
   {
     condition = function(self)
       return not vim.api.nvim_get_option_value("modifiable", { buf = self.bufnr })
-        or vim.api.nvim_get_option_value("readonly", { buf = self.bufnr })
+          or vim.api.nvim_get_option_value("readonly", { buf = self.bufnr })
     end,
     provider = function(self)
       if vim.api.nvim_get_option_value("buftype", { buf = self.bufnr }) == "terminal" then
