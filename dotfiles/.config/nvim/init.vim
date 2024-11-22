@@ -75,7 +75,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/lukas-reineke/indent-blankline.nvim')
   call a:packager.add('https://github.com/windwp/nvim-autopairs')
   call a:packager.add('https://github.com/norcalli/nvim-colorizer.lua')
-  call a:packager.add('git@github.com:Vimjas/vim-python-pep8-indent.git', { 'type': 'opt' })
+  call a:packager.add('https://github.com/Vimjas/vim-python-pep8-indent', { 'type': 'opt' })
 
   call a:packager.add('https://github.com/chr4/nginx.vim')
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'})
@@ -93,7 +93,7 @@ function! s:packager_init(packager) abort
 
   " Language server
   call a:packager.add('https://github.com/neovim/nvim-lspconfig')
-  call a:packager.add('git@github.com:Saghen/blink.cmp.git', { 'do': 'cargo build --release'})
+  call a:packager.add('https://github.com/Saghen/blink.cmp', { 'do': 'cargo build --release'})
   call a:packager.add('https://github.com/hrsh7th/vim-vsnip')
   call a:packager.add('https://github.com/SmiteshP/nvim-navic')
 
