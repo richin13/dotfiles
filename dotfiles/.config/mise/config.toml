@@ -1,8 +1,18 @@
-[tools]
-node = "20.18.0"
-python = "3.12.6"
-lua = "5.4.7"
+[settings]
+experimental = true
 
+[tools]
+deno = "latest"
+go = "latest"
+lua = "5.4.7"
+lua-language-server = "latest"
+neovim = "nightly"
+node = "20.18.0"
+postgres = "16"
+python = "3.12.6"
+terraform = "1.7.5"
+tmux = "latest"
+usage = "latest"
 "npm:@microsoft/compose-language-service" = "latest"
 "npm:@prisma/language-server" = "latest"
 "npm:@tailwindcss/language-server" = "latest"
@@ -22,14 +32,3 @@ lua = "5.4.7"
 "pipx:ruff" = "latest"
 "pipx:sqlfluff" = "latest"
 "pipx:termux-language-server" = "latest"
-deno = "latest"
-go = "latest"
-lua-language-server = "latest"
-neovim = "nightly"
-postgres = "16"
-terraform = "1.7.5"
-tmux = "latest"
-usage = "latest"
-
-[settings]
-experimental = true
