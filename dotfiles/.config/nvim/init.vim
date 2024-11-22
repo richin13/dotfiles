@@ -143,13 +143,13 @@ augroup END
 " }}}
 " General: Folding Settings ------------------- {{{
 
-augroup fold_settings
-  autocmd!
-  autocmd FileType * setlocal foldlevel=99
-  autocmd FileType python,rust setlocal foldcolumn=1 foldmethod=expr foldexpr=v:lua.vim.treesitter.foldexpr() foldlevelstart=99
-  autocmd FileType vim,tmux,zsh,lua setlocal foldlevel=0 foldnestmax=2
-  autocmd FileType vim,tmux,zsh,lua,sh,make setlocal foldmethod=marker foldlevelstart=0
-augroup END
+" augroup fold_settings
+"   autocmd!
+"   autocmd FileType * setlocal foldlevel=99
+"   autocmd FileType python,rust setlocal foldcolumn=1 foldmethod=expr foldexpr=v:lua.vim.treesitter.foldexpr() foldlevelstart=99
+"   autocmd FileType vim,tmux,zsh,lua setlocal foldlevel=0 foldnestmax=2
+"   autocmd FileType vim,tmux,zsh,lua,sh,make setlocal foldmethod=marker foldlevelstart=0
+" augroup END
 
 " }}}
 " General: Trailing whitespace ---------------- {{{
