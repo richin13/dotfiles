@@ -13,7 +13,7 @@
       "    $0",
       "",
       "",
-      "if __name__ == '__main__':",
+      "if __name__ == \"__main__\":",
       "    main()"
     ]
   },
@@ -21,15 +21,15 @@
     "prefix": "loud",
     "description": "Print a message with a loud comment",
     "body": [
-      "print('##########################################################################')",
-      "print('# $0')",
-      "print('##########################################################################')"
+      "print(\"##########################################################################\")",
+      "print(\"# $0\")",
+      "print(\"##########################################################################\")"
     ]
   },
   "Pytest Skip Test": {
-    "prefix": "skip",
+    "prefix": "ptskip",
     "description": "Skip a test in pytest",
-    "body": ["import pytest", "@pytest.mark.skip(reason='$0')"]
+    "body": ["import pytest", "@pytest.mark.skip(reason=\"$0\")"]
   },
   "Click CMD App Skeleton": {
     "prefix": "click",
