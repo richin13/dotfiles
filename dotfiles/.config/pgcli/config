@@ -17,3 +17,6 @@ syntax_style = paraiso-dark
 # Alias for a default postgresql DB running with default settings (docker)
 # use `pgcli -D local` to connect to this DB
 local = postgresql://postgres:postgres@localhost:5432/postgres
+
+# Alias for a postgresql DB running on a Raspberry Pi (local network)
+rpi = postgresql://postgres@rpi.local:5432/postgres
