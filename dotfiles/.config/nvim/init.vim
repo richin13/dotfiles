@@ -138,6 +138,7 @@ augroup indentation_sr
   autocmd Filetype python,php,rust setlocal shiftwidth=4 softtabstop=4 tabstop=8
   autocmd Filetype yaml setlocal indentkeys-=<:>
   autocmd Filetype make,snippets,tsv setlocal noexpandtab tabstop=4
+  autocmd Filetype xsd setlocal noexpandtab tabstop=2
 augroup END
 
 " }}}
