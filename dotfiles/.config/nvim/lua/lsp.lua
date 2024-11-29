@@ -2,7 +2,9 @@ local lspconfig = require("lspconfig")
 local _border = "rounded"
 
 require("blink-cmp").setup({
-  keymap = "super-tab",
+  keymap = {
+    preset = "super-tab"
+  },
   highlight = {
     use_nvim_cmp_as_default = false,
   },
