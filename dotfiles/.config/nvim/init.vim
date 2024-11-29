@@ -339,7 +339,6 @@ let g:vim_filetype_formatter_commands = {
       \ 'php': 'npx --no-update-notifier --silent prettier --parser=php',
       \ 'python': function('s:ruff'),
       \ 'sql': 'sqlfluff format --nocolor -',
-      \ 'toml': 'toml-sort --trailing-comma-inline-array',
       \ 'yml': 'yamlfmt -'
       \ }
 
