@@ -308,7 +308,7 @@ inoremap <buffer> <silent> <localleader>u <C-R>=GenerateUUID4()<CR>
 
 " Copilot
 let g:copilot_no_tab_map = v:true
-imap <silent><script><expr> <C-y> copilot#Accept("\<CR>")
+imap <silent><script><expr> <C-y> copilot#Accept("")
 
 " Numbers
 let g:enable_numbers = 0
