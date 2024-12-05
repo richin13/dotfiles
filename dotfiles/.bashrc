@@ -343,17 +343,24 @@ if [ "$DISTRO" = "ubuntu" ]; then
     sudo apt upgrade -y
     sudo apt autoremove -y
     sudo snap refresh
-    pushd .
+    pushd . >/dev/null
     cd ~/dotfiles || return 1
-    git pull
-    popd || return 1
-    mise upgrade
+    #: check if repo is clean
+    if ! git diff-index --quiet HEAD --; then
+      red "Dotfiles repo is dirty, please update manually"
+    else
+      git pull --rebase
+    fi
+    popd >/dev/null || return 1
+    mise upgrade -y
     nvim -c 'PlugUpdate'
   }
 
   function update-ff-dev() { #: Upgrade firefox developer edition
-    wget "https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=en-US" -O Firefox-dev.tar.bz2
-    sudo tar xjf Firefox-dev.tar.bz2 -C /opt/
+    local filename=Firefox-dev.tar.bz2
+    wget "https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=en-US" -O "$filename"
+    sudo tar xjf "$filename" -C /opt/
+    rm -rf "$filename"
   }
 fi
 
