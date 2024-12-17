@@ -5,24 +5,29 @@ require("blink-cmp").setup({
   keymap = {
     preset = "super-tab"
   },
-  highlight = {
-    use_nvim_cmp_as_default = false,
-  },
-  trigger = {
-    signature_help = {
-      enabled = true,
-    },
-  },
-  windows = {
-    autocomplete = {
+  -- highlight = {
+  --   use_nvim_cmp_as_default = false,
+  -- },
+  -- windows = {
+  --   autocomplete = {
+  --     border = _border,
+  --   },
+  -- },
+  completion = {
+    menu = {
       border = _border,
     },
     documentation = {
-      border = _border,
       auto_show = true,
       auto_show_delay_ms = 800,
+      window = {
+        border = _border,
+      },
     },
-    signature_help = {
+  },
+  signature = {
+    enabled = true,
+    window = {
       border = _border,
     },
   },
