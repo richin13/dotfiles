@@ -136,6 +136,11 @@ if [ "$DISTRO" = "arch" ]; then
   ssh-add >/dev/null 2>&1
 fi
 
+#: Fix flameshot on wayland
+if [ "$DISTRO" = "arch" ]; then
+  export QT_QPA_PLATFORM=xcb
+fi
+
 export DEFAULT_PYTHON_VENV_DIR=.venv
 
 # }}}
