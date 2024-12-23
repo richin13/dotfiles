@@ -652,11 +652,9 @@ alias gobusterz='gobuster dir -w /usr/share/dirbuster/wordlists/directory-list-l
 # }}}
 # Prompt config ----------------------------------------------------- {{{
 
-green='\[\e[0;32m\]'
-purple="\[\e[0;34m\]"
-pink="\[\e[0;35m\]"
-reset='\[\e[0m\]'
-export PS1="${green}\u@\h${reset}:${purple?}\w${reset}\n${pink}\$${reset} "
+if [ -n "$BASH_VERSION" ]; then
+  eval "$(starship init bash)"
+fi
 
 # }}}
 if [ -d "$FORTUNES_FOLDER" ] && [ -x "$(command -v fortune)" ]; then

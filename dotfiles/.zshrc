@@ -53,10 +53,6 @@ source ${ZINIT_HOME}/zinit.zsh
 zinit snippet OMZL::git.zsh
 zinit snippet OMZL::key-bindings.zsh
 
-#: Theme
-zinit ice src"dracula.zsh-theme"
-zinit light richin13/dracula.zsh-theme
-
 # Cool stuff
 zinit light paulirish/git-open
 zinit light zsh-users/zsh-syntax-highlighting
@@ -167,4 +163,8 @@ fi
 
 if [ -f ~/.local/bin/mise ]; then
   eval "$(~/.local/bin/mise activate zsh)"
+fi
+
+if [ $commands[starship] ]; then
+  eval "$(starship init zsh)"
 fi

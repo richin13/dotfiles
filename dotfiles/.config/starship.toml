@@ -1,0 +1,41 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# format = """$all"""
+# right_format = """$aws"""
+
+[aws]
+format = '[$symbol($profile )(\($region\) )(\[$duration\] )]($style)'
+style = "8"
+
+[character]
+success_symbol = "[Ψ](bold purple)"
+error_symbol = "[Ψ](bold red)"
+
+[directory]
+truncation_length = 2
+truncate_to_repo = false
+style = "green"
+
+[gcloud]
+disabled = true
+
+[docker_context]
+detect_files = [
+  "docker-compose.yaml",
+  "docker-compose.yml",
+  "compose.yaml",
+  "compose.yml",
+  "prod.yml",
+  "prod.yaml",
+]
+disabled = false
+
+[git_branch]
+format = "$symbol[$branch(:$remote_branch)]($style) "
+symbol = " "
+
+[git_status]
+style = "blue"
+
+[package]
+disabled = true
