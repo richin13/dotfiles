@@ -170,7 +170,9 @@ local configs = {
   -- https://github.com/tailwindlabs/tailwindcss-intellisense
   tailwindcss = {},
   -- https://github.com/juliosueiras/terraform-lsp
-  terraformls = {},
+  terraformls = {
+    filetypes = { "hcl", "tf", "tfvars" },
+  },
   -- https://github.com/typescript-language-server/typescript-language-server
   ts_ls = {
     single_file_support = false,

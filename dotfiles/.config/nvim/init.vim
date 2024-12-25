@@ -334,6 +334,7 @@ endfunction
 
 let g:vim_filetype_formatter_commands = {
       \ 'bash': 'shfmt -ci -i 2',
+      \ 'hcl': 'terraform fmt -',
       \ 'lua': 'stylua --indent-type=Spaces --indent-width=2 -',
       \ 'prisma': {-> printf(':silent lua vim.lsp.buf.format()')},
       \ 'php': 'npx --no-update-notifier --silent prettier --parser=php',
