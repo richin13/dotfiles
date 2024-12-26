@@ -5,14 +5,6 @@ require("blink-cmp").setup({
   keymap = {
     preset = "super-tab"
   },
-  -- highlight = {
-  --   use_nvim_cmp_as_default = false,
-  -- },
-  -- windows = {
-  --   autocomplete = {
-  --     border = _border,
-  --   },
-  -- },
   completion = {
     menu = {
       border = _border,
@@ -30,6 +22,9 @@ require("blink-cmp").setup({
     window = {
       border = _border,
     },
+  },
+  sources = {
+    cmdline = {},
   },
 })
 
