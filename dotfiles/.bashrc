@@ -447,6 +447,17 @@ function padl() {
   poetry add --group=dev "${deps[@]}"
 }
 
+function ccc() {
+  local servicename
+  servicename=$(basename "$(pwd)" | tr '[:upper:]' '[:lower:]')
+  if docker compose ps "$servicename" &>/dev/null; then
+    docker compose exec "$servicename" "$@"
+  else
+    echo "'$servicename' not found in compose.yml config"
+    return 1
+  fi
+}
+
 # }}}
 # Aliases ----------------------------------------------------------- {{{
 #: General aliases
@@ -604,13 +615,15 @@ alias unwip="git rev-list --max-count=1 --format=\"%s\" HEAD | grep -q \"\--wip-
 #: Docker aliases
 alias dc="docker compose"
 alias dcbuild="dc build"
-alias dcdown="dc down --remove-orphans --volumes"
+alias dcdown="dc down --remove-orphans"
 alias dcexec="dc exec"
 alias dclogs="dc logs --follow"
 alias dcps="dc ps"
 alias dcrestart="dc restart"
 alias dcrun="dc run --rm"
 alias dcup="dc up"
+alias dctx="docker context use"
+alias dctxd="docker context use default"
 
 #: Kubernetes aliases
 alias k="kubectl"
