@@ -47,6 +47,12 @@ augroup custom_vim_resized
   au VimResized * wincmd =
 augroup END
 
+" Return to last edit position when opening files
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+
 " }}}
 " General: Plugin Install --------------------- {{{
 function! s:packager_init(packager) abort
