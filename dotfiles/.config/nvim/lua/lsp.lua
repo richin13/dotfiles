@@ -3,10 +3,13 @@ local _border = "rounded"
 
 require("blink-cmp").setup({
   keymap = {
-    preset = "super-tab"
+    preset = "super-tab",
   },
   completion = {
     menu = {
+      auto_show = function(ctx)
+        return ctx.mode ~= "cmdline"
+      end,
       border = _border,
     },
     documentation = {
@@ -22,9 +25,6 @@ require("blink-cmp").setup({
     window = {
       border = _border,
     },
-  },
-  sources = {
-    cmdline = {},
   },
 })
 
