@@ -400,20 +400,8 @@ function gh-install() { #: Install the latest deb package from a Github release
     red "Invalid repo name: $repo, must be user/repo"
     return 1
   fi
-  local url="https://api.github.com/repos/$repo/releases/latest"
-  local arch
-  local url
-  local filename
-  arch=$(dpkg --print-architecture)
-  url=$(curl -s "$url" | jq -r ".assets[] | .browser_download_url" | grep 'amd64' | grep 'linux' | grep '.deb')
-  if [ -z "$url" ]; then
-    red "No deb package found for $arch in https://github.com/$repo"
-    return 1
-  fi
-  filename=$(basename "$url")
-  curl -L "$url" -o "$filename"
-  sudo dpkg -i "$filename"
-  rm -rf "$filename"
+  echo "Using mise [aqua backend] to install $repo"
+  mise use -g "aqua:$repo"
 }
 
 function install-language-servers() {
