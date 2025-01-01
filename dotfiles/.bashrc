@@ -553,6 +553,7 @@ alias prd="poetry remove --group=dev"
 alias django="python manage.py"
 alias cc="cookiecutter"
 alias vaa='source $DEFAULT_PYTHON_VENV_DIR/bin/activate'
+alias rr="ruff rule"
 
 #: Git aliases
 alias g="git"
