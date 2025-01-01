@@ -157,7 +157,7 @@ require("nvim-treesitter.configs").setup({
   playground = {
     enable = false,
     disable = {},
-    updatetime = 25,         -- Debounced time for highlighting nodes in the playground from source code
+    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
     persist_queries = false, -- Whether the query persists across vim sessions
   },
   highlight = {
@@ -231,11 +231,6 @@ require("nvim-comment-frame").setup({
 })
 
 -------------------------------------------------------------------------------
---                              nvim-ts-autotag                              --
--------------------------------------------------------------------------------
-require("nvim-ts-autotag").setup()
-
--------------------------------------------------------------------------------
 --                            TreeSitter Context                             --
 -------------------------------------------------------------------------------
 require("treesitter-context").setup({
@@ -252,7 +247,7 @@ require("ts_context_commentstring").setup({
 local get_option = vim.filetype.get_option
 vim.filetype.get_option = function(filetype, option)
   return option == "commentstring" and require("ts_context_commentstring.internal").calculate_commentstring()
-      or get_option(filetype, option)
+    or get_option(filetype, option)
 end
 -- }}}
 -- telescope.nvim {{{
