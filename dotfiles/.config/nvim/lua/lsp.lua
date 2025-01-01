@@ -6,9 +6,11 @@ require("blink-cmp").setup({
     preset = "super-tab",
   },
   completion = {
+    accept = { auto_brackets = { enabled = false }, },
     menu = {
-      auto_show = function(ctx)
-        return ctx.mode ~= "cmdline"
+      auto_show = function ()
+        -- Do not show if we're sitting on an empty line
+        return vim.fn.empty(vim.fn.getline(".")) == 0
       end,
       border = _border,
     },
