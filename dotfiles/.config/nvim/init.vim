@@ -35,6 +35,7 @@ set wildmenu wildmode=longest,list,full
 set termguicolors
 let &background = $ALACRITTY_TERM_BACKGROUND
 colorscheme theme
+set nowrap linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
 
 " Redraw window whenever I've regained focus
 augroup redraw_on_refocus
@@ -53,6 +54,7 @@ autocmd BufReadPost *
      \   exe "normal! g`\"" |
      \ endif
 
+autocmd QuitPre * if exists("w:focuswriting") | only | endif
 " }}}
 " General: Plugin Install --------------------- {{{
 function! s:packager_init(packager) abort
@@ -277,6 +279,11 @@ nnoremap <leader>x yiwi<C-r>"=<Esc>
 nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
 vnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>"
 
+nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+xnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+xnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+
 " }}}
 " General: File type detection ---------------- {{{
 augroup file_extensions
@@ -327,6 +334,33 @@ smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab
 imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
+command! Focus call s:focuswriting()
+function! s:focuswriting()
+  set lazyredraw
+  try
+    normal! ma
+    let current_buffer = bufnr('%')
+    tabe
+    " Left Window
+    let w:focuswriting = 1
+    setlocal nomodifiable readonly nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
+    vsplit
+    vsplit
+    " Right Window
+    let w:focuswriting = 1
+    setlocal nomodifiable readonly nobuflisted nonumber norelativenumber fillchars=eob:\  statusline=\  colorcolumn=0 winhighlight=Normal:NormalFloat
+    wincmd h
+    " Middle Window
+    let w:focuswriting = 1
+    vertical resize 88
+    execute 'buffer ' .. current_buffer
+    setlocal number norelativenumber wrap winfixwidth colorcolumn=0 nofoldenable
+    wincmd =
+    normal! `azz0
+  finally
+    set nolazyredraw
+  endtry
+endfunction
 "  }}}
 " Config: Code Formatting --------------------- {{{
 
