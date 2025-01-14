@@ -50,7 +50,9 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_create_autocmd("CursorMoved", {
       callback = function()
         vim.lsp.buf.clear_references()
-        vim.diagnostic.open_float({ scope = "cursor", focusable = false })
+        if vim.diagnostic.is_enabled() then
+          vim.diagnostic.open_float({ scope = "cursor", focusable = false })
+        end
       end,
       buffer = bufnr,
       group = "lsp_document_highlight",
