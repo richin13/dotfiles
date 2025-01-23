@@ -390,20 +390,6 @@ function p() { #: Runs a python REPL (on batteries, if installed)
   fi
 }
 
-function gh-install() { #: Install the latest deb package from a Github release
-  local repo=$1
-  if [ -z "$repo" ]; then
-    red "Please provide a repo name: user/repo"
-    return 1
-  fi
-  if ! echo "$repo" | grep -q '/'; then
-    red "Invalid repo name: $repo, must be user/repo"
-    return 1
-  fi
-  echo "Using mise [aqua backend] to install $repo"
-  mise use -g "aqua:$repo"
-}
-
 function install-language-servers() {
   if [ "$DISTRO" = "ubuntu" ]; then
     # https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary
