@@ -35,7 +35,7 @@ set wildmenu wildmode=longest,list,full
 set termguicolors
 let &background = $ALACRITTY_TERM_BACKGROUND
 colorscheme theme
-set nowrap linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
+set wrap linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
 
 " Redraw window whenever I've regained focus
 augroup redraw_on_refocus
