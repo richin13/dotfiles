@@ -79,7 +79,7 @@ local on_attach = function(client, bufnr)
   })
 
   -- Keymappings for LSP
-  local opts = { noremap = true, silent = true }
+  local opts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set("n", "<leader>gy", vim.lsp.buf.type_definition, opts)
   vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, opts)
   vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, opts)
