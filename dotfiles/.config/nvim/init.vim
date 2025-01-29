@@ -122,6 +122,7 @@ augroup END
 " }}}
 " General: Lua Plugins Setup ------------------ {{{
 
+lua vim.loader.enable()
 lua require('packages')
 lua require('plugins.heirline')
 lua require('misc')
@@ -221,7 +222,7 @@ noremap <Down> <nop>
 
 " Telescope pickers
 nnoremap <silent> <C-Space> <cmd>Telescope resume<cr>
-nnoremap <silent> <C-p> <cmd>Telescope find_files hidden=true<cr>
+nnoremap <silent> <C-p> <cmd>Telescope find_files<cr>
 nnoremap <silent> <leader>tf <cmd>Telescope find_files<cr>
 nnoremap <silent> <C-_> <cmd>Telescope live_grep<cr>
 nnoremap <silent> <leader>tg <cmd>Telescope live_grep<cr>
@@ -284,6 +285,7 @@ xnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 xnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 
+snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
 " }}}
 " General: File type detection ---------------- {{{
 augroup file_extensions
