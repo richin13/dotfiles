@@ -10,7 +10,7 @@ bold_italic = { style = "ExtraBold Italic" }
 italic = { style = "Bold Italic" }
 
 [window]
-decorations = "full"
+decorations = "None"
 startup_mode = "Maximized"
-padding = { y = 4 }
+padding = { y = 8 }
 opacity = 1
