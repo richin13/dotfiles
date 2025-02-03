@@ -64,7 +64,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/fcpg/vim-altscreen')
   call a:packager.add('https://github.com/kyazdani42/nvim-web-devicons')
   call a:packager.add('https://github.com/tpope/vim-surround')
-  call a:packager.add('https://github.com/christoomey/vim-system-copy')
 
   call a:packager.add('https://github.com/rebelot/heirline.nvim')
   call a:packager.add('https://github.com/kyazdani42/nvim-tree.lua')
@@ -286,6 +285,20 @@ nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 xnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 
 snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
+
+function! YankToClipboard(type)
+    let saved_register = @@
+    if a:type ==# 'line'
+        normal! '[V']"+y
+    else
+        execute 'normal! `[v`]"+y'
+    endif
+    let @@ = saved_register
+endfunction
+
+vnoremap cp "+y
+nnoremap cP "+yy
+nnoremap <silent> cp :set operatorfunc=YankToClipboard<CR>g@
 " }}}
 " General: File type detection ---------------- {{{
 augroup file_extensions
