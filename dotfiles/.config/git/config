@@ -1,6 +1,5 @@
-[user]
-	email = richin13@gmail.com
-	name = Ricardo Madriz
+[include]
+	path = ~/.config/git/config.local
 [core]
   pager = delta
   editor = nvim
