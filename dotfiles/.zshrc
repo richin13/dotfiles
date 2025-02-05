@@ -9,6 +9,7 @@ fi
 # Sensitive information includes
 if [ -f "$XDG_CONFIG_HOME/zsh/sensitive.zsh" ]; then
   include "$XDG_CONFIG_HOME/zsh/sensitive.zsh"
+  alias sensitive="vim $XDG_CONFIG_HOME/zsh/sensitive.zsh"
 fi
 
 # Remove duplicates in $PATH
