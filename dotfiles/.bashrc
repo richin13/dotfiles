@@ -95,6 +95,11 @@ if [ -d "$LOCAL_BINS" ]; then
   path_ladd "$LOCAL_BINS"
 fi
 
+LMSTUDIO_BINS="$HOME/.lmstudio/bin"
+if [ -d "$LMSTUDIO_BINS" ]; then
+  path_ladd "$LMSTUDIO_BINS"
+fi
+
 # EXPORT THE FINAL, MODIFIED PATH
 export PATH
 
