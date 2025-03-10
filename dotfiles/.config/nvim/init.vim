@@ -33,7 +33,6 @@ set updatetime=250
 set wildignorecase wildignore=*.pyc,**/__pycache__/*,**/node_modules/*,.coverage.*,.eggs,*.egg-info/
 set wildmenu wildmode=longest,list,full
 set termguicolors
-let &background = $ALACRITTY_TERM_BACKGROUND
 colorscheme theme
 set wrap linebreak breakat=\ \	,])/- breakindent breakindentopt=list:-1
 

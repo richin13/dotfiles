@@ -64,14 +64,6 @@ export DOTFILES="$HOME/dotfiles"
 export DARK_THEME="dracula"
 export LIGHT_THEME="rose-pine-dawn"
 
-ALACRITTY_TERM_BACKGROUND=$(grep -o "\(light\|dark\).toml" "$XDG_CONFIG_HOME/alacritty/alacritty.toml" | cut -d'.' -f1)
-export ALACRITTY_TERM_BACKGROUND
-if [ "$ALACRITTY_TERM_BACKGROUND" = "dark" ]; then
-  export ACTIVE_THEME="$DARK_THEME"
-else
-  export ACTIVE_THEME="$LIGHT_THEME"
-fi
-
 CARGO_BINS="$HOME/.cargo/bin"
 if [ -d "$CARGO_BINS" ]; then
   path_ladd "$CARGO_BINS"
@@ -403,25 +395,6 @@ function install-language-servers() {
       gunzip -c - >~/.local/bin/rust-analyzer &&
       chmod +x ~/.local/bin/rust-analyzer
   fi
-}
-
-function togglebg() {
-  local cur_bg
-  local new_bg
-  local theme
-  cur_bg="$ALACRITTY_TERM_BACKGROUND"
-  if [ "$cur_bg" = "dark" ]; then
-    new_bg="light"
-    theme="$LIGHT_THEME"
-  else
-    new_bg="dark"
-    theme="$DARK_THEME"
-  fi
-  sed -i "s/$cur_bg.toml\"/$new_bg.toml\"/" "$XDG_CONFIG_HOME/alacritty/alacritty.toml"
-  export ALACRITTY_TERM_BACKGROUND="$new_bg"
-  export ACTIVE_THEME="$theme"
-  LS_COLORS="$(vivid generate $theme)"
-  export LS_COLORS
 }
 
 function padl() {
