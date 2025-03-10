@@ -1,0 +1,10 @@
+font-family = "JetBrainsMono Nerd Font"
+font-family-bold = "JetBrainsMono Nerd Font"
+font-family-italic = "JetBrainsMono Nerd Font"
+font-family-bold-italic = "JetBrainsMono Nerd Font"
+font-size = 13
+window-decoration = "none"
+maximize = true
+window-padding-y = 8
+background-opacity = 1
+theme = dracula
