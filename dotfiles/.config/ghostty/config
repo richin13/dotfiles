@@ -1,10 +1,23 @@
-font-family = "JetBrainsMono Nerd Font"
-font-family-bold = "JetBrainsMono Nerd Font"
-font-family-italic = "JetBrainsMono Nerd Font"
-font-family-bold-italic = "JetBrainsMono Nerd Font"
+font-family = JetBrainsMono Nerd Font
 font-size = 13
+font-style = Bold
+font-feature = -calt, -liga, -dlig
 window-decoration = "none"
 maximize = true
 window-padding-y = 8
 background-opacity = 1
 theme = dracula
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+#: i'm not ready to ditch tmux yet
+#keybind = ctrl+f>c=new_tab
+#keybind = ctrl+f>p=previous_tab
+#keybind = ctrl+f>n=next_tab
+#keybind = ctrl+f>-=new_split:down
+#keybind = ctrl+f>backslash=new_split:right
+#keybind = ctrl+f>h=goto_split:left
+#keybind = ctrl+f>j=goto_split:down
+#keybind = ctrl+f>k=goto_split:up
+#keybind = ctrl+f>l=goto_split:right
