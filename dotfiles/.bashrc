@@ -37,15 +37,6 @@ if [ -n "$BASH_VERSION" ]; then
   export HISTFILESIZE=10000
 fi
 
-if [ -x "$(command -v nvim)" ]; then
-  export EDITOR=nvim
-  export VISUAL=nvim
-  export MANPAGER='nvim +Man!' #: Use nvim as pager for man pages
-else
-  export EDITOR=vim
-  export VISUAL=vim
-fi
-
 #: colored GCC warnings and errors (for when we install from source)
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
@@ -100,7 +91,16 @@ if [ -f "$HOME/.local/bin/mise" ] && [ -n "$BASH_VERSION" ]; then
   eval "$(~/.local/bin/mise activate bash)"
 fi
 
-[[ -x "$(command -v vivid)" ]] && export LS_COLORS="$(vivid generate $ACTIVE_THEME)"
+if [ -x "$(command -v nvim)" ]; then
+  export EDITOR=nvim
+  export VISUAL=nvim
+  export MANPAGER='nvim +Man!' #: Use nvim as pager for man pages
+else
+  export EDITOR=vim
+  export VISUAL=vim
+fi
+
+[[ -x "$(command -v vivid)" ]] && export LS_COLORS="$(vivid generate dracula)"
 
 if [ -x "$(command -v zoxide)" ]; then
   if [ -n "$BASH_VERSION" ]; then
@@ -466,7 +466,7 @@ else
   alias -g ......='../../../../..'
 fi
 
-[[ -x "$(command -v nvim)" ]] && alias vim="nvim"
+[[ -x "$(mise -q --silent which nvim)" ]] && alias vim="nvim"
 [[ -x "$(command -v bat)" ]] && alias cat="bat --style='numbers,changes'"
 [[ -x "$(command -v lsd)" ]] && alias ls="lsd"
 [[ -x "$(command -v rg)" ]] || alias rg="red 'rg is not installed' && grep -rnw . -e"
