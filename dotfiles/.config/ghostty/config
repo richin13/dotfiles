@@ -1,6 +1,9 @@
 font-family = JetBrainsMono Nerd Font
 font-size = 13
 font-style = Bold
+font-style-bold = ExtraBold
+# font-style-italic = Bold Italic
+font-style-bold-italic = ExtraBold Italic
 font-feature = -calt, -liga, -dlig
 window-decoration = "none"
 maximize = true
