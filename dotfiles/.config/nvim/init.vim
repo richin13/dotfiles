@@ -95,6 +95,7 @@ function! s:packager_init(packager) abort
   " Git
   call a:packager.add('https://github.com/tpope/vim-fugitive')
   call a:packager.add('https://github.com/lewis6991/gitsigns.nvim')
+  call a:packager.add('https://github.com/sindrets/diffview.nvim')
 
   " Language server
   call a:packager.add('https://github.com/neovim/nvim-lspconfig')
