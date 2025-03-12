@@ -1,0 +1,18 @@
+{
+  "Pelican Blog Post": {
+    "prefix": "pelican",
+    "body": [
+      "Title: ${1:Title}",
+      "Date: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}",
+      "Category: ${3:Category}",
+      "Tags: ${4:Tags}",
+      "Slug: ${5:Slug}",
+      "Author: Ricardo Madriz",
+      "Summary: ${6:Summary}",
+      "",
+      "# ${1:Title}",
+      "",
+      "${0:Content}"
+    ]
+  }
+}
