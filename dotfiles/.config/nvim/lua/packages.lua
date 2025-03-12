@@ -1,3 +1,22 @@
+-- diffview.nvim {{{
+-- https://github.com/sindrets/diffview.nvim
+vim.keymap.set('n', '<leader><leader>v', function()
+  if next(require('diffview.lib').views) == nil then
+    vim.cmd('DiffviewOpen')
+  else
+    vim.cmd('DiffviewClose')
+  end
+end)
+
+vim.opt.diffopt = {
+  "internal",
+  "filler",
+  "closeoff",
+  "indent-heuristic",
+  "linematch:60",
+  "algorithm:histogram"
+}
+-- }}}
 -- gitsigns.nvim {{{
 -- https://github.com/lewis6991/gitsigns.nvim
 require("gitsigns").setup({
