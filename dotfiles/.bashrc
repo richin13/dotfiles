@@ -468,10 +468,10 @@ else
 fi
 
 [[ -x "$(mise -q --silent which nvim)" ]] && alias vim="nvim"
-[[ -x "$(command -v bat)" ]] && alias cat="bat --style='numbers,changes'"
-[[ -x "$(command -v lsd)" ]] && alias ls="lsd"
-[[ -x "$(command -v rg)" ]] || alias rg="red 'rg is not installed' && grep -rnw . -e"
-[[ -x "$(command -v fd)" ]] || alias fd="red 'fd is not installed' && find . -type f -iname"
+[[ -x "$(mise -q --silent which bat)" ]] && alias cat="bat --style='numbers,changes'"
+[[ -x "$(mise -q --silent which lsd)" ]] && alias ls="lsd"
+[[ -x "$(mise -q --silent which rg)" ]] || alias rg="red 'rg is not installed' && grep -rnw . -e"
+[[ -x "$(mise -q --silent which fd)" ]] || alias fd="red 'fd is not installed' && find . -type f -iname"
 
 #: Config files aliases
 alias bashrc='nvim $HOME/.bashrc'
