@@ -50,15 +50,3 @@ tpm: ## Install tpm tmux plugin manager
 .PHONY: zoxide
 zoxide: ## Install zoxide
 	curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
-
-.PHONY: rust-tools
-rust-tools: ## Install rust tools
-	cargo install \
-		bat \
-		fd-find \
-		git-delta \
-		lsd \
-		ripgrep \
-		sd \
-		tailspin \
-		vivid
