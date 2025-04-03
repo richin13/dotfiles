@@ -46,7 +46,7 @@ cargo-binstall = "latest"
 "pipx:autorandr" = "latest"
 "pipx:ipython" = "latest"
 "pipx:pgcli" = "latest"
-"pipx:poetry" = "latest"
+"pipx:poetry" = { version = "latest", uvx_args = "--with poetry-plugin-export" }
 "pipx:ruff" = "latest"
 "pipx:sqlfluff" = "latest"
 "pipx:termux-language-server" = "latest"
