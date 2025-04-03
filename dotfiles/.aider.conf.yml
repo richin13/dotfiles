@@ -1,0 +1,34 @@
+model: gemini-2.5-pro
+
+set-env:
+  - AWS_REGION=us-east-1
+  - AWS_PROFILE=ai
+
+# Use $AIDER_MODEL to select aliases on different computers
+alias:
+  - "kip:bedrock/us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+
+watch-files: true
+multiline: true
+suggest-shell-commands: true
+cache-prompts: false
+stream: true
+notifications: true
+check-update: false
+show-release-notes: false
+
+gitignore: false
+auto-commits: false
+dirty-commits: false
+
+# Theme
+code-theme                      : dracula
+user-input-color                : "#bd93f9"
+tool-output-color               : "#8be9fd"
+tool-error-color                : "#ff5555"
+tool-warning-color              : "#f1fa8c"
+assistant-output-color          : "#50fa7b"
+completion-menu-color           : "#f8f8f2"
+completion-menu-bg-color        : "#282a36"
+completion-menu-current-color   : "#44475a"
+completion-menu-current-bg-color: "#ff79c6"
