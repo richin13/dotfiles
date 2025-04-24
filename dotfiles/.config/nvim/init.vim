@@ -105,6 +105,7 @@ function! s:packager_init(packager) abort
 
   " Copilot, why not
   call a:packager.add('https://github.com/github/copilot.vim')
+  call a:packager.add('https://github.com/azorng/goose.nvim')
 endfunction
 
 packadd vim-packager

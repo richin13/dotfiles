@@ -3,6 +3,7 @@
 [core]
   pager = delta
   editor = nvim
+  sshCommand = ssh -o AddKeysToAgent=yes
 [gpg]
 	format = ssh
 [gpg "ssh"]
