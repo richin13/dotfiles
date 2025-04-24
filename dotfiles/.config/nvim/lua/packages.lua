@@ -75,12 +75,6 @@ require("ibl").setup({
 -- https://github.com/windwp/nvim-autopairs
 require("nvim-autopairs").setup({})
 -- }}}
--- nvim-colorizer.lua {{{
--- https://github.com/norcalli/nvim-colorizer.lua
-require("colorizer").setup({
-  "lua",
-})
--- }}}
 -- nvim-navic.lua {{{
 -- https://github.com/SmiteshP/nvim-navic
 require("nvim-navic").setup({
