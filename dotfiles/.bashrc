@@ -426,6 +426,38 @@ function ccc() {
   fi
 }
 
+function openai() {
+  local user_prompt="$1"
+  local system_prompt="${2:-You are a helpful assistant}"
+  local model="${OPENAI_MODEL:-"gpt-4.1"}"
+  local base_url="${OPENAI_BASE_URL:-https://api.openai.com/v1}"
+  local api_key="${OPENAI_API_KEY:-}"
+
+  if [[ -z "$user_prompt" ]]; then
+    echo "Usage: openai \"user prompt\" [\"system prompt\"]"
+    return 1
+  fi
+
+  curl -s "$base_url/chat/completions" \
+    -H "Authorization: Bearer $api_key" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "model": "'"$model"'",
+      "messages": [
+        {"role": "system", "content": "'"$system_prompt"'"},
+        {"role": "user", "content": "'"$user_prompt"'"}
+      ]
+    }' | jq -r '.choices[0].message.content'
+}
+
+function gemini() {
+  # https://ai.google.dev/gemini-api/docs/openai#rest
+  OPENAI_MODEL=gemini-2.0-flash \
+    OPENAI_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai \
+    OPENAI_API_KEY=$GEMINI_API_KEY \
+    openai "$1" "$2"
+}
+
 # }}}
 # Aliases ----------------------------------------------------------- {{{
 #: General aliases
