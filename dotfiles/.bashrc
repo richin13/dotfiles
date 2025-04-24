@@ -641,6 +641,9 @@ alias ya="yarn add"
 alias yad="yarn add -D"
 alias yr="yarn remove"
 
+#: Mise
+alias mif="mise install -f"
+
 #: PHP / Laravel aliases
 alias sail="bash vendor/bin/sail"
 alias artisan="sail artisan"
