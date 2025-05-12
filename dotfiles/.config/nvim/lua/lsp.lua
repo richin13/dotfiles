@@ -60,7 +60,7 @@ local on_attach = function(client, bufnr)
   end
 
   if client:supports_method('textDocument/documentColor') then
-    vim.lsp.document_color.enable(true, bufnr)
+    vim.lsp.document_color.enable(true, bufnr, { style = "virtual" })
   end
 
   vim.diagnostic.config({
