@@ -146,6 +146,7 @@ augroup indentation_sr
   autocmd Filetype yaml setlocal indentkeys-=<:>
   autocmd Filetype make,snippets,tsv setlocal noexpandtab tabstop=4
   autocmd Filetype xsd setlocal noexpandtab tabstop=2
+  autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
 augroup END
 
 " }}}

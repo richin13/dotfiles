@@ -114,6 +114,8 @@ local configs = {
   dockerls = {},
   -- https://github.com/hrsh7th/vscode-langservers-extracted
   eslint = {},
+  -- https://github.com/golang/tools/tree/master/gopls
+  gopls = {},
   -- https://github.com/hrsh7th/vscode-langservers-extracted
   html = {},
   -- https://github.com/luals/lua-language-server
