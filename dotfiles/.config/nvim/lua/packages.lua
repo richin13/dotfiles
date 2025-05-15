@@ -71,9 +71,10 @@ require("ibl").setup({
   },
 })
 -- }}}
--- nvim-autoparis {{{
--- https://github.com/windwp/nvim-autopairs
-require("nvim-autopairs").setup({})
+-- mini.nvim {{{
+-- https://github.com/echasnovski/mini.nvim
+require('mini.pairs').setup({})
+require('mini.tabline').setup({})
 -- }}}
 -- nvim-navic.lua {{{
 -- https://github.com/SmiteshP/nvim-navic

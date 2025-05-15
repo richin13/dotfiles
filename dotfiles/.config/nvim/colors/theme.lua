@@ -330,6 +330,21 @@ local groups = {
   BlinkCmpSignatureHelp = { link = "NormalFloat" },
   BlinkCmpSignatureHelpBorder = { link = "FloatBorder" },
   BlinkCmpLabelDeprecated = { link = "DiagnosticDeprecated" },
+
+  -- Mini.nvim
+  MiniTablineCurrent = { bg = colors.color_10_bright_green, fg = colors.color_0_black },
+  MiniTablineHidden = { link = "Visual" },
+  MiniTablineModifiedCurrent = {
+    bg = colors.color_10_bright_green,
+    fg = colors.color_0_black,
+    italic = true,
+    bold = true,
+  },
+  MiniTablineModifiedHidden = {
+    bg = colors.color_8_bright_black,
+    fg = colors.color_14_bright_cyan,
+    italic = true,
+  },
 }
 
 -- set defined highlights

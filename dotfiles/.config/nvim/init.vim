@@ -66,6 +66,7 @@ function! s:packager_init(packager) abort
 
   call a:packager.add('https://github.com/rebelot/heirline.nvim')
   call a:packager.add('https://github.com/kyazdani42/nvim-tree.lua')
+  call a:packager.add('https://github.com/echasnovski/mini.nvim')
 
   " fuzzy finders
   call a:packager.add('https://github.com/nvim-lua/popup.nvim')
@@ -78,7 +79,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/tommcdo/vim-lion')
   call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
   call a:packager.add('https://github.com/lukas-reineke/indent-blankline.nvim')
-  call a:packager.add('https://github.com/windwp/nvim-autopairs')
   call a:packager.add('https://github.com/Vimjas/vim-python-pep8-indent', { 'type': 'opt' })
 
   call a:packager.add('https://github.com/chr4/nginx.vim')

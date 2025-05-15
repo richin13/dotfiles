@@ -6,7 +6,6 @@ local diagnostics = require("plugins.heirline.diagnostics")
 local file_info = require("plugins.heirline.file-info")
 local git = require("plugins.heirline.git")
 local mode = require("plugins.heirline.mode")
-local tabline = require("plugins.heirline.tabline")
 local winbar = require("plugins.heirline.winbar")
 
 local Align = common.Align
@@ -88,7 +87,6 @@ M.setup = function()
   require("heirline").setup({
     statusline = StatusLines,
     winbar = winbar.WinBars,
-    tabline = tabline.BufferLine,
     opts = {
       disable_winbar_cb = function(args)
         return conditions.buffer_matches({
