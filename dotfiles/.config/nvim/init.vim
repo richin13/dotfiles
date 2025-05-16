@@ -62,7 +62,6 @@ function! s:packager_init(packager) abort
   " Basic
   call a:packager.add('https://github.com/fcpg/vim-altscreen')
   call a:packager.add('https://github.com/kyazdani42/nvim-web-devicons')
-  call a:packager.add('https://github.com/tpope/vim-surround')
 
   call a:packager.add('https://github.com/rebelot/heirline.nvim')
   call a:packager.add('https://github.com/kyazdani42/nvim-tree.lua')

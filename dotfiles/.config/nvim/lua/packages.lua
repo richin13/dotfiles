@@ -73,7 +73,16 @@ require("ibl").setup({
 -- }}}
 -- mini.nvim {{{
 -- https://github.com/echasnovski/mini.nvim
+require('mini.ai').setup({})
 require('mini.pairs').setup({})
+require('mini.splitjoin').setup()
+require('mini.surround').setup({
+  mappings = { --match tpope's vim-surround
+    add = "ys",
+    delete = "ds",
+    replace = "cs",
+  },
+})
 require('mini.tabline').setup({})
 -- }}}
 -- nvim-navic.lua {{{
