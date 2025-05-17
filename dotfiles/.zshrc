@@ -127,6 +127,11 @@ bindkey '^N' down-line-or-beginning-search
 bindkey '^K' clear-screen #: Use C-K to clear the screen
 bindkey -M menuselect '^o' accept-and-infer-next-history
 
+function vfd() {
+  files=("${(@f)$(fd "$@")}")
+  (( ${#files} )) && nvim "${files[@]}"
+}
+
 #: Hook functions (https://zsh.sourceforge.io/Doc/Release/Functions.html#Hook-Functions)
 function chpwd() {
   local owner=$(stat -L -c "%U" $PWD)
