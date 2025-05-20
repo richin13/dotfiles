@@ -53,3 +53,4 @@ cargo-binstall = "latest"
 "ubi:mikefarah/yq" = { version = "latest", matching = "yq_linux_amd64" }
 "ubi:starship/starship" = "latest"
 "ubi:supabase/cli" = { version = "latest", extract_all = "true", exe = "supabase" }
+pnpm = "latest"
