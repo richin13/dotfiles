@@ -295,12 +295,12 @@ require("telescope").setup({
   },
 })
 -- }}}
-require("vim._extui").enable({
-  enable = true,
-  msg = {
-    pos = "box",
-    box = {
-      timeout = 4000,
-    },
-  },
-})
+-- require("vim._extui").enable({
+--   enable = true,
+--   msg = {
+--     pos = "box",
+--     box = {
+--       timeout = 4000,
+--     },
+--   },
+-- })
