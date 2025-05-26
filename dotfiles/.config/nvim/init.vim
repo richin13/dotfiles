@@ -102,7 +102,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/SmiteshP/nvim-navic')
 
   " Copilot, why not
-  call a:packager.add('https://github.com/github/copilot.vim')
+  call a:packager.add('https://github.com/Exafunction/windsurf.vim')
   call a:packager.add('https://github.com/azorng/goose.nvim')
 endfunction
 
@@ -333,9 +333,10 @@ inoremap <buffer> <silent> <localleader>u <C-R>=GenerateUUID4()<CR>
 " }}}
 "  Plugin: Configure --------------------------- {{{
 
-" Copilot
-let g:copilot_no_tab_map = v:true
-imap <silent><script><expr> <C-y> copilot#Accept("")
+" Windsurf.nvim
+let g:codeium_disable_bindings = 1
+imap <silent><script><expr> <C-y> codeium#Accept()
+imap <M-[> <Cmd>call codeium#CycleOrComplete()<CR>
 
 " Numbers
 let g:enable_numbers = 0
