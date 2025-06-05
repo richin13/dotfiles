@@ -493,6 +493,8 @@ alias tree="lsd --tree -I __pycache__ -I .venv -I node_modules -I .git"
 alias tree1="tree --depth=1"
 alias zzz="systemctl suspend"
 alias vplug="cd ~/.config/nvim/pack/packager/start"
+alias gor="go run *.go"
+alias gog="go get -v"
 
 if [ -n "$BASH_VERSION" ]; then
   alias ..="cd .." #: No auto_cd in bash :(
