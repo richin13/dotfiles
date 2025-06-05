@@ -437,10 +437,7 @@ function openai() {
     echo "Usage: openai \"user prompt\" [\"system prompt\"]"
     return 1
   fi
-  curl -s "$base_url/chat/completions" \
-    -H "Authorization: Bearer $api_key" \
-    -H "Content-Type: application/json" \
-    -d $(jq -n \
+  req_body=$(jq -n \
     --arg model "$model" \
     --arg system_prompt "$system_prompt" \
     --arg user_prompt "$user_prompt" \
@@ -450,7 +447,11 @@ function openai() {
         {role: "system", content: $system_prompt},
         {role: "user", content: $user_prompt}
       ]
-    }') | jq -r '.choices[0].message.content'
+    }')
+  curl -s "$base_url/chat/completions" \
+    -H "Authorization: Bearer $api_key" \
+    -H "Content-Type: application/json" \
+    -d "$req_body" | jq -r '.choices[0].message.content'
 }
 
 function gemini() {
