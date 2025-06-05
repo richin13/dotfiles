@@ -336,6 +336,11 @@ inoremap <buffer> <silent> <localleader>u <C-R>=GenerateUUID4()<CR>
 " Windsurf.nvim
 let g:codeium_enabled = v:false
 let g:codeium_disable_bindings = 1
+let g:codeium_filetypes = {
+      \ 'bash': v:false,
+      \ 'sh': v:false,
+      \ 'zsh': v:false,
+      \ }
 imap <silent><script><expr> <C-y> codeium#Accept()
 imap <M-[> <Cmd>call codeium#CycleOrComplete()<CR>
 
