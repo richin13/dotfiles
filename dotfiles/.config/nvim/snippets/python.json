@@ -80,5 +80,10 @@
       "    \"\"\"${2:Resource} response schema for when individual record returned.\"\"\"",
       "    pass"
     ]
+  },
+  "LOGGER": {
+    "prefix": "ll",
+    "description": "Create a LOGGER",
+    "body": ["LOGGER = logging.getLogger(__name__)", ""]
   }
 }

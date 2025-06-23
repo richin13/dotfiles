@@ -54,6 +54,8 @@ autocmd BufReadPost *
      \ endif
 
 autocmd QuitPre * if exists("w:focuswriting") | only | endif
+
+iabbr improt import
 " }}}
 " General: Plugin Install --------------------- {{{
 function! s:packager_init(packager) abort
