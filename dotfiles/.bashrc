@@ -456,7 +456,7 @@ function openai() {
 
 function gemini() {
   # https://ai.google.dev/gemini-api/docs/openai#rest
-  OPENAI_MODEL=gemini-2.0-flash \
+  OPENAI_MODEL=gemini-2.5-flash-lite-preview-06-17 \
     OPENAI_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai \
     OPENAI_API_KEY=$GEMINI_API_KEY \
     openai "$1" "$2"
