@@ -7,7 +7,6 @@ local file_info = require("plugins.heirline.file-info")
 local git = require("plugins.heirline.git")
 local mode = require("plugins.heirline.mode")
 local winbar = require("plugins.heirline.winbar")
-local ai = require("plugins.heirline.ai")
 
 local Align = common.Align
 local Space = common.Space
@@ -51,8 +50,6 @@ local DefaultStatusline = {
   Space,
   diagnostics.DiagnosticsBlock,
   Align,
-  ai.Suggestions,
-  Space,
   git.GitBlock,
   Space,
 }

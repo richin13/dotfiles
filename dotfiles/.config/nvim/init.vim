@@ -102,9 +102,6 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/Saghen/blink.cmp', { 'do': 'cargo build --release'})
   call a:packager.add('https://github.com/hrsh7th/vim-vsnip')
   call a:packager.add('https://github.com/SmiteshP/nvim-navic')
-
-  " Copilot, why not
-  call a:packager.add('https://github.com/Exafunction/windsurf.vim')
 endfunction
 
 packadd vim-packager
@@ -333,17 +330,6 @@ inoremap <buffer> <silent> <localleader>u <C-R>=GenerateUUID4()<CR>
 
 " }}}
 "  Plugin: Configure --------------------------- {{{
-
-" Windsurf.nvim
-let g:codeium_enabled = v:false
-let g:codeium_disable_bindings = 1
-let g:codeium_filetypes = {
-      \ 'bash': v:false,
-      \ 'sh': v:false,
-      \ 'zsh': v:false,
-      \ }
-imap <silent><script><expr> <C-y> codeium#Accept()
-imap <M-[> <Cmd>call codeium#CycleOrComplete()<CR>
 
 " Numbers
 let g:enable_numbers = 0
