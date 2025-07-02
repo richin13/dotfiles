@@ -68,6 +68,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/rebelot/heirline.nvim')
   call a:packager.add('https://github.com/kyazdani42/nvim-tree.lua')
   call a:packager.add('https://github.com/echasnovski/mini.nvim')
+  call a:packager.add('https://github.com/windwp/nvim-autopairs')
 
   " fuzzy finders
   call a:packager.add('https://github.com/nvim-lua/popup.nvim')

@@ -77,7 +77,6 @@ require("ibl").setup({
 -- mini.nvim {{{
 -- https://github.com/echasnovski/mini.nvim
 require('mini.ai').setup({})
-require('mini.pairs').setup({})
 require('mini.splitjoin').setup()
 require('mini.surround').setup({
   mappings = { --match tpope's vim-surround
@@ -92,6 +91,9 @@ require('mini.surround').setup({
   },
 })
 require('mini.tabline').setup({})
+-- }}}
+-- nvim-autopairs --- {{{
+require('nvim-autopairs').setup()
 -- }}}
 -- nvim-navic.lua {{{
 -- https://github.com/SmiteshP/nvim-navic
@@ -300,12 +302,3 @@ require("telescope").setup({
   },
 })
 -- }}}
--- require("vim._extui").enable({
---   enable = true,
---   msg = {
---     pos = "box",
---     box = {
---       timeout = 4000,
---     },
---   },
--- })
