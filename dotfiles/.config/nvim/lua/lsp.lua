@@ -102,6 +102,20 @@ end
 
 -- See https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local configs = {
+  -- https://detachhead.github.io/basedpyright
+  basedpyright = {
+    settings = {
+      basedpyright = {
+        analysis = {
+          diagnosticSeverityOverrides = {
+            reportAny = false,
+            reportUnusedCallResult = false,
+            reportMissingTypeStubs = false,
+          }
+        }
+      }
+    },
+  },
   -- https://github.com/bash-lsp/bash-language-server
   bashls = {},
   -- https://github.com/denoland/deno
@@ -148,23 +162,23 @@ local configs = {
   -- https://github.com/prisma/language-tools
   prismals = {},
   -- https://github.com/microsoft/pyright
-  pyright = {
-    settings = {
-      pyright = {
-        disableOrganizeImports = true,
-        disableTaggedHints = true,
-      },
-      python = {
-        analysis = {
-          diagnosticSeverityOverrides = {
-            reportUnusedImport = "none",
-            reportUnusedFunction = "none",
-            reportUnusedVariable = "none",
-          },
-        },
-      },
-    },
-  },
+  -- pyright = {
+  --   settings = {
+  --     pyright = {
+  --       disableOrganizeImports = true,
+  --       disableTaggedHints = true,
+  --     },
+  --     python = {
+  --       analysis = {
+  --         diagnosticSeverityOverrides = {
+  --           reportUnusedImport = "none",
+  --           reportUnusedFunction = "none",
+  --           reportUnusedVariable = "none",
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
   -- https://github.com/astral-sh/ruff
   ruff = {},
   -- https://github.com/rust-lang/rust-analyzer
