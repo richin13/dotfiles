@@ -109,8 +109,23 @@ local configs = {
         analysis = {
           diagnosticSeverityOverrides = {
             reportAny = false,
-            reportUnusedCallResult = false,
+            reportDeprecated = false,
+            reportExplicitAny = false,
+            reportImplicitStringConcatenation = false,
+            reportMissingParameterType = false,
+            reportMissingTypeArgument = false,
             reportMissingTypeStubs = false,
+            reportUnannotatedClassAttribute = false,
+            reportUninitializedInstanceVariable = false,
+            reportUnknownArgumentType = false,
+            reportUnknownMemberType = false,
+            reportUnknownParameterType = false,
+            reportUnknownVariableType = false,
+            reportUnnecessaryComparison = false,
+            reportUnnecessaryIsInstance = false,
+            reportUnusedCallResult = false,
+            reportUnusedFunction = false,
+            reportUnusedParameter = false,
           }
         }
       }
