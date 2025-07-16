@@ -123,6 +123,7 @@ local configs = {
             reportUnknownVariableType = false,
             reportUnnecessaryComparison = false,
             reportUnnecessaryIsInstance = false,
+            reportUntypedFunctionDecorator = false,
             reportUnusedCallResult = false,
             reportUnusedFunction = false,
             reportUnusedParameter = false,
