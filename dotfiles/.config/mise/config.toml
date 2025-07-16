@@ -55,3 +55,4 @@ cargo-binstall = "latest"
 "ubi:supabase/cli" = { version = "latest", extract_all = "true", exe = "supabase" }
 pnpm = "latest"
 "pipx:basedpyright" = "latest"
+"cargo:du-dust" = "latest"
