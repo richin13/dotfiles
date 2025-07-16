@@ -636,6 +636,7 @@ alias dcrun="dc run --rm"
 alias dcup="dc up"
 alias dctx="docker context use"
 alias dctxd="docker context use default"
+alias xx-psql="docker compose exec db psql -U postgres"
 
 #: Kubernetes aliases
 alias k="kubectl"
