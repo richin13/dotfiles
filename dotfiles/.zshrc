@@ -119,6 +119,10 @@ if command -v mise &> /dev/null; then
   eval "$(mise completion zsh)"
 fi
 
+if command -v uv &> /dev/null; then
+  eval "$(uv generate-shell-completion zsh)"
+fi
+
 zinit cdreplay -q
 # }}}
 
