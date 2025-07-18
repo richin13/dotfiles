@@ -1,17 +1,19 @@
 {
   "permissions": {
+    "defaultMode": "acceptEdits",
     "allow": [
       "Read(src/**)",
       "Read(package*.json)",
       "Edit(src/**)",
-      "Bash(git diff:*)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
       "Bash(find *)",
       "Bash(grep *)",
-      "Bash(rg *)"
-    ],
-    "deny": ["Bash(rm:*)", "Bash(curl:*)", "Bash(git push:*)"]
+      "Bash(rg *)",
+      "Bash(npm run:*)",
+      "Bash(npx *)",
+      "Bash(npx gluestack-ui add *)",
+      "Bash(ls *)"
+    ]
   },
+  "enableAllProjectMcpServers": true,
   "includeCoAuthoredBy": false
 }
