@@ -426,7 +426,7 @@ function ccc() {
   fi
 }
 
-function openai() {
+function comp-openai() {
   local user_prompt="$1"
   local system_prompt="${2:-You are a helpful assistant}"
   local model="${OPENAI_MODEL:-"gpt-4.1"}"
@@ -454,7 +454,7 @@ function openai() {
     -d "$req_body" | jq -r '.choices[0].message.content'
 }
 
-function gemini() {
+function comp-gemini() {
   # https://ai.google.dev/gemini-api/docs/openai#rest
   OPENAI_MODEL=gemini-2.5-flash-lite-preview-06-17 \
     OPENAI_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai \
