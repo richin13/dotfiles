@@ -1,6 +1,6 @@
 {
+  "includeCoAuthoredBy": false,
   "permissions": {
-    "defaultMode": "acceptEdits",
     "allow": [
       "Read(src/**)",
       "Read(package*.json)",
@@ -12,8 +12,9 @@
       "Bash(npx *)",
       "Bash(npx gluestack-ui add *)",
       "Bash(ls *)"
-    ]
+    ],
+    "defaultMode": "acceptEdits"
   },
-  "enableAllProjectMcpServers": true,
-  "includeCoAuthoredBy": false
+  "model": "sonnet",
+  "enableAllProjectMcpServers": true
 }
