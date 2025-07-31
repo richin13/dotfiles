@@ -46,6 +46,9 @@ export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 
 DISTRO=$(grep '^ID' /etc/os-release | cut -d '=' -f 2 | head -n1)
+if [[ $DISTRO = "pop" ]];then
+  DISTRO=ubuntu
+fi
 export DISTRO
 
 export REPOS_FOLDER="$HOME/src"
@@ -336,14 +339,6 @@ function printcolors() {
 
 # Ubuntu-only functions
 if [ "$DISTRO" = "ubuntu" ]; then
-  function upgradezoom() { #: Upgrade zoom
-    local filename=zoom_amd64.deb
-    curl -L "https://zoom.us/client/latest/$filename" -o $filename
-    sudo dpkg -i $filename
-    sudo apt-get install -f
-    rm -rf $filename
-  }
-
   function upgrade() { #: Do a full system upgrade
     sudo apt update
     sudo apt upgrade -y
@@ -359,14 +354,8 @@ if [ "$DISTRO" = "ubuntu" ]; then
     fi
     popd >/dev/null || return 1
     mise upgrade -y
+    mise install --force neovim@nightly
     nvim -c 'PlugUpdate'
-  }
-
-  function update-ff-dev() { #: Upgrade firefox developer edition
-    local filename=Firefox-dev.tar.bz2
-    wget "https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=en-US" -O "$filename"
-    sudo tar xjf "$filename" -C /opt/
-    rm -rf "$filename"
   }
 fi
 
@@ -399,20 +388,6 @@ function install-language-servers() {
       gunzip -c - >~/.local/bin/rust-analyzer &&
       chmod +x ~/.local/bin/rust-analyzer
   fi
-}
-
-function padl() {
-  #: Takes a list of dependencies and adds them with poetry add --group=dev "<dep>@*"
-  if [ -z "$1" ]; then
-    red "No dependencies provided"
-    return 1
-  fi
-
-  local deps=()
-  for dep in "$@"; do
-    deps+=("${dep}@*")
-  done
-  poetry add --group=dev "${deps[@]}"
 }
 
 function ccc() {
@@ -520,7 +495,6 @@ alias bashrc='nvim $HOME/.bashrc'
 alias zshrc='nvim $HOME/.zshrc'
 alias vimrc='nvim $XDG_CONFIG_HOME/nvim/init.vim'
 alias tmuxconf='nvim $HOME/.tmux.conf'
-alias coc-settings='vim $XDG_CONFIG_HOME/nvim/coc-settings.json'
 
 if [ -z "$DOTFILES" ] && [ -d "$DOTFILES" ]; then
   alias dotfiles='cd $DOTFILES'
