@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
@@ -15,10 +16,9 @@
     ],
     "defaultMode": "acceptEdits"
   },
-  "model": "sonnet",
   "enableAllProjectMcpServers": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754335848355
   },
-  "$schema": "https://json.schemastore.org/claude-code-settings.json"
+  "model": "sonnet"
 }
