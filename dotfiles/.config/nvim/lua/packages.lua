@@ -207,54 +207,24 @@ require("nvim-tree").setup({
 -- }}}
 -- nvim-treesitter and related {{{
 -- https://github.com/nvim-treesitter/nvim-treesitter
-require("nvim-treesitter.configs").setup({
-  playground = {
-    enable = false,
-    disable = {},
-    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-    persist_queries = false, -- Whether the query persists across vim sessions
-  },
-  highlight = {
-    enable = true,
-    disable = { "dockerfile" },
-    additional_vim_regex_highlighting = { "php" },
-  },
-  textobjects = {
-    enable = true,
-    select = {
-      enable = true,
-      lookahead = true,
-      keymaps = {
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
-      },
-    },
-    swap = {
-      enable = true,
-      swap_next = {
-        ["<leader>a"] = "@parameter.inner",
-      },
-      swap_previous = {
-        ["<leader>A"] = "@parameter.inner",
-      },
-    },
-  },
-  indent = {
-    enable = false,
-  },
-  ensure_installed = {
+
+-- vim.treesitter.language.register("bash", "zsh")
+-- vim.treesitter.language.register("bash", "shell")
+
+local nvim_ts = require("nvim-treesitter")
+
+nvim_ts.setup({
+  install_dir = vim.fn.stdpath('data') .. '/site'
+})
+nvim_ts.install {
     "bash",
     "comment",
     "css",
     "dockerfile",
     "gitcommit",
     "graphql",
-    "haskell",
     "hcl",
     "html",
-    "hurl",
     "javascript",
     "lua",
     "make",
@@ -264,16 +234,13 @@ require("nvim-treesitter.configs").setup({
     "prisma",
     "python",
     "query",
-    "r",
     "rust",
     "sql",
-    "svelte",
     "toml",
     "tsx",
     "typescript",
     "yaml",
-  },
-})
+}
 
 -------------------------------------------------------------------------------
 --                   Comment frame (depends on treesitter)                   --

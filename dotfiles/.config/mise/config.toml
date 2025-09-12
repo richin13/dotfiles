@@ -59,3 +59,4 @@ cargo-binstall = "latest"
 "ubi:starship/starship" = "latest"
 "ubi:supabase/cli" = { version = "latest", extract_all = "true", exe = "supabase" }
 pnpm = "latest"
+"npm:tree-sitter-cli" = "latest"

@@ -49,9 +49,9 @@ augroup END
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal! g`\"" |
+      \ endif
 
 autocmd QuitPre * if exists("w:focuswriting") | only | endif
 
@@ -81,12 +81,10 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/tommcdo/vim-lion')
   call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
   call a:packager.add('https://github.com/lukas-reineke/indent-blankline.nvim')
-  call a:packager.add('https://github.com/Vimjas/vim-python-pep8-indent', { 'type': 'opt' })
 
   call a:packager.add('https://github.com/chr4/nginx.vim')
-  call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'})
-  call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter-textobjects')
-  call a:packager.add('https://github.com/nvim-treesitter/playground')
+  call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter', { 'branch': 'main', 'do': ':TSUpdate' })
+  call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter-textobjects', { 'branch': 'main' })
   call a:packager.add('https://github.com/romgrk/nvim-treesitter-context')
   call a:packager.add('https://github.com/windwp/nvim-ts-autotag')
   call a:packager.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring')
@@ -115,17 +113,11 @@ command! PlugInstall echom 'Use :PackagerInstall instead' | :PackagerInstall
 command! PlugUpdate echom 'Use :PackagerUpdate instead' | :PackagerUpdate
 command! PlugClean echom 'Use :PackagerClean instead' | :PackagerClean
 
-augroup enable_opt_plugins
-  autocmd!
-  autocmd Filetype python packadd vim-python-pep8-indent
-augroup END
-" }}}
 " General: Lua Plugins Setup ------------------ {{{
 
 lua vim.loader.enable()
 lua require('packages')
 lua require('plugins.heirline')
-lua require('misc')
 lua require('lsp')
 
 " `gf` to open lua file under cursor
@@ -289,13 +281,13 @@ xnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 snoremap <C-l> <Cmd>lua vim.snippet.stop()<CR><Esc>
 
 function! YankToClipboard(type)
-    let saved_register = @@
-    if a:type ==# 'line'
-        normal! '[V']"+y
-    else
-        execute 'normal! `[v`]"+y'
-    endif
-    let @@ = saved_register
+  let saved_register = @@
+  if a:type ==# 'line'
+    normal! '[V']"+y
+  else
+    execute 'normal! `[v`]"+y'
+  endif
+  let @@ = saved_register
 endfunction
 
 vnoremap cp "+y
