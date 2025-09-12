@@ -239,6 +239,7 @@ nvim_ts.install {
     "toml",
     "tsx",
     "typescript",
+    "vim",
     "yaml",
 }
 
