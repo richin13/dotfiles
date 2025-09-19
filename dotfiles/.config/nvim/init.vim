@@ -119,6 +119,7 @@ lua vim.loader.enable()
 lua require('packages')
 lua require('plugins.heirline')
 lua require('lsp')
+lua require('treesitter')
 
 " `gf` to open lua file under cursor
 augroup custom_general_lua_extensions
