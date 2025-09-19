@@ -301,10 +301,9 @@ augroup file_extensions
   autocmd BufNewFile,BufRead,BufEnter,VimEnter *.prisma set filetype=prisma
   autocmd BufNewFile,BufRead,BufEnter docker-compose*.yml,docker-compose*.yaml,compose*.yml,compose*.yaml set filetype=yaml.docker-compose
   autocmd BufNewFile,BufRead,BufEnter *.zsh-theme,.zprofile set filetype=zsh
+  autocmd BufNewFile,BufRead,BufEnter .bashrc,.bash_profile set filetype=bash
   autocmd BufNewFile,BufRead,BufEnter *.jsx set filetype=javascript
   autocmd BufNewFile,BufRead,BufEnter .env.* set filetype=sh
-  autocmd BufRead poetry.lock set filetype=toml
-  autocmd BufRead .pylintrc set filetype=dosini
   autocmd BufNewFile,BufRead,BufEnter *.tf set filetype=hcl
   autocmd BufNewFile,BufRead *.service*,*.timer set ft=systemd
   autocmd BufNewFile,BufRead *.jinja,*.jinja2 set ft=jinja
