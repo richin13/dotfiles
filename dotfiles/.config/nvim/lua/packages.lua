@@ -272,6 +272,10 @@ vim.filetype.get_option = function(filetype, option)
     or get_option(filetype, option)
 end
 -- }}}
+-- oklch-color-picker.nvim {{{
+-- https://github.com/eero-lehtinen/oklch-color-picker.nvim
+require("oklch-color-picker").setup()
+-- }}}
 -- telescope.nvim {{{
 -- https://github.com/nvim-telescope/telescope.nvim
 local actions = require("telescope.actions")

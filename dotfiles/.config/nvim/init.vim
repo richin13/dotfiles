@@ -90,6 +90,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/JoosepAlviste/nvim-ts-context-commentstring')
   call a:packager.add('https://github.com/s1n7ax/nvim-comment-frame')
   call a:packager.add('https://github.com/lepture/vim-jinja')
+  call a:packager.add('https://github.com/eero-lehtinen/oklch-color-picker.nvim')
 
   " Git
   call a:packager.add('https://github.com/tpope/vim-fugitive')
