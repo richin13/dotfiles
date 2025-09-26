@@ -276,6 +276,19 @@ end
 -- https://github.com/eero-lehtinen/oklch-color-picker.nvim
 require("oklch-color-picker").setup()
 -- }}}
+-- outline.nvim {{{
+-- https://github.com/hedyhli/outline.nvim
+vim.keymap.set(
+  "n",
+  "<space>f",
+  "<cmd>Outline<CR>",
+  { desc = "Toggle Outline" }
+)
+
+require("outline").setup({
+  position = 'left'
+})
+-- }}}
 -- telescope.nvim {{{
 -- https://github.com/nvim-telescope/telescope.nvim
 local actions = require("telescope.actions")

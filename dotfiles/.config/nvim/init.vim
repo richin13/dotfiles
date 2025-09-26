@@ -102,6 +102,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/Saghen/blink.cmp', { 'do': 'cargo build --release'})
   call a:packager.add('https://github.com/hrsh7th/vim-vsnip')
   call a:packager.add('https://github.com/SmiteshP/nvim-navic')
+  call a:packager.add('https://github.com/hedyhli/outline.nvim.git')
 
   " AI
   call a:packager.add('https://github.com/coder/claudecode.nvim')
