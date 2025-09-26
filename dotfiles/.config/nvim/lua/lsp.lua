@@ -86,10 +86,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Keymappings for LSP
     local opts = { noremap = true, silent = true, buffer = args.buf }
-    vim.keymap.set("n", "<leader>gy", vim.lsp.buf.type_definition, opts)
-    vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, opts)
-    vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, opts)
-    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+    -- Using nvim defaults: see :h lsp-defaults
+    -- gra - code action
+    -- gri - implementation
+    -- grn - rename
+    -- grt - type definition
+    vim.keymap.set("n", "<leader>gr", "<cmd>Telescope lsp_references<CR>", { noremap = true, silent = true })
     vim.keymap.set("n", "K", function()
       vim.lsp.buf.clear_references()
       vim.lsp.buf.hover({ border = _border })
