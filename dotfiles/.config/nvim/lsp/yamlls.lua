@@ -1,4 +1,5 @@
-vim.lsp.config("yamlls", {
+---@type vim.lsp.Config
+return {
   settings = {
     yaml = {
       schemas = {
@@ -6,4 +7,4 @@ vim.lsp.config("yamlls", {
       },
     },
   },
-})
+}

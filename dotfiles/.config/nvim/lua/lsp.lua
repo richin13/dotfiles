@@ -129,8 +129,6 @@ local configs = {
   "ruff",
   -- https://github.com/rust-lang/rust-analyzer
   "rust_analyzer",
-  -- https://github.com/termux/termux-language-server/
-  "pkgbuild_language_server",
   -- https://github.com/tailwindlabs/tailwindcss-intellisense
   "tailwindcss",
   -- https://github.com/juliosueiras/terraform-lsp
