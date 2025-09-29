@@ -121,6 +121,8 @@ local configs = {
   "gopls",
   -- https://github.com/hrsh7th/vscode-langservers-extracted
   "html",
+  -- https://github.com/SilasMarvin/lsp-ai
+  "lsp_ai",
   -- https://github.com/luals/lua-language-server
   "lua_ls",
   -- https://github.com/prisma/language-tools
