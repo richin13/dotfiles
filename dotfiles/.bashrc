@@ -153,6 +153,17 @@ function mkcd() { #: Combine mkdir and cd
   mkdir -p "$@" && cd "$_" || return 1
 }
 
+# credits: Evan Hahn -- https://evanhahn.com/scripts-i-wrote-that-i-use-all-the-time/
+function tmpd () {
+  cd "$(mktemp -d)"
+  chmod -R 0700 .
+  if [[ $# -eq 1 ]]; then
+    \mkdir -p "$1"
+    cd "$1"
+    chmod -R 0700 .
+  fi
+}
+
 function sa() { #: Search aliases
   alias | grep "${*}"
 }
@@ -525,12 +536,6 @@ alias py="python"
 alias pipi="pip install"
 alias pipu="pip uninstall -y"
 alias pipf="pip freeze"
-alias pa="poetry add"
-alias pad="poetry add --group dev"
-alias pi="poetry install"
-alias pu="poetry update"
-alias pr="poetry remove"
-alias prd="poetry remove --group=dev"
 alias django="python manage.py"
 alias cc="cookiecutter"
 alias rr="ruff rule"
@@ -539,6 +544,9 @@ alias uvad="uv add --dev"
 alias uvu="uv remove"
 alias uvr="uv run"
 alias uvs="uv sync"
+
+#: Js aliases
+alias npx="npx -y"
 
 #: Git aliases
 alias g="git"
@@ -589,6 +597,7 @@ alias gstp="git stash pop"
 alias gstd="git stash drop"
 alias gstl="git stash list"
 alias gst="git status"
+alias gsts="git status --short"
 alias gsw="git switch"
 alias gcb="git switch -c"
 alias gcd="git switch develop"
@@ -619,12 +628,6 @@ alias kaf!="kubectl apply -f --force"
 alias kd="kubectl describe"
 alias kdp="kubectl describe pod"
 alias kga="kubectl get pods --all-namespaces"
-
-#: Js / yarn aliases
-alias yi="yarn install"
-alias ya="yarn add"
-alias yad="yarn add -D"
-alias yr="yarn remove"
 
 #: Mise
 alias mif="mise install -f"
