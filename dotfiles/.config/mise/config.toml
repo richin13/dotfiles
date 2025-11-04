@@ -57,9 +57,9 @@ cargo-binstall = "latest"
 "ubi:artempyanykh/marksman" = "latest"
 "ubi:mikefarah/yq" = { version = "latest", matching = "yq_linux_amd64" }
 "ubi:starship/starship" = "latest"
-"ubi:supabase/cli" = { version = "latest", extract_all = "true", exe = "supabase" }
 pnpm = "latest"
 "npm:tree-sitter-cli" = "latest"
 "cargo:stylua" = "latest"
 "npm:claude-ext" = "latest"
 "cargo:lsp-ai" = "latest"
+"go:github.com/charmbracelet/crush" = "latest"
