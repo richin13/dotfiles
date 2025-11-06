@@ -115,6 +115,7 @@ command! PlugInstall echom 'Use :PackagerInstall instead' | :PackagerInstall
 command! PlugUpdate echom 'Use :PackagerUpdate instead' | :PackagerUpdate
 command! PlugClean echom 'Use :PackagerClean instead' | :PackagerClean
 
+" }}}
 " General: Lua Plugins Setup ------------------ {{{
 
 lua vim.loader.enable()
