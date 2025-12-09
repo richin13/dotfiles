@@ -135,7 +135,7 @@ require("nvim-navic").setup({
 -- }}}
 -- nvim-tree.lua {{{
 -- https://github.com/nvim-tree/nvim-tree.lua
-local VIEW_WIDTH_FIXED = 30
+local VIEW_WIDTH_FIXED = 35
 local view_width_max = VIEW_WIDTH_FIXED -- fixed to start
 
 -- toggle the width and redraw
