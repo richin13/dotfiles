@@ -448,6 +448,16 @@ function comp-gemini() {
     openai "$1" "$2"
 }
 
+rgq() {
+    local tmpfile="/tmp/rg-vim-$$.out"
+    rg --vimgrep "$@" > "$tmpfile"
+    if [[ -s "$tmpfile" ]]; then
+        nvim -q "$tmpfile"
+    else
+        echo "No matches found."
+    fi
+    rm "$tmpfile"
+}
 # }}}
 # Aliases ----------------------------------------------------------- {{{
 #: General aliases
@@ -620,6 +630,7 @@ alias dcup="dc up"
 alias dctx="docker context use"
 alias dctxd="docker context use default"
 alias xx-psql="docker compose exec db psql -U postgres"
+alias drun="docker run --rm -it"
 
 #: Kubernetes aliases
 alias k="kubectl"
