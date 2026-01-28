@@ -327,6 +327,23 @@ function! GenerateUUID4()
 endfunction
 inoremap <buffer> <silent> <localleader>u <C-R>=GenerateUUID4()<CR>
 
+command! -range C <line1>,<line2>call s:copy_reference()
+command! -range CopyReference <line1>,<line2>call s:copy_reference()
+function! s:copy_reference() range
+  let path = expand('%')
+  if path == ''
+    echohl WarningMsg | echo 'No file to copy' | echohl None
+    return
+  endif
+  let reference = '@' .. path ..
+        \ (a:firstline == a:lastline ?
+        \    ':' .. a:firstline :
+        \    ':' .. a:firstline .. '-' .. a:lastline
+        \ )
+  call setreg('+', reference)
+  echo 'Copied: ' .. reference
+endfunction
+
 " }}}
 "  Plugin: Configure --------------------------- {{{
 
