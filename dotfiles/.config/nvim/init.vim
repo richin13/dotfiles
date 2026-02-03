@@ -331,19 +331,20 @@ function! GenerateUUID4()
 endfunction
 inoremap <buffer> <silent> <localleader>u <C-R>=GenerateUUID4()<CR>
 
-command! -range C <line1>,<line2>call s:copy_reference()
-command! -range CopyReference <line1>,<line2>call s:copy_reference()
-function! s:copy_reference() range
+command! -range C <line1>,<line2>call s:copy_reference(<range>)
+function! s:copy_reference(range_type) range
   let path = expand('%')
   if path == ''
     echohl WarningMsg | echo 'No file to copy' | echohl None
     return
   endif
-  let reference = '@' .. path ..
-        \ (a:firstline == a:lastline ?
-        \    ':' .. a:firstline :
-        \    ':' .. a:firstline .. '-' .. a:lastline
-        \ )
+  if a:range_type == 0
+    let reference = '@' .. path
+  elseif a:firstline == a:lastline
+    let reference = '@' .. path .. ':' .. a:firstline
+  else
+    let reference = '@' .. path .. ':' .. a:firstline .. '-' .. a:lastline
+  endif
   call setreg('+', reference)
   echo 'Copied: ' .. reference
 endfunction
