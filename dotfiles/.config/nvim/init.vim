@@ -105,7 +105,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/hedyhli/outline.nvim.git')
 
   " AI
-  call a:packager.add('https://github.com/coder/claudecode.nvim')
+  call a:packager.add('https://github.com/github/copilot.vim')
 endfunction
 
 packadd vim-packager
@@ -228,6 +228,10 @@ nnoremap <silent> <leader>b <cmd>Telescope buffers<cr>
 nnoremap <silent> <leader>th <cmd>Telescope git_files<cr>
 nnoremap <silent> B <cmd>Telescope git_branches<cr>
 nnoremap <silent> S <cmd>Telescope spell_suggest<cr>
+
+" Copilot
+let g:copilot_no_tab_map = v:true
+imap <silent><script><expr> <C-y> copilot#Accept("")
 
 nnoremap <silent><leader>r :NumbersToggle<CR>
 
