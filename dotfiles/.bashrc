@@ -367,6 +367,7 @@ if [ "$DISTRO" = "ubuntu" ]; then
     mise upgrade -y
     mise install --force neovim@nightly
     nvim -c 'PlugUpdate'
+    uv self update
   }
 fi
 
