@@ -14,6 +14,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "lua",
     "make",
     "markdown",
+    "mermaid",
     "php",
     "python",
     "query",

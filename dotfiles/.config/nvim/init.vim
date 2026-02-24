@@ -81,6 +81,7 @@ function! s:packager_init(packager) abort
   call a:packager.add('https://github.com/tommcdo/vim-lion')
   call a:packager.add('https://github.com/pappasam/vim-filetype-formatter')
   call a:packager.add('https://github.com/lukas-reineke/indent-blankline.nvim')
+  call a:packager.add('https://github.com/kevalin/mermaid.nvim')
 
   call a:packager.add('https://github.com/chr4/nginx.vim')
   call a:packager.add('https://github.com/nvim-treesitter/nvim-treesitter', { 'branch': 'main', 'do': ':TSUpdate' })
@@ -427,6 +428,8 @@ augroup END
 function! _Preview()
   if &filetype ==? 'markdown'
     exec 'MarkdownPreview'
+  elseif &filetype ==? 'mermaid'
+    exec 'MermaidPreview'
   else
     !gio open %:p
   endif

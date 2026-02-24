@@ -74,6 +74,10 @@ require("ibl").setup({
   },
 })
 -- }}}
+-- mermaid.nvim {{{
+-- https://github.com/kevalin/mermaid.nvim
+require('mermaid').setup()
+-- }}}
 -- mini.nvim {{{
 -- https://github.com/echasnovski/mini.nvim
 require('mini.ai').setup({})
