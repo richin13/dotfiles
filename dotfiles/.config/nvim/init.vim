@@ -209,8 +209,6 @@ nnoremap <silent> <localleader><Space> :IBLToggle<cr>
 " Disable the functionality of arrow keys
 noremap <Left> <nop>
 noremap <Right> <nop>
-noremap <Up> <nop>
-noremap <Down> <nop>
 
 " Omnicompletion now works with Ctrl-Space
 " inoremap <C-@> <C-x><C-o>
