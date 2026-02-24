@@ -459,6 +459,21 @@ rgq() {
     fi
     rm "$tmpfile"
 }
+
+cf() { #: Copy the contents of a file to the clipboard
+  if [[ $# -ne 1 ]]; then
+    red "Please specify a file to copy"
+    return 1
+  fi
+
+  if [ -f "$1" ]; then
+    readlink -f "$1" | xclip -selection clipboard
+  else
+    red "'$1' is not a file"
+    return 1
+  fi
+}
+alias pf='cp "$(xclip -o -selection clipboard)" .'
 # }}}
 # Aliases ----------------------------------------------------------- {{{
 #: General aliases
