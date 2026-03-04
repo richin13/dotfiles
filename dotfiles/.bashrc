@@ -164,6 +164,102 @@ function tmpd () {
   fi
 }
 
+# ---------------------------------------------------------------------------
+#  dc – Docker Compose shorthand wrapper
+# ---------------------------------------------------------------------------
+dc() {
+  declare -A cmd_map=(
+    [b]=build
+    [u]=up
+    [x]=exec
+    [r]=run
+    [l]=logs
+    [d]=down
+    [rs]=restart
+  )
+  declare -A default_flags=(
+    [down]="--remove-orphans"
+    [logs]="--follow"
+    [run]="--rm -it"
+  )
+
+  if (( $# == 0 )); then
+    cat <<'HELP'
+dc – Docker Compose shorthand
+
+Usage: dc <cmd> [args …]
+
+Shortcuts                         Full form
+  b  | build   ................   docker compose build
+  u  | up      ................   docker compose up
+  x  | exec    ................   docker compose exec
+  r  | run     ................   docker compose run
+  l  | logs    ................   docker compose logs
+  d  | down    ................   docker compose down
+  rs | restart ................   docker compose restart
+
+Anything else is forwarded verbatim to `docker compose`.
+HELP
+    return 0
+  fi
+
+  local subcmd="$1"; shift
+  subcmd="${cmd_map[$subcmd]:-$subcmd}"
+
+  docker compose "$subcmd" ${default_flags[$subcmd]} "$@"
+}
+
+if [ -n "$BASH_VERSION" ]; then
+  # ---------------------------------------------------------------------------
+  #  Bash completion for dc
+  # ---------------------------------------------------------------------------
+  _dc() {
+    local cur prev words cword
+    _init_completion || return
+
+    declare -A cmd_map=(
+      [b]=build [u]=up [x]=exec [r]=run
+      [l]=logs  [d]=down [rs]=restart
+    )
+
+    # Multi-service commands: complete services at every position
+    declare -A multi_svc=(
+      [build]=1 [up]=1 [logs]=1 [restart]=1 [down]=1
+    )
+    # Single-service commands: complete a service only once, then fall back
+    declare -A single_svc=( [exec]=1 [run]=1 )
+
+    # ── Position 1: complete the subcommand / alias ─────────────────────────
+    if (( cword == 1 )); then
+      local -a cmds=( b build u up x exec r run l logs d down rs restart )
+      COMPREPLY=( $(compgen -W "${cmds[*]}" -- "$cur") )
+      return
+    fi
+
+    # ── Position 2+: contextual completion ──────────────────────────────────
+    local subcmd="${words[1]}"
+    local resolved="${cmd_map[$subcmd]:-$subcmd}"
+
+    local want_services=0
+    if [[ -n "${multi_svc[$resolved]}" ]]; then
+      want_services=1
+    elif [[ -n "${single_svc[$resolved]}" ]] && (( cword == 2 )); then
+      want_services=1
+    fi
+
+    if (( want_services )); then
+      local services
+      services="$(docker compose config --services 2>/dev/null)"
+      COMPREPLY=( $(compgen -W "$services" -- "$cur") )
+    else
+      # exec/run past the service name → fall back to file completion
+      _filedir
+    fi
+  }
+
+  complete -F _dc dc
+fi
+
 function sa() { #: Search aliases
   alias | grep "${*}"
 }
@@ -634,19 +730,9 @@ alias wip='git add -A; command git rm $(git ls-files --deleted) 2> /dev/null; co
 alias unwip="git rev-list --max-count=1 --format=\"%s\" HEAD | grep -q \"\--wip--\" && git reset HEAD~1"
 
 #: Docker aliases
-alias dc="docker compose"
-alias dcbuild="dc build"
-alias dcdown="dc down --remove-orphans"
-alias dcexec="dc exec"
-alias dclogs="dc logs --follow"
-alias dcps="dc ps"
-alias dcrestart="dc restart"
-alias dcrun="dc run --rm"
-alias dcup="dc up"
 alias dctx="docker context use"
 alias dctxd="docker context use default"
 alias xx-psql="docker compose exec db psql -U postgres"
-alias drun="docker run --rm -it"
 
 #: Kubernetes aliases
 alias k="kubectl"
