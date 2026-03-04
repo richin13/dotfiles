@@ -723,7 +723,7 @@ alias gsts="git status --short"
 alias gsw="git switch"
 alias gcb="git switch -c"
 alias gcd="git switch develop"
-alias gcm="git switch main || git switch master"
+alias gcm="git switch main 2>/dev/null || git switch master 2>/dev/null || echo 'No main or master branch found'"
 # Edit modified files
 alias vemd="vim \$(git status --porcelain=v2 | grep -P '\.M' | cut -d ' ' -f 9)"
 alias wip='git add -A; command git rm $(git ls-files --deleted) 2> /dev/null; command git commit --no-verify --no-gpg-sign --message "--wip-- [skip ci]"'
