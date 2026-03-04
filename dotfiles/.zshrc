@@ -30,6 +30,11 @@ if [ ! -z $ZPROF ]; then
   zmodload zsh/zprof
 fi
 
+#: Completions
+if [ -d "$XDG_CONFIG_HOME/zsh/completions" ]; then
+  fpath=($XDG_CONFIG_HOME/zsh/completions $fpath)
+fi
+
 #: Zsh settings
 #: See https://zsh.sourceforge.io/Doc/Release/Options.html#Options
 unsetopt flow_control

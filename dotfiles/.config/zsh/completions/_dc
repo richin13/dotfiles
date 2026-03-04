@@ -1,0 +1,48 @@
+#compdef dc
+
+_dc() {
+  local -A cmd_map=(b build u up x exec r run l logs d down rs restart)
+
+  local -A multi_svc=(build 1 up 1 logs 1 restart 1 down 1)
+  local -A single_svc=(exec 1 run 1)
+
+  if (( CURRENT == 2 )); then
+    local -a cmds=(
+      'b:build service images'
+      'build:build service images'
+      'u:create and start containers'
+      'up:create and start containers'
+      'x:execute a command in a running container'
+      'exec:execute a command in a running container'
+      'r:run a one-off command on a service'
+      'run:run a one-off command on a service'
+      'l:view container logs'
+      'logs:view container logs'
+      'd:stop and remove containers'
+      'down:stop and remove containers'
+      'rs:restart running containers'
+      'restart:restart running containers'
+    )
+    _describe 'command' cmds
+    return
+  fi
+
+  local resolved="${cmd_map[${words[2]}]:-${words[2]}}"
+
+  local want_services=0
+  if (( ${+multi_svc[$resolved]} )); then
+    want_services=1
+  elif (( ${+single_svc[$resolved]} )) && (( CURRENT == 3 )); then
+    want_services=1
+  fi
+
+  if (( want_services )); then
+    local -a services
+    services=( ${(f)"$(docker compose config --services 2>/dev/null)"} )
+    (( ${#services} )) && compadd -- "${services[@]}"
+  else
+    _files
+  fi
+}
+
+_dc "$@"
