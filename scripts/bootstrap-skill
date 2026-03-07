@@ -1,0 +1,191 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd -- "${SCRIPT_DIR}/.." && pwd)"
+
+AGENT_SKILLS_DIR="${REPO_ROOT}/skills"
+DOTFILES_DIR="${REPO_ROOT}/dotfiles"
+AGENTS_SKILLS_DIR="${DOTFILES_DIR}/.agents/skills"
+CLAUDE_SKILLS_DIR="${DOTFILES_DIR}/.claude/skills"
+SKILLS_DIR_NAME="$(basename -- "${AGENT_SKILLS_DIR}")"
+
+is_valid_skill_name() {
+  local name="$1"
+  [[ "${name}" =~ ^[a-z0-9][a-z0-9_-]*$ ]]
+}
+
+create_or_update_symlink() {
+  local target="$1"
+  local link_path="$2"
+  ln -sfn "${target}" "${link_path}"
+}
+
+usage() {
+  cat <<'EOF'
+Usage:
+  bootstrap-skill new
+  bootstrap-skill fix <skill-name>
+  bootstrap-skill rm <skill-name>
+
+Commands:
+  new           Interactively create a new shared skill and symlinks.
+  fix           Recreate symlinks in dotfiles for an existing skill.
+  rm            Remove a skill directory and its symlinks.
+EOF
+}
+
+require_valid_skill_name() {
+  local skill_name="$1"
+  if [[ -z "${skill_name}" ]]; then
+    echo "Skill name is required." >&2
+    exit 1
+  fi
+  if ! is_valid_skill_name "${skill_name}"; then
+    echo "Invalid skill name: '${skill_name}'." >&2
+    exit 1
+  fi
+}
+
+skill_target() {
+  local skill_name="$1"
+  printf '../../../%s/%s' "${SKILLS_DIR_NAME}" "${skill_name}"
+}
+
+fix_links() {
+  local skill_name="$1"
+  local skill_dir="${AGENT_SKILLS_DIR}/${skill_name}"
+  local target
+  target="$(skill_target "${skill_name}")"
+
+  if [[ ! -d "${skill_dir}" ]]; then
+    echo "Skill directory does not exist: ${skill_dir}" >&2
+    exit 1
+  fi
+
+  mkdir -p "${AGENTS_SKILLS_DIR}" "${CLAUDE_SKILLS_DIR}"
+  create_or_update_symlink "${target}" "${AGENTS_SKILLS_DIR}/${skill_name}"
+  create_or_update_symlink "${target}" "${CLAUDE_SKILLS_DIR}/${skill_name}"
+
+  echo "Symlinks fixed:"
+  echo "- ${AGENTS_SKILLS_DIR}/${skill_name} -> ${target}"
+  echo "- ${CLAUDE_SKILLS_DIR}/${skill_name} -> ${target}"
+}
+
+new_skill() {
+  local skill_name=""
+  local skill_description=""
+  local skill_dir=""
+  local skill_file=""
+
+  echo "Bootstrap a new shared skill"
+  echo
+  echo "Skill name requirements: lowercase letters, numbers, '-' and '_' only."
+
+  while true; do
+    read -r -p "Skill name: " skill_name
+    if [[ -z "${skill_name}" ]]; then
+      echo "Skill name cannot be empty."
+      continue
+    fi
+    if ! is_valid_skill_name "${skill_name}"; then
+      echo "Invalid skill name: '${skill_name}'."
+      continue
+    fi
+    break
+  done
+
+  read -r -p "Description (optional): " skill_description
+
+  skill_dir="${AGENT_SKILLS_DIR}/${skill_name}"
+  skill_file="${skill_dir}/SKILL.md"
+
+  if [[ -e "${skill_dir}" ]]; then
+    echo "Skill directory already exists: ${skill_dir}" >&2
+    exit 1
+  fi
+
+  mkdir -p "${skill_dir}"
+
+  cat > "${skill_file}" <<EOF
+---
+name: ${skill_name}
+description: ${skill_description}
+---
+
+# ${skill_name}
+
+EOF
+
+  fix_links "${skill_name}"
+
+  echo
+  echo "Created:"
+  echo "- ${skill_dir}"
+  echo "- ${skill_file}"
+}
+
+rm_skill() {
+  local skill_name="$1"
+  local skill_dir="${AGENT_SKILLS_DIR}/${skill_name}"
+  local agents_link="${AGENTS_SKILLS_DIR}/${skill_name}"
+  local claude_link="${CLAUDE_SKILLS_DIR}/${skill_name}"
+
+  if [[ -d "${skill_dir}" ]]; then
+    rm -rf -- "${skill_dir}"
+    echo "Removed skill directory: ${skill_dir}"
+  else
+    echo "Skill directory not found (skipped): ${skill_dir}"
+  fi
+
+  if [[ -L "${agents_link}" || -e "${agents_link}" ]]; then
+    rm -f -- "${agents_link}"
+    echo "Removed link: ${agents_link}"
+  else
+    echo "Link not found (skipped): ${agents_link}"
+  fi
+
+  if [[ -L "${claude_link}" || -e "${claude_link}" ]]; then
+    rm -f -- "${claude_link}"
+    echo "Removed link: ${claude_link}"
+  else
+    echo "Link not found (skipped): ${claude_link}"
+  fi
+}
+
+main() {
+  local cmd="${1:-new}"
+
+  case "${cmd}" in
+    new)
+      if [[ $# -ne 1 && $# -ne 0 ]]; then
+        usage
+        exit 1
+      fi
+      new_skill
+      ;;
+    fix)
+      if [[ $# -ne 2 ]]; then
+        usage
+        exit 1
+      fi
+      require_valid_skill_name "${2}"
+      fix_links "${2}"
+      ;;
+    rm)
+      if [[ $# -ne 2 ]]; then
+        usage
+        exit 1
+      fi
+      require_valid_skill_name "${2}"
+      rm_skill "${2}"
+      ;;
+    *)
+      usage
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"

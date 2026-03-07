@@ -31,6 +31,63 @@ $ cd ~/dotfiles
 $ make dotfiles
 ```
 
+## Shared Skills
+
+This repository supports shared agent skills stored once in `./agent-skills` and linked into both:
+
+- `./dotfiles/.agents/skills` (Codex)
+- `./dotfiles/.claude/skills` (Claude Code)
+
+Each skill must live in:
+
+```text
+agent-skills/<skill-name>/SKILL.md
+```
+
+And `SKILL.md` must include frontmatter:
+
+```md
+---
+name: <skill-name>
+description: <short description>
+---
+```
+
+### Bootstrap a new skill
+
+Use the interactive bootstrap script:
+
+```bash
+./scripts/bootstrap-skill new
+```
+
+Or run it through Make:
+
+```bash
+make skill
+```
+
+Fix symlinks for an existing skill:
+
+```bash
+./scripts/bootstrap-skill fix <skill-name>
+```
+
+Remove a skill and its symlinks:
+
+```bash
+./scripts/bootstrap-skill rm <skill-name>
+```
+
+The bootstrap flow will:
+
+- Ask for skill name and description
+- Create `./agent-skills/<skill-name>/`
+- Create `./agent-skills/<skill-name>/SKILL.md` with frontmatter
+- Create/update symlinks in:
+  - `./dotfiles/.agents/skills/<skill-name>`
+  - `./dotfiles/.claude/skills/<skill-name>`
+
 # Aftermath
 
 - (Map Caps Lock to Ctrl)[https://dev.to/tallesl/change-caps-lock-to-ctrl-3c4]

@@ -20,6 +20,10 @@ config_directories: $(CONFIG_DIRS_HOME) ## Create the directories in the HOME fo
 ~/.config/%: dotfiles/.config/%
 	-mkdir -p $@
 
+.PHONY: skill
+skill: ## Bootstrap a new shared agent skill
+	./scripts/bootstrap-skill new
+
 ################################################################################
 # Tools
 ################################################################################
