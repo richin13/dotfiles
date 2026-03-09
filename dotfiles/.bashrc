@@ -180,7 +180,7 @@ dc() {
   declare -A default_flags=(
     [down]="--remove-orphans"
     [logs]="--follow"
-    [run]="--rm -it"
+    [run]="--rm"
   )
 
   if (( $# == 0 )); then
