@@ -390,6 +390,12 @@ function! s:focuswriting()
     set nolazyredraw
   endtry
 endfunction
+
+" Disable copilot.nvim (:Copilot disable) in markdown files
+augroup copilot_markdown_disable
+  autocmd!
+  autocmd FileType markdown Copilot disable
+augroup END
 "  }}}
 " Config: Code Formatting --------------------- {{{
 
