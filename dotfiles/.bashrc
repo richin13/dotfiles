@@ -90,7 +90,7 @@ fi
 export PATH
 
 #: Setup mise
-if [ -f "$HOME/.local/bin/mise" ] && [ -n "$BASH_VERSION" ]; then
+if [ -x "$(command -v mise)" ] && [ -n "$BASH_VERSION" ]; then
   eval "$(~/.local/bin/mise activate bash)"
 fi
 
@@ -617,11 +617,13 @@ else
   alias -g ......='../../../../..'
 fi
 
-[[ -x "$(mise -q --silent which nvim)" ]] && alias vim="nvim"
-[[ -x "$(mise -q --silent which bat)" ]] && alias cat="bat --style='numbers,changes'"
-[[ -x "$(mise -q --silent which lsd)" ]] && alias ls="lsd"
-[[ -x "$(mise -q --silent which rg)" ]] || alias rg="red 'rg is not installed' && grep -rnw . -e"
-[[ -x "$(mise -q --silent which fd)" ]] || alias fd="red 'fd is not installed' && find . -type f -iname"
+if [ -x "$(command -v mise)" ]; then
+  [[ -x "$(mise -q --silent which nvim)" ]] && alias vim="nvim"
+  [[ -x "$(mise -q --silent which bat)" ]] && alias cat="bat --style='numbers,changes'"
+  [[ -x "$(mise -q --silent which lsd)" ]] && alias ls="lsd"
+  [[ -x "$(mise -q --silent which rg)" ]] || alias rg="red 'rg is not installed' && grep -rnw . -e"
+  [[ -x "$(mise -q --silent which fd)" ]] || alias fd="red 'fd is not installed' && find . -type f -iname"
+fi
 
 #: Config files aliases
 alias bashrc='nvim $HOME/.bashrc'
@@ -758,8 +760,7 @@ alias nmapa!="nmap -sS -sU -T4 -A -v -Pn "         #: All TCP and UDP, no ping
 alias gobusterz='gobuster dir -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u '
 # }}}
 # Prompt config ----------------------------------------------------- {{{
-
-if [ -n "$BASH_VERSION" ]; then
+if [ -x "$(command -v starship)" ] && [ -n "$BASH_VERSION" ]; then
   eval "$(starship init bash)"
 fi
 
