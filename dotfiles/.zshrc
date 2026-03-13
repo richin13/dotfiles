@@ -143,6 +143,7 @@ function vfd() {
 
 #: Hook functions (https://zsh.sourceforge.io/Doc/Release/Functions.html#Hook-Functions)
 function chpwd() {
+  [[ $- != *i* ]] && return
   local owner=$(stat -L -c "%U" $PWD)
 
   if [[ $USER = $owner ]]; then
