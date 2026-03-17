@@ -10,7 +10,6 @@ endif
 let mapleader = ","
 let maplocalleader = "\\"
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:node_host_prog = $HOME . '/.asdf/installs/nodejs/12.15.0/bin/node'
 
 filetype plugin indent on
 set completeopt=menu,longest,preview
