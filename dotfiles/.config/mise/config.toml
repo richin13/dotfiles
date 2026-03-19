@@ -52,6 +52,7 @@ cargo-binstall = "latest"
 "npm:yaml-language-server" = "latest"
 "pipx:basedpyright" = "latest"
 "pipx:ipython" = "latest"
+"pipx:mdformat" = "latest"
 "pipx:pgcli" = "latest"
 "pipx:poethepoet" = "latest"
 "pipx:poetry" = { version = "latest", uvx_args = "--with poetry-plugin-export" }
