@@ -144,6 +144,13 @@ require("nvim-tree").setup({
     },
     side = "right",
   },
+  update_focused_file = {
+    enable = true,
+    update_root = {
+      enable = false,
+      ignore_list = {},
+    },
+  },
   actions = {
     open_file = {
       quit_on_open = true,
@@ -250,6 +257,7 @@ require("ts_context_commentstring").setup({
   enable_autocmd = false,
 })
 local get_option = vim.filetype.get_option
+---@diagnostic disable-next-line: duplicate-set-field
 vim.filetype.get_option = function(filetype, option)
   return option == "commentstring" and require("ts_context_commentstring.internal").calculate_commentstring()
     or get_option(filetype, option)
