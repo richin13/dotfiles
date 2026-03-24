@@ -513,11 +513,12 @@ vim.api.nvim_create_autocmd("FileType", {
 -- }}}
 
 -- Config: Preview {{{
+local live_preview_fts = { markdown = true, html = true, asciidoc = true, svg = true }
 local function preview()
-  local ft = vim.bo.filetype
-  if ft:lower() == "markdown" then
-    vim.cmd("MarkdownPreview")
-  elseif ft:lower() == "mermaid" then
+  local ft = vim.bo.filetype:lower()
+  if live_preview_fts[ft] then
+    vim.cmd("LivePreview start")
+  elseif ft == "mermaid" then
     vim.cmd("MermaidPreview")
   else
     vim.fn.system("gio open " .. vim.fn.expand("%:p"))

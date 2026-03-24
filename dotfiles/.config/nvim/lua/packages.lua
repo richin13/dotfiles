@@ -5,8 +5,6 @@ vim.api.nvim_create_autocmd("PackChanged", {
     if kind == "install" or kind == "update" then
       if name == "blink.cmp" then
         vim.system({ "cargo", "build", "--release" }, { cwd = ev.data.path })
-      elseif name == "markdown-preview.nvim" then
-        vim.system({ "npm", "i" }, { cwd = ev.data.path .. "/app" })
       end
     end
   end,
@@ -26,7 +24,7 @@ vim.pack.add({
   "https://github.com/nvim-telescope/telescope.nvim",
   -- Utils
   "https://github.com/tpope/vim-abolish",
-  "https://github.com/iamcco/markdown-preview.nvim",
+  "https://github.com/brianhuster/live-preview.nvim",
   "https://github.com/tommcdo/vim-lion",
   "https://github.com/pappasam/vim-filetype-formatter",
   "https://github.com/lukas-reineke/indent-blankline.nvim",
