@@ -498,17 +498,6 @@ function install-language-servers() {
   fi
 }
 
-function ccc() {
-  local servicename
-  servicename=$(basename "$(pwd)" | tr '[:upper:]' '[:lower:]')
-  if docker compose ps "$servicename" &>/dev/null; then
-    docker compose exec "$servicename" "$@"
-  else
-    echo "'$servicename' not found in compose.yml config"
-    return 1
-  fi
-}
-
 function comp-openai() {
   local user_prompt="$1"
   local system_prompt="${2:-You are a helpful assistant}"
@@ -570,6 +559,34 @@ cf() { #: Copy the contents of a file to the clipboard
   fi
 }
 alias pf='cp "$(xclip -o -selection clipboard)" .'
+
+function cc() {
+  local model="${ANTHROPIC_DEFAULT_SONNET_MODEL}[1m]"
+  local skip_permissions=false
+  local args=()
+
+  if [[ $# -gt 0 && "$1" != -* ]]; then
+    if   [[ "opus"   == "$1"* ]]; then model="${ANTHROPIC_DEFAULT_OPUS_MODEL}[1m]";   shift
+    elif [[ "sonnet" == "$1"* ]]; then model="${ANTHROPIC_DEFAULT_SONNET_MODEL}[1m]"; shift
+    elif [[ "haiku"  == "$1"* ]]; then model="$ANTHROPIC_DEFAULT_HAIKU_MODEL";  shift
+    fi
+  fi
+
+  for arg in "$@"; do
+    if [[ "$arg" == "yolo" ]]; then
+      skip_permissions=true
+    else
+      args+=("$arg")
+    fi
+  done
+
+  local cmd=(claude --model="$model")
+  $skip_permissions && cmd+=(--dangerously-skip-permissions)
+  cmd+=("${args[@]}")
+
+  "${cmd[@]}"
+}
+
 # }}}
 # Aliases ----------------------------------------------------------- {{{
 #: General aliases
@@ -661,7 +678,6 @@ alias pipi="pip install"
 alias pipu="pip uninstall -y"
 alias pipf="pip freeze"
 alias django="python manage.py"
-alias cc="cookiecutter"
 alias rr="ruff rule"
 alias uva="uv add"
 alias uvad="uv add --dev"
