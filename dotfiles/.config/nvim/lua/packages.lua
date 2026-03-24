@@ -39,7 +39,7 @@ vim.pack.add({
   "https://github.com/JoosepAlviste/nvim-ts-context-commentstring",
   "https://github.com/s1n7ax/nvim-comment-frame",
   "https://github.com/lepture/vim-jinja",
-  "https://github.com/eero-lehtinen/oklch-color-picker.nvim",
+  -- "https://github.com/eero-lehtinen/oklch-color-picker.nvim",
   -- Git
   "https://github.com/tpope/vim-fugitive",
   "https://github.com/lewis6991/gitsigns.nvim",
@@ -322,7 +322,8 @@ end
 -- }}}
 -- oklch-color-picker.nvim {{{
 -- https://github.com/eero-lehtinen/oklch-color-picker.nvim
-require("oklch-color-picker").setup()
+-- TODO: broken on nightly, enable() signature changed in vim.lsp.document_color
+-- require("oklch-color-picker").setup()
 -- }}}
 -- outline.nvim {{{
 -- https://github.com/hedyhli/outline.nvim
