@@ -1,3 +1,60 @@
+-- vim.pack: plugin management {{{
+vim.api.nvim_create_autocmd("PackChanged", {
+  callback = function(ev)
+    local name, kind = ev.data.spec.name, ev.data.kind
+    if kind == "install" or kind == "update" then
+      if name == "blink.cmp" then
+        vim.system({ "cargo", "build", "--release" }, { cwd = ev.data.path })
+      elseif name == "markdown-preview.nvim" then
+        vim.system({ "npm", "i" }, { cwd = ev.data.path .. "/app" })
+      end
+    end
+  end,
+})
+
+vim.pack.add({
+  -- Basic
+  "https://github.com/fcpg/vim-altscreen",
+  "https://github.com/kyazdani42/nvim-web-devicons",
+  "https://github.com/rebelot/heirline.nvim",
+  "https://github.com/kyazdani42/nvim-tree.lua",
+  "https://github.com/echasnovski/mini.nvim",
+  "https://github.com/windwp/nvim-autopairs",
+  -- Fuzzy finders
+  "https://github.com/nvim-lua/popup.nvim",
+  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/nvim-telescope/telescope.nvim",
+  -- Utils
+  "https://github.com/tpope/vim-abolish",
+  "https://github.com/iamcco/markdown-preview.nvim",
+  "https://github.com/tommcdo/vim-lion",
+  "https://github.com/pappasam/vim-filetype-formatter",
+  "https://github.com/lukas-reineke/indent-blankline.nvim",
+  "https://github.com/kevalin/mermaid.nvim",
+  "https://github.com/chr4/nginx.vim",
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
+  "https://github.com/romgrk/nvim-treesitter-context",
+  "https://github.com/windwp/nvim-ts-autotag",
+  "https://github.com/JoosepAlviste/nvim-ts-context-commentstring",
+  "https://github.com/s1n7ax/nvim-comment-frame",
+  "https://github.com/lepture/vim-jinja",
+  "https://github.com/eero-lehtinen/oklch-color-picker.nvim",
+  -- Git
+  "https://github.com/tpope/vim-fugitive",
+  "https://github.com/lewis6991/gitsigns.nvim",
+  "https://github.com/sindrets/diffview.nvim",
+  -- LSP
+  "https://github.com/neovim/nvim-lspconfig",
+  "https://github.com/Saghen/blink.cmp",
+  "https://github.com/hrsh7th/vim-vsnip",
+  "https://github.com/SmiteshP/nvim-navic",
+  "https://github.com/hedyhli/outline.nvim",
+  -- AI
+  "https://github.com/github/copilot.vim",
+})
+-- }}}
+
 -- diffview.nvim {{{
 -- https://github.com/sindrets/diffview.nvim
 vim.keymap.set('n', '<leader><leader>v', function()
