@@ -53,6 +53,19 @@ vim.pack.add({
   -- AI
   "https://github.com/github/copilot.vim",
 })
+
+vim.api.nvim_create_user_command("PackUpdate", function() vim.pack.update() end, {})
+vim.api.nvim_create_user_command("PackClean", function()
+  local inactive = vim.iter(vim.pack.get())
+    :filter(function(x) return not x.active end)
+    :map(function(x) return x.spec.name end)
+    :totable()
+  if #inactive == 0 then
+    vim.notify("No inactive plugins to remove")
+    return
+  end
+  vim.pack.del(inactive)
+end, {})
 -- }}}
 
 -- diffview.nvim {{{
