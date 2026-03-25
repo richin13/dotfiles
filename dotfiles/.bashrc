@@ -584,7 +584,7 @@ function cc() {
   $skip_permissions && cmd+=(--dangerously-skip-permissions)
   cmd+=("${args[@]}")
 
-  "${cmd[@]}"
+  AWS_PROFILE=default "${cmd[@]}"
 }
 
 # }}}
