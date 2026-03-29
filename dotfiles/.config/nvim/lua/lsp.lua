@@ -1,5 +1,15 @@
 local _border = "rounded"
 
+local function enable_document_color(bufnr)
+  local opts = { style = "virtual" }
+
+  -- Neovim nightly expects a filter table; older versions accepted a raw bufnr.
+  local ok = pcall(vim.lsp.document_color.enable, true, { bufnr = bufnr }, opts)
+  if not ok then
+    vim.lsp.document_color.enable(true, bufnr, opts)
+  end
+end
+
 require("blink-cmp").setup({
   keymap = {
     preset = "super-tab",
@@ -62,7 +72,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     if client:supports_method("textDocument/documentColor") then
-      vim.lsp.document_color.enable(true, args.buf, { style = "virtual" })
+      enable_document_color(args.buf)
     end
 
     vim.diagnostic.config({
