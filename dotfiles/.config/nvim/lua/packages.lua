@@ -41,6 +41,26 @@ vim.pack.add({
   "https://github.com/github/copilot.vim",
 })
 
+vim.api.nvim_create_autocmd("PackChanged", {
+  group = vim.api.nvim_create_augroup("my.pack.nvim-treesitter", { clear = true }),
+  callback = function(ev)
+    local spec = ev.data and ev.data.spec
+    if not spec or spec.name ~= "nvim-treesitter" then
+      return
+    end
+
+    if ev.data.kind ~= "install" and ev.data.kind ~= "update" then
+      return
+    end
+
+    if not ev.data.active then
+      vim.cmd.packadd("nvim-treesitter")
+    end
+
+    require("nvim-treesitter.install").update("all", { summary = true }):wait(300000)
+  end,
+})
+
 vim.api.nvim_create_user_command("PackUpdate", function() vim.pack.update() end, {})
 vim.api.nvim_create_user_command("PackClean", function()
   local inactive = vim.iter(vim.pack.get())
