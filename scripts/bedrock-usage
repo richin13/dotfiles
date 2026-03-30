@@ -13,11 +13,17 @@ START=$(date -u -d "$DAYS days ago" +%Y-%m-%dT%H:%M:%S)
 END=$(date -u +%Y-%m-%dT%H:%M:%S)
 TOTAL_SECONDS=$((DAYS * 86400))
 
+extract_profile_id() {
+  local val="${1##*/}"
+  val="${val%\[1m\]}"
+  echo "$val"
+}
+
 declare -A PROFILES
 PROFILES=(
-  ["opus"]="${ANTHROPIC_DEFAULT_OPUS_MODEL##*/}"
-  ["sonnet"]="${ANTHROPIC_DEFAULT_SONNET_MODEL##*/}"
-  ["haiku"]="${ANTHROPIC_DEFAULT_HAIKU_MODEL##*/}"
+  ["opus"]="$(extract_profile_id "$ANTHROPIC_DEFAULT_OPUS_MODEL")"
+  ["sonnet"]="$(extract_profile_id "$ANTHROPIC_DEFAULT_SONNET_MODEL")"
+  ["haiku"]="$(extract_profile_id "$ANTHROPIC_DEFAULT_HAIKU_MODEL")"
 )
 
 # Pricing per 1M tokens (Bedrock on-demand, us-east-1)
