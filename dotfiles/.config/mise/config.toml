@@ -1,6 +1,7 @@
 [settings]
 experimental = true
 idiomatic_version_file_enable_tools = ["python"]
+env_shell_expand = false
 
 [tools]
 deno = "latest"
