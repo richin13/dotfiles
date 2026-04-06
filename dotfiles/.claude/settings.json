@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "defaultMode": "approveEdits"
+  },
+  "model": "sonnet",
+  "enableAllProjectMcpServers": true,
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh"
+  },
+  "extraKnownMarketplaces": {},
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [
+      "Riding into town",
+      "Dutch-planning",
+      "Losing the cops",
+      "Declaring bankruptcy",
+      "That's what she said",
+      "Suiting up",
+      "Crossing the event horizon",
+      "Checking the layers",
+      "Walking by faith",
+      "Counting blessings"
+    ]
+  },
+  "alwaysThinkingEnabled": true,
+  "autoMemoryEnabled": true,
+  "skipDangerousModePermissionPrompt": true,
+  "skipAutoPermissionPrompt": true
+}
