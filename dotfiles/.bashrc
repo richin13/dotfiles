@@ -167,7 +167,7 @@ function tmpd () {
 # ---------------------------------------------------------------------------
 #  dc – Docker Compose shorthand wrapper
 # ---------------------------------------------------------------------------
-dc() {
+function dc() {
   declare -A cmd_map=(
     [b]=build
     [u]=up
@@ -206,7 +206,7 @@ HELP
   local subcmd="$1"; shift
   subcmd="${cmd_map[$subcmd]:-$subcmd}"
 
-  docker compose "$subcmd" ${default_flags[$subcmd]} "$@"
+  docker --log-level error compose "$subcmd" ${default_flags[$subcmd]} "$@"
 }
 
 if [ -n "$BASH_VERSION" ]; then
