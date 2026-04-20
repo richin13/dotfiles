@@ -561,13 +561,14 @@ cf() { #: Copy the contents of a file to the clipboard
 alias pf='cp "$(xclip -o -selection clipboard)" .'
 
 function cc() {
-  local model="${ANTHROPIC_DEFAULT_SONNET_MODEL:-sonnet}[1m]"
+  local model="${ANTHROPIC_DEFAULT_SONNET_MODEL:+${ANTHROPIC_DEFAULT_SONNET_MODEL}[1m]}"
+  model="${model:-sonnet}"
   local skip_permissions=false
   local args=()
 
   if [[ $# -gt 0 && "$1" != -* ]]; then
-    if   [[ "opus"   == "$1"* ]]; then model="${ANTHROPIC_DEFAULT_OPUS_MODEL:-opus}[1m]";   shift
-    elif [[ "sonnet" == "$1"* ]]; then model="${ANTHROPIC_DEFAULT_SONNET_MODEL:-sonnet}[1m]"; shift
+    if   [[ "opus"   == "$1"* ]]; then model="${ANTHROPIC_DEFAULT_OPUS_MODEL:+${ANTHROPIC_DEFAULT_OPUS_MODEL}[1m]}"; model="${model:-opus}";     shift
+    elif [[ "sonnet" == "$1"* ]]; then model="${ANTHROPIC_DEFAULT_SONNET_MODEL:+${ANTHROPIC_DEFAULT_SONNET_MODEL}[1m]}"; model="${model:-sonnet}"; shift
     elif [[ "haiku"  == "$1"* ]]; then model="${ANTHROPIC_DEFAULT_HAIKU_MODEL:-haiku}";  shift
     fi
   fi
