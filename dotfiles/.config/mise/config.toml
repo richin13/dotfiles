@@ -16,6 +16,7 @@ terraform = "1.7.5"
 tmux = "latest"
 usage = "latest"
 cargo-binstall = "latest"
+bun = "latest"
 
 #-----------------------------------------------------------------------------#
 #                                    Tools                                    #
