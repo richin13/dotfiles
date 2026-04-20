@@ -72,7 +72,6 @@ vim.loader.enable()
 require("packages")
 require("plugins.heirline")
 require("lsp")
-require("treesitter")
 
 -- `gf` to open lua file under cursor
 vim.api.nvim_create_autocmd("FileType", {

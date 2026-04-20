@@ -279,11 +279,7 @@ require("nvim-tree").setup({
 -- vim.treesitter.language.register("bash", "shell")
 
 local nvim_ts = require("nvim-treesitter")
-
-nvim_ts.setup({
-  install_dir = vim.fn.stdpath('data') .. '/site'
-})
-nvim_ts.install {
+local enabled_langs = {
     "bash",
     "comment",
     "css",
@@ -297,6 +293,7 @@ nvim_ts.install {
     "make",
     "markdown",
     "markdown_inline",
+    "mermaid",
     "php",
     "prisma",
     "python",
@@ -309,6 +306,52 @@ nvim_ts.install {
     "vim",
     "yaml",
 }
+local lang_mappings = {
+  zsh = "bash",
+  sh = "bash",
+}
+
+nvim_ts.setup({
+  install_dir = vim.fn.stdpath('data') .. '/site'
+})
+nvim_ts.install(enabled_langs)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {
+    "bash",
+    "css",
+    "dockerfile",
+    "hcl",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "lua",
+    "make",
+    "markdown",
+    "mermaid",
+    "php",
+    "prisma",
+    "python",
+    "query",
+    "rust",
+    "sql",
+    "toml",
+    "tsx",
+    "typescript",
+    "typescriptreact",
+    "vim",
+    "yaml",
+    "zsh",
+  },
+  callback = function(args)
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    if lang_mappings[args.match] then
+      vim.treesitter.start(args.buf, lang_mappings[args.match])
+    else
+      vim.treesitter.start(args.buf)
+    end
+  end,
+})
 
 -------------------------------------------------------------------------------
 --                   Comment frame (depends on treesitter)                   --
