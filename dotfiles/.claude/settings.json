@@ -10,6 +10,10 @@
     "type": "command",
     "command": "~/.claude/statusline.sh"
   },
+  "enabledPlugins": {
+    "context7@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true
+  },
   "extraKnownMarketplaces": {},
   "spinnerVerbs": {
     "mode": "replace",
@@ -27,8 +31,10 @@
     ]
   },
   "alwaysThinkingEnabled": true,
+  "awaySummaryEnabled": false,
   "autoMemoryEnabled": true,
   "skipDangerousModePermissionPrompt": true,
-  "skipAutoPermissionPrompt": true,
-  "awaySummaryEnabled": false
+  "preferredNotifChannel": "ghostty",
+  "autoCompactEnabled": false,
+  "skipAutoPermissionPrompt": true
 }
