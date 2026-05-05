@@ -590,6 +590,21 @@ function cc() {
   "${cmd[@]}"
 }
 
+eg() { #: env | grep with a pattern, ignoring case and showing results in color
+  local pattern="${1:?usage: envg <pattern>}"
+  local results
+  results=$(
+    env \
+      | awk -F= -v pat="$pattern" 'tolower($1) ~ tolower(pat)' \
+      | sort
+  )
+  if [[ -z "$results" ]]; then
+    echo "envg: no matches for '$pattern'" >&2
+    return 1
+  fi
+  echo "$results" | grep -i --color=always "$pattern"
+}
+
 # }}}
 # Aliases ----------------------------------------------------------- {{{
 #: General aliases
