@@ -240,10 +240,6 @@ vim.keymap.set("n", "<leader>th", "<cmd>Telescope git_files<cr>", { silent = tru
 vim.keymap.set("n", "B", "<cmd>Telescope git_branches<cr>", { silent = true })
 vim.keymap.set("n", "S", "<cmd>Telescope spell_suggest<cr>", { silent = true })
 
--- Copilot
-vim.g.copilot_no_tab_map = true
-vim.keymap.set("i", "<C-y>", 'copilot#Accept("")', { silent = true, script = true, expr = true })
-
 vim.keymap.set("n", "<silent><leader>r", ":NumbersToggle<CR>", { silent = true })
 
 -- Exit: Preview and Help && QuickFix and Location List
@@ -418,12 +414,6 @@ end, { range = true })
 -- Plugin: Configure {{{
 vim.g.enable_numbers = 0
 vim.g.numbers_exclude = { "NvimTree" }
-
-vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("copilot_markdown_disable", { clear = true }),
-  pattern = "markdown",
-  callback = function() vim.cmd("Copilot disable") end,
-})
 
 local focus_writing_group = vim.api.nvim_create_augroup("focus_writing_quit", { clear = true })
 vim.api.nvim_create_autocmd("QuitPre", {

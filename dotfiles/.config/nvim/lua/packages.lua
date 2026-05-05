@@ -37,8 +37,6 @@ vim.pack.add({
   "https://github.com/hrsh7th/vim-vsnip",
   "https://github.com/SmiteshP/nvim-navic",
   "https://github.com/hedyhli/outline.nvim",
-  -- AI
-  "https://github.com/github/copilot.vim",
 })
 
 vim.api.nvim_create_autocmd("PackChanged", {
