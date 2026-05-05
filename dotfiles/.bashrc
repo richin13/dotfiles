@@ -663,7 +663,7 @@ fi
 #: Config files aliases
 alias bashrc='nvim $HOME/.bashrc'
 alias zshrc='nvim $HOME/.zshrc'
-alias vimrc='nvim $XDG_CONFIG_HOME/nvim/init.vim'
+alias vimrc='nvim $XDG_CONFIG_HOME/nvim/init.lua'
 alias tmuxconf='nvim $HOME/.tmux.conf'
 
 if [ -z "$DOTFILES" ] && [ -d "$DOTFILES" ]; then
@@ -716,6 +716,7 @@ alias gba="git branch --all"
 alias gbd="git branch --delete"
 alias gbD="git branch --delete --force"
 alias gbd!="git branch --delete --force"
+alias gbc!="gfa && git branch -vv | grep ': gone]' | awk '{print \$1}' | xargs git branch -d"
 alias gco="git checkout"
 alias gcf="git clean -fd"
 alias gcl="git clone --recurse-submodules"
