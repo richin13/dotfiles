@@ -46,7 +46,7 @@
       "src": "https://github.com/s1n7ax/nvim-comment-frame"
     },
     "nvim-lspconfig": {
-      "rev": "97774019cb17697f35872b28bc020a72b4ca1b51",
+      "rev": "cd576dd72d31ddffcbfa6d064c0dd697ca218758",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navic": {
@@ -63,7 +63,7 @@
       "version": "'main'"
     },
     "nvim-treesitter-context": {
-      "rev": "adf4b6b0420b7be6c717ef0ac7993183d6c201b1",
+      "rev": "b311b30818951d01f7b4bf650521b868b3fece16",
       "src": "https://github.com/romgrk/nvim-treesitter-context"
     },
     "nvim-treesitter-textobjects": {
