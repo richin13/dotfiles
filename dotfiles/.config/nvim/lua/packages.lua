@@ -59,6 +59,21 @@ vim.api.nvim_create_autocmd("PackChanged", {
   end,
 })
 
+vim.api.nvim_create_autocmd("User", {
+  pattern = "TSUpdate",
+  callback = function()
+    local parsers = require("nvim-treesitter.parsers")
+    parsers.mermaid = {
+      ---@diagnostic disable-next-line: missing-fields
+      install_info = {
+        url = "https://github.com/pappasam/tree-sitter-mermaid",
+        queries = "queries",
+      },
+      tier = 4,
+    }
+  end,
+})
+
 vim.api.nvim_create_user_command("PackUpdate", function() vim.pack.update() end, {})
 vim.api.nvim_create_user_command("PackClean", function()
   local inactive = vim.iter(vim.pack.get())
