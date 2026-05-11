@@ -1,0 +1,5 @@
+{
+  "lastChangelogVersion": "0.74.0",
+  "defaultProvider": "deepseek",
+  "defaultModel": "deepseek-v4-pro"
+}
