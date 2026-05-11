@@ -664,7 +664,7 @@ fi
 alias bashrc='nvim $HOME/.bashrc'
 alias zshrc='nvim $HOME/.zshrc'
 alias vimrc='nvim $XDG_CONFIG_HOME/nvim/init.lua'
-alias tmuxconf='nvim $HOME/.tmux.conf'
+alias tmuxconf='nvim $XDG_CONFIG_HOME/tmux/tmux.conf'
 
 if [ -z "$DOTFILES" ] && [ -d "$DOTFILES" ]; then
   alias dotfiles='cd $DOTFILES'
