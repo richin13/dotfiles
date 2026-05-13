@@ -63,7 +63,7 @@ bun = "latest"
 "pipx:ruff" = "latest"
 "pipx:sqlfluff" = "latest"
 "pipx:termux-language-server" = "latest"
-"ubi:artempyanykh/marksman" = "latest"
-"ubi:mikefarah/yq" = { version = "latest", matching = "yq_linux_amd64" }
-"ubi:starship/starship" = "latest"
-"ubi:supabase/cli" = { version = "latest", exe = "supabase" }
+"github:artempyanykh/marksman" = "latest"
+"github:mikefarah/yq" = { version = "latest", asset_pattern = "yq_linux_amd64" }
+"github:starship/starship" = "latest"
+"github:supabase/cli" = { version = "latest", bin = "supabase" }
