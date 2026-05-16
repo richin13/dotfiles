@@ -1,1 +1,4 @@
+tmp/
+dotfiles/.claude/.credentials.json
+dotfiles/.claude/history.jsonl
 dotfiles/.config/nvim/nvim-pack-lock.json
