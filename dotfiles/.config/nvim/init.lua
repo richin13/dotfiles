@@ -419,6 +419,9 @@ end, { range = true })
 -- }}}
 
 -- Plugin: Configure {{{
+vim.g.copilot_no_tab_map = true
+vim.keymap.set("i", "<C-y>", 'copilot#Accept("")', { silent = true, expr = true, script = true, replace_keycodes = false })
+
 vim.g.enable_numbers = 0
 vim.g.numbers_exclude = { "NvimTree" }
 
