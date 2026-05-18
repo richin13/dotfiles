@@ -78,8 +78,7 @@ sudo apt install -y \
   ripgrep \
   tree \
   wget \
-  xclip \
-  xsel \
+  wl-clipboard \
   xstow \
   zsh
 echo_warning sudo apt autoclean

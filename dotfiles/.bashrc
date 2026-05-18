@@ -552,13 +552,13 @@ cf() { #: Copy the contents of a file to the clipboard
   fi
 
   if [ -f "$1" ]; then
-    readlink -f "$1" | xclip -selection clipboard
+    readlink -f "$1" | wl-copy
   else
     red "'$1' is not a file"
     return 1
   fi
 }
-alias pf='cp "$(xclip -o -selection clipboard)" .'
+alias pf='cp "$(wl-paste)" .'
 
 function cc() {
   local model="${ANTHROPIC_DEFAULT_SONNET_MODEL:+${ANTHROPIC_DEFAULT_SONNET_MODEL}[1m]}"
@@ -611,7 +611,7 @@ eg() { #: env | grep with a pattern, ignoring case and showing results in color
 alias cat!="/usr/bin/cat"
 alias cp!="/usr/bin/cp -f"
 alias cp="cp -iv"
-alias cpwd="pwd | xclip" #: Copy the current working directory to the clipboard
+alias cpwd="pwd | wl-copy" #: Copy the current working directory to the clipboard
 alias ff="grep -rnw . -e"
 alias fixm="autorandr --change"
 alias jk="fc -e -" #: Execute the previous command
@@ -624,7 +624,7 @@ alias m="make"
 alias mkdir="mkdir -pv"
 alias mv="mv -iv"
 alias o=xdg-open
-alias ppwd="cd \`xclip -o\`" #: cd to the directory in the clipboard
+alias ppwd="cd \`wl-paste\`" #: cd to the directory in the clipboard
 alias rf="rm -rf"
 alias rm!="/usr/bin/rm -rf"
 alias rm="rm -Iv"

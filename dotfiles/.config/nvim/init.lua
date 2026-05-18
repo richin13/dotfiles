@@ -6,6 +6,13 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = "\\"
 vim.env.NVIM_TUI_ENABLE_TRUE_COLOR = 1
 
+vim.g.clipboard = {
+  name = "wl-clipboard",
+  copy = { ["+"] = "wl-copy", ["*"] = "wl-copy" },
+  paste = { ["+"] = "wl-paste", ["*"] = "wl-paste" },
+  cache_enabled = false,
+}
+
 vim.opt.completeopt = { "menu", "longest", "preview" }
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
