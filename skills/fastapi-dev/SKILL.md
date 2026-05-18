@@ -9,6 +9,7 @@ description: FastAPI engineering choices. To be used when asked to "create route
 - Import routers in app factory and register them via `app.include_router`. Define a helper `_register_routers` function colocated with `create_app`.
 - Define a custom exceptions module at `<module>/exceptions.py` with a base application error. Then register an exception handler via `@app.exception_handler(BaseAppError)` to return proper JSON responses.
 - Ensure pydantic's `RequestValidationError` and `ValidationError` are handled too and transformed to a consistent error response format.
+- All responses use generic envelope schemas (`APIResponse[T]`, `APIListResponse[T]`, `APIErrorResponse`) so the OpenAPI spec surfaces the wrapping. See `references/response-schemas.md`.
 
 ## Routers
 
