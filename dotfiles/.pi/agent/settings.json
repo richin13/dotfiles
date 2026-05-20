@@ -1,5 +1,7 @@
 {
-  "lastChangelogVersion": "0.74.0",
+  "lastChangelogVersion": "0.75.3",
   "defaultProvider": "deepseek",
-  "defaultModel": "deepseek-v4-pro"
+  "defaultModel": "deepseek-v4-pro",
+  "enableInstallTelemetry": false,
+  "defaultThinkingLevel": "xhigh"
 }
