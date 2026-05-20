@@ -69,13 +69,15 @@ Show the drafted title and body to the user. Wait for explicit approval before a
 
 ### 5. Apply
 
+Use the REST API directly to avoid a known GraphQL error where `gh pr edit` fails because it queries the deprecated "Projects (classic)" `projectCards` field:
+
 ```bash
-gh pr edit --title "<title>" --body "$(cat <<'EOF'
+gh api repos/<owner>/<repo>/pulls/<number> -X PATCH -f title="<title>" -f body="$(cat <<'EOF'
 <body>
 EOF
-)"
+)" --jq '.html_url'
 ```
 
-Always use a HEREDOC for the body to preserve formatting.
+Always use a HEREDOC for the body to preserve formatting. Extract owner/repo from `gh repo view --json nameWithOwner --jq .nameWithOwner`.
 
 After applying, return the PR URL from the output.
