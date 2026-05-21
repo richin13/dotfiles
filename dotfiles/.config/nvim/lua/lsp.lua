@@ -145,6 +145,8 @@ local configs = {
   "terraformls",
   -- https://github.com/typescript-language-server/typescript-language-server
   "ts_ls",
+  -- https://github.com/astral-sh/ty
+  "ty",
   -- https://github.com/iamcco/vim-language-server
   "vimls",
   -- https://github.com/redhat-developer/yaml-language-server

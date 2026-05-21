@@ -2,6 +2,7 @@
 return {
   settings = {
     basedpyright = {
+      typeCheckingMode = "off",
       analysis = {
         diagnosticSeverityOverrides = {
           reportAny = false,
