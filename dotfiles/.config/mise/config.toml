@@ -4,7 +4,10 @@ idiomatic_version_file_enable_tools = ["python"]
 env_shell_expand = false
 
 [tools]
+bun = "latest"
+cargo-binstall = "latest"
 deno = "latest"
+fzf = "latest"
 go = "latest"
 lua = "5.4.7"
 lua-language-server = "latest"
@@ -15,8 +18,6 @@ python = "3.13.7"
 terraform = "1.7.5"
 tmux = "latest"
 usage = "latest"
-cargo-binstall = "latest"
-bun = "latest"
 
 #-----------------------------------------------------------------------------#
 #                                    Tools                                    #

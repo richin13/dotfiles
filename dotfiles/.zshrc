@@ -184,3 +184,91 @@ fi
 if [ $commands[starship] ]; then
   eval "$(starship init zsh)"
 fi
+
+if [ $commands[fzf] ]; then
+  source <(fzf --zsh)
+
+  export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+
+  export FZF_DEFAULT_OPTS="
+    --height 60%
+    --layout reverse
+    --border rounded
+    --border-label-pos 3
+    --prompt '  '
+    --pointer '▶'
+    --marker '✓'
+    --ansi
+    --cycle
+    --bind 'ctrl-/:toggle-preview'
+    --bind 'ctrl-space:toggle+down'
+    --bind 'ctrl-a:select-all'
+    --bind 'ctrl-d:deselect-all'
+    --bind 'ctrl-f:preview-page-down'
+    --bind 'ctrl-b:preview-page-up'
+    --bind 'ctrl-u:preview-half-page-up'
+    --bind 'ctrl-e:preview-half-page-down'
+    --bind '?:toggle-preview'
+    --color 'fg:#cdd6f4,fg+:#cdd6f4,bg:#1e1e2e,bg+:#313244'
+    --color 'hl:#89b4fa,hl+:#89dceb,border:#585b70,header:#cba6f7'
+    --color 'label:#cba6f7,prompt:#cba6f7,pointer:#f38ba8,marker:#a6e3a1'
+    --color 'spinner:#f38ba8,info:#585b70'
+  "
+
+  # ── Ctrl-T: file picker ──────────────────────────────────────
+
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_CTRL_T_OPTS="
+    --border-label ' Files '
+    --preview 'bat --color=always --style=numbers,changes --line-range=:300 {}'
+    --preview-window 'right:55%:wrap'
+  "
+
+  # ── Ctrl-R: history ──────────────────────────────────────────
+
+  export FZF_CTRL_R_OPTS="
+    --border-label ' History '
+    --preview 'echo {}'
+    --preview-window 'down:3:wrap:hidden'
+    --bind 'ctrl-/:toggle-preview'
+    --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+    --color header:italic
+    --header 'ctrl-y: copy to clipboard'
+  "
+
+  # ── Alt-C: directory jump ────────────────────────────────────
+
+  export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+  export FZF_ALT_C_OPTS="
+    --border-label ' Directories '
+    --preview 'eza --tree --color=always --icons --level=2 {}'
+    --preview-window 'right:40%'
+  "
+
+  gvim() {
+    local files
+    files=$(
+      (git diff --name-only; git ls-files --others --exclude-standard) \
+      | fzf -m --preview 'git diff --color {} 2>/dev/null || bat --color=always {}'
+    )
+    [[ -n "$files" ]] && nvim $(echo "$files")
+  }
+
+  fe() {
+    local result file line
+    result=$(
+      rg --color=always --line-number --no-heading --smart-case "${*:-}" \
+      | fzf \
+          --ansi \
+          --border-label ' Search Contents ' \
+          --delimiter ':' \
+          --preview 'bat --color=always --style=numbers,changes {1} --highlight-line {2}' \
+          --preview-window 'right:55%:+{2}+3/3:wrap'
+    )
+    [[ -z "$result" ]] && return
+    file=$(echo "$result" | cut -d: -f1)
+    line=$(echo "$result" | cut -d: -f2)
+    nvim "$file" +"$line"
+  }
+
+fi
