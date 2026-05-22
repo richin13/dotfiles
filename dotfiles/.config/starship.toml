@@ -4,8 +4,9 @@
 # right_format = """$aws"""
 
 [aws]
-format = '[$symbol($profile )(\($region\) )(\[$duration\] )]($style)'
+format = '[$symbol($profile )(\[$duration\] )]($style)'
 style = "8"
+force_display = true
 
 [character]
 success_symbol = "[Ψ](bold purple)"
@@ -39,3 +40,6 @@ style = "blue"
 
 [package]
 disabled = true
+
+[python]
+format = 'via [${symbol}${pyenv_prefix}(${version} )]($style)'
