@@ -54,3 +54,15 @@ tpm: ## Install tpm tmux plugin manager
 .PHONY: zoxide
 zoxide: ## Install zoxide
 	curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+
+################################################################################
+# Fortunes
+################################################################################
+.PHONY: fortunes
+fortunes: ## Regenerate .dat files for enabled fortunes
+	@for file in dotfiles/.config/fortunes/*; do \
+		if [[ ! "$$file" =~ \.(disabled|dat)$$ ]] && [[ ! -f "$$file.dat.disabled" ]]; then \
+			echo "Regenerating $$file.dat"; \
+			strfile "$$file"; \
+		fi; \
+	done
