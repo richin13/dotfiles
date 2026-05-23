@@ -206,7 +206,7 @@ HELP
   local subcmd="$1"; shift
   subcmd="${cmd_map[$subcmd]:-$subcmd}"
 
-  docker --log-level error compose "$subcmd" ${default_flags[$subcmd]} "$@"
+  docker --log-level error compose "$subcmd" "${default_flags[$subcmd]}" "$@"
 }
 
 if [ -n "$BASH_VERSION" ]; then
@@ -214,7 +214,7 @@ if [ -n "$BASH_VERSION" ]; then
   #  Bash completion for dc
   # ---------------------------------------------------------------------------
   _dc() {
-    local cur prev words cword
+    local cur words cword
     _init_completion || return
 
     declare -A cmd_map=(
@@ -328,10 +328,6 @@ function docs() { #: Serve documentation directory
     python -m http.server "$*"
     popd >/dev/null || return 1
   fi
-}
-
-function zoomy() { #: Open a zoom meeting
-  xdg-open "zoommtg://zoom.us/join?action=join&confno=$1" >/dev/null 2>&1
 }
 
 function despace() {
@@ -716,7 +712,6 @@ alias gba="git branch --all"
 alias gbd="git branch --delete"
 alias gbD="git branch --delete --force"
 alias gbd!="git branch --delete --force"
-alias gbc!="gfa && git branch -vv | grep ': gone]' | awk '{print \$1}' | xargs git branch -d"
 alias gco="git checkout"
 alias gcf="git clean -fd"
 alias gcl="git clone --recurse-submodules"

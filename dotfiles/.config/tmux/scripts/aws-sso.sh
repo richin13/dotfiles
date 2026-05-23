@@ -1,6 +1,9 @@
 #!/bin/bash
 
 function aws_sso_status {
+  if [[ "$DISTRO" != "ubuntu" ]]; then
+    return
+  fi
   local cache_dir="$HOME/.aws/sso/cache"
   local now
   now=$(date -u +%s)
