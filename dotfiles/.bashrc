@@ -206,7 +206,7 @@ HELP
   local subcmd="$1"; shift
   subcmd="${cmd_map[$subcmd]:-$subcmd}"
 
-  docker --log-level error compose "$subcmd" "${default_flags[$subcmd]}" "$@"
+  docker --log-level error compose "$subcmd" ${default_flags[$subcmd]:+${default_flags[$subcmd]}} "$@"
 }
 
 if [ -n "$BASH_VERSION" ]; then
