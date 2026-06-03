@@ -271,4 +271,16 @@ if [ $commands[fzf] ]; then
     nvim "$file" +"$line"
   }
 
+  # Ctrl-G: fzf dirty git files
+  fzf-git-dirty() {
+    local files
+    files=$(git status --short | sed -e 's/^...//' -e 's/.* -> //' | fzf --multi --preview 'git diff --color=always {}' | tr '\n' ' ')
+    if [[ -n "$files" ]]; then
+      LBUFFER+="${files}"
+    fi
+    zle reset-prompt
+  }
+  zle -N fzf-git-dirty
+  bindkey '^G' fzf-git-dirty
+
 fi

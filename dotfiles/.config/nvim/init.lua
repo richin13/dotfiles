@@ -244,6 +244,7 @@ vim.keymap.set("n", "<leader>tg", "<cmd>Telescope live_grep<cr>", { silent = tru
 vim.keymap.set("n", "<C-b>", "<cmd>Telescope buffers<cr>", { silent = true })
 vim.keymap.set("n", "<leader>b", "<cmd>Telescope buffers<cr>", { silent = true })
 vim.keymap.set("n", "<leader>th", "<cmd>Telescope git_files<cr>", { silent = true })
+vim.keymap.set("n", "<leader>tg", "<cmd>Telescope git_status<cr>", { silent = true })
 vim.keymap.set("n", "B", "<cmd>Telescope git_branches<cr>", { silent = true })
 vim.keymap.set("n", "S", "<cmd>Telescope spell_suggest<cr>", { silent = true })
 
