@@ -14,7 +14,8 @@
     "skill-creator@claude-plugins-official": true,
     "context7@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
-    "slack@claude-plugins-official": true
+    "slack@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {},
   "spinnerVerbs": {
@@ -33,10 +34,11 @@
     ]
   },
   "alwaysThinkingEnabled": true,
-  "awaySummaryEnabled": false,
-  "autoMemoryEnabled": true,
-  "skipDangerousModePermissionPrompt": true,
-  "preferredNotifChannel": "ghostty",
   "autoCompactEnabled": false,
-  "skipAutoPermissionPrompt": true
+  "autoMemoryEnabled": true,
+  "awaySummaryEnabled": false,
+  "preferredNotifChannel": "ghostty",
+  "showClearContextOnPlanAccept": true,
+  "skipAutoPermissionPrompt": true,
+  "skipDangerousModePermissionPrompt": true
 }
