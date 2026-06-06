@@ -33,8 +33,8 @@ vim.pack.add({
   "https://github.com/sindrets/diffview.nvim",
   -- LSP
   "https://github.com/neovim/nvim-lspconfig",
-  { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("1.0") },
-  "https://github.com/hrsh7th/vim-vsnip",
+  { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("*") },
+  -- "https://github.com/hrsh7th/vim-vsnip",
   "https://github.com/SmiteshP/nvim-navic",
   "https://github.com/hedyhli/outline.nvim",
   -- AI

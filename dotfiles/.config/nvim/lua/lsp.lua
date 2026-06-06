@@ -17,10 +17,14 @@ require("blink-cmp").setup({
   completion = {
     accept = { auto_brackets = { enabled = false } },
     menu = {
-      auto_show = function(ctx)
-        return ctx.mode ~= "cmdline"
-      end,
       border = _border,
+      draw = {
+        columns = {
+          { "label", "label_description", gap = 1},
+          { "kind_icon"},
+          { "source_id"},
+        }
+      },
     },
     documentation = {
       auto_show = true,
@@ -36,6 +40,9 @@ require("blink-cmp").setup({
       border = _border,
     },
   },
+  cmdline = {
+    enabled = false,
+  }
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -118,7 +125,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- See https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local configs = {
   -- https://detachhead.github.io/basedpyright
-  "basedpyright",
+  -- "basedpyright",
   -- https://github.com/bash-lsp/bash-language-server
   "bashls",
   -- https://github.com/microsoft/compose-language-service
