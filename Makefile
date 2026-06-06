@@ -61,8 +61,8 @@ zoxide: ## Install zoxide
 .PHONY: fortunes
 fortunes: ## Regenerate .dat files for enabled fortunes
 	@for file in dotfiles/.config/fortunes/*; do \
-		if [[ ! "$$file" =~ \.(disabled|dat)$$ ]] && [[ ! -f "$$file.dat.disabled" ]]; then \
-			echo "Regenerating $$file.dat"; \
-			strfile "$$file"; \
-		fi; \
+		case "$$file" in *.disabled|*.dat) continue;; esac; \
+		[ -f "$$file.dat.disabled" ] && continue; \
+		echo "Regenerating $$file.dat"; \
+		strfile "$$file"; \
 	done
