@@ -34,11 +34,11 @@
     ]
   },
   "alwaysThinkingEnabled": true,
-  "autoCompactEnabled": false,
-  "autoMemoryEnabled": true,
   "awaySummaryEnabled": false,
-  "preferredNotifChannel": "ghostty",
   "showClearContextOnPlanAccept": true,
-  "skipAutoPermissionPrompt": true,
-  "skipDangerousModePermissionPrompt": true
+  "autoMemoryEnabled": true,
+  "skipDangerousModePermissionPrompt": true,
+  "preferredNotifChannel": "ghostty",
+  "autoCompactEnabled": false,
+  "skipAutoPermissionPrompt": true
 }
