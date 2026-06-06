@@ -13,7 +13,7 @@ vim.g.clipboard = {
   cache_enabled = false,
 }
 
-vim.opt.completeopt = { "menu", "longest", "preview" }
+vim.opt.completeopt = { "menu", "longest", "fuzzy" }
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.exrc = true
@@ -72,6 +72,10 @@ vim.api.nvim_create_autocmd("QuitPre", {
 })
 
 vim.cmd("iabbr improt import")
+
+require("vim._core.ui2").enable({
+  enable = true,
+})
 -- }}}
 
 -- General: Lua Plugins Setup {{{
@@ -422,6 +426,12 @@ end, { range = true })
 -- Plugin: Configure {{{
 vim.g.copilot_no_tab_map = true
 vim.keymap.set("i", "<C-y>", 'copilot#Accept("")', { silent = true, expr = true, script = true, replace_keycodes = false })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("copilot_markdown_disable", { clear = true }),
+  pattern = "markdown",
+  callback = function() vim.cmd("Copilot disable") end,
+})
 
 vim.g.enable_numbers = 0
 vim.g.numbers_exclude = { "NvimTree" }
