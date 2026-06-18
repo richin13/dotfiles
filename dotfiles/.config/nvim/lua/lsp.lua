@@ -128,12 +128,12 @@ local configs = {
   -- "basedpyright",
   -- https://github.com/bash-lsp/bash-language-server
   "bashls",
+  -- https://biomejs.dev
+  "biome",
   -- https://github.com/microsoft/compose-language-service
   "docker_compose_language_service",
   -- https://github.com/rcjsuen/dockerfile-language-server-nodejs
   "dockerls",
-  -- https://github.com/hrsh7th/vscode-langservers-extracted
-  "eslint",
   -- https://github.com/golang/tools/tree/master/gopls
   "gopls",
   -- https://github.com/hrsh7th/vscode-langservers-extracted
