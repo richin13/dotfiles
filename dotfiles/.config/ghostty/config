@@ -1,18 +1,19 @@
+background-opacity = 1
+command = zsh
+cursor-style = block
+cursor-style-blink = false
 font-family = JetBrainsMono Nerd Font
+font-feature = -calt, -liga, -dlig
 font-size = 13
 font-style = Bold
 font-style-bold = ExtraBold
-# font-style-italic = Bold Italic
 font-style-bold-italic = ExtraBold Italic
-font-feature = -calt, -liga, -dlig
-window-decoration = "none"
+font-style-italic = Bold Italic
 maximize = true
-window-padding-y = 8
-background-opacity = 1
-theme = dracula
-cursor-style = block
-cursor-style-blink = false
 shell-integration-features = no-cursor
+theme = dracula
+window-decoration = "none"
+window-padding-y = 8
 
 #: i'm not ready to ditch tmux yet
 #keybind = ctrl+f>c=new_tab
