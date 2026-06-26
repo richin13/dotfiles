@@ -34,7 +34,7 @@ vim.pack.add({
   -- LSP
   "https://github.com/neovim/nvim-lspconfig",
   { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("*") },
-  -- "https://github.com/hrsh7th/vim-vsnip",
+  "https://github.com/hrsh7th/vim-vsnip",
   "https://github.com/SmiteshP/nvim-navic",
   "https://github.com/hedyhli/outline.nvim",
   -- AI
