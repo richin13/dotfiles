@@ -27,6 +27,22 @@ function include() {
   [[ -f "$1" ]] && source "$1"
 }
 
+function clip-copy() {
+  if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
+    wl-copy "$@"
+  else
+    xclip -selection clipboard "$@"
+  fi
+}
+
+function clip-paste() {
+  if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
+    wl-paste "$@"
+  else
+    xclip -selection clipboard -o "$@"
+  fi
+}
+
 export SHELL=bash
 export PAGER="less"
 export LESS='FRSX~' #: Global less options
@@ -548,13 +564,13 @@ cf() { #: Copy the contents of a file to the clipboard
   fi
 
   if [ -f "$1" ]; then
-    readlink -f "$1" | wl-copy
+    readlink -f "$1" | clip-copy
   else
     red "'$1' is not a file"
     return 1
   fi
 }
-alias pf='cp "$(wl-paste)" .'
+alias pf='cp "$(clip-paste)" .'
 
 function cc() {
   local model="${ANTHROPIC_DEFAULT_SONNET_MODEL:+${ANTHROPIC_DEFAULT_SONNET_MODEL}[1m]}"
@@ -607,7 +623,7 @@ eg() { #: env | grep with a pattern, ignoring case and showing results in color
 alias cat!="/usr/bin/cat"
 alias cp!="/usr/bin/cp -f"
 alias cp="cp -iv"
-alias cpwd="pwd | wl-copy" #: Copy the current working directory to the clipboard
+alias cpwd="pwd | clip-copy" #: Copy the current working directory to the clipboard
 alias ff="grep -rnw . -e"
 alias fixm="autorandr --change"
 alias jk="fc -e -" #: Execute the previous command
@@ -620,7 +636,7 @@ alias m="make"
 alias mkdir="mkdir -pv"
 alias mv="mv -iv"
 alias o=xdg-open
-alias ppwd="cd \`wl-paste\`" #: cd to the directory in the clipboard
+alias ppwd="cd \`clip-paste\`" #: cd to the directory in the clipboard
 alias rf="rm -rf"
 alias rm!="/usr/bin/rm -rf"
 alias rm="rm -Iv"

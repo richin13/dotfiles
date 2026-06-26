@@ -6,10 +6,17 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = "\\"
 vim.env.NVIM_TUI_ENABLE_TRUE_COLOR = 1
 
+local is_wayland = vim.env.XDG_SESSION_TYPE == "wayland"
 vim.g.clipboard = {
-  name = "wl-clipboard",
-  copy = { ["+"] = "wl-copy", ["*"] = "wl-copy" },
-  paste = { ["+"] = "wl-paste", ["*"] = "wl-paste" },
+  name = is_wayland and "wl-clipboard" or "xclip",
+  copy = {
+    ["+"] = is_wayland and "wl-copy" or "xclip -selection clipboard",
+    ["*"] = is_wayland and "wl-copy" or "xclip -selection clipboard",
+  },
+  paste = {
+    ["+"] = is_wayland and "wl-paste" or { "xclip", "-selection", "clipboard", "-o" },
+    ["*"] = is_wayland and "wl-paste" or { "xclip", "-selection", "clipboard", "-o" },
+  },
   cache_enabled = false,
 }
 
