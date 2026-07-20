@@ -602,6 +602,41 @@ function cc() {
   "${cmd[@]}"
 }
 
+function cx() {
+  local model="openai.gpt-5.6-sol"
+  local yolo=false
+  local cmd
+
+  if (( $# > 2 )); then
+    printf 'Usage: cx [s|t|l] [yolo]\n' >&2
+    return 2
+  fi
+
+  case "${1:-s}" in
+    s|sol)   model="openai.gpt-5.6-sol" ;;
+    t|terra) model="openai.gpt-5.6-terra" ;;
+    l|luna)  model="openai.gpt-5.6-luna" ;;
+    yolo)    yolo=true ;;
+    *)
+      printf 'Invalid model: %s\nUsage: cx [s|t|l] [yolo]\n' "$1" >&2
+      return 2
+      ;;
+  esac
+
+  if (( $# == 2 )); then
+    if [[ "$2" != "yolo" ]]; then
+      printf 'Invalid argument: %s; expected yolo\n' "$2" >&2
+      return 2
+    fi
+    yolo=true
+  fi
+
+  cmd=(codex --model="$model")
+  $yolo && cmd+=(--dangerously-bypass-approvals-and-sandbox)
+
+  AWS_PROFILE=${AWS_PROFILE_AI:-default} "${cmd[@]}"
+}
+
 eg() { #: env | grep with a pattern, ignoring case and showing results in color
   local pattern="${1:?usage: envg <pattern>}"
   local results
