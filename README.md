@@ -31,6 +31,41 @@ $ cd ~/dotfiles
 $ make dotfiles
 ```
 
+## Machine-local configuration
+
+Use `git freeze` to keep a shared default for selected tracked files while
+allowing each machine to customize them locally. It stores the shared policy in
+the committed `.git-freeze` manifest and uses Git's local `skip-worktree` flag
+to hide machine-specific edits.
+
+```bash
+install -m 755 scripts/git-freeze ~/.local/bin/git-freeze
+```
+
+After cloning or pulling a manifest change, activate its paths locally:
+
+```bash
+git freeze apply
+```
+
+To declare a new tracked file, preserving any existing local edits:
+
+```bash
+git freeze add path/to/config
+git add .git-freeze
+git commit -m "Freeze machine-local configuration"
+```
+
+Inspect declared files with `git freeze list`. Use `git freeze thaw path/to/config`
+to temporarily expose its local changes, or `git freeze unfreeze path/to/config`
+to remove it from the shared policy.
+
+Before updating, run `git freeze check --fetch` to see whether upstream changed
+any frozen files. `git freeze sync` fetches, stashes local overrides for
+affected files, fast-forwards the branch, reapplies those overrides, and freezes
+the files again. It refuses to run with non-frozen working-tree changes and
+leaves conflicting files thawed with the recovery stash intact.
+
 ## Shared Skills
 
 This repository supports shared agent skills stored once in `./agent-skills` and linked into both:

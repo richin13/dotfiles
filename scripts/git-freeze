@@ -1,0 +1,475 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+MANIFEST_NAME=".git-freeze"
+
+usage() {
+  cat <<'EOF'
+Usage:
+  git freeze add <path>...
+  git freeze apply
+  git freeze list
+  git freeze thaw <path>...
+  git freeze unfreeze <path>...
+  git freeze check [--fetch]
+  git freeze sync
+
+Commands:
+  add         Add tracked paths to .git-freeze and freeze them locally.
+  apply       Freeze every path declared in .git-freeze.
+  list        Show declared paths and their local freeze state.
+  thaw        Temporarily unfreeze declared paths without changing .git-freeze.
+  unfreeze    Remove paths from .git-freeze and unfreeze them locally.
+  check       Report declared paths changed by the current branch's upstream.
+  sync        Preserve local overrides, fast-forward from upstream, and refreeze.
+
+The .git-freeze manifest must contain one repository-relative path per line.
+Blank lines and lines beginning with '#' are ignored.
+EOF
+}
+
+die() {
+  echo "git freeze: $*" >&2
+  exit 1
+}
+
+warn() {
+  echo "git freeze: $*" >&2
+}
+
+require_repository() {
+  REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" ||
+    die "run this command inside a Git worktree"
+  REPO_PREFIX="$(git rev-parse --show-prefix)"
+  MANIFEST_PATH="${REPO_ROOT}/${MANIFEST_NAME}"
+}
+
+require_head() {
+  git -C "${REPO_ROOT}" rev-parse --verify --quiet HEAD >/dev/null ||
+    die "the repository has no commits"
+}
+
+require_manifest() {
+  [[ -f "${MANIFEST_PATH}" ]] ||
+    die "${MANIFEST_NAME} does not exist; add a tracked file first"
+}
+
+array_contains() {
+  local needle="$1"
+  shift
+  local value=""
+
+  for value in "$@"; do
+    [[ "${value}" == "${needle}" ]] && return 0
+  done
+
+  return 1
+}
+
+read_manifest() {
+  FROZEN_PATHS=()
+
+  [[ -f "${MANIFEST_PATH}" ]] || return 0
+
+  local path=""
+  while IFS= read -r path || [[ -n "${path}" ]]; do
+    [[ -z "${path}" || "${path}" == \#* ]] && continue
+    array_contains "${path}" "${FROZEN_PATHS[@]}" &&
+      die "${MANIFEST_NAME} contains a duplicate path: ${path}"
+    FROZEN_PATHS+=("${path}")
+  done < "${MANIFEST_PATH}"
+}
+
+require_manifest_paths() {
+  local path=""
+
+  for path in "${FROZEN_PATHS[@]}"; do
+    [[ "${path}" != /* && "${path}" != *$'\n'* ]] ||
+      die "${MANIFEST_NAME} contains an invalid path: ${path}"
+    git -C "${REPO_ROOT}" --literal-pathspecs ls-files --error-unmatch -- "${path}" \
+      >/dev/null 2>&1 ||
+      die "${MANIFEST_NAME} references an untracked path: ${path}"
+  done
+}
+
+resolve_tracked_path() {
+  local input="$1"
+  local candidate=""
+  local matches=""
+
+  [[ "${input}" != *$'\n'* ]] || die "paths containing newlines are not supported"
+
+  if [[ "${input}" == /* ]]; then
+    case "${input}" in
+      "${REPO_ROOT}"/*) candidate="${input#"${REPO_ROOT}/"}" ;;
+      *) die "path is outside this repository: ${input}" ;;
+    esac
+  else
+    candidate="${REPO_PREFIX}${input}"
+  fi
+
+  matches="$(
+    git -C "${REPO_ROOT}" --literal-pathspecs ls-files --full-name --error-unmatch \
+      -- "${candidate}" 2>/dev/null
+  )" || die "path is not a tracked file: ${input}"
+
+  [[ -n "${matches}" && "${matches}" != *$'\n'* ]] ||
+    die "path must identify exactly one tracked file: ${input}"
+  [[ "${matches}" != "${MANIFEST_NAME}" ]] ||
+    die "${MANIFEST_NAME} cannot freeze itself"
+
+  printf '%s\n' "${matches}"
+}
+
+parse_paths() {
+  COMMAND_PATHS=()
+
+  [[ $# -gt 0 ]] || die "at least one path is required"
+
+  if [[ "${1}" == "--" ]]; then
+    shift
+  fi
+  [[ $# -gt 0 ]] || die "at least one path is required"
+
+  local input=""
+  local path=""
+  for input in "$@"; do
+    path="$(resolve_tracked_path "${input}")"
+    array_contains "${path}" "${COMMAND_PATHS[@]}" && continue
+    COMMAND_PATHS+=("${path}")
+  done
+}
+
+is_skip_worktree() {
+  local path="$1"
+  local entry=""
+
+  entry="$(git -C "${REPO_ROOT}" ls-files -v -- "${path}")"
+  [[ "${entry:0:1}" == "S" ]]
+}
+
+require_index_matches_head() {
+  local path="$1"
+
+  [[ -z "$(git -C "${REPO_ROOT}" ls-files -u -- "${path}")" ]] ||
+    die "path has unresolved conflicts: ${path}"
+  git -C "${REPO_ROOT}" diff --cached --quiet -- "${path}" ||
+    die "path has staged changes: ${path}; commit them or run 'git restore --staged -- ${path}'"
+}
+
+freeze_paths() {
+  local path=""
+
+  for path in "$@"; do
+    require_index_matches_head "${path}"
+  done
+
+  git -C "${REPO_ROOT}" update-index --skip-worktree -- "$@"
+}
+
+unfreeze_paths() {
+  git -C "${REPO_ROOT}" update-index --no-skip-worktree -- "$@"
+}
+
+write_manifest_without_paths() {
+  local temporary_manifest=""
+  local line=""
+
+  temporary_manifest="$(mktemp "${REPO_ROOT}/.${MANIFEST_NAME}.tmp.XXXXXX")"
+  while IFS= read -r line || [[ -n "${line}" ]]; do
+    array_contains "${line}" "${COMMAND_PATHS[@]}" && continue
+    printf '%s\n' "${line}" >> "${temporary_manifest}"
+  done < "${MANIFEST_PATH}"
+
+  mv "${temporary_manifest}" "${MANIFEST_PATH}"
+}
+
+add_paths() {
+  require_head
+  parse_paths "$@"
+  read_manifest
+
+  local path=""
+  local added=0
+  for path in "${COMMAND_PATHS[@]}"; do
+    if array_contains "${path}" "${FROZEN_PATHS[@]}"; then
+      continue
+    fi
+
+    if ! git -C "${REPO_ROOT}" diff --cached --quiet -- "${path}"; then
+      git -C "${REPO_ROOT}" restore --staged -- "${path}"
+    fi
+
+    if [[ ! -e "${MANIFEST_PATH}" ]]; then
+      printf '# Files with machine-local overrides.\n' > "${MANIFEST_PATH}"
+    fi
+    printf '%s\n' "${path}" >> "${MANIFEST_PATH}"
+    FROZEN_PATHS+=("${path}")
+    added=1
+  done
+
+  freeze_paths "${COMMAND_PATHS[@]}"
+
+  if [[ "${added}" -eq 1 ]]; then
+    echo "Added paths to ${MANIFEST_NAME}. Commit the manifest to share this policy."
+  fi
+  echo "Frozen ${#COMMAND_PATHS[@]} path(s)."
+}
+
+apply_manifest() {
+  require_head
+  require_manifest
+  read_manifest
+  require_manifest_paths
+
+  [[ "${#FROZEN_PATHS[@]}" -gt 0 ]] || {
+    echo "No paths declared in ${MANIFEST_NAME}."
+    return
+  }
+
+  freeze_paths "${FROZEN_PATHS[@]}"
+  echo "Frozen ${#FROZEN_PATHS[@]} path(s)."
+}
+
+list_paths() {
+  require_manifest
+  read_manifest
+  require_manifest_paths
+
+  if [[ "${#FROZEN_PATHS[@]}" -eq 0 ]]; then
+    echo "No paths declared in ${MANIFEST_NAME}."
+    return
+  fi
+
+  local path=""
+  for path in "${FROZEN_PATHS[@]}"; do
+    if is_skip_worktree "${path}"; then
+      printf 'active\t%s\n' "${path}"
+    else
+      printf 'inactive\t%s\n' "${path}"
+    fi
+  done
+}
+
+thaw_paths() {
+  require_manifest
+  parse_paths "$@"
+  read_manifest
+
+  local path=""
+  for path in "${COMMAND_PATHS[@]}"; do
+    array_contains "${path}" "${FROZEN_PATHS[@]}" ||
+      die "path is not declared in ${MANIFEST_NAME}: ${path}"
+  done
+
+  unfreeze_paths "${COMMAND_PATHS[@]}"
+  echo "Thawed ${#COMMAND_PATHS[@]} path(s)."
+}
+
+remove_paths() {
+  require_manifest
+  parse_paths "$@"
+  read_manifest
+
+  local path=""
+  for path in "${COMMAND_PATHS[@]}"; do
+    array_contains "${path}" "${FROZEN_PATHS[@]}" ||
+      die "path is not declared in ${MANIFEST_NAME}: ${path}"
+  done
+
+  unfreeze_paths "${COMMAND_PATHS[@]}"
+  write_manifest_without_paths
+  echo "Unfroze ${#COMMAND_PATHS[@]} path(s). Commit ${MANIFEST_NAME} to share this policy change."
+}
+
+upstream_ref() {
+  local upstream=""
+
+  upstream="$(
+    git -C "${REPO_ROOT}" rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' \
+      2>/dev/null
+  )" || die "the current branch has no upstream"
+  printf '%s\n' "${upstream}"
+}
+
+changed_upstream_paths() {
+  local upstream="$1"
+  CHANGED_PATHS=()
+
+  local path=""
+  for path in "${FROZEN_PATHS[@]}"; do
+    if ! git -C "${REPO_ROOT}" diff --quiet HEAD "${upstream}" -- "${path}"; then
+      CHANGED_PATHS+=("${path}")
+    fi
+  done
+}
+
+check_paths() {
+  local fetch=0
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --fetch) fetch=1 ;;
+      *) die "unknown option for check: $1" ;;
+    esac
+    shift
+  done
+
+  require_head
+  require_manifest
+  read_manifest
+  require_manifest_paths
+
+  if [[ "${fetch}" -eq 1 ]]; then
+    git -C "${REPO_ROOT}" fetch
+  fi
+
+  local upstream=""
+  upstream="$(upstream_ref)"
+  changed_upstream_paths "${upstream}"
+
+  local path=""
+  for path in "${FROZEN_PATHS[@]}"; do
+    if array_contains "${path}" "${CHANGED_PATHS[@]}"; then
+      printf 'changed\t%s\n' "${path}"
+    else
+      printf 'unchanged\t%s\n' "${path}"
+    fi
+  done
+}
+
+require_clean_non_frozen_worktree() {
+  [[ -z "$(git -C "${REPO_ROOT}" status --porcelain)" ]] ||
+    die "commit, stash, or discard non-frozen changes before syncing"
+}
+
+require_active_paths() {
+  local path=""
+
+  for path in "${FROZEN_PATHS[@]}"; do
+    is_skip_worktree "${path}" ||
+      die "declared path is not frozen: ${path}; run 'git freeze apply' first"
+  done
+}
+
+require_paths_present_upstream() {
+  local upstream="$1"
+  local path=""
+
+  for path in "${CHANGED_PATHS[@]}"; do
+    git -C "${REPO_ROOT}" cat-file -e "${upstream}:${path}" 2>/dev/null ||
+      die "upstream deleted ${path}; thaw it and reconcile the deletion manually"
+  done
+}
+
+restore_removed_paths() {
+  local path=""
+
+  for path in "${PRE_SYNC_PATHS[@]}"; do
+    if ! array_contains "${path}" "${FROZEN_PATHS[@]}"; then
+      unfreeze_paths "${path}"
+    fi
+  done
+}
+
+sync_paths() {
+  require_head
+  require_manifest
+  read_manifest
+  require_manifest_paths
+  require_active_paths
+  require_clean_non_frozen_worktree
+
+  PRE_SYNC_PATHS=("${FROZEN_PATHS[@]}")
+
+  git -C "${REPO_ROOT}" fetch
+
+  local upstream=""
+  upstream="$(upstream_ref)"
+  git -C "${REPO_ROOT}" merge-base --is-ancestor HEAD "${upstream}" ||
+    die "the current branch cannot fast-forward to ${upstream}"
+
+  changed_upstream_paths "${upstream}"
+  require_paths_present_upstream "${upstream}"
+
+  local stash_ref=""
+  if [[ "${#CHANGED_PATHS[@]}" -gt 0 ]]; then
+    unfreeze_paths "${CHANGED_PATHS[@]}"
+
+    if ! git -C "${REPO_ROOT}" diff --quiet -- "${CHANGED_PATHS[@]}" ||
+      ! git -C "${REPO_ROOT}" diff --cached --quiet -- "${CHANGED_PATHS[@]}"; then
+      git -C "${REPO_ROOT}" stash push \
+        --message "git-freeze: local overrides before sync" \
+        -- "${CHANGED_PATHS[@]}" >/dev/null
+      stash_ref="$(git -C "${REPO_ROOT}" stash list -1 --format='%gd')"
+      [[ -n "${stash_ref}" ]] || die "could not create a recovery stash"
+    fi
+  fi
+
+  git -C "${REPO_ROOT}" merge --ff-only "${upstream}"
+
+  if [[ -n "${stash_ref}" ]]; then
+    if ! git -C "${REPO_ROOT}" stash apply "${stash_ref}"; then
+      warn "could not reapply local overrides; resolve the conflicts manually"
+      warn "the recovery stash remains at ${stash_ref}"
+      warn "after resolving, unstage the paths and run 'git freeze apply'"
+      exit 1
+    fi
+    git -C "${REPO_ROOT}" stash drop "${stash_ref}" >/dev/null
+  fi
+
+  read_manifest
+  require_manifest_paths
+  restore_removed_paths
+  apply_manifest
+  echo "Synchronized with ${upstream}."
+}
+
+main() {
+  require_repository
+
+  local command="${1:-}"
+  case "${command}" in
+    add)
+      shift
+      add_paths "$@"
+      ;;
+    apply)
+      [[ $# -eq 1 ]] || die "apply does not accept arguments"
+      apply_manifest
+      ;;
+    list)
+      [[ $# -eq 1 ]] || die "list does not accept arguments"
+      list_paths
+      ;;
+    thaw)
+      shift
+      thaw_paths "$@"
+      ;;
+    unfreeze)
+      shift
+      remove_paths "$@"
+      ;;
+    check)
+      shift
+      check_paths "$@"
+      ;;
+    sync)
+      [[ $# -eq 1 ]] || die "sync does not accept arguments"
+      sync_paths
+      ;;
+    -h|--help|help)
+      usage
+      ;;
+    "")
+      usage
+      exit 1
+      ;;
+    *)
+      die "unknown command: ${command}"
+      ;;
+  esac
+}
+
+main "$@"

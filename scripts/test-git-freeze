@@ -1,0 +1,169 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+FREEZE="${SCRIPT_DIR}/git-freeze"
+TEMP_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/git-freeze-test.XXXXXX")"
+
+cleanup() {
+  rm -rf -- "${TEMP_ROOT}"
+}
+trap cleanup EXIT
+
+fail() {
+  echo "test-git-freeze: $*" >&2
+  exit 1
+}
+
+assert_contains() {
+  local value="$1"
+  local expected="$2"
+
+  [[ "${value}" == *"${expected}"* ]] ||
+    fail "expected '${expected}' in '${value}'"
+}
+
+assert_skip_worktree() {
+  local repository="$1"
+  local path="$2"
+  local state=""
+
+  state="$(git -C "${repository}" ls-files -v -- "${path}")"
+  [[ "${state:0:1}" == "S" ]] ||
+    fail "expected ${path} to be frozen, got '${state}'"
+}
+
+assert_not_skip_worktree() {
+  local repository="$1"
+  local path="$2"
+  local state=""
+
+  state="$(git -C "${repository}" ls-files -v -- "${path}")"
+  [[ "${state:0:1}" != "S" ]] ||
+    fail "expected ${path} to be thawed, got '${state}'"
+}
+
+configure_repository() {
+  local repository="$1"
+
+  git -C "${repository}" config user.name "Git Freeze Test"
+  git -C "${repository}" config user.email "git-freeze@example.test"
+  git -C "${repository}" config commit.gpgSign false
+}
+
+REMOTE="${TEMP_ROOT}/remote.git"
+SEED="${TEMP_ROOT}/seed"
+CLIENT="${TEMP_ROOT}/client"
+CONFLICT_CLIENT="${TEMP_ROOT}/conflict-client"
+
+git init --bare --initial-branch=main "${REMOTE}" >/dev/null
+git clone "${REMOTE}" "${SEED}" >/dev/null
+configure_repository "${SEED}"
+
+cat > "${SEED}/config" <<'EOF'
+shared=1
+padding-1=true
+padding-2=true
+padding-3=true
+padding-4=true
+padding-5=true
+machine=default
+EOF
+git -C "${SEED}" add config
+git -C "${SEED}" commit -m "Add config" >/dev/null
+git -C "${SEED}" push -u origin main >/dev/null
+
+git clone "${REMOTE}" "${CLIENT}" >/dev/null
+configure_repository "${CLIENT}"
+
+cat > "${CLIENT}/config" <<'EOF'
+shared=1
+padding-1=true
+padding-2=true
+padding-3=true
+padding-4=true
+padding-5=true
+machine=local
+EOF
+(cd "${CLIENT}" && "${FREEZE}" add config >/dev/null)
+assert_contains "$(cat "${CLIENT}/.git-freeze")" "config"
+assert_skip_worktree "${CLIENT}" config
+[[ -z "$(git -C "${CLIENT}" status --porcelain -- config)" ]] ||
+  fail "frozen local config should not appear in status"
+
+git -C "${CLIENT}" add .git-freeze
+git -C "${CLIENT}" commit -m "Declare frozen config" >/dev/null
+git -C "${CLIENT}" push >/dev/null
+
+git -C "${SEED}" pull --ff-only >/dev/null
+cat > "${SEED}/config" <<'EOF'
+shared=2
+padding-1=true
+padding-2=true
+padding-3=true
+padding-4=true
+padding-5=true
+machine=default
+EOF
+git -C "${SEED}" add config
+git -C "${SEED}" commit -m "Update shared config" >/dev/null
+git -C "${SEED}" push >/dev/null
+
+git clone "${REMOTE}" "${CONFLICT_CLIENT}" >/dev/null
+configure_repository "${CONFLICT_CLIENT}"
+(cd "${CONFLICT_CLIENT}" && "${FREEZE}" apply >/dev/null)
+cat > "${CONFLICT_CLIENT}/config" <<'EOF'
+shared=2
+padding-1=true
+padding-2=true
+padding-3=true
+padding-4=true
+padding-5=true
+machine=local
+EOF
+
+CHECK_OUTPUT="$(cd "${CLIENT}" && "${FREEZE}" check --fetch)"
+assert_contains "${CHECK_OUTPUT}" $'changed\tconfig'
+
+(cd "${CLIENT}" && "${FREEZE}" sync >/dev/null)
+assert_contains "$(cat "${CLIENT}/config")" "shared=2"
+assert_contains "$(cat "${CLIENT}/config")" "machine=local"
+assert_skip_worktree "${CLIENT}" config
+
+(cd "${CLIENT}" && "${FREEZE}" thaw config >/dev/null)
+assert_not_skip_worktree "${CLIENT}" config
+assert_contains "$(git -C "${CLIENT}" status --porcelain -- config)" "config"
+
+(cd "${CLIENT}" && "${FREEZE}" apply >/dev/null)
+assert_skip_worktree "${CLIENT}" config
+
+(cd "${CLIENT}" && "${FREEZE}" unfreeze config >/dev/null)
+assert_not_skip_worktree "${CLIENT}" config
+[[ "$(cat "${CLIENT}/.git-freeze")" != *"config"* ]] ||
+  fail "unfreeze should remove config from the manifest"
+
+cat > "${SEED}/config" <<'EOF'
+shared=2
+padding-1=true
+padding-2=true
+padding-3=true
+padding-4=true
+padding-5=true
+machine=remote
+EOF
+git -C "${SEED}" add config
+git -C "${SEED}" commit -m "Change machine default" >/dev/null
+git -C "${SEED}" push >/dev/null
+
+if (cd "${CONFLICT_CLIENT}" && "${FREEZE}" sync >/dev/null 2>&1); then
+  fail "sync should fail when local and upstream overrides overlap"
+fi
+assert_not_skip_worktree "${CONFLICT_CLIENT}" config
+[[ -n "$(git -C "${CONFLICT_CLIENT}" ls-files -u -- config)" ]] ||
+  fail "conflicting sync should leave an unresolved index"
+assert_contains \
+  "$(git -C "${CONFLICT_CLIENT}" stash list -1 --format='%s')" \
+  "git-freeze: local overrides before sync"
+
+echo "test-git-freeze: passed"
