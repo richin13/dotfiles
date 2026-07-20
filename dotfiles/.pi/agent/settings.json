@@ -1,7 +1,10 @@
 {
-  "lastChangelogVersion": "0.75.3",
+  "lastChangelogVersion": "0.80.6",
   "defaultProvider": "deepseek",
   "defaultModel": "deepseek-v4-pro",
   "enableInstallTelemetry": false,
-  "defaultThinkingLevel": "xhigh"
+  "defaultThinkingLevel": "xhigh",
+  "packages": [
+    "npm:@juicesharp/rpiv-ask-user-question"
+  ]
 }
