@@ -1,3 +1,6 @@
 # Files with machine-local overrides.
 dotfiles/.claude/settings.json
 dotfiles/.config/ghostty/config
+dotfiles/.config/flameshot/flameshot.ini
+dotfiles/.pi/agent/models.json
+dotfiles/.pi/agent/settings.json
