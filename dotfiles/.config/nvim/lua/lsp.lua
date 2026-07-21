@@ -140,6 +140,8 @@ local configs = {
   "html",
   -- https://github.com/luals/lua-language-server
   "lua_ls",
+  -- https://github.com/artempyanykh/marksman
+  "marksman",
   -- https://github.com/prisma/language-tools
   "prismals",
   -- https://github.com/astral-sh/ruff
