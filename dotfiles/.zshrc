@@ -6,12 +6,6 @@ if [ -f "$HOME/.bashrc" ]; then
   source "$HOME/.bashrc"
 fi
 
-# Sensitive information includes
-if [ -f "$XDG_CONFIG_HOME/zsh/sensitive.zsh" ]; then
-  include "$XDG_CONFIG_HOME/zsh/sensitive.zsh"
-  alias sensitive="vim $XDG_CONFIG_HOME/zsh/sensitive.zsh"
-fi
-
 # Remove duplicates in $PATH
 # https://til.hashrocket.com/posts/7evpdebn7g-remove-duplicates-in-zsh-path
 typeset -aU path

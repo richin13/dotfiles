@@ -27,6 +27,14 @@ function include() {
   [[ -f "$1" ]] && source "$1"
 }
 
+# Sensitive information (shared across shells)
+_include_sensitive="$XDG_CONFIG_HOME/shell/sensitive.sh"
+if [ -f "$_include_sensitive" ]; then
+  include "$_include_sensitive"
+  alias sensitive="$EDITOR $_include_sensitive"
+fi
+unset _include_sensitive
+
 function clip-copy() {
   if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
     wl-copy "$@"
