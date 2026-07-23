@@ -58,7 +58,7 @@ Review ALL commits and the full diff, not just the latest commit. Identify:
 - [ ] <verification steps>
 
 ---
-> Created by Claude Code 🤖
+> Drafted by <your name> 🤖
 ```
 
 Keep bullet points concise. The summary should focus on "why" not "what" when possible. Test plan items should be actionable verification steps.
