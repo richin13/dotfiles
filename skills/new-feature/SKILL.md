@@ -1,6 +1,6 @@
 ---
 name: new-feature
-description: Use when the user asks to implement a feature, add functionality, or build something new.
+description: Explicit-only workflow for deep feature exploration. Use only when the user explicitly names `new-feature`.
 disable-model-invocation: true
 ---
 
