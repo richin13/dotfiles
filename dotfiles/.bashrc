@@ -660,6 +660,18 @@ eg() { #: env | grep with a pattern, ignoring case and showing results in color
   echo "$results" | grep -i --color=always "$pattern"
 }
 
+whoport() {
+  local port="${1:?usage: whoport <port>}"
+  local sock container
+  sock=$(ss -H -ltnup "sport = :$port" 2>/dev/null)
+  container=$(docker ps --filter "publish=$port" --format '{{.Names}} ({{.Image}}, {{.ID}})' 2>/dev/null)
+
+  [[ -n "$sock" ]] && echo "$sock"
+  [[ -n "$container" ]] && echo "docker container: $container"
+  [[ -z "$sock" && -z "$container" ]] && echo "nothing listening on port $port" >&2
+  return 0
+}
+
 # }}}
 # Aliases ----------------------------------------------------------- {{{
 #: General aliases
