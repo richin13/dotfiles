@@ -6,18 +6,25 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = "\\"
 vim.env.NVIM_TUI_ENABLE_TRUE_COLOR = 1
 
-local is_wayland = vim.env.XDG_SESSION_TYPE == "wayland"
+-- OSC 52 for copy only, paste returns the last clipboard yank to avoid terminal read prompts
+local osc52 = require("vim.ui.clipboard.osc52")
+local clipboard_cache = {}
+local function clipboard_copy(reg)
+  local send = osc52.copy(reg)
+  return function(lines, regtype)
+    clipboard_cache[reg] = { lines, regtype }
+    send(lines)
+  end
+end
+local function clipboard_paste(reg)
+  return function()
+    return clipboard_cache[reg] or { vim.split(vim.fn.getreg('"'), "\n"), vim.fn.getregtype('"') }
+  end
+end
 vim.g.clipboard = {
-  name = is_wayland and "wl-clipboard" or "xclip",
-  copy = {
-    ["+"] = is_wayland and "wl-copy" or "xclip -selection clipboard",
-    ["*"] = is_wayland and "wl-copy" or "xclip -selection clipboard",
-  },
-  paste = {
-    ["+"] = is_wayland and "wl-paste" or { "xclip", "-selection", "clipboard", "-o" },
-    ["*"] = is_wayland and "wl-paste" or { "xclip", "-selection", "clipboard", "-o" },
-  },
-  cache_enabled = false,
+  name = "osc52",
+  copy = { ["+"] = clipboard_copy("+"), ["*"] = clipboard_copy("*") },
+  paste = { ["+"] = clipboard_paste("+"), ["*"] = clipboard_paste("*") },
 }
 
 vim.opt.completeopt = { "menu", "longest", "fuzzy" }

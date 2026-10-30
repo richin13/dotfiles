@@ -225,7 +225,7 @@ if [ $commands[fzf] ]; then
     --preview 'echo {}'
     --preview-window 'down:3:wrap:hidden'
     --bind 'ctrl-/:toggle-preview'
-    --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+    --bind 'ctrl-y:execute-silent(printf \"\033]52;c;%s\a\" \"\$(echo -n {2..} | base64 | tr -d \"\n\")\" > /dev/tty)+abort'
     --color header:italic
     --header 'ctrl-y: copy to clipboard'
   "

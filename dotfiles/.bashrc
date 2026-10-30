@@ -36,18 +36,15 @@ fi
 unset _include_sensitive
 
 function clip-copy() {
-  if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
-    wl-copy "$@"
-  else
-    xclip -selection clipboard "$@"
-  fi
+  printf '\033]52;c;%s\a' "$(base64 | tr -d '\n')" > /dev/tty
 }
 
 function clip-paste() {
-  if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
-    wl-paste "$@"
+  if [ -n "$TMUX" ]; then
+    tmux save-buffer -
   else
-    xclip -selection clipboard -o "$@"
+    echo "clip-paste needs tmux" >&2
+    return 1
   fi
 }
 

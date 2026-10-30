@@ -19,7 +19,7 @@ Make sure to install:
 - [zplug](https://github.com/zplug/zplug#installation)
 - [tpm](https://github.com/zplug/zplug#installation) (Optional, only if you plan to use Tmux [highly recommended])
 
-And these `xstow xsel` using your package manager
+And these `xstow` using your package manager
 
 ## Installation
 
