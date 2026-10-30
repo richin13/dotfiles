@@ -1,3 +1,4 @@
+app-notifications = no-clipboard-copy
 background-opacity = 1
 command = zsh
 cursor-style = block
