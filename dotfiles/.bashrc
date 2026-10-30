@@ -645,6 +645,10 @@ function cx() {
   AWS_PROFILE=${AWS_PROFILE_AI:-default} "${cmd[@]}"
 }
 
+function pi() { #: run pi with the default AWS profile, ignoring per-project AWS_PROFILE (e.g. mise.toml)
+  AWS_PROFILE=default command pi "$@"
+}
+
 eg() { #: env | grep with a pattern, ignoring case and showing results in color
   local pattern="${1:?usage: envg <pattern>}"
   local results
