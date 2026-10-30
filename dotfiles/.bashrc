@@ -39,14 +39,20 @@ function clip-copy() {
   printf '\033]52;c;%s\a' "$(base64 | tr -d '\n')" > /dev/tty
 }
 
-function clip-paste() {
-  if [ -n "$TMUX" ]; then
-    tmux save-buffer -
-  else
-    echo "clip-paste needs tmux" >&2
-    return 1
+function clip-paste() (
+  saved=$(stty -g < /dev/tty)
+  trap 'stty "$saved" < /dev/tty' EXIT
+  trap 'exit 130' INT
+  stty -echo -icanon < /dev/tty
+  printf '\033]52;c;?\033\\' > /dev/tty
+  IFS= read -r -d '\' -t 30 reply < /dev/tty
+  if [[ "$reply" != *52\;* ]]; then
+    echo "clip-paste: no clipboard reply from the terminal" >&2
+    exit 1
   fi
-}
+  reply=${reply%$'\033'}
+  printf '%s' "${reply##*;}" | base64 -d
+)
 
 export SHELL=bash
 export PAGER="less"
