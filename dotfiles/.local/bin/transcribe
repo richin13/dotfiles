@@ -1,0 +1,148 @@
+#!/usr/bin/env python3
+"""Transcribe a video or audio file with faster-whisper on NVIDIA (CUDA), AMD (ROCm) or CPU.
+
+The launcher detects the backend and re-executes itself through `uv` with the matching dependencies.
+"""
+
+import argparse
+import ctypes
+import glob
+import os
+import shutil
+import sys
+import typing as t
+import urllib.request
+import zipfile
+from pathlib import Path
+
+PYTHON = "3.12"
+BASE_DEPS = ["faster-whisper", "av>=14,<19"]
+CUDA_DEPS = ["nvidia-cublas-cu12", "nvidia-cudnn-cu12==9.*"]
+CT2_VERSION = "4.8.5"
+CT2_ROCM_ZIP = f"https://github.com/OpenNMT/CTranslate2/releases/download/v{CT2_VERSION}/rocm-python-wheels-Linux.zip"
+ROCM_PATH = Path(os.environ.get("ROCM_PATH", "/opt/rocm"))
+ROCM_LIBS = ("libamdhip64.so.7", "libhipblas.so.3", "libhiprand.so.1")
+CACHE = Path(os.environ.get("XDG_CACHE_HOME", Path.home() / ".cache")) / "transcribe"
+COMPUTE_TYPES = {"cuda": "int8_float16", "rocm": "float16", "cpu": "int8"}
+WORKER_ENV = "TRANSCRIBE_BACKEND"
+
+
+def parse_args() -> argparse.Namespace:
+    """Parse the command line."""
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("input", type=Path)
+    parser.add_argument("-o", "--output", type=Path)
+    parser.add_argument("-m", "--model", default="large-v3")
+    parser.add_argument("-l", "--language", default=None)
+    parser.add_argument("--device", choices=["auto", *COMPUTE_TYPES], default="auto")
+    parser.add_argument("--compute-type", help="default: " + ", ".join(f"{k}={v}" for k, v in COMPUTE_TYPES.items()))
+    return parser.parse_args()
+
+
+def detect_backend() -> str:
+    """Pick cuda, rocm or cpu based on the drivers present."""
+    if shutil.which("nvidia-smi"):
+        return "cuda"
+    if Path("/dev/kfd").exists():
+        return "rocm"
+    return "cpu"
+
+
+def check_rocm_libs() -> None:
+    """Exit with an install hint when the ROCm runtime libraries the wheel links against are missing."""
+    missing = [lib for lib in ROCM_LIBS if not (ROCM_PATH / "lib" / lib).exists()]
+    if missing:
+        sys.exit(
+            f"missing in {ROCM_PATH}/lib: {', '.join(missing)}\n"
+            "install with: sudo pacman -S hip-runtime-amd hipblas hiprand"
+        )
+
+
+def rocm_wheel() -> Path:
+    """Return the cached CTranslate2 ROCm wheel, downloading it from the GitHub release on first use."""
+    tag = "cp" + PYTHON.replace(".", "")
+    name = f"ctranslate2-{CT2_VERSION}-{tag}-{tag}-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl"
+    wheel = CACHE / name
+    if wheel.exists():
+        return wheel
+
+    CACHE.mkdir(parents=True, exist_ok=True)
+    archive = CACHE / "rocm-python-wheels-Linux.zip"
+    print(f"downloading CTranslate2 {CT2_VERSION} ROCm wheels (~400 MB, first run only)", file=sys.stderr)
+    urllib.request.urlretrieve(CT2_ROCM_ZIP, archive)
+    with zipfile.ZipFile(archive) as z:
+        partial = wheel.with_suffix(".part")
+        partial.write_bytes(z.read(f"temp-linux/{name}"))
+        partial.rename(wheel)
+    archive.unlink()
+    return wheel
+
+
+def launch(backend: str) -> t.NoReturn:
+    """Re-execute this script inside a uv environment built for the backend."""
+    deps = list(BASE_DEPS)
+    env = dict(os.environ, **{WORKER_ENV: backend})
+    if backend == "cuda":
+        deps += CUDA_DEPS
+    elif backend == "rocm":
+        check_rocm_libs()
+        deps.append(str(rocm_wheel()))
+        env["LD_LIBRARY_PATH"] = os.pathsep.join(filter(None, [str(ROCM_PATH / "lib"), env.get("LD_LIBRARY_PATH")]))
+
+    cmd = ["uv", "run", "--quiet", "--no-project", "--python", PYTHON]
+    for dep in deps:
+        cmd += ["--with", dep]
+    cmd += ["python", "-I", __file__, *sys.argv[1:]]
+    os.execvpe("uv", cmd, env)
+
+
+def preload_cuda_libs() -> None:
+    """Load the pip-installed cuBLAS and cuDNN libraries so CTranslate2 finds them."""
+    for root in sys.path:
+        for pattern in ("nvidia/cublas/lib/*.so*", "nvidia/cudnn/lib/*.so*"):
+            for path in sorted(glob.glob(os.path.join(root, pattern))):
+                ctypes.CDLL(path, mode=ctypes.RTLD_GLOBAL)
+
+
+def format_timestamp(seconds: float) -> str:
+    """Format seconds as HH:MM:SS."""
+    h, rem = divmod(int(seconds), 3600)
+    m, s = divmod(rem, 60)
+    return f"{h:02d}:{m:02d}:{s:02d}"
+
+
+def transcribe(args: argparse.Namespace, backend: str) -> None:
+    """Run the transcription; ROCm builds of CTranslate2 expose the GPU as device "cuda"."""
+    if backend == "cuda":
+        preload_cuda_libs()
+
+    from faster_whisper import WhisperModel
+
+    output: Path = args.output or Path(args.input.stem + ".txt")
+    model = WhisperModel(
+        args.model,
+        device="cpu" if backend == "cpu" else "cuda",
+        compute_type=args.compute_type or COMPUTE_TYPES[backend],
+    )
+    segments, info = model.transcribe(str(args.input), language=args.language, vad_filter=True)
+    print(f"backend={backend} language={info.language} p={info.language_probability:.2f} duration={info.duration:.0f}s")
+
+    with output.open("w") as f:
+        for s in segments:
+            line = f"[{format_timestamp(s.start)}] {s.text.strip()}"
+            print(line, flush=True)
+            f.write(line + "\n")
+    print(f"saved {output}")
+
+
+def main() -> None:
+    """Launch the backend environment or, inside it, transcribe."""
+    args = parse_args()
+    backend = os.environ.get(WORKER_ENV)
+    if backend is None:
+        launch(detect_backend() if args.device == "auto" else args.device)
+    transcribe(args, backend)
+
+
+if __name__ == "__main__":
+    main()
