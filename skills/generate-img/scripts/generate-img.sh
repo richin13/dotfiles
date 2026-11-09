@@ -10,9 +10,9 @@
 #                     Wrap in quotes if it contains spaces.
 #
 # OPTIONS:
-#   -m, --model       Image model. Default: gpt-image-2.5-sunburst
-#                     gpt-image-2.5-sunburst  best quality and edit precision
-#                     gpt-image-2.5-flare     faster, ~gpt-image-2 quality
+#   -m, --model       Image model. Default: gpt-image-2.6-sunburst
+#                     gpt-image-2.6-sunburst  best quality and edit precision
+#                     gpt-image-2.6-flare     faster, ~gpt-image-2 quality
 #   -s, --size        Image dimensions. Default: auto
 #                     auto or WIDTHxHEIGHT. Common: 1024x1024 | 1536x1024 |
 #                     1024x1536 | 2048x2048 | 2048x1152 | 3840x2160 | 2160x3840
@@ -58,7 +58,7 @@
 set -euo pipefail
 
 # ── Defaults ──────────────────────────────────────────────────────────────────
-MODEL="gpt-image-2.5-sunburst"
+MODEL="gpt-image-2.6-sunburst"
 SIZE="auto"
 BACKGROUND="auto"
 QUALITY="medium"

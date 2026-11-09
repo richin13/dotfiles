@@ -1,6 +1,6 @@
 ---
 name: generate-img
-description: Generate or edit images with OpenAI GPT Image 2.5 (Sunburst/Flare) through a bundled bash script. Use when asked to "generate an image", "create an illustration/diagram/logo/mockup", "edit this image", "remove the background", or to produce any visual asset. The model is quite capable as long as the specification is clear.
+description: Generate or edit images with OpenAI GPT Image 2.6 (Sunburst/Flare) through a bundled bash script. Use when asked to "generate an image", "create an illustration/diagram/logo/mockup", "edit this image", "remove the background", or to produce any visual asset. The model is quite capable as long as the specification is clear.
 ---
 
 # generate-img
@@ -28,7 +28,7 @@ $SCRIPT -e person.png -e jacket.png "Image 1: person. Image 2: jacket. Dress the
 
 | Flag | Values | Default |
 |---|---|---|
-| `-m, --model` | `gpt-image-2.5-sunburst` (best quality, best edit precision), `gpt-image-2.5-flare` (faster, about gpt-image-2 quality) | sunburst |
+| `-m, --model` | `gpt-image-2.6-sunburst` (best quality, best edit precision), `gpt-image-2.6-flare` (faster, about gpt-image-2 quality) | sunburst |
 | `-s, --size` | `auto` or `WxH`. Common: `1024x1024`, `1536x1024`, `1024x1536`, `2048x2048`, `2048x1152`, `3840x2160`, `2160x3840` | `auto` |
 | `-q, --quality` | `low`, `medium`, `high`, `xhigh`, `max`, `auto` | `medium` |
 | `-b, --background` | `auto`, `opaque`, `transparent` | `auto` |
@@ -50,9 +50,9 @@ Notes:
 - **Quality:** use `low` for drafts and exploration, and `medium` for most final images. Use `high` for small or dense text, infographics, slides, close-up portraits, and identity-sensitive edits. Use `xhigh` or `max` only when `high` does not meet a specific requirement. A higher level costs more time and money, and it does not always give a better result.
 - **Size:** use `1536x1024` for diagrams, slides, and landscape scenes. Use `1024x1536` for posters, phone UI, and portraits. Use `1024x1024` for icons and logos.
 
-## Prompting guide (GPT Image 2.5)
+## Prompting guide (GPT Image 2.6)
 
-These rules come from OpenAI's GPT Image 2.5 prompting guide.
+These rules come from OpenAI's GPT Image 2.6 prompting guide.
 
 1. **Define the result and its use.** Name the deliverable (product photo, ad, infographic, UI mockup, slide, logo) and the audience. This sets the level of polish.
 2. **Use a fixed order.** Scene/background, then subject, then key details, then constraints. For complex requests, use short labeled sections or line breaks, not one long paragraph.
