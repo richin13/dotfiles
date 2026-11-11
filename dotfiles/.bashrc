@@ -191,6 +191,15 @@ function tmpd () {
   fi
 }
 
+function sandd () { #: Create and enter ~/src/local-sandbox/<project>
+  if [[ $# -ne 1 || -z "$1" || "$1" == */* || "$1" == "." || "$1" == ".." ]]; then
+    echo "usage: sandd <project-name> (single folder name, no slashes)" >&2
+    return 1
+  fi
+  local dir="$HOME/src/local-sandbox/$1"
+  \mkdir -p "$dir" && cd "$dir"
+}
+
 # ---------------------------------------------------------------------------
 #  dc – Docker Compose shorthand wrapper
 # ---------------------------------------------------------------------------
@@ -614,7 +623,7 @@ function cc() {
 }
 
 function cx() {
-  local model="openai.gpt-5.6-sol"
+  local model="openai.gpt-6.1-sol"
   local yolo=false
   local cmd
 
@@ -624,9 +633,10 @@ function cx() {
   fi
 
   case "${1:-s}" in
-    s|sol)   model="openai.gpt-5.6-sol" ;;
-    t|terra) model="openai.gpt-5.6-terra" ;;
-    l|luna)  model="openai.gpt-5.6-luna" ;;
+    a|astra)   model="openai.gpt-6.1-astra" ;;
+    s|sol)   model="openai.gpt-6.1-sol" ;;
+    t|terra) model="openai.gpt-6-terra" ;;
+    l|luna)  model="openai.gpt-6-luna" ;;
     yolo)    yolo=true ;;
     *)
       printf 'Invalid model: %s\nUsage: cx [s|t|l] [yolo]\n' "$1" >&2
