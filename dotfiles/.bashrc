@@ -714,7 +714,6 @@ alias rm!="/usr/bin/rm -rf"
 alias rm="rm -Iv"
 alias servedir="python -m http.server"
 alias srm="shred -n 100 -z -u" #: Securely delete a file
-alias ssol="aws sso login"
 alias tks="tmux kill-server"
 alias tree="lsd --tree -I __pycache__ -I .venv -I node_modules -I .git"
 alias tree1="tree --depth=1"

@@ -15,11 +15,14 @@ function aws_sso_status {
 import json, sys
 with open('$f') as fh:
     data = json.load(fh)
-if 'expiresAt' in data and 'startUrl' in data:
+if 'refreshToken' in data and 'startUrl' in data:
+    print('refreshable')
+elif 'expiresAt' in data and 'startUrl' in data:
     print(data['expiresAt'])
 " 2>/dev/null)
 
     [ -z "$expires_at" ] && continue
+    [ "$expires_at" = "refreshable" ] && return
 
     local exp_epoch
     exp_epoch=$(date -u -d "${expires_at}" +%s 2>/dev/null)
